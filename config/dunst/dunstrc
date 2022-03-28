@@ -34,7 +34,7 @@
 
     # Offset from the origin
     # (side)x(top-bot-side)
-    offset = 60x50
+    offset = 60x70
 
     # Scale factor. It is auto-detected if value is 0.
     scale = 0
