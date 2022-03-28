@@ -6,7 +6,7 @@ sxhkd &
 nm-applet &
 lxpolkit &
 $HOME/.config/polybar/launch.sh
-feh --bg-fill $HOME/Documents/github/wallpapers/dark-waves.jpg
+$HOME/.fehbg 
 picom --experimental-backends &
 
 # Workspaces
