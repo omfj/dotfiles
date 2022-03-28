@@ -1,0 +1,38 @@
+#!/bin/sh
+
+# Autostart
+#pgrep -x sxhkd > /dev/null || sxhkd &
+sxhkd &
+nm-applet &
+lxpolkit &
+$HOME/.config/polybar/launch.sh
+feh --bg-fill $HOME/Documents/github/wallpapers/cloud-city.jpg
+picom --experimental-backends &
+
+# Workspaces
+bspc monitor -d I II III IV V VI VII
+
+# Border
+bspc config border_width         3
+
+# Split
+bspc config split_ratio          0.52
+
+# Viewing options
+bspc config borderless_monocle    false
+bspc config gapless_monocle       true
+bspc config focus_follows_pointer true
+
+# Padding and gap
+bspc config top_padding 45
+bspc config right_padding 0
+bspc config left_padding 0
+bspc config bottom_padding 5
+bspc config window_gap 15
+
+# Window rules
+bspc rule -a mplayer2 state=floating
+bspc rule -a inf101v22-tetris-TetrisMain state=floating
+bspc rule -a Kupfer.py focus=on
+bspc rule -a Screenkey manage=off
+
