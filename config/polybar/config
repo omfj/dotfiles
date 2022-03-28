@@ -16,9 +16,9 @@ hover = #49717171
 [bar/omfjbar]
 ;monitor = ${env:MONITOR:HDMI-1}
 width = 97%
-height = 35
+height = 30
 ;radius = 10
-;offset-y = 1%
+offset-y = .5%
 ;fixed-center = true
 
 ; Centering bar
@@ -92,7 +92,6 @@ type = internal/bspwm
 ;label-focused = 
 label-focused-background = ${colors.hover}
 label-focused-padding-right = 1
-
 
 ;label-occupied = 
 label-occupied-padding-right = ${self.label-focused-padding-right}
