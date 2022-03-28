@@ -27,9 +27,17 @@ super + shift + {w,f,s,c}
 super + shift + {Left,Right,Down,Up}
   playerctl {previous,next,play-pause,shuffle toggle}
 
+#
+# multimedia
+#
+
 # multimedia for headphones
-{XF86AudioPrev,XF86AudioNext,XF86AudioPause}
-  playerctl {previous,next,play-pause}
+{XF86AudioPrev,XF86AudioNext}
+  playerctl {previous,next}
+
+# play or pause
+{XF86AudioPause,XF86AudioPlay}
+  playerctl play-pause
 
 # powermenu
 super + p
