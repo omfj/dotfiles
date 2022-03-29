@@ -8,6 +8,7 @@ lxpolkit &
 $HOME/.config/polybar/launch.sh
 $HOME/.fehbg 
 picom --experimental-backends &
+pgrep bspswallow || bspswallow &
 
 # Workspaces
 bspc monitor -d I II III IV V VI VII
