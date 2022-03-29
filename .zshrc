@@ -20,13 +20,21 @@ plugins=(git zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
 # Aliases
+
+## Ttyper
 alias typer="ttyper -l norwegian -w 25"
 
+## Better ls
 alias l="exa"
 alias ls="exa"
 alias ll="exa -l"
 alias la="exa -a"
 alias lla="exa -la"
 
+## SSH with kitty
+alias ssh="kitty +kitten ssh"
+
 # Starship
 eval "$(starship init zsh)"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
