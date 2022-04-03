@@ -16,7 +16,7 @@ hover = #49717171
 [bar/omfjbar]
 ;monitor = ${env:MONITOR:HDMI-1}
 width = 100%
-height = 30
+height = 25
 ;offset-y = .5%
 fixed-center = true
 
@@ -42,13 +42,13 @@ module-margin-right = 1
 separator = |
 separator-foreground = ${colors.foreground-alt}
 
-font-0 = FiraCode Nerd Font:size=12;2
-font-1 = FiraCode Nerd Font:size=8;2
-font-2 = FiraCode Nerd Font:size=10;2
+font-0 = FiraCode Nerd Font:size=11;2
+font-1 = FiraCode Nerd Font:size=7;2
+font-2 = FiraCode Nerd Font:size=9;2
 
-modules-left = powermenu bspwm xwindow
+modules-left = powermenu mod bspwm xwindow
 modules-center =
-modules-right = alsa backlight wlan xkeyboard memory cpu temperature battery date
+modules-right = pulseaudio backlight memory cpu temperature battery date
 
 tray-position = right
 tray-padding = 5
@@ -61,7 +61,7 @@ cursor-scroll = ns-resize
 
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:55:...%
+label = %title:0:40:...%
 
 [module/xkeyboard]
 type = internal/xkeyboard
@@ -106,8 +106,40 @@ label-urgent-padding-right = ${self.label-focused-padding-right}
 label-empty-foreground = ${colors.foreground-alt}
 label-empty-padding-right = ${self.label-focused-padding-right}
 
+format = <label-state>
+
+;<label-(monocle|tiled|fullscreen|floating|locked|sticky|private)>
+label-focused-monocle = MONOCLE
+label-focused-tiled = TILED
+label-focused-fullscreen = FULLSCREEN
+label-focused-floating = FLOATING
+label-focused-locked = LOCKED
+label-focused-sticky = STICKY
+label-focused-private = PRIVATE
+
 ; Separator in between workspaces
 ;label-separator = |
+
+; Credit: https://github.com/archcraft-os/archcraft-bspwm/blob/main/files/polybar/modules
+[module/mod]
+type = internal/bspwm
+
+format = <label-mode>
+;format-background = ${color.YELLOW}
+;format-foreground = ${color.BACKGROUND}
+format-underline = ${colors.underline}
+format-padding = 1
+
+label-monocle = "Monocle"
+label-tiled = "Tiled"
+
+label-floating = " - Float"
+label-pseudotiled = " - Pseudo"
+label-fullscreen = " - Full"
+
+label-locked = " | Locked"
+label-sticky = " | Sticky"
+label-private = " | Private"
 
 ; [module/xbacklight]
 ; type = internal/xbacklight
@@ -162,9 +194,8 @@ label = %percentage_used%%
 
 [module/wlan]
 type = internal/network
-interface = wlp0s20f3
+interface = wlan0
 interval = 3.0
-
 
 format-connected = <label-connected>
 format-connected-underline = ${colors.underline}
@@ -210,32 +241,33 @@ format-prefix-foreground = ${colors.foreground-alt}
 
 label = %date%%time%
 
-; [module/pulseaudio]
-; type = internal/pulseaudio
+[module/pulseaudio]
+type = internal/pulseaudio
 
-; format-volume = <label-volume> <bar-volume>
-; label-volume =  %percentage%%
-; label-volume-foreground = ${root.foreground}
+format-volume = <label-volume> 
+;format-volume = <label-volume> <bar-volume>
+label-volume =  %percentage%%
+label-volume-foreground = ${root.foreground}
 
-; label-muted =  muted
-; label-muted-foreground = #666
+label-muted =  muted
+label-muted-foreground = #666
 
-; bar-volume-width = 10
-; bar-volume-foreground-0 = #55aa55
-; bar-volume-foreground-1 = #55aa55
-; bar-volume-foreground-2 = #55aa55
-; bar-volume-foreground-3 = #55aa55
-; bar-volume-foreground-4 = #55aa55
-; bar-volume-foreground-5 = #f5a70a
-; bar-volume-foreground-6 = #ff5555
-; bar-volume-gradient = false
-; bar-volume-indicator = |
-; bar-volume-indicator-font = 2
-; bar-volume-fill = ─
-; bar-volume-fill-font = 2
-; bar-volume-empty = ─
-; bar-volume-empty-font = 2
-; bar-volume-empty-foreground = ${colors.foreground-alt}
+bar-volume-width = 10
+bar-volume-foreground-0 = #55aa55
+bar-volume-foreground-1 = #55aa55
+bar-volume-foreground-2 = #55aa55
+bar-volume-foreground-3 = #55aa55
+bar-volume-foreground-4 = #55aa55
+bar-volume-foreground-5 = #f5a70a
+bar-volume-foreground-6 = #ff5555
+bar-volume-gradient = false
+bar-volume-indicator = |
+bar-volume-indicator-font = 2
+bar-volume-fill = ─
+bar-volume-fill-font = 2
+bar-volume-empty = ─
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.foreground-alt}
 
 [module/alsa]
 type = internal/alsa

@@ -34,6 +34,15 @@ alias lla="exa -la"
 ## SSH with kitty
 alias ssh="kitty +kitten ssh"
 
+## Get around quick
+alias cddot="cd $HOME/Documents/github/dotfiles"
+alias cdscr="cd $HOME/Documents/github/scripts"
+alias cdwal="cd $HOME/Documents/github/wallpapers"
+alias cdsch="cd $HOME/Documents/school"
+alias cdrea="cd $HOME/Documents/reading"
+alias cdpic="cd $HOME/Pictures"
+alias cdlec="cd $HOME/Videos/lectures"
+
 # Starship
 eval "$(starship init zsh)"
 

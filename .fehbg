@@ -1,0 +1,3 @@
+#!/bin/sh
+
+feh --no-fehbg --bg-fill '/home/olem/Documents/github/wallpapers/dark-waves.jpg' 
