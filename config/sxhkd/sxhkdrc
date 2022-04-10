@@ -5,60 +5,59 @@
 #
 
 # terminal emulator
-super + Return
-	kitty
+super + shift + Return
+    kitty
 
 # program launcher
 super + shift + d
-	/home/olem/.config/rofi/launchers/colorful/run.sh
+    /home/olem/.config/rofi/launchers/colorful/run.sh
 
 # program launcher (Apps)
 super + d
-    /home/olem/.config/rofi/launchers/colorful/app.sh
+    /home/olem/.config/rofi/launchers/colorful/apps.sh
 
 # make sxhkd reload its configuration files:
 super + Escape
-	pkill -USR1 -x sxhkd
+    pkill -USR1 -x sxhkd
 
 # apps
 super + shift + {w,f,s,c}
-  {brave,thunar,spotify,discord}
+    {firefox,thunar,spotify,discord}
 
 # multimedia
 super + shift + {Left,Right,Down,Up}
-  playerctl {previous,next,play-pause,shuffle toggle}
+    playerctl {previous,next,play-pause,shuffle toggle}
 
 # volume control
 {XF86AudioLowerVolume,XF86AudioRaiseVolume,XF86AudioMute}
-  olem-volume {down,up,mute}
+    olem-volume {down,up,mute}
 
 # volume control small
 shift + {XF86AudioLowerVolume,XF86AudioRaiseVolume}
-  olem-volume {down,up} small
+    olem-volume {down,up} small
 
 # brightness control
 {XF86MonBrightnessDown,XF86MonBrightnessUp}
-  xbacklight -{dec,inc} 5
+    brightnessctl s 5%{-,+}
 
 # multimedia for headphones
 {XF86AudioPrev,XF86AudioNext}
-  playerctl {previous,next}
+    playerctl {previous,next}
 
 # play or pause
 {XF86AudioPause,XF86AudioPlay}
-  playerctl play-pause
+    playerctl play-pause
 
 # powermenu
 super + p
-  olem-powermenu
+    olem-powermenu
 
 # screenshot to clipbard
-alt + shift + {1,2,3}
-  olem-screenshot {select,window,fullscreen} clip
+alt + shift + 1 ; {1,2,3}
+    olem-screenshot {select,window,fullscreen} clip
 
-# screenshot to pictures
-Print
-  scrot
+alt + shift + 2 ; {1,2,3}
+    olem-screenshot {select,window,fullscreen} pictures
 
 #
 # bspwm hotkeys
@@ -66,11 +65,11 @@ Print
 
 # increase or decrease window gap
 super + {plus,minus,equal}
-	gaps {plus,minus,equal}
+    gaps {plus,minus,equal}
 
 # quit/restart bspwm
 super + alt + {q,r}
-	bspc {quit,wm -r}
+    bspc {quit,wm -r}
 
 # close and kill
 super + {_,shift + }q
@@ -78,15 +77,15 @@ super + {_,shift + }q
 
 # alternate between the tiled and monocle layout
 super + m
-	bspc desktop -l next
+    bspc desktop -l next
 
 # send the newest marked node to the newest preselected node
 super + y
-	bspc node newest.marked.local -n newest.!automatic.local
+    bspc node newest.marked.local -n newest.!automatic.local
 
 # swap the current node and the biggest window
 super + g
-	bspc node -s biggest.window
+    bspc node -s biggest.window
 
 #
 # state/flags
@@ -94,11 +93,11 @@ super + g
 
 # set the window state
 super + {t,shift + space,space,f}
-	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+    bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
 # set the node flags
 super + ctrl + {m,x,y,z}
-	bspc node -g {marked,locked,sticky,private}
+    bspc node -g {marked,locked,sticky,private}
 
 #
 # focus/swap
@@ -106,33 +105,33 @@ super + ctrl + {m,x,y,z}
 
 # focus the node in the given direction
 super + {_,shift + }{h,j,k,l}
-	bspc node -{f,s} {west,south,north,east}
+    bspc node -{f,s} {west,south,north,east}
 
 # focus the node for the given path jump
 super + {p,b,comma,period}
-	bspc node -f @{parent,brother,first,second}
+    bspc node -f @{parent,brother,first,second}
 
 # focus the next/previous window in the current desktop
 alt + {_,shift + }Tab
-	bspc node -f {next,prev}.local.!hidden.window
+    bspc node -f {next,prev}.local.!hidden.window
 
 # focus the next/previous desktop in the current monitor
 super + bracket{left,right}
-	bspc desktop -f {prev,next}.local
+    bspc desktop -f {prev,next}.local
 
 # focus the last node/desktop
 super + {|,Tab}
-	bspc {node,desktop} -f last
+    bspc {node,desktop} -f last
 
 # focus the older or newer node in the focus history
 super + {o,i}
-	bspc wm -h off; \
-	bspc node {older,newer} -f; \
-	bspc wm -h on
+    bspc wm -h off; \
+    bspc node {older,newer} -f; \
+    bspc wm -h on
 
 # focus or send to the given desktop
 super + {_,shift + }{1-9,0}
-	bspc {desktop -f,node -d} '^{1-9,10}'
+    bspc {desktop -f,node -d} focused:'^{1-9,10}'
 
 #
 # move/resize
@@ -140,21 +139,21 @@ super + {_,shift + }{1-9,0}
 
 # expand a window by moving one of its side outward
 super + alt + {h,j,k,l}
-	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+    bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
 
 # contract a window by moving one of its side inward
 super + alt + shift + {h,j,k,l}
-	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+    bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
 
 # move a floating window
 super + {Left,Down,Up,Right}
-	bspc node -v {-20 0,0 20,0 -20,20 0}
+    bspc node -v {-20 0,0 20,0 -20,20 0}
 
 # smart move
 super + shift + {h,j,k,l}
-	bspwm_smart_move {west,south,north,east}
+    bspwm_smart_move {west,south,north,east}
 
 # lock screen
 super + x
-	betterlockscreen --lock blur
+    betterlockscreen --lock blur
 

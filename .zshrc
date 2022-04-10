@@ -13,10 +13,20 @@ export mnf130="$uib/semester2/mnf130"
 export inf101="$uib/semester2/inf101"
 export inf142="$uib/semester2/inf142"
 
+## ENV
+export TERMINAL=kitty
+export XDG_CONFIG_HOME=$HOME/.config
+export npm_config_prefix="$HOME/.local"
+
+# Style QT
+export QT_QPA_PLATFORMTHEME="qt5ct"
+export QT_STYLE_OVERIDE="GTK+"
+  
+
 # Plugins
 plugins=(git zsh-syntax-highlighting)
 
-# Source?
+# Source
 source $ZSH/oh-my-zsh.sh
 
 # Aliases

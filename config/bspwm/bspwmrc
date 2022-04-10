@@ -1,21 +1,30 @@
 #!/bin/sh
 
 # Autostart
-#pgrep -x sxhkd > /dev/null || sxhkd &
 sxhkd &
 nm-applet &
 lxpolkit &
 $HOME/.config/polybar/launch.sh
 $HOME/.fehbg 
 picom --experimental-backends &
-xss-lock betterlockscreen -l blur -- suspend &
 pgrep bspswallow || bspswallow &
+xsetroot -cursor_name left_ptr &
 
-# Workspaces
-bspc monitor -d I II III IV V VI VII
+# For artix
+#xss-lock betterlockscreen -l blur -- suspend &
+
+if [[ $(xrandr -q | grep 'HDMI-1 connected') ]]; then
+	xrandr --output HDMI-1 --primary --mode 1920x1080 --rotate normal --output eDP-1 --mode 1920x1080 --rotate normal
+
+	bspc monitor eDP-1 -d I II III IV V VI VII
+	bspc monitor HDMI-1 -d I II III IV V VI VII
+else
+	xrandr --output eDP-1 --primary --mode 1920x1080 --rotate normal
+	bspc monitor -d I II III IV V VI VII
+fi
 
 # Border
-bspc config border_width         3
+bspc config border_width         2
 #bspc config focused_border_color "#00498D"
 
 # Split
@@ -28,12 +37,14 @@ bspc config focus_follows_pointer true
 
 # Padding and gap
 bspc config top_padding 35 # Polybarheight + window_gap
-bspc config window_gap  10
+bspc config window_gap  0
 
 # Window rules
+bspc rule -a java state=floating
+bspc rule -a 1Password state=floating
+bspc rule -a inf101v22-tetris-TetrisMain state=floating
 bspc rule -a Blueman-manager state=floating
 bspc rule -a mplayer2 state=floating
-bspc rule -a inf101v22-tetris-TetrisMain state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
 

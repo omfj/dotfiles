@@ -11,25 +11,24 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'lervag/vimtex'
 Plug 'vim-python/python-syntax'
+Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
 " Etc
 let mapleader = " "
 set nu rnu
 set encoding=utf-8
-set tabstop=4
 set scrolloff=7
+
+" Tab to spaces
+set tabstop=4
+set shiftwidth=4
+set expandtab
 
 " General colors
 let &t_ut=''
 let g:python_highlight_all = 1
 colorscheme jellybeans
-
-" NERDTree
-nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
 
 " Vim airline
 let g:airline#extensions#tabline#enabled = 1
