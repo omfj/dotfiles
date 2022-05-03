@@ -1,0 +1,14 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+	name = Ole Magnus Johnsen
+	email = ole.magnus@me.com
+	signingkey = A20C43840D841F41
+[commit]
+	gpgsign = true
+[gpg]
+	program = gpg
+[pull]
+	rebase = true
+[init]
+	defaultBranch = master
