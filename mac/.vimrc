@@ -30,6 +30,7 @@ let mapleader = " "
 colorscheme jellybeans
 set backspace=indent,eol,start
 set nu rnu
+set so=8
 
 " Prettier
 filetype plugin indent on
@@ -51,13 +52,17 @@ let g:airline_powerline_fonts = 1
 let g:airline#enable#fugitive=1
 let g:airline#enable#syntastic=1
 let g:airline#enable#bufferline=1
-let g:airline_theme='ayu_dark'
 
 " Nerdtree
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
+" Window Navigation with Ctrl-[hjkl]
+noremap <C-J> <C-W>j
+noremap <C-K> <C-W>k
+noremap <C-H> <C-W>h
+noremap <C-L> <C-W>l
 
-""" Keybinds
+""" Notes
 " gc - comment out line in visual mode
