@@ -13,12 +13,14 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'tomasr/molokai'
 Plug 'morhetz/gruvbox'
+Plug 'chriskempson/base16-vim'
 Plug 'tomasr/molokai'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 call plug#end()
 
 let mapleader = " "
-colo gruvbox
+colo base16-default-dark
+set termguicolors
 set backspace=indent,eol,start
 set nu rnu
 set so=8
