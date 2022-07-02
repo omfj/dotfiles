@@ -9,7 +9,7 @@ $HOME/.fehbg
 pgrep emacs || /usr/bin/emacs --daemon &
 picom --experimental-backends &
 pgrep bspswallow || bspswallow &
-#xsetroot -cursor_name left_ptr &
+xsetroot -cursor_name left_ptr &
 
 # For artix
 #xss-lock betterlockscreen -l blur -- suspend &
