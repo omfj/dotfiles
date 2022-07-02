@@ -2,13 +2,14 @@
 
 # Autostart
 sxhkd &
-nm-applet &
+#nm-applet &
 lxpolkit &
 $HOME/.config/polybar/launch.sh
 $HOME/.fehbg 
+pgrep emacs || /usr/bin/emacs --daemon &
 picom --experimental-backends &
 pgrep bspswallow || bspswallow &
-xsetroot -cursor_name left_ptr &
+#xsetroot -cursor_name left_ptr &
 
 # For artix
 #xss-lock betterlockscreen -l blur -- suspend &
@@ -24,7 +25,7 @@ else
 fi
 
 # Border
-bspc config border_width         2
+bspc config border_width         4
 #bspc config focused_border_color "#00498D"
 
 # Split
@@ -37,7 +38,7 @@ bspc config focus_follows_pointer true
 
 # Padding and gap
 bspc config top_padding 35 # Polybarheight + window_gap
-bspc config window_gap  0
+bspc config window_gap  5
 
 # Window rules
 bspc rule -a java state=floating

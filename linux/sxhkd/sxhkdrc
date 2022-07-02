@@ -30,15 +30,15 @@ super + shift + {Left,Right,Down,Up}
 
 # volume control
 {XF86AudioLowerVolume,XF86AudioRaiseVolume,XF86AudioMute}
-    olem-volume {down,up,mute}
+    ovolume {down,up,mute}
 
 # volume control small
 shift + {XF86AudioLowerVolume,XF86AudioRaiseVolume}
-    olem-volume {down,up} small
+    ovolume {down,up} small
 
 # brightness control
 {XF86MonBrightnessDown,XF86MonBrightnessUp}
-    brightnessctl s 5%{-,+}
+    obrightness {down, up}
 
 # multimedia for headphones
 {XF86AudioPrev,XF86AudioNext}
@@ -50,14 +50,14 @@ shift + {XF86AudioLowerVolume,XF86AudioRaiseVolume}
 
 # powermenu
 super + p
-    olem-powermenu
+    opowermenu
 
 # screenshot to clipbard
 alt + shift + 1 ; {1,2,3}
-    olem-screenshot {select,window,fullscreen} clip
+    oscreenshot {select,window,fullscreen} clip
 
 alt + shift + 2 ; {1,2,3}
-    olem-screenshot {select,window,fullscreen} pictures
+    oscreenshot {select,window,fullscreen} pictures
 
 #
 # bspwm hotkeys
