@@ -363,7 +363,7 @@ type = custom/script
 label = %output%
 label-padding = 1
 exec = echo ""
-click-left = "olem-powermenu"
+click-left = "opowermenu"
 
 ; label-close = cancel
 ; label-close-foreground = ${colors.alert}
