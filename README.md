@@ -1,2 +1,5 @@
 # dotfiles
-the dotfiles for my arch, bspwm, polybar setup with dunst, picom 
+
+The dotfiles for my arch computer and my macbook
+
+
