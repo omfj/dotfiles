@@ -42,12 +42,12 @@ module-margin-right = 1
 separator = |
 separator-foreground = ${colors.foreground-alt}
 
-font-0 = DejaVuSansMono Nerd Font:size=11;2
-font-1 = DejaVuSansMono Nerd Font:size=7;2
-font-2 = DejaVuSansMono Nerd Font:size=9;2
+font-0 = BlexMono Nerd Font:size=11;2
+font-1 = BlexMono Nerd Font:size=7;2
+font-2 = BlexMono Nerd Font:size=9;2
 
-modules-left = powermenu mod bspwm xwindow
-modules-center =
+modules-left = powermenu bspwm xwindow
+modules-center = mod
 modules-right = pulseaudio backlight memory cpu temperature battery date
 
 tray-position = right
