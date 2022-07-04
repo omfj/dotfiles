@@ -4,6 +4,6 @@ Configs/dotfiles for my mac and linux machine. Included some scripts relevant fo
 
 ## screenshots
 
-![screenshot of the destop of my arch machine](../assets/unixporn.png)
+![screenshot of the destop of my arch machine](assets/unixporn.png)
 
 
