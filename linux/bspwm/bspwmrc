@@ -6,7 +6,7 @@ sxhkd &
 lxpolkit &
 $HOME/.config/polybar/launch.sh
 $HOME/.fehbg 
-pgrep emacs || /usr/bin/emacs --daemon &
+pgrep emacs || emacs --daemon &
 picom --experimental-backends &
 pgrep bspswallow || bspswallow &
 xsetroot -cursor_name left_ptr &
@@ -38,7 +38,7 @@ bspc config focus_follows_pointer true
 
 # Padding and gap
 bspc config top_padding 35 # Polybarheight + window_gap
-bspc config window_gap  5
+bspc config window_gap  15
 
 # Window rules
 bspc rule -a java state=floating

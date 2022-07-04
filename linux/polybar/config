@@ -20,6 +20,8 @@ height = 25
 ;offset-y = .5%
 fixed-center = true
 
+enable-ipc = true
+
 
 ;radius = 10
 
