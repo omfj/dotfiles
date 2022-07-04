@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+ID="9994"
+
+function send_notification() {
+    brightness=$(brightnessctl -m -d 'intel_backlight' | cut -d, -f4)
+    dunstify -a "changebrightness" -u low -r "$ID" -h int:value:"$brightness" -i "bbrightness-$1" "Brightness: ${brightness}" -t 2000
+}
+
+
+case $1 in
+    up)
+        brightnessctl s 5%+
+        send_notification $1
+        pkill -RTMIN+20 dwmblocks
+        ;;
+    down)
+        brightnessctl s 5%-
+        send_notification $1
+        pkill -RTMIN+20 dwmblocks
+        ;;
+esac

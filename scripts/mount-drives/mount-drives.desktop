@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Mount drives
+Comment=Mounts the drives from rclone
+Keywords=mount;drives;rclone;
+Exec=/home/olem/Documents/github/scripts/mount-drives/mount-drives.sh
+Icon=drive-removable-media
+Terminal=false
+Type=Application
