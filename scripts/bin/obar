@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+
+case $1 in
+    show)
+        polybar-msg cmd show
+        bspc config top_padding 35
+        ;;
+    hide)
+        polybar-msg cmd hide
+        bspc config top_padding 0
+        ;;
+esac

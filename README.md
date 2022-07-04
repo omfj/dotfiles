@@ -1,6 +1,6 @@
-# dotfiles
+# configs
 
-The dotfiles for my arch computer and my macbook
+Configs/dotfiles for my mac and linux machine. Included some scripts relevant for my sxhkd
 
 ## screenshots
 

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+while true; do
+  ip=$(curl ifconfig.me -s)
+  echo "$ip"
+  sleep 1
+done

@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+FILENAME="%Y-%m-%d-%T-screenshot.png"
+OUTPUT_PIC="$HOME/Pictures/screenshots/$FILENAME"
+OUTPUT_TMP='/tmp/%F_%T_$wx$h.png'
+SAVED_AT="Screenshots folder"
+
+# scrot '/tmp/%F_%T_$wx$h.png' --select --line mode=edge -e 'xclip -sel clip -t image/png -i $f' 
+
+function scrotSelectPictures() {
+	scrot "$OUTPUT_PIC" --select --line mode=edge
+}
+
+function scrotSelectClip() {
+	scrot "$OUTPUT_TMP" --select --line mode=edge -e 'xclip -sel clip -t image/png -i $f' 
+}
+
+function scrotWindowPictures() {
+	scrot "$OUTPUT_PIC" --focused --border
+}
+
+function scrotWindowClip() {
+	scrot "$OUTPUT_TMP" --focused --border -e 'xclip -sel clip -t image/png -i $f' 
+}
+
+function scrotFullscreenClip() {
+	scrot "$OUTPUT_TMP" -e 'xclip -sel clip -t image/png -i $f' 
+}
+
+case "$1 $2" in
+	"select pictures")
+        scrotSelect || exit
+        ;;
+  	"select clip")
+        scrotSelectClip && SAVED_AT="Clipboard" || exit
+        ;;
+	"window pictures")
+        scrotWindow || exit
+        ;;
+	"window clip")
+        scrotWindowClip && SAVED_AT="Clipboard" || exit
+        ;;
+	"fullscreen clip")
+        scrotFullscreenClip && SAVED_AT="Clipboard" || exit
+        ;;
+esac
+
+notify-send "Screenshot taken." "Saved at: $SAVED_AT"

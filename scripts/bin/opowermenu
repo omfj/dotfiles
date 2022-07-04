@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+rofi_command="rofi -theme $HOME/Documents/github/scripts/powermenu/powermenu.rasi"
+
+uptime=$(uptime -p | sed -e 's/up //g')
+
+# Options
+shutdown=""
+reboot=""
+lock=""
+suspend=""
+logout=""
+
+options="$shutdown\n$reboot\n$lock\n$suspend\n$logout"
+
+chosen="$(echo -e "$options" | $rofi_command -p "UP - $uptime" -dmenu -selected-row 2)"
+case $chosen in
+    $shutdown) systemctl shutdown;;
+    $reboot) systemctl reboot ;;
+    $lock) betterlockscreen -l blur ;;
+    $suspend)
+		mpc -q pause
+		amixer set Master mute
+		systemctl suspend
+        ;;
+    $logout) bspc quit ;;
+	*) exit ;;
+esac

@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+ID="9993"
+
+function send_notification() {
+	volume=$(pamixer --get-volume)
+	dunstify -a "changevolume" -u low -r "$ID" -h int:value:"$volume" -i "volume-$1" "Volume: ${volume}%" -t 2000
+}
+
+case $1 in
+up)
+	pamixer -u
+	if [[ $2 == small ]]; then
+		pamixer -i 1
+	else
+		pamixer -i 5
+	fi
+	send_notification $1
+    #pkill -RTMIN+10 dwmblocks
+	;;
+	
+down)
+	pamixer -u
+	if [[ $2 == small ]]; then
+		pamixer -d 1
+	else
+		pamixer -d 5
+	fi
+	send_notification $1
+    #pkill -RTMIN+10 dwmblocks
+	;;
+mute)
+	pamixer -t
+	if $(pamixer --get-mute); then
+		dunstify -i volume-mute -a "changevolume" -t 2000 -r "$ID" -u low "Muted"
+	else
+		send_notification up
+	fi
+    #pkill -RTMIN+10 dwmblocks
+	;;
+esac
