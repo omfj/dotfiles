@@ -1,0 +1,23 @@
+font:
+  # Normal (roman) font face
+  normal:
+    family: "BlexMono Nerd Font"
+    #style: Regular
+
+  # Bold font face
+  bold:
+    family: "BlexMono Nerd Font"
+    #style: Bold
+
+  # Italic font face
+  italic:
+    family: "BlexMono Nerd Font"
+    #style: Italic
+
+  # Bold italic font face
+  bold_italic:
+    family: "BlexMono Nerd Font"
+    #style: Bold Italic
+
+  size: 15
+

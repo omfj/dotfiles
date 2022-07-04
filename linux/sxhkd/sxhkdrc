@@ -59,6 +59,10 @@ alt + shift + 1 ; {1,2,3}
 alt + shift + 2 ; {1,2,3}
     oscreenshot {select,window,fullscreen} pictures
 
+# hide/show polybar
+super + {_, shift} + b
+    obar {show, hide}
+
 #
 # bspwm hotkeys
 #
