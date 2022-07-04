@@ -1,0 +1,39 @@
+path+="$HOME/bin"
+path+="/usr/local/bin"
+path+="$HOME/.cargo/bin"
+path+="$HOME/.yarn/bin"
+path+="$HOME/.local/bin"
+export PATH
+
+plugins=(
+    git 
+    zsh-syntax-highlighting
+    web-search
+    zsh-fzf-history-search
+)
+
+export ZSH="$HOME/.oh-my-zsh"
+source $ZSH/oh-my-zsh.sh
+
+# Aliases
+
+## Better ls
+alias l="exa"
+alias ls="exa"
+alias la="exa -a"
+alias ll="exa -l"
+alias lla="exa -la"
+
+## To folders
+export DOTFILES=$HOME/Documents/github/configs/linux
+
+## Cargo
+export CARGO_NAME="Ole Magnus Johnsen"
+export CARGO_EMAIL="ole.magnus@me.com"
+
+alias v="lvim"
+
+eval "$(starship init zsh)"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
