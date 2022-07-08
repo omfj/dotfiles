@@ -1,9 +1,15 @@
-export PATH=$HOME/bin:/usr/local/bin:$PATH:/Users/olem/.cargo/bin
-export PATH="$PATH/.emacs.d/bin:$PATH"
-export PATH="/usr/local/sbin:$PATH"
-export PATH="/usr/local/opt/openjdk/bin:$PATH"
-export PATH="/Library/Frameworks/Python.framework/Versions/3.10/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
+path+="$HOME/bin:/usr/local/bin"
+path+="/Users/olem/.cargo/bin"
+path+="$HOME/.emacs.d/bin"
+path+="/usr/local/sbin"
+path+="/usr/local/opt/openjdk/bin"
+path+="/Library/Frameworks/Python.framework/Versions/3.10/bin"
+path+="$HOME/.local/bin"
+path+="/opt/homebrew/opt/openjdk/bin"
+export PATH
+
+# Java homebrew
+export CPPFLAGS="-I/opt/homebrew/opt/openjdk/include"
 
 plugins=(
     git 
@@ -18,6 +24,7 @@ source $ZSH/oh-my-zsh.sh
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # Aliases
+#
 ## Better ls
 alias l="exa"
 alias ls="exa"
@@ -29,6 +36,9 @@ alias lla="exa -la"
 export CARGO_NAME="Ole Magnus Johnsen"
 export CARGO_EMAIL="ole.magnus@me.com"xport inf142="$uib/semester2/inf142"
 
+## To folders
+export DOTFILES=$HOME/Documents/github/configs
+
 
 eval "$(starship init zsh)"
 
@@ -38,3 +48,4 @@ export HOMEBREW_AUTO_UPDATE_SECS="86400"
 
 [ -f "/Users/olem/.ghcup/env" ] && source "/Users/olem/.ghcup/env" # ghcup-env
 export GPG_TTY=$(tty)
+export PATH="/opt/homebrew/opt/node@16/bin:$PATH"
