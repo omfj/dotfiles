@@ -24,7 +24,7 @@ source $ZSH/oh-my-zsh.sh
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # Aliases
-#
+
 ## Better ls
 alias l="exa"
 alias ls="exa"
@@ -32,12 +32,17 @@ alias la="exa -a"
 alias ll="exa -l"
 alias lla="exa -la"
 
+alias vim="nvim"
+alias v="nvim"
+
+alias cat="bat"
+
 ## Cargo
 export CARGO_NAME="Ole Magnus Johnsen"
 export CARGO_EMAIL="ole.magnus@me.com"xport inf142="$uib/semester2/inf142"
 
 ## To folders
-export DOTFILES=$HOME/Documents/github/configs
+export DOTFILES=$HOME/Documents/github/dotfiles
 
 
 eval "$(starship init zsh)"
@@ -48,4 +53,8 @@ export HOMEBREW_AUTO_UPDATE_SECS="86400"
 
 [ -f "/Users/olem/.ghcup/env" ] && source "/Users/olem/.ghcup/env" # ghcup-env
 export GPG_TTY=$(tty)
+
+# Use node 16 as default
 export PATH="/opt/homebrew/opt/node@16/bin:$PATH"
+export LDFLAGS="-L/opt/homebrew/opt/node@16/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/node@16/include"

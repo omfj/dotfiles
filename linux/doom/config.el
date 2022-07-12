@@ -35,16 +35,16 @@
 (setq doom-theme 'doom-opera)
 
 ;; Font
-(setq doom-font (font-spec :family "BlexMono Nerd Font" :size 22 :weight 'semi-light)
+(setq doom-font (font-spec :family "BlexMono Nerd Font" :size 18 :weight 'semi-light)
       doom-variable-pitch-font (font-spec :family "BlexMono Nerd Font") ; inherits `doom-font''s :size
-      doom-unicode-font (font-spec :family "BlexMono Nerd Font" :size 22)
-      doom-big-font (font-spec :family "BlexMono Nerd Font" :size 28))
+      doom-unicode-font (font-spec :family "BlexMono Nerd Font" :size 18)
+      doom-big-font (font-spec :family "BlexMono Nerd Font" :size 26))
 
 ;; Change meta key to CMD from Option
 (:if IS-MAC
      (setq mac-option-modifier nil
-      	mac-command-modifier 'meta
-      	x-select-enable-clipboard t))
+        mac-command-modifier 'meta
+        select-enable-clipboard t))
 
 ;; Tailwind LSP
 (use-package! lsp-tailwindcss)

@@ -66,6 +66,7 @@ return packer.startup(function()
     -- Colorschemes
     use "lunarvim/colorschemes"
     use "RRethy/nvim-base16"
+    use "folke/tokyonight.nvim"
 
     -- File explorer
     use "preservim/nerdtree"

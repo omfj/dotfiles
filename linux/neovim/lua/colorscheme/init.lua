@@ -1,4 +1,8 @@
-local colorscheme = "tomorrow"
+local colorscheme = "tokyonight"
+
+if colorscheme == "tokyonight" then
+    vim.g.tokyonight_style = "night"
+end
 
 local ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
 if not ok then

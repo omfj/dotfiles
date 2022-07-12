@@ -17,7 +17,7 @@ keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 
 -- NERDTree
-keymap("n", "<Leader>t", ":NERDTreeToggle<CR>", opts)
+keymap("n", "<Leader>e", ":NERDTreeToggle<CR>", opts)
 
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize -2<CR>", opts)
