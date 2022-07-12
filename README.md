@@ -1,5 +1,7 @@
 # configs
 
+<!-- hey there -->
+
 Configs/dotfiles for my mac and linux machine. Included some scripts relevant for my sxhkd
 
 ## screenshots
