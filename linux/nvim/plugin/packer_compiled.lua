@@ -99,6 +99,11 @@ _G.packer_plugins = {
     path = "/Users/olem/.local/share/nvim/site/pack/packer/start/colorschemes",
     url = "https://github.com/lunarvim/colorschemes"
   },
+  ["monokai-pro.nvim"] = {
+    loaded = true,
+    path = "/Users/olem/.local/share/nvim/site/pack/packer/start/monokai-pro.nvim",
+    url = "https://gitlab.com/__tpb/monokai-pro.nvim"
+  },
   nerdtree = {
     loaded = true,
     path = "/Users/olem/.local/share/nvim/site/pack/packer/start/nerdtree",
