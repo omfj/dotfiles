@@ -67,6 +67,7 @@ return packer.startup(function()
     use "lunarvim/colorschemes"
     use "RRethy/nvim-base16"
     use "folke/tokyonight.nvim"
+    use 'https://gitlab.com/__tpb/monokai-pro.nvim'
 
     -- File explorer
     use "preservim/nerdtree"
