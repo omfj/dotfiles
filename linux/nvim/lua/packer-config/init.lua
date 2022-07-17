@@ -22,27 +22,17 @@ return packer.startup(function()
     use "nvim-lua/popup.nvim"
     use "nvim-lua/plenary.nvim"
 
-    -- LSP
-    use "neovim/nvim-lspconfig"
-    use "williamboman/nvim-lsp-installer"
-
     -- Telescope
     use "nvim-telescope/telescope.nvim"
-
-    -- CMP
-    use "hrsh7th/nvim-cmp"
-    use "hrsh7th/cmp-buffer"
-    use "hrsh7th/cmp-path"
-    use "hrsh7th/cmp-cmdline"
-    use "hrsh7th/cmp-nvim-lsp"
-
-    -- LSP
 
     -- Diagnostics
     use {
         "folke/trouble.nvim",
         requires = "kyazdani42/nvim-web-devicons",
     }
+
+    -- Code lens
+    use 'markwoodhall/vim-codelens'
 
     -- Pairing brackets and so on
     use {
@@ -53,20 +43,19 @@ return packer.startup(function()
     -- COC (for coc-rust-analyzer)
     use { "neoclide/coc.nvim", branch = "release" }
 
-    -- Code formating
-    use "jose-elias-alvarez/null-ls.nvim"
+    -- Lualine
     use {
-        "prettier/vim-prettier",
-        run = "yarn install",
+        'nvim-lualine/lualine.nvim',
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true }
     }
+
+    -- Floating terminal
+    use 'voldikss/vim-floaterm'
 
     -- Treesitter
     use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
 
     -- Colorschemes
-    use "lunarvim/colorschemes"
-    use "RRethy/nvim-base16"
-    use "folke/tokyonight.nvim"
     use 'https://gitlab.com/__tpb/monokai-pro.nvim'
 
     -- File explorer

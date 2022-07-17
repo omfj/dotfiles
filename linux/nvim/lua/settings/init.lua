@@ -19,6 +19,7 @@ local options = {
     number = true,
     cursorline = true,
     foldcolumn = "2",
+    mouse = "a",
 }
 
 vim.opt.shortmess:append "c"
