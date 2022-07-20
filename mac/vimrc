@@ -11,13 +11,9 @@ Plug 'preservim/nerdtree'
 Plug 'nanotech/jellybeans.vim'
 Plug 'tomasr/molokai'
 Plug 'tpope/vim-commentary'
-Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
-Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'mattn/emmet-vim'
-Plug 'leafgarland/typescript-vim'
-Plug 'valloric/youcompleteme'
-Plug 'w0rp/ale'
 Plug 'ap/vim-css-color'
 Plug 'tpope/vim-sensible'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
@@ -25,12 +21,13 @@ Plug 'tpope/vim-sleuth'
 Plug 'rust-lang/rust.vim'
 call plug#end()
 
-" Vim
+" Settings
 let mapleader = " "
 colorscheme jellybeans
 set backspace=indent,eol,start
 set nu rnu
-set so=8
+set mouse=a
+set so=6
 
 " Prettier
 filetype plugin indent on
@@ -54,10 +51,11 @@ let g:airline#enable#syntastic=1
 let g:airline#enable#bufferline=1
 
 " Nerdtree
-nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <leader>e :NERDTreeToggle<CR>
 nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-t> :NERDTreeFocus<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
+
 " Window Navigation with Ctrl-[hjkl]
 noremap <C-J> <C-W>j
 noremap <C-K> <C-W>k

@@ -32,8 +32,8 @@ alias la="exa -a"
 alias ll="exa -l"
 alias lla="exa -la"
 
-alias v="nvim"
 alias vim="nvim"
+alias v="nvim"
 
 alias cat="bat"
 
@@ -42,7 +42,6 @@ export CARGO_NAME="Ole Magnus Johnsen"
 export CARGO_EMAIL="ole.magnus@me.com"xport inf142="$uib/semester2/inf142"
 
 ## To folders
-alias cdd="cd $DOTFILES"
 export DOTFILES=$HOME/Documents/github/dotfiles
 
 
@@ -52,12 +51,10 @@ export HOMEBREW_AUTO_UPDATE_SECS="86400"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-#[ -f "/Users/olem/.ghcup/env" ] && source "/Users/olem/.ghcup/env" # ghcup-env
+[ -f "/Users/olem/.ghcup/env" ] && source "/Users/olem/.ghcup/env" # ghcup-env
 export GPG_TTY=$(tty)
 
 # Use node 16 as default
 export PATH="/opt/homebrew/opt/node@16/bin:$PATH"
 export LDFLAGS="-L/opt/homebrew/opt/node@16/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/node@16/include"
-
-[ -f "/Users/olem/.ghcup/env" ] && source "/Users/olem/.ghcup/env" # ghcup-env
