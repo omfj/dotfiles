@@ -5,11 +5,11 @@ window_gap="$(bspc config window_gap)"
 
 case "$1" in 
     plus) 
-            "${command[@]}" $(( window_gap + 2 ))
+            "${command[@]}" $(( window_gap + 1 ))
             ;;
     minus)
             [ $window_gap -ne 0 ] &&
-                    "${command[@]}" $(( window_gap - 2 ))
+                    "${command[@]}" $(( window_gap - 1 ))
             ;;
     equal)
             "${command[@]}" 0

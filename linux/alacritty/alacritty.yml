@@ -4,12 +4,11 @@ import:
 
 env:
   TERM: alacritty
-  WINIT_X11_SCALE_FACTOR: '1.0'
 
 window:
   padding:
-    x: 10
-    y: 10
+    x: 0
+    y: 0
 
   opacity: 0.9
 

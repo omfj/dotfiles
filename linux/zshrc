@@ -37,3 +37,4 @@ eval "$(starship init zsh)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+[ -f "/home/olem/.ghcup/env" ] && source "/home/olem/.ghcup/env" # ghcup-env

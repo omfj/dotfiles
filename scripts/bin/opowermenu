@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-rofi_command="rofi -theme $HOME/Documents/github/scripts/powermenu/powermenu.rasi"
+rofi_command="rofi -theme /home/olem/Documents/github/configs/scripts/powermenu/powermenu.rasi"
 
 uptime=$(uptime -p | sed -e 's/up //g')
 
@@ -19,9 +19,9 @@ case $chosen in
     $reboot) systemctl reboot ;;
     $lock) betterlockscreen -l blur ;;
     $suspend)
-		mpc -q pause
-		amixer set Master mute
-		systemctl suspend
+		    mpc -q pause
+    		amixer set Master mute
+	    	systemctl suspend
         ;;
     $logout) bspc quit ;;
 	*) exit ;;
