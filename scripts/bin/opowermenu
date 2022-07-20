@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-rofi_command="rofi -theme /home/olem/Documents/github/configs/scripts/powermenu/powermenu.rasi"
+rofi_command="rofi -theme /home/olem/Documents/github/dotfiles/scripts/powermenu/powermenu.rasi"
 
 uptime=$(uptime -p | sed -e 's/up //g')
 
@@ -15,7 +15,7 @@ options="$shutdown\n$reboot\n$lock\n$suspend\n$logout"
 
 chosen="$(echo -e "$options" | $rofi_command -p "UP - $uptime" -dmenu -selected-row 2)"
 case $chosen in
-    $shutdown) systemctl shutdown;;
+    $shutdown) systemctl poweroff ;;
     $reboot) systemctl reboot ;;
     $lock) betterlockscreen -l blur ;;
     $suspend)
@@ -23,6 +23,14 @@ case $chosen in
     		amixer set Master mute
 	    	systemctl suspend
         ;;
-    $logout) bspc quit ;;
+    $logout)
+      if [[ $(pgrep bspwm) ]]; then
+        bspc quit
+      elif [[ $(grep dwm) ]]; then
+        kill dwm
+      else
+        notify-send --urgency critical "I do not know how to exit log out of your session."
+      fi
+      ;;
 	*) exit ;;
 esac
