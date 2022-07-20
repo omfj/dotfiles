@@ -27,7 +27,7 @@ case $chosen in
       if [[ $(pgrep bspwm) ]]; then
         bspc quit
       elif [[ $(grep dwm) ]]; then
-        kill dwm
+        pkill dwm
       else
         notify-send --urgency critical "I do not know how to exit log out of your session."
       fi
