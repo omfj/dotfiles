@@ -25,7 +25,8 @@ alias ll="exa -l"
 alias lla="exa -la"
 
 ## To folders
-export DOTFILES=$HOME/Documents/github/configs/linux
+alias cdd="cd $DOTFILES"
+export DOTFILES=$HOME/Documents/github/dotfiles
 
 ## Cargo
 export CARGO_NAME="Ole Magnus Johnsen"
