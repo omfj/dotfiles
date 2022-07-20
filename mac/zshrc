@@ -45,14 +45,13 @@ export CARGO_EMAIL="ole.magnus@me.com"xport inf142="$uib/semester2/inf142"
 alias cdd="cd $DOTFILES"
 export DOTFILES=$HOME/Documents/github/dotfiles
 
-
+# Start starship
 eval "$(starship init zsh)"
 
 export HOMEBREW_AUTO_UPDATE_SECS="86400"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-#[ -f "/Users/olem/.ghcup/env" ] && source "/Users/olem/.ghcup/env" # ghcup-env
 export GPG_TTY=$(tty)
 
 # Use node 16 as default
