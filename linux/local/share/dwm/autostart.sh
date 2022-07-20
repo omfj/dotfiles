@@ -1,0 +1,1 @@
+/home/olem/Documents/github/omfj-suckless/autostart.sh
