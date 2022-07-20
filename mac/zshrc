@@ -42,6 +42,7 @@ export CARGO_NAME="Ole Magnus Johnsen"
 export CARGO_EMAIL="ole.magnus@me.com"xport inf142="$uib/semester2/inf142"
 
 ## To folders
+alias cdd="cd $DOTFILES"
 export DOTFILES=$HOME/Documents/github/dotfiles
 
 
