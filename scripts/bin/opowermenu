@@ -14,15 +14,20 @@ logout=""
 options="$shutdown\n$reboot\n$lock\n$suspend\n$logout"
 
 chosen="$(echo -e "$options" | $rofi_command -p "UP - $uptime" -dmenu -selected-row 2)"
+
 case $chosen in
     $shutdown) systemctl poweroff ;;
+
     $reboot) systemctl reboot ;;
+
     $lock) betterlockscreen -l blur ;;
+
     $suspend)
 		    mpc -q pause
     		amixer set Master mute
 	    	systemctl suspend
         ;;
+
     $logout)
       if [[ $(pgrep bspwm) ]]; then
         bspc quit
@@ -32,5 +37,6 @@ case $chosen in
         notify-send --urgency critical "I do not know how to exit log out of your session."
       fi
       ;;
+
 	*) exit ;;
 esac

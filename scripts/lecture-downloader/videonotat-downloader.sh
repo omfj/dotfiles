@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 
-working_dir=$(pwd)
-filename="$working_dir/lectures.txt"
+filename="$(pwd)/lectures.txt"
 
-function inf101-lec-to-vid() {
+function videonotat_to_mp4() {
 	curl "$1" \
 	-H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:96.0) Gecko/20100101 Firefox/96.0' \
 	-H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8' \
@@ -22,7 +21,7 @@ function inf101-lec-to-vid() {
 
 n=1
 while read line; do
-	inf101-lec-to-vid $line $n
+	videonotat_to_mp4 $line $n &
 	n=$((n+1))
 done < $filename
 
