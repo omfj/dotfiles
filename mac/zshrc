@@ -52,7 +52,7 @@ export HOMEBREW_AUTO_UPDATE_SECS="86400"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export GPG_TTY=$(tty)
+# export GPG_TTY=$(tty)
 
 # Use node 16 as default
 export PATH="/opt/homebrew/opt/node@16/bin:$PATH"
