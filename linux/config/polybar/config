@@ -8,7 +8,7 @@ foreground-alt = #555
 primary = #ffb52a
 secondary = #e60053
 
-alert = #bd2c40
+alert = #8b0000
 underline = #817f7f
 good = #028A0F
 hover = #DF717171

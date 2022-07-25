@@ -26,7 +26,7 @@ fi
 
 # Border
 bspc config border_width         3
-bspc config focused_border_color "#00498D"
+bspc config focused_border_color "#8B0000"
 
 # Split
 bspc config split_ratio 0.52
@@ -38,11 +38,9 @@ bspc config focus_follows_pointer true
 
 # Padding and gap
 bspc config top_padding 35 # Polybarheight + window_gap
-bspc config window_gap  15
+bspc config window_gap  8
 
 # Window rules
 bspc rule -a 1Password state=floating
-bspc rule -a inf101v22-tetris-TetrisMain state=floating
 bspc rule -a Blueman-manager state=floating
-bspc rule -a mplayer2 state=floating
 
