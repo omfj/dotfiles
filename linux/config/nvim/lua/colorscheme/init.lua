@@ -1,4 +1,4 @@
-local colorscheme = "monokaipro"
+local colorscheme = "jellybeans"
 
 if colorscheme == "tokyonight" then
     vim.g.tokyonight_style = "night"

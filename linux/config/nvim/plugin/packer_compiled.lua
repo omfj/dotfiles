@@ -74,6 +74,11 @@ _G.packer_plugins = {
     path = "/Users/olem/.local/share/nvim/site/pack/packer/start/coc.nvim",
     url = "https://github.com/neoclide/coc.nvim"
   },
+  ["jellybeans.vim"] = {
+    loaded = true,
+    path = "/Users/olem/.local/share/nvim/site/pack/packer/start/jellybeans.vim",
+    url = "https://github.com/nanotech/jellybeans.vim"
+  },
   ["lualine.nvim"] = {
     loaded = true,
     path = "/Users/olem/.local/share/nvim/site/pack/packer/start/lualine.nvim",
@@ -119,6 +124,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/olem/.local/share/nvim/site/pack/packer/start/popup.nvim",
     url = "https://github.com/nvim-lua/popup.nvim"
+  },
+  ["tabline.nvim"] = {
+    loaded = true,
+    path = "/Users/olem/.local/share/nvim/site/pack/packer/start/tabline.nvim",
+    url = "https://github.com/kdheepak/tabline.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,

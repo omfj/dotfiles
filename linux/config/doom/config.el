@@ -32,7 +32,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-opera)
+(setq doom-theme 'doom-sourcerer)
 
 ;; Font
 (setq doom-font (font-spec :family "BlexMono Nerd Font" :size 18 :weight 'semi-light)
@@ -41,10 +41,12 @@
       doom-big-font (font-spec :family "BlexMono Nerd Font" :size 26))
 
 ;; Change meta key to CMD from Option
-(:if IS-MAC
+(if IS-MAC
      (setq mac-option-modifier nil
         mac-command-modifier 'meta
         select-enable-clipboard t))
+
+(global-whitespace-mode +1)
 
 ;; Tailwind LSP
 (use-package! lsp-tailwindcss)

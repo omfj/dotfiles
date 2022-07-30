@@ -49,6 +49,11 @@ return packer.startup(function()
         requires = { 'kyazdani42/nvim-web-devicons', opt = true }
     }
 
+    use {
+        'kdheepak/tabline.nvim',
+        requires = { { 'hoob3rt/lualine.nvim', opt=true }, {'kyazdani42/nvim-web-devicons', opt = true} }
+    }
+
     -- Floating terminal
     use 'voldikss/vim-floaterm'
 
@@ -57,6 +62,7 @@ return packer.startup(function()
 
     -- Colorschemes
     use 'https://gitlab.com/__tpb/monokai-pro.nvim'
+    use "nanotech/jellybeans.vim"
 
     -- File explorer
     use "preservim/nerdtree"
