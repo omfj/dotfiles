@@ -1,0 +1,2 @@
+require "floaterm"
+require "prettier"
