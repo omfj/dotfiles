@@ -37,7 +37,7 @@ bspc config gapless_monocle       true
 bspc config focus_follows_pointer true
 
 # Padding and gap
-bspc config top_padding 35 # Polybarheight + window_gap
+bspc config top_padding 42 # Polybarheight + window_gap
 bspc config window_gap  8
 
 # Window rules

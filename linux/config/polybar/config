@@ -50,7 +50,7 @@ font-2 = BlexMono Nerd Font:size=9;2
 
 modules-left = powermenu bspwm xwindow
 modules-center = mod
-modules-right = pulseaudio backlight memory cpu temperature battery date
+modules-right = pulseaudio backlight memory cpu battery date
 
 tray-position = right
 tray-padding = 5
