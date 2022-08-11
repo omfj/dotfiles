@@ -16,3 +16,4 @@
 	ac = commit -S -am
 	s = status
 	cm = commit -m
+	c = clone

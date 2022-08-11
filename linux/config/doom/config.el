@@ -32,13 +32,13 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-sourcerer)
+(setq doom-theme 'doom-dark+)
 
 ;; Font
-(setq doom-font (font-spec :family "BlexMono Nerd Font" :size 18 :weight 'semi-light)
-      doom-variable-pitch-font (font-spec :family "BlexMono Nerd Font") ; inherits `doom-font''s :size
-      doom-unicode-font (font-spec :family "BlexMono Nerd Font" :size 18)
-      doom-big-font (font-spec :family "BlexMono Nerd Font" :size 26))
+(setq doom-font (font-spec :family "FiraMono Nerd Font" :size 14 :weight 'semi-light)
+      doom-variable-pitch-font (font-spec :family "FiraMono Nerd Font") ; inherits `doom-font''s :size
+      doom-unicode-font (font-spec :family "FiraMono Nerd Font" :size 14)
+      doom-big-font (font-spec :family "FiraMono Nerd Font" :size 22))
 
 ;; Change meta key to CMD from Option
 (if IS-MAC
@@ -46,9 +46,7 @@
         mac-command-modifier 'meta
         select-enable-clipboard t))
 
-(global-whitespace-mode +1)
-
-;; Tailwind LSP
+ ; Tailwind LSP
 (use-package! lsp-tailwindcss)
 
 (setq scroll-margin 8)
@@ -59,7 +57,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/Documents/org/")
+(setq org-directory '~/Documents/org/)
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an

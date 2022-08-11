@@ -18,7 +18,6 @@ local options = {
     relativenumber = true,
     number = true,
     cursorline = true,
-    foldcolumn = "2",
     mouse = "a",
 }
 
