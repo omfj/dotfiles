@@ -33,6 +33,7 @@ alias ll="exa -l"
 alias lla="exa -la"
 
 alias v="nvim"
+alias vi="nvim"
 alias vim="nvim"
 
 alias cat="bat"
@@ -58,3 +59,11 @@ export LDFLAGS="-L/opt/homebrew/opt/node@16/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/node@16/include"
 
 [ -f "/Users/olem/.ghcup/env" ] && source "/Users/olem/.ghcup/env" # ghcup-env
+
+# bun completions
+[ -s "/Users/olem/.bun/_bun" ] && source "/Users/olem/.bun/_bun"
+
+# bun
+export BUN_INSTALL="/Users/olem/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+export PATH="/opt/homebrew/opt/llvm@12/bin:$PATH"
