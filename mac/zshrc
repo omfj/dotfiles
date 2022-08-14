@@ -9,6 +9,7 @@ path+="/opt/homebrew/opt/openjdk/bin"
 export PATH
 
 # Java homebrew
+
 export CPPFLAGS="-I/opt/homebrew/opt/openjdk/include"
 
 plugins=(
@@ -26,6 +27,7 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # Aliases
 
 ## Better ls
+
 alias l="exa"
 alias ls="exa"
 alias la="exa -a"
@@ -39,14 +41,20 @@ alias vim="nvim"
 alias cat="bat"
 
 ## Cargo
+
 export CARGO_NAME="Ole Magnus Johnsen"
 export CARGO_EMAIL="ole.magnus@me.com"xport inf142="$uib/semester2/inf142"
 
 ## To folders
-alias cdd="cd $DOTFILES"
+
+alias echodb="psql -h $(ifconfig -u | grep 'inet ' | grep -v 127.0.0.1 | cut -d\  -f2 | head -1) -p 5432 -U postgres"
+alias front="cd $HOME/Documents/github/echo-web/frontend"
+alias back="cd $HOME/Documents/github/echo-web/backend"
+alias dots="cd $DOTFILES"
 export DOTFILES=$HOME/Documents/github/dotfiles
 
 # Start starship
+
 eval "$(starship init zsh)"
 
 export HOMEBREW_AUTO_UPDATE_SECS="86400"
@@ -54,16 +62,17 @@ export HOMEBREW_AUTO_UPDATE_SECS="86400"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Use node 16 as default
+
 export PATH="/opt/homebrew/opt/node@16/bin:$PATH"
 export LDFLAGS="-L/opt/homebrew/opt/node@16/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/node@16/include"
 
 [ -f "/Users/olem/.ghcup/env" ] && source "/Users/olem/.ghcup/env" # ghcup-env
 
-# bun completions
-[ -s "/Users/olem/.bun/_bun" ] && source "/Users/olem/.bun/_bun"
+# Bun
 
-# bun
+[ -s "/Users/olem/.bun/_bun" ] && source "/Users/olem/.bun/_bun"
 export BUN_INSTALL="/Users/olem/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH="/opt/homebrew/opt/llvm@12/bin:$PATH"
+
