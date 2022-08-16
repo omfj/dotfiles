@@ -2,11 +2,13 @@
 cmd + shift - return : open -a iTerm
 
 # Open Brave
-cmd + shift - w      : open -a brave
+cmd + shift - w : open -a Firefox\ Developer\ Edition
 
 .blacklist [
     "iterm"
     "brave"
+    "firefox developer edition"
     "discord"
     "visual studio code"
 ]
+
