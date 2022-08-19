@@ -25,7 +25,7 @@ alias ll="exa -l"
 alias lla="exa -la"
 
 ## To folders
-alias cdd="cd $DOTFILES"
+alias dots="cd $DOTFILES"
 export DOTFILES=$HOME/Documents/github/dotfiles
 
 ## Cargo
