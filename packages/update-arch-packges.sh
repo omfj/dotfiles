@@ -1,1 +1,1 @@
-paru -Qe | awk '{ print  }' > arch-packages.txt
+paru -Qe | awk '{ print $1 }' > arch-packages.txt
