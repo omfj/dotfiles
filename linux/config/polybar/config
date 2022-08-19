@@ -16,7 +16,7 @@ hover = #DF717171
 [bar/omfjbar]
 monitor = ${env:MONITOR:}
 width = 100%
-height = 35
+height = 30
 ;offset-y = .5%
 fixed-center = true
 
@@ -44,9 +44,9 @@ module-margin-right = 1
 separator = |
 separator-foreground = ${colors.foreground-alt}
 
-font-0 = Hack Nerd Font:size=14;2
-font-1 = BlexMono Nerd Font:size=7;2
-font-2 = BlexMono Nerd Font:size=9;2
+font-0 = FiraCode Nerd Font:size=12;2
+font-1 = FiraCode Nerd Font:size=7;2
+font-2 = FiraCode Nerd Font:size=9;2
 
 modules-left = powermenu bspwm xwindow
 modules-center = mod
