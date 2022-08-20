@@ -6,6 +6,9 @@ path+="/usr/local/opt/openjdk/bin"
 path+="/Library/Frameworks/Python.framework/Versions/3.10/bin"
 path+="$HOME/.local/bin"
 path+="/opt/homebrew/opt/openjdk/bin"
+path+="$BUN_INSTALL/bin"
+path+="/opt/homebrew/opt/llvm@12/bin"
+path+="/opt/homebrew/opt/node@16/bin"
 export PATH
 
 # Java homebrew
@@ -15,7 +18,6 @@ export CPPFLAGS="-I/opt/homebrew/opt/openjdk/include"
 plugins=(
     git 
     zsh-syntax-highlighting
-    web-search
     zsh-fzf-history-search
 )
 
@@ -43,29 +45,31 @@ alias cat="bat"
 ## Cargo
 
 export CARGO_NAME="Ole Magnus Johnsen"
-export CARGO_EMAIL="ole.magnus@me.com"xport inf142="$uib/semester2/inf142"
+export CARGO_EMAIL="ole.magnus@me.com"
 
 ## To folders
 
+export DOTFILES="$HOME/Documents/github/dotfiles"
 alias echodb="psql -h $(ifconfig -u | grep 'inet ' | grep -v 127.0.0.1 | cut -d\  -f2 | head -1) -p 5432 -U postgres"
 alias front="cd $HOME/Documents/github/echo-web/frontend"
 alias back="cd $HOME/Documents/github/echo-web/backend"
+alias github="cd $HOME/Documents/github/"
 alias dots="cd $DOTFILES"
-export DOTFILES=$HOME/Documents/github/dotfiles
 
 # Start starship
 
 eval "$(starship init zsh)"
 
-export HOMEBREW_AUTO_UPDATE_SECS="86400"
+# Fzf
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Use node 16 as default
 
-export PATH="/opt/homebrew/opt/node@16/bin:$PATH"
 export LDFLAGS="-L/opt/homebrew/opt/node@16/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/node@16/include"
+
+# Haskell
 
 [ -f "/Users/olem/.ghcup/env" ] && source "/Users/olem/.ghcup/env" # ghcup-env
 
@@ -73,6 +77,4 @@ export CPPFLAGS="-I/opt/homebrew/opt/node@16/include"
 
 [ -s "/Users/olem/.bun/_bun" ] && source "/Users/olem/.bun/_bun"
 export BUN_INSTALL="/Users/olem/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-export PATH="/opt/homebrew/opt/llvm@12/bin:$PATH"
 
