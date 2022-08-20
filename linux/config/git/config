@@ -1,6 +1,6 @@
 [user]
 	name = Ole Magnus Johnsen
-	email = ole.magnus@me.com
+	email = hei@omfj.no
 	signingkey = A20C43840D841F41
 [commit]
 	gpgsign = true
