@@ -35,9 +35,9 @@
 (setq doom-theme 'doom-dark+)
 
 ;; Font
-(setq doom-font (font-spec :family "FiraMono Nerd Font" :size 14 :weight 'semi-light)
-      doom-variable-pitch-font (font-spec :family "FiraMono Nerd Font") ; inherits `doom-font''s :size
-      doom-unicode-font (font-spec :family "FiraMono Nerd Font" :size 14)
+(setq doom-font (font-spec :family "FiraMono Nerd Font" :size 18 :weight 'semi-light)
+      doom-variable-pitch-font (font-spec :family "FiraMono Nerd Font")
+      doom-unicode-font (font-spec :family "FiraMono Nerd Font" :size 18)
       doom-big-font (font-spec :family "FiraMono Nerd Font" :size 22))
 
 ;; Change meta key to CMD from Option
@@ -45,9 +45,6 @@
      (setq mac-option-modifier nil
         mac-command-modifier 'meta
         select-enable-clipboard t))
-
- ; Tailwind LSP
-(use-package! lsp-tailwindcss)
 
 (setq scroll-margin 8)
 
