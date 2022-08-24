@@ -50,6 +50,8 @@ alias vim="nvim"
 
 alias cat="bat"
 
+alias uib="cd $HOME/Google\ Drive/My\ Drive/uib/"
+
 ## Cargo
 
 export CARGO_NAME="Ole Magnus Johnsen"
