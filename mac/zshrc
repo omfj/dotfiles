@@ -1,3 +1,9 @@
+plugins=(
+    git 
+    zsh-syntax-highlighting
+    zsh-fzf-history-search
+)
+
 # PATH
 
 path+="$HOME/.ghcup/bin"
@@ -19,15 +25,12 @@ path+="/opt/homebrew/opt/llvm/bin"
 
 export PATH
 
-
-plugins=(
-    git 
-    zsh-syntax-highlighting
-    zsh-fzf-history-search
-)
+# ZSH
 
 export ZSH="$HOME/.oh-my-zsh"
 source $ZSH/oh-my-zsh.sh
+
+# iTerm
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
@@ -69,13 +72,15 @@ eval "$(starship init zsh)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# LLVM
+# Flags
+
+## LLVM
 
 LDFLAGS+="-L$(brew --prefix)/opt/llvm/lib -Wl,-rpath,$(brew --prefix)/opt/llvm/lib"
 LDFLAGS+="-L/opt/homebrew/opt/node@16/lib"
 export LDFLAGS
 
-# CPP
+## CPP
 
 CPPFLAGS+="-I/opt/homebrew/opt/llvm/include"
 CPPFLAGS+="-I/opt/homebrew/opt/openjdk/include"
