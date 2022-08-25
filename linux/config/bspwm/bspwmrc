@@ -4,25 +4,19 @@
 sxhkd &
 #nm-applet &
 lxpolkit &
-$HOME/.config/polybar/launch.sh
+pgrep polybar || $HOME/.config/polybar/launch.sh
 $HOME/.fehbg 
 pgrep emacs || emacs --daemon &
 picom --experimental-backends &
 pgrep bspswallow || bspswallow &
 xsetroot -cursor_name left_ptr &
+mount-drives
 
 # For artix
 #xss-lock betterlockscreen -l blur -- suspend &
 
-if [[ $(xrandr -q | grep 'HDMI-1 connected') ]]; then
-	xrandr --output HDMI-1 --primary --mode 1920x1080 --rotate normal --output eDP-1 --mode 1920x1080 --rotate normal
-
-	bspc monitor eDP-1  -d I II III IV V VI VII
-	bspc monitor HDMI-1 -d I II III IV V VI VII
-else
-	xrandr --output eDP-1 --primary --mode 1920x1080 --rotate normal
-	bspc monitor -d I II III IV V VI VII
-fi
+# Workspaces
+bspc monitor -d I II III IV V VI VII
 
 # Border
 bspc config border_width         3
