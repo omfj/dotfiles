@@ -31,8 +31,8 @@ bspc config gapless_monocle       true
 bspc config focus_follows_pointer true
 
 # Padding and gap
-bspc config top_padding 42 # Polybarheight + window_gap
-bspc config window_gap  8
+bspc config top_padding 40 # Polybarheight + window_gap
+bspc config window_gap  10
 
 # Window rules
 bspc rule -a 1Password state=floating

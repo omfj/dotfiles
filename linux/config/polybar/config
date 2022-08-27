@@ -15,19 +15,16 @@ hover = #DF717171
 
 [bar/omfjbar]
 monitor = ${env:MONITOR:}
-width = 100%
 height = 30
-;offset-y = .5%
 fixed-center = true
 
 enable-ipc = true
 
 
-;radius = 10
 
-; Centering bar
-;width = 95%
-;offset-x = 1.5%
+width = 99%
+offset-y = 1%
+offset-x = 0.5%
 
 background = ${colors.background}
 foreground = ${colors.foreground}
