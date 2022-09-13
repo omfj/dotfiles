@@ -1,8 +1,11 @@
 # Open iTerm2
 cmd + shift - return : open -a iTerm
 
-# Open Brave
+# Open Firefox
 cmd + shift - w : open -a Firefox\ Developer\ Edition
+
+# Open Slack
+cmd + shift - s : open -a Slack
 
 .blacklist [
     "iterm"

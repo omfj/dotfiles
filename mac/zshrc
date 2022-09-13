@@ -20,8 +20,8 @@ path+="$BUN_INSTALL/bin"
 path+="/Library/Frameworks/Python.framework/Versions/3.10/bin"
 
 path+="/opt/homebrew/opt/openjdk/bin"
-path+="/opt/homebrew/opt/node@16/bin"
 path+="/opt/homebrew/opt/llvm/bin"
+path+="/opt/homebrew/opt/node@16/bin"
 
 export PATH
 
@@ -43,10 +43,6 @@ alias ls="exa"
 alias la="exa -a"
 alias ll="exa -l"
 alias lla="exa -la"
-
-alias v="nvim"
-alias vi="nvim"
-alias vim="nvim"
 
 alias cat="bat"
 
@@ -98,3 +94,8 @@ export CPPFLAGS
 [ -s "/Users/olem/.bun/_bun" ] && source "/Users/olem/.bun/_bun"
 export BUN_INSTALL="/Users/olem/.bun"
 
+# Heroku
+
+HEROKU_AC_ZSH_SETUP_PATH=/Users/olem/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
+
+export PATH="/opt/homebrew/opt/node@16/bin:$PATH"
