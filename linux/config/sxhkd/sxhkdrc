@@ -68,7 +68,7 @@ super + {_, shift} + b
 #
 
 # increase or decrease window gap
-super + {plus, minus, 0}
+super + {i, u, 0}
     gaps {plus,minus,equal}
 
 # quit/restart bspwm
