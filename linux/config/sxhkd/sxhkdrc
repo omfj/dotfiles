@@ -52,12 +52,8 @@ shift + {XF86AudioLowerVolume,XF86AudioRaiseVolume}
 super + p
     opowermenu
 
-# screenshot to clipbard
-alt + shift + 1 ; {1,2,3}
-    oscreenshot {select,window,fullscreen} clip
-
-alt + shift + 2 ; {1,2,3}
-    oscreenshot {select,window,fullscreen} pictures
+alt + shift + 2 
+    oscreenshot select download 
 
 # hide/show polybar
 super + {_, shift} + b
