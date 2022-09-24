@@ -10,6 +10,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 Plug 'morhetz/gruvbox'
+Plug 'tomasiser/vim-code-dark'
 
 Plug 'preservim/nerdtree'
 
@@ -32,7 +33,7 @@ set backspace=indent,eol,start
 set mouse=a
 
 " colorscheme
-colorscheme gruvbox
+colorscheme codedark
 let g:rainbow_active = 1
 
 " tabs vs spaces
