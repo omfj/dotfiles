@@ -3,18 +3,29 @@
 FILENAME="%Y-%m-%d-%T-screenshot.png"
 OUTPUT_PIC="$HOME/Pictures/screenshots/$FILENAME"
 OUTPUT_TMP='/tmp/%F_%T_$wx$h.png'
-SAVED_AT="Screenshots folder"
 
 # scrot '/tmp/%F_%T_$wx$h.png' --select --line mode=edge -e 'xclip -sel clip -t image/png -i $f' 
 
-function scrotSelectPictures() {
-	maim -o "$OUTPUT_PIC" -s
+function fullscreenScreenshot() {
+	maim -u | tee $HOME/Pictures/screenshots/$(date +%s).png | xclip -selection clipboard -t image/png
+	
+	notify-send "Screenshot taken"
 }
 
-case "$1 $2" in
-	"select download")
-        scrotSelect || exit
+
+function selectScreenshot() {
+	maim -u -s | tee $HOME/Pictures/screenshots/$(date +%s).png | xclip -selection clipboard -t image/png
+
+	notify-send "Screenshot taken"
+}
+
+# Input
+case "$1" in
+	"select")
+        	selectScreenshot || exit
         ;;
+	"fullscreen")
+		fullscreenScreenshot || exit
+	;;
 esac
 
-notify-send "Screenshot taken." "Saved at: $SAVED_AT"

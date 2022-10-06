@@ -52,8 +52,9 @@ shift + {XF86AudioLowerVolume,XF86AudioRaiseVolume}
 super + p
     opowermenu
 
-alt + shift + 2 
-    oscreenshot select download 
+# screenshot
+alt + shift + {1,2}
+    oscreenshot {fullscreen,select}
 
 # hide/show polybar
 super + {_, shift} + b
