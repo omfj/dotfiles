@@ -12,6 +12,8 @@ breeze
 brightnessctl
 bspwm
 btop
+cabal-install
+chrony
 cmake
 cmatrix
 discord
@@ -43,6 +45,7 @@ grub
 gst-plugin-pipewire
 gvfs
 gzip
+haskell-language-server
 htop
 intel-media-driver
 intel-ucode
@@ -73,6 +76,7 @@ noto-fonts
 noto-fonts-cjk
 noto-fonts-emoji
 npm
+okular
 openssh
 pacman
 pamixer
@@ -82,13 +86,17 @@ picom
 pipewire
 pipewire-alsa
 pipewire-jack
-pipewire-pulse
 pkgconf
 playerctl
 polybar
+postgresql
+pulseaudio-bluetooth
+pulseaudio-equalizer
 pulsemixer
 python-pip
+qbittorrent
 qt5ct
+rclone
 ripgrep
 rofi
 rustup
@@ -96,6 +104,7 @@ rxvt-unicode
 scrot
 sed
 smartmontools
+stack
 starship
 sudo
 sxhkd
@@ -106,8 +115,10 @@ thunar
 thunar-volman
 tldr
 usbutils
+valgrind
 vi
 vim
+virtualbox
 vulkan-intel
 vulkan-radeon
 wget
@@ -129,5 +140,10 @@ xorg-xinit
 xorg-xinput
 xorg-xsetroot
 yarn
+zathura
+zathura-cb
+zathura-djvu
+zathura-pdf-mupdf
+zathura-ps
 zram-generator
 zsh
