@@ -1,8 +1,8 @@
 # dotfiles
 
-<!-- hey there -->
+<!-- secret text!?!?! -->
 
-This repo contains all the dotfiles I use on a regular basis. Do not expect the config files to be well written, and at sometimes do not even expect them to work. 
+This repo contains all the dotfiles I use on a regular basis. Do not expect the config files to be well written. 
 
 ## screenshots
 
