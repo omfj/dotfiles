@@ -35,10 +35,10 @@
 (setq doom-theme 'doom-dark+)
 
 ;; Font
-(setq doom-font (font-spec :family "FiraMono Nerd Font" :size 18 :weight 'semi-light)
-      doom-variable-pitch-font (font-spec :family "FiraMono Nerd Font")
-      doom-unicode-font (font-spec :family "FiraMono Nerd Font" :size 18)
-      doom-big-font (font-spec :family "FiraMono Nerd Font" :size 22))
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 14 :weight 'semi-light)
+      doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font")
+      doom-unicode-font (font-spec :family "JetBrainsMono Nerd Font" :size 14)
+      doom-big-font (font-spec :family "JetBrainsMono Nerd Font" :size 18))
 
 ;; Change meta key to CMD from Option
 (if IS-MAC

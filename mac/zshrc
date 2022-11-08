@@ -55,11 +55,11 @@ export CARGO_EMAIL="ole.magnus@me.com"
 
 ## To folders
 
-export DOTFILES="$HOME/Documents/github/dotfiles"
-alias echodb="psql -h $(ifconfig -u | grep 'inet ' | grep -v 127.0.0.1 | cut -d\  -f2 | head -1) -p 5432 -U postgres"
-alias front="cd $HOME/Documents/github/echo-web/frontend"
-alias back="cd $HOME/Documents/github/echo-web/backend"
-alias github="cd $HOME/Documents/github/"
+export DOTFILES="$HOME/Programming/github/dotfiles"
+alias front="cd $HOME/Programming/github/echo-web/frontend"
+alias back="cd $HOME/Programming/github/echo-web/backend"
+alias github="cd $HOME/Programming/github/"
+
 alias dots="cd $DOTFILES"
 
 # Start starship
@@ -99,3 +99,4 @@ export BUN_INSTALL="/Users/olem/.bun"
 HEROKU_AC_ZSH_SETUP_PATH=/Users/olem/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
 
 export PATH="/opt/homebrew/opt/node@16/bin:$PATH"
+
