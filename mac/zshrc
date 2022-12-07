@@ -100,3 +100,4 @@ HEROKU_AC_ZSH_SETUP_PATH=/Users/olem/Library/Caches/heroku/autocomplete/zsh_setu
 
 export PATH="/opt/homebrew/opt/node@16/bin:$PATH"
 
+export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
