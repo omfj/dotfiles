@@ -6,11 +6,11 @@ sxhkd &
 lxpolkit &
 pgrep polybar || $HOME/.config/polybar/launch.sh
 $HOME/.fehbg 
-pgrep emacs || emacs --daemon &
-picom --experimental-backends &
-pgrep bspswallow || bspswallow &
+#pgrep emacs || emacs --daemon &
+picom &
+#pgrep bspswallow || bspswallow &
 xsetroot -cursor_name left_ptr &
-mount-drives
+#mount-drives
 
 # For artix
 #xss-lock betterlockscreen -l blur -- suspend &
@@ -19,7 +19,7 @@ mount-drives
 bspc monitor -d I II III IV V VI VII
 
 # Border
-bspc config border_width         3
+bspc config border_width         5
 bspc config focused_border_color "#777777"
 
 # Split
@@ -29,6 +29,9 @@ bspc config split_ratio 0.52
 bspc config borderless_monocle    true
 bspc config gapless_monocle       true
 bspc config focus_follows_pointer true
+
+# Mouse
+bspc config focus_follows_pointer false
 
 # Padding and gap
 bspc config top_padding 40 # Polybarheight + window_gap
