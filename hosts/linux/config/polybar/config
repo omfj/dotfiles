@@ -1,8 +1,6 @@
 [colors]
-;background = ${xrdb:color0:#222}
-background = #111
+background = #11111133
 background-alt = #444
-;foreground = ${xrdb:color7:#222}
 foreground = #eee
 foreground-alt = #555
 primary = #ffb52a
@@ -19,8 +17,6 @@ height = 30
 fixed-center = true
 
 enable-ipc = true
-
-
 
 #width = 99%
 #offset-y = 1%
@@ -41,9 +37,9 @@ module-margin-right = 1
 separator = |
 separator-foreground = ${colors.foreground-alt}
 
-font-0 = FiraCode Nerd Font:size=12;2
-font-1 = FiraCode Nerd Font:size=7;2
-font-2 = FiraCode Nerd Font:size=9;2
+font-0 = JetBrainsMono Nerd Font:size=12;2
+font-1 = JetBrainsMono Nerd Font:size=7;2
+font-2 = JetBrainsMono Nerd Font:size=9;2
 
 modules-left = powermenu bspwm xwindow
 modules-center = mod

@@ -18,13 +18,19 @@ export PATH
 
 # Folders
 
-export DOTFILES=$HOME/Documents/github/dotfiles
-export GITHUB=$HOME/Documents/github
+export DOTFILES=$HOME/Programming/github/dotfiles
+export GITHUB=$HOME/Programming/github
 
 # ZSH
 
 export ZSH="$HOME/.oh-my-zsh"
 source $ZSH/oh-my-zsh.sh
+
+# Global config
+
+export EDITOR="vim"
+export SHELL="zsh"
+export GPG_TTY=$(tty)
 
 # Aliases
 

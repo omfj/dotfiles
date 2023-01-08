@@ -9,7 +9,7 @@
 [pull]
 	rebase = true
 [init]
-	defaultBranch = master
+	defaultBranch = main
 [core]
 	editor = vim
 [alias]

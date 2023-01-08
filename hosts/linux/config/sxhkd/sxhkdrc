@@ -8,13 +8,15 @@
 super + shift + Return
     kitty
 
-# program launcher
-super + shift + d
-    /home/olem/.config/rofi/launchers/colorful/run.sh
-
-# program launcher (Apps)
+## program launcher
+#super + shift + d
+#    /home/olem/.config/rofi/launchers/colorful/run.sh
+#
+## program launcher (Apps)
+#super + d
+#    /home/olem/.config/rofi/launchers/colorful/apps.sh
 super + d
-    /home/olem/.config/rofi/launchers/colorful/apps.sh
+    dmenu_run -fn "JetBrainsMono Nerd Font-13" -h 40 -p "Program: " -nb "#111111" -nf "#eeeeee" -sb "#555555"
 
 # make sxhkd reload its configuration files:
 super + Escape
