@@ -1,0 +1,18 @@
+theme = "dark_plus"
+
+[editor]
+line-number = "relative"
+auto-format = true
+true-color = true
+
+[editor.lsp]
+display-messages = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[keys.normal]
+G = "goto_file_end"
+
