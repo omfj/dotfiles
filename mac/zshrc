@@ -1,3 +1,5 @@
+# Fig pre block. Keep at the top of this file.
+[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
 plugins=(
     git 
     zsh-syntax-highlighting
@@ -34,6 +36,10 @@ source $ZSH/oh-my-zsh.sh
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+# EDITOR
+
+export EDITOR="vim"
+
 # Aliases
 
 ## Better ls
@@ -61,6 +67,11 @@ alias back="cd $HOME/Programming/github/echo-web/backend"
 alias github="cd $HOME/Programming/github/"
 
 alias dots="cd $DOTFILES"
+
+## Docker
+
+alias dcu="docker-compose up --build"
+alias dcd="docker-compose down"
 
 # Start starship
 
@@ -101,3 +112,10 @@ HEROKU_AC_ZSH_SETUP_PATH=/Users/olem/Library/Caches/heroku/autocomplete/zsh_setu
 export PATH="/opt/homebrew/opt/node@16/bin:$PATH"
 
 export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
+
+# tabtab source for packages
+# uninstall by removing these lines
+[[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
+
+# Fig post block. Keep at the bottom of this file.
+[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
