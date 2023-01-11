@@ -23,7 +23,7 @@ path+="/Library/Frameworks/Python.framework/Versions/3.10/bin"
 
 path+="/opt/homebrew/opt/openjdk/bin"
 path+="/opt/homebrew/opt/llvm/bin"
-path+="/opt/homebrew/opt/node@16/bin"
+#path+="/opt/homebrew/opt/node@16/bin"
 
 export PATH
 
