@@ -17,3 +17,4 @@
 	s = status
 	cm = commit -m
 	c = clone
+	lg = log --oneline --graph
