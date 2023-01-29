@@ -119,6 +119,7 @@ HEROKU_AC_ZSH_SETUP_PATH=/Users/olem/Library/Caches/heroku/autocomplete/zsh_setu
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
 
+export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
+
 # Fig post block. Keep at the bottom of this file.
 [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
-export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
