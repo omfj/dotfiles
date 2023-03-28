@@ -17,7 +17,6 @@ super + shift + Return
 #    /home/olem/.config/rofi/launchers/colorful/apps.sh
 super + d
     dmenu_run -fn "JetBrainsMono Nerd Font-13" -h 40 -p "Program: " -nb "#111111" -nf "#eeeeee" -sb "#555555"
-
 # make sxhkd reload its configuration files:
 super + Escape
     pkill -USR1 -x sxhkd
