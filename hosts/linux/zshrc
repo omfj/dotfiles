@@ -31,6 +31,7 @@ source $ZSH/oh-my-zsh.sh
 export EDITOR="vim"
 export SHELL="zsh"
 export GPG_TTY=$(tty)
+export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 
 # Aliases
 
