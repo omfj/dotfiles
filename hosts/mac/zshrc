@@ -7,7 +7,6 @@ plugins=(
 )
 
 # PATH
-
 path+="$HOME/.ghcup/bin"
 path+="$HOME/.cargo/bin"
 path+="$HOME/.emacs.d/bin"
@@ -28,22 +27,18 @@ path+="/opt/homebrew/opt/llvm/bin"
 export PATH
 
 # ZSH
-
 export ZSH="$HOME/.oh-my-zsh"
 source $ZSH/oh-my-zsh.sh
 
 # iTerm
-
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # EDITOR
-
 export EDITOR="vim"
 
 # Aliases
 
 ## Better ls
-
 alias l="exa"
 alias ls="exa"
 alias la="exa -a"
@@ -55,12 +50,10 @@ alias cat="bat"
 alias uib="cd $HOME/Google\ Drive/My\ Drive/uib/"
 
 ## Cargo
-
 export CARGO_NAME="Ole Magnus Johnsen"
 export CARGO_EMAIL="ole.magnus@me.com"
 
 ## To folders
-
 export PROGRAMMING="$HOME/Programming/"
 export DOTFILES="$PROGRAMMING/github/dotfiles"
 alias front="cd $PROGRAMMING/github/echo-web/frontend"
@@ -70,43 +63,36 @@ alias github="cd $PROGRAMMING/github"
 alias dots="cd $DOTFILES"
 
 ## Docker
-
 alias dcu="docker-compose up --build"
 alias dcd="docker-compose down"
-# Start starship
 
+# Start starship
 eval "$(starship init zsh)"
 
 # Fzf
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Flags
 
 ## LLVM
-
 LDFLAGS+="-L$(brew --prefix)/opt/llvm/lib -Wl,-rpath,$(brew --prefix)/opt/llvm/lib"
 LDFLAGS+="-L/opt/homebrew/opt/node@16/lib"
 export LDFLAGS
 
 ## CPP
-
 CPPFLAGS+="-I/opt/homebrew/opt/llvm/include"
 CPPFLAGS+="-I/opt/homebrew/opt/openjdk/include"
 CPPFLAGS+="-I/opt/homebrew/opt/node@16/include"
 export CPPFLAGS
 
 # GHCUP
-
 [ -f "/Users/olem/.ghcup/env" ] && source "/Users/olem/.ghcup/env"
 
 # Bun
-
 [ -s "/Users/olem/.bun/_bun" ] && source "/Users/olem/.bun/_bun"
 export BUN_INSTALL="/Users/olem/.bun"
 
 # Heroku
-
 HEROKU_AC_ZSH_SETUP_PATH=/Users/olem/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
 
 # tabtab source for packages
@@ -114,9 +100,6 @@ HEROKU_AC_ZSH_SETUP_PATH=/Users/olem/Library/Caches/heroku/autocomplete/zsh_setu
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
 
 export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
-
-# Fig post block. Keep at the bottom of this file.
-[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
 
 # pnpm
 export PNPM_HOME="/Users/olem/Library/pnpm"
@@ -133,3 +116,13 @@ export FNM_MULTISHELL_PATH="/Users/olem/Library/Caches/fnm_multishells/97116_167
 export FNM_DIR="/Users/olem/Library/Application Support/fnm"
 rehash
 
+# Change zsh-syntax-highlight color
+ZSH_HIGHLIGHT_STYLES[arg0]="fg=blue,bold"
+ZSH_HIGHLIGHT_STYLES[alias]="fg=magenta,bold"
+ZSH_HIGHLIGHT_STYLES[precommand]="fg=blue,bold,underline"
+
+# z
+. /opt/homebrew/etc/profile.d/z.sh
+
+# Fig post block. Keep at the bottom of this file.
+[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
