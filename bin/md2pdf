@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+case "$1" in
+  -h|--help)
+    echo "Usage: create.sh <input.md> <output.pdf>"
+    exit 0
+  ;;
+esac
+
+if [ -z "$1" ]; then
+  echo "Error: No input file specified."
+  exit 1
+fi
+
+if [ -z "$2" ]; then
+  echo "Error: No output file specified."
+  exit 1
+fi
+
+pandoc "$1" \
+  -f gfm \
+  -V linkcolor:blue \
+  -V geometry:a4paper \
+  -V geometry:margin=2cm \
+  -V mainfont="Inter" \
+  --pdf-engine=xelatex \
+  -o "$2"
+

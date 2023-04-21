@@ -49,6 +49,8 @@ alias cat="bat"
 
 alias uib="cd $HOME/Google\ Drive/My\ Drive/uib/"
 
+alias ass2="cd /Applications/XAMPP/htdocs/inf115"
+
 ## Cargo
 export CARGO_NAME="Ole Magnus Johnsen"
 export CARGO_EMAIL="ole.magnus@me.com"
@@ -61,6 +63,7 @@ alias back="cd $PROGRAMMING/github/echo-web/backend"
 alias mono="cd $PROGRAMMING/github/new-website"
 alias github="cd $PROGRAMMING/github"
 alias dots="cd $DOTFILES"
+alias conf="cd $HOME/.config"
 
 ## Docker
 alias dcu="docker-compose up --build"
