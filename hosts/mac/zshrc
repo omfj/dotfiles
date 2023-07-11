@@ -1,6 +1,6 @@
 # Fig pre block. Keep at the top of this file.
 [[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
-
+[ -f "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh" ] && source "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh"
 plug "zap-zsh/supercharge"
 plug "zsh-users/zsh-syntax-highlighting"
 plug "joshskidmore/zsh-fzf-history-search"
@@ -10,12 +10,15 @@ path+="$HOME/.ghcup/bin"
 path+="$HOME/.cargo/bin"
 path+="$HOME/.emacs.d/bin"
 path+="$HOME/.local/bin"
+path+="$HOME/.deno/bin"
 
 path+="/usr/local/bin"
 path+="/usr/local/sbin"
 path+="/usr/local/opt/openjdk/bin"
 
 path+="$BUN_INSTALL/bin"
+
+path+="$HOME/.composer/vendor/bin"
 
 path+="/Library/Frameworks/Python.framework/Versions/3.10/bin"
 
@@ -42,6 +45,7 @@ export EDITOR="vim"
 # Aliases
 
 ## Better ls
+
 alias l="exa"
 alias ls="exa"
 alias la="exa -a"
@@ -108,7 +112,10 @@ HEROKU_AC_ZSH_SETUP_PATH=/Users/olem/Library/Caches/heroku/autocomplete/zsh_setu
 
 # pnpm
 export PNPM_HOME="/Users/olem/Library/pnpm"
-export PATH="$PNPM_HOME:$PATH"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
 # pnpm end
 
 # fnm
@@ -151,6 +158,9 @@ jenv() {
   esac
 }
 
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /opt/homebrew/bin/terraform terraform
+
 # Fig post block. Keep at the bottom of this file.
 [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
-
