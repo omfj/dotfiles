@@ -44,13 +44,13 @@ export EDITOR="vim"
 
 # Aliases
 
-## Better ls
-
 alias l="exa"
 alias ls="exa"
 alias la="exa -a"
 alias ll="exa -l"
 alias lla="exa -la"
+
+alias i="pnpm i"
 
 alias cat="bat"
 
