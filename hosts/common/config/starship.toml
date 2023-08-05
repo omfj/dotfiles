@@ -21,6 +21,6 @@ error_symbol = "[λ](bold red)"
 [memory_usage]
 symbol = " "
 
-[rust]
-symbol = " "
+[aws]
+disabled = true
 
