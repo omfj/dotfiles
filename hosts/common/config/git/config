@@ -11,7 +11,7 @@
 [init]
 	defaultBranch = main
 [core]
-	editor = vim
+	editor = nvim
 [alias]
 	ac = commit -S -am
 	s = status
