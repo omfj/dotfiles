@@ -5,12 +5,15 @@ plug "zap-zsh/supercharge"
 plug "zsh-users/zsh-syntax-highlighting"
 plug "joshskidmore/zsh-fzf-history-search"
 
+GOPATH="$HOME/go"
+
 # PATH
 path+="$HOME/.ghcup/bin"
 path+="$HOME/.cargo/bin"
 path+="$HOME/.emacs.d/bin"
 path+="$HOME/.local/bin"
 path+="$HOME/.deno/bin"
+path+="$GOPATH/bin"
 
 path+="/usr/local/bin"
 path+="/usr/local/sbin"
@@ -40,7 +43,7 @@ source $ZSH/oh-my-zsh.sh
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # EDITOR
-export EDITOR="vim"
+export EDITOR="nvim"
 
 # Aliases
 
@@ -161,6 +164,10 @@ jenv() {
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Fig post block. Keep at the bottom of this file.
 [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
