@@ -30,6 +30,7 @@ path+="/opt/homebrew/opt/llvm/bin"
 #path+="/opt/homebrew/opt/node@16/bin"
 path+="/opt/homebrew/opt/postgresql@15/bin"
 path+="/opt/homebrew/opt/openjdk@17/bin"
+path+="/opt/homebrew/opt/sqlite/bin"
 
 path+="/Users/olem/.jenv/shims"
 
@@ -47,11 +48,11 @@ export EDITOR="nvim"
 
 # Aliases
 
-alias l="exa"
-alias ls="exa"
-alias la="exa -a"
-alias ll="exa -l"
-alias lla="exa -la"
+alias l="eza"
+alias ls="eza"
+alias la="eza -a"
+alias ll="eza -l"
+alias lla="eza -la"
 
 alias i="pnpm i"
 
@@ -71,7 +72,6 @@ export DOTFILES="$PROGRAMMING/github/dotfiles"
 alias front="cd $PROGRAMMING/github/echo-web/frontend"
 alias back="cd $PROGRAMMING/github/echo-web/backend"
 alias mono="cd $PROGRAMMING/github/new-website"
-alias github="cd $PROGRAMMING/github"
 alias dots="cd $DOTFILES"
 alias conf="cd $HOME/.config"
 
@@ -171,3 +171,22 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Fig post block. Keep at the bottom of this file.
 [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
+
+# opam configuration
+[[ ! -r /Users/olem/.opam/opam-init/init.zsh ]] || source /Users/olem/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+#__conda_setup="$('/opt/homebrew/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+#if [ $? -eq 0 ]; then
+#    eval "$__conda_setup"
+#else
+#    if [ -f "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh" ]; then
+#        . "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh"
+#    else
+#        export PATH="/opt/homebrew/Caskroom/miniconda/base/bin:$PATH"
+#    fi
+#fi
+#unset __conda_setup
+# <<< conda initialize <<<
+
