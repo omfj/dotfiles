@@ -62,6 +62,8 @@ alias uib="cd $HOME/Google\ Drive/My\ Drive/uib/"
 
 alias ass2="cd /Applications/XAMPP/htdocs/inf115"
 
+alias minecraft="cd $HOME/Library/Application\ Support/minecraft"
+
 ## Cargo
 export CARGO_NAME="Ole Magnus Johnsen"
 export CARGO_EMAIL="ole.magnus@me.com"
