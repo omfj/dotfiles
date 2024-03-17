@@ -1,5 +1,5 @@
-# Fig pre block. Keep at the top of this file.
-[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
+# CodeWhisperer pre block. Keep at the top of this file.
+[[ -f "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.pre.zsh"
 [ -f "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh" ] && source "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh"
 plug "zap-zsh/supercharge"
 plug "zsh-users/zsh-syntax-highlighting"
@@ -33,6 +33,7 @@ path+="/opt/homebrew/opt/openjdk@17/bin"
 path+="/opt/homebrew/opt/sqlite/bin"
 
 path+="/Users/olem/.jenv/shims"
+path+="/Users/olem/Library/Caches/fnm_multishells/86204_1710421977269/bin"
 
 export PATH
 
@@ -128,10 +129,12 @@ esac
 
 # fnm
 export FNM_LOGLEVEL="info"
-export FNM_NODE_DIST_MIRROR="https://nodejs.org/dist"
 export FNM_ARCH="arm64"
 export FNM_VERSION_FILE_STRATEGY="local"
-export FNM_MULTISHELL_PATH="/Users/olem/Library/Caches/fnm_multishells/97116_1677930423836"
+export FNM_COREPACK_ENABLED="false"
+export FNM_RESOLVE_ENGINES="false"
+export FNM_MULTISHELL_PATH="/Users/olem/Library/Caches/fnm_multishells/86204_1710421977269"
+export FNM_NODE_DIST_MIRROR="https://nodejs.org/dist"
 export FNM_DIR="/Users/olem/Library/Application Support/fnm"
 rehash
 
@@ -169,8 +172,11 @@ complete -o nospace -C /opt/homebrew/bin/terraform terraform
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-# Fig post block. Keep at the bottom of this file.
-[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
-
 # opam configuration
 [[ ! -r /Users/olem/.opam/opam-init/init.zsh ]] || source /Users/olem/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+
+
+[[ -f "$HOME/fig-export/dotfiles/dotfile.zsh" ]] && builtin source "$HOME/fig-export/dotfiles/dotfile.zsh"
+
+# CodeWhisperer post block. Keep at the bottom of this file.
+[[ -f "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.post.zsh"
