@@ -1,6 +1,10 @@
 # CodeWhisperer pre block. Keep at the top of this file.
 [[ -f "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.pre.zsh"
+
+# setup zap
 [ -f "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh" ] && source "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh"
+
+# zap plugins
 plug "zap-zsh/supercharge"
 plug "zsh-users/zsh-syntax-highlighting"
 plug "joshskidmore/zsh-fzf-history-search"
@@ -32,7 +36,6 @@ path+="/opt/homebrew/opt/postgresql@15/bin"
 path+="/opt/homebrew/opt/openjdk@17/bin"
 path+="/opt/homebrew/opt/sqlite/bin"
 
-path+="/Users/olem/.jenv/shims"
 path+="/Users/olem/Library/Caches/fnm_multishells/86204_1710421977269/bin"
 
 export PATH
@@ -58,6 +61,8 @@ alias lla="eza -la"
 alias i="pnpm i"
 
 alias cat="bat"
+
+alias cd="z"
 
 alias uib="cd $HOME/Google\ Drive/My\ Drive/uib/"
 
@@ -142,28 +147,6 @@ rehash
 ZSH_HIGHLIGHT_STYLES[arg0]="fg=blue,bold"
 ZSH_HIGHLIGHT_STYLES[alias]="fg=magenta,bold"
 ZSH_HIGHLIGHT_STYLES[precommand]="fg=blue,bold,underline"
-
-export JENV_SHELL=zsh
-export JENV_LOADED=1
-unset JAVA_HOME
-unset JDK_HOME
-source '/opt/homebrew/Cellar/jenv/0.5.6/libexec/libexec/../completions/jenv.zsh'
-jenv rehash 2>/dev/null
-jenv refresh-plugins
-jenv() {
-  type typeset &> /dev/null && typeset command
-  command="$1"
-  if [ "$#" -gt 0 ]; then
-    shift
-  fi
-
-  case "$command" in
-  enable-plugin|rehash|shell|shell-options)
-    eval `jenv "sh-$command" "$@"`;;
-  *)
-    command jenv "$command" "$@";;
-  esac
-}
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
