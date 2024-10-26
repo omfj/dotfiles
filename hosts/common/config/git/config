@@ -18,5 +18,6 @@
 	cm = commit -m
 	c = clone
 	lg = log --oneline --graph
-  yolo = push -f
+	fomo = !git fetch origin main && git rebase origin/main
+        yolo = push -f
 
