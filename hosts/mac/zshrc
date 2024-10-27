@@ -128,3 +128,5 @@ export PATH="/Applications/MacPorts/Emacs.app/Contents/MacOS:$PATH"
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
+export PATH="/Users/olem/.config/herd-lite/bin:$PATH"
+export PHP_INI_SCAN_DIR="/Users/olem/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
