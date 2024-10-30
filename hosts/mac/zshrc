@@ -2,9 +2,10 @@
 [ -f "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh" ] && source "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh"
 
 # zap plugins
-plug "zap-zsh/supercharge"
 plug "zsh-users/zsh-syntax-highlighting"
 plug "joshskidmore/zsh-fzf-history-search"
+
+bindkey -e
 
 GOPATH="$HOME/go"
 
@@ -31,6 +32,7 @@ path+="/opt/homebrew/opt/llvm/bin"
 path+="/opt/homebrew/opt/postgresql@15/bin"
 path+="/opt/homebrew/opt/openjdk@17/bin"
 path+="/opt/homebrew/opt/sqlite/bin"
+path+="/opt/homebrew/opt/rustup/bin"
 
 export PATH
 
@@ -55,6 +57,8 @@ alias minecraft="cd $HOME/Library/Application\ Support/minecraft"
 export CARGO_NAME="Ole Magnus Johnsen"
 export CARGO_EMAIL="ole.magnus@me.com"
 
+export XDG_CONFIG_HOME="$HOME/.config"
+
 ## To folders
 export PROGRAMMING="$HOME/Developer"
 export DOTFILES="$PROGRAMMING/github/dotfiles"
@@ -75,7 +79,7 @@ eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 
 # Fzf
-source <(fzf --zsh)
+#source <(fzf --zsh)
 
 
 # GHCUP
@@ -108,8 +112,8 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH="/Applications/MacPorts/Emacs.app/Contents/MacOS:$PATH"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+export SDKMAN_DIR=$(brew --prefix sdkman-cli)/libexec
+[[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]] && source "${SDKMAN_DIR}/bin/sdkman-init.sh"
 
 export PATH="/Users/olem/.config/herd-lite/bin:$PATH"
 export PHP_INI_SCAN_DIR="/Users/olem/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
