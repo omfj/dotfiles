@@ -1,7 +1,10 @@
+# Add deno completions to search path
+if [[ ":$FPATH:" != *":/Users/olem/.zsh/completions:"* ]]; then export FPATH="/Users/olem/.zsh/completions:$FPATH"; fi
 # setup zap
 [ -f "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh" ] && source "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh"
 
 # zap plugins
+plug "zap-zsh/supercharge"
 plug "zsh-users/zsh-syntax-highlighting"
 plug "joshskidmore/zsh-fzf-history-search"
 
@@ -53,6 +56,15 @@ alias cd="z"
 alias uib="cd $HOME/Google\ Drive/My\ Drive/uib/"
 alias minecraft="cd $HOME/Library/Application\ Support/minecraft"
 
+# dot dot dot
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
+alias .......="cd ../../../../../.."
+alias ........="cd ../../../../../../.."
+
 ## Cargo
 export CARGO_NAME="Ole Magnus Johnsen"
 export CARGO_EMAIL="ole.magnus@me.com"
@@ -79,7 +91,7 @@ eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 
 # Fzf
-#source <(fzf --zsh)
+source <(fzf --zsh)
 
 
 # GHCUP
@@ -117,3 +129,7 @@ export SDKMAN_DIR=$(brew --prefix sdkman-cli)/libexec
 
 export PATH="/Users/olem/.config/herd-lite/bin:$PATH"
 export PHP_INI_SCAN_DIR="/Users/olem/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
+. "/Users/olem/.deno/env"
+
+# bun completions
+[ -s "/Users/olem/.bun/_bun" ] && source "/Users/olem/.bun/_bun"
