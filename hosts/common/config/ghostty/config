@@ -1,0 +1,18 @@
+font-family = JetBrainsMono Nerd Font
+font-style = Regular
+font-size = 13
+font-thicken = true
+
+title = ""
+
+theme = "Dark+"
+
+window-padding-x = 10
+window-padding-y = 10
+
+cursor-style = block
+cursor-style-blink = true
+
+background = 1f1f1f
+foreground = ffffff
+
