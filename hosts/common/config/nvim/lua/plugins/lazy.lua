@@ -9,7 +9,6 @@ return {
   { import = "lazyvim.plugins.extras.ui.edgy" },
   { import = "lazyvim.plugins.extras.ui.dashboard-nvim" },
   { import = "lazyvim.plugins.extras.ui.mini-starter" },
-  { import = "lazyvim.plugins.extras.ui.smear-cursor" },
 
   { import = "lazyvim.plugins.extras.formatting.prettier" },
   { import = "lazyvim.plugins.extras.linting.eslint" },
