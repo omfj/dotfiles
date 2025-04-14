@@ -1,9 +1,18 @@
 #"$schema" = 'https://starship.rs/config-schema.json'
 
 add_newline = true
+format = """
+$username$hostname$directory$git_branch$git_status$package$time
+$character"""
 
 [git_metrics]
 disabled = false
+
+[time]
+disabled = false
+format = "at [$time]($style) "
+time_format = "%H:%M:%S"
+style = "bold yellow"
 
 [directory]
 style = "bold blue"
@@ -24,3 +33,5 @@ symbol = " "
 [aws]
 disabled = true
 
+[gcloud]
+disabled = true
