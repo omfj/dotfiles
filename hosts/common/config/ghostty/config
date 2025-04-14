@@ -1,11 +1,14 @@
-font-family = JetBrainsMono Nerd Font
+theme = Dark Modern
+
+font-family = JetBrainsMonoNL NFM Regular
 font-style = Regular
 font-size = 13
 font-thicken = true
 
-title = ""
+background = 151515
+foreground = ffffff
 
-theme = "GruvBoxDarkHard"
+title = ""
 
 window-padding-x = 10
 window-padding-y = 10
@@ -13,6 +16,7 @@ window-padding-y = 10
 cursor-style = block
 cursor-style-blink = true
 
-background = 151515
-foreground = ffffff
+link-url = true
+
+copy-on-select = true
 

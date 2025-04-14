@@ -37,6 +37,8 @@ path+="/opt/homebrew/opt/openjdk@17/bin"
 path+="/opt/homebrew/opt/sqlite/bin"
 path+="/opt/homebrew/opt/rustup/bin"
 
+path+="/Library/Developer/CommandLineTools/usr/bin"
+
 export PATH
 
 # EDITOR
@@ -134,3 +136,4 @@ export PHP_INI_SCAN_DIR="/Users/olem/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
 # bun completions
 [ -s "/Users/olem/.bun/_bun" ] && source "/Users/olem/.bun/_bun"
 
+alias claude="/Users/olem/.claude/local/claude"
