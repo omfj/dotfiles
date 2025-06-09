@@ -19,6 +19,6 @@
 	c = clone
 	lg = log --oneline --graph
 	fomo = !git fetch origin main && git rebase origin/main
-  yolo = push -f
-  fl = push --force-with-lease
+	yolo = push -f
+	fl = push --force-with-lease
 
