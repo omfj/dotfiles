@@ -1,3 +1,6 @@
+# reload config with 
+# cmd + shift + ,
+
 theme = Dark Modern
 
 font-family = JetBrainsMonoNL NFM Regular
@@ -7,6 +10,8 @@ font-thicken = true
 
 background = 151515
 foreground = ffffff
+
+#background-opacity = 0.95
 
 title = ""
 
