@@ -25,7 +25,17 @@ source = "hosts/mac/zshrc"
 target = "~/.zshrc"
 condition = { os = ["macos"], hostname = "obook.local" }
 
+[[links]]
+source = "hosts/bekk/zshrc"
+target = "~/.zshrc"
+condition = { os = ["macos"], hostname = "bekk-mac-2318.local" }
+
 [[actions]]
 type = "shell-command"
 name = "Install Zap for zsh"
 command = "zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1"
+
+[[actions]]
+type = "shell-command"
+name = "Install tpm for tmux"
+command = "git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm"
