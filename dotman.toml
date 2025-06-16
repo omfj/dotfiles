@@ -23,4 +23,9 @@ target = "~/.config/starship.toml"
 [[links]]
 source = "hosts/mac/zshrc"
 target = "~/.zshrc"
-condition = { os = ["macos"] }
+condition = { os = ["macos"], hostname = "obook.local" }
+
+[[actions]]
+type = "shell-command"
+name = "Install Zap for zsh"
+command = "zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1"
