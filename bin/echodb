@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-
-docker exec -it backend-database-1 psql -h localhost -p 5432 -U postgres
-
