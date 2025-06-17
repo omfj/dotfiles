@@ -1,0 +1,24 @@
+[user]
+	name = Ole Magnus Fon Johnsen
+	email = ole.johnsen@bekk.no
+	signingkey = A20C43840D841F41
+[commit]
+	gpgsign = true
+[gpg]
+	program = gpg2
+[pull]
+	rebase = true
+[init]
+	defaultBranch = main
+[core]
+	editor = nvim
+[alias]
+	ac = commit -S -am
+	s = status
+	cm = commit -m
+	c = clone
+	lg = log --oneline --graph
+	fomo = !git fetch origin main && git rebase origin/main
+	yolo = push -f
+	fl = push --force-with-lease
+
