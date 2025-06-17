@@ -3,6 +3,12 @@ version = "1"
 [[links]]
 source = "hosts/common/config/git"
 target = "~/.config/git"
+condition = { os = ["macos"], hostname = "obook.local" }
+
+[[links]]
+source = "hosts/bekk/config/git"
+target = "~/.config/git"
+condition = { os = ["macos"], hostname = "bekk-mac-2318.local" }
 
 [[links]]
 source = "hosts/common/config/ghostty"
