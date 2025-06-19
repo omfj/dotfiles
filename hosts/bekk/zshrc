@@ -22,6 +22,9 @@ export PATH
 # EDITOR
 export EDITOR="nvim"
 
+# Build kit
+export DOCKER_BUILDKIT=1
+
 # Aliases
 
 alias l="eza"

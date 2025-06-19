@@ -1,11 +1,6 @@
 [user]
 	name = Ole Magnus Fon Johnsen
 	email = ole.johnsen@bekk.no
-	signingkey = A20C43840D841F41
-[commit]
-	gpgsign = true
-[gpg]
-	program = gpg2
 [pull]
 	rebase = true
 [init]
