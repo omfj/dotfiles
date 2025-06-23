@@ -79,4 +79,4 @@ ZSH_HIGHLIGHT_STYLES[arg0]="fg=blue,bold"
 ZSH_HIGHLIGHT_STYLES[alias]="fg=magenta,bold"
 ZSH_HIGHLIGHT_STYLES[precommand]="fg=blue,bold,underline"
 
-alias claude="/Users/olem/.claude/local/claude"
+alias claude="/Users/ole/.claude/local/claude"
