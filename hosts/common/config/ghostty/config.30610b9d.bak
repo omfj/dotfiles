@@ -25,4 +25,3 @@ link-url = true
 
 copy-on-select = true
 
-keybind = shift+enter=text:\n

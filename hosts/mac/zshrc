@@ -136,4 +136,3 @@ export PHP_INI_SCAN_DIR="/Users/olem/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
 # bun completions
 [ -s "/Users/olem/.bun/_bun" ] && source "/Users/olem/.bun/_bun"
 
-alias claude="/Users/olem/.claude/local/claude"
