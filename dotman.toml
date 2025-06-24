@@ -1,19 +1,17 @@
-version = "1"
-
 [[links]]
 source = "hosts/common/config/git"
 target = "~/.config/git"
-condition = { os = ["macos"], hostname = "obook.local" }
+if = { os = ["macos"], hostname = "obook.local" }
 
 [[links]]
 source = "hosts/bekk/config/git"
 target = "~/.config/git"
-condition = { os = ["macos"], hostname = "bekk-mac-2318.local" }
+if = { os = ["macos"], hostname = "bekk-mac-2318.local" }
 
 [[links]]
 source = "hosts/bekk/config/tmux"
 target = "~/.config/tmux"
-condition = { os = ["macos"], hostname = "bekk-mac-2318.local" }
+if = { os = ["macos"], hostname = "bekk-mac-2318.local" }
 
 [[links]]
 source = "hosts/common/config/ghostty"
@@ -34,19 +32,21 @@ target = "~/.config/starship.toml"
 [[links]]
 source = "hosts/mac/zshrc"
 target = "~/.zshrc"
-condition = { hostname = "obook.local" }
+if = { hostname = "obook.local" }
 
 [[links]]
 source = "hosts/bekk/zshrc"
 target = "~/.zshrc"
-condition = { hostname = "bekk-mac-2318.local" }
+if = { hostname = "bekk-mac-2318.local" }
 
 [[actions]]
 type = "shell-command"
 name = "Install Zap for zsh"
-command = "zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1"
+run = "zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1"
+if-not = { run = "test -d ~/.local/share/zap", shell = "zsh" }
 
 [[actions]]
 type = "shell-command"
 name = "Install tpm for tmux"
-command = "git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm"
+run = "git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm"
+if-not = { run = "test -d ~/.tmux/plugins/tpm" }
