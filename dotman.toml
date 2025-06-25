@@ -39,6 +39,10 @@ source = "hosts/bekk/zshrc"
 target = "~/.zshrc"
 if = { hostname = "bekk-mac-2318.local" }
 
+[[links]]
+source = "hosts/common/vimrc"
+target = "~/.vimrc"
+
 [[actions]]
 type = "shell-command"
 name = "Install Zap for zsh"

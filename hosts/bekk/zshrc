@@ -20,7 +20,7 @@ path+="/Library/Developer/CommandLineTools/usr/bin"
 export PATH
 
 # EDITOR
-export EDITOR="nvim"
+export EDITOR="vim"
 
 # Build kit
 export DOCKER_BUILDKIT=1

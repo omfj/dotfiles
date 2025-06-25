@@ -47,6 +47,9 @@ let g:airline#enable#bufferline=1
 " Nerdtree
 nnoremap <leader>e :NERDTreeToggle<CR>
 
+" Write and quit
+nnoremap <leader>qq :q<CR>
+
 " Window Navigation with Ctrl-[hjkl]
 noremap <C-J> <C-W>j
 noremap <C-K> <C-W>k
