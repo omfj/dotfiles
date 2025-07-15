@@ -18,7 +18,7 @@
 	cm = commit -m
 	c = clone
 	lg = log --oneline --graph
-	fomo = !git fetch origin main && git rebase origin/main
+	fomo = "!f() { git fetch origin ${1:-main} && git rebase origin/${1:-main}; }; f"
 	yolo = push -f
 	fl = push --force-with-lease
 
