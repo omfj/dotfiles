@@ -14,6 +14,7 @@
 	c = clone
 	lg = log --oneline --graph
 	fomo = "!f() { git fetch origin ${1:-main} && git rebase origin/${1:-main}; }; f"
+	cleanup-branches = "!git fetch --prune && git branch -vv | awk '/: gone]/{print $1}' | xargs -r git branch -d"
 	yolo = push -f
 	fl = push --force-with-lease
 
