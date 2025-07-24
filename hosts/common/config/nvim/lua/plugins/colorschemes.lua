@@ -1,11 +1,11 @@
 return {
   {
-    "ellisonleao/gruvbox.nvim",
+    "RRethy/base16-nvim",
     priority = 1000,
-    config = true,
   },
   {
-    "RRethy/base16-nvim",
+    "scottmckendry/cyberdream.nvim",
+    lazy = false,
     priority = 1000,
   },
 }

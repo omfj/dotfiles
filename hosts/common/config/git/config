@@ -12,6 +12,7 @@
 	defaultBranch = main
 [core]
 	editor = nvim
+  pager = delta
 [alias]
 	ac = commit -S -am
 	s = status
@@ -21,5 +22,12 @@
 	fomo = "!f() { git fetch origin ${1:-main} && git rebase origin/${1:-main}; }; f"
 	cleanup-branches = "!git fetch --prune && git branch -vv | awk '/: gone]/{print $1}' | xargs -r git branch -d"
 	yolo = push -f
-	fl = push --force-with-lease
+  fl = push --force-with-lease
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  navigate = true
+  line-numbers = true
+[merge]
+  conflictstyle = zdiff3
 
