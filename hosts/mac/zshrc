@@ -54,7 +54,6 @@ alias lla="eza -la"
 
 alias i="pnpm i"
 alias cat="bat"
-alias cd="z"
 alias uib="cd $HOME/Google\ Drive/My\ Drive/uib/"
 alias minecraft="cd $HOME/Library/Application\ Support/minecraft"
 
@@ -90,7 +89,7 @@ alias dcd="docker-compose down"
 eval "$(starship init zsh)"
 
 # Start zoxide
-eval "$(zoxide init zsh)"
+[ -z "$DISABLE_ZOXIDE" ] && eval "$(zoxide init --cmd cd zsh)"
 
 # Fzf
 source <(fzf --zsh)
