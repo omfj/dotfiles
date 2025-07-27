@@ -23,3 +23,14 @@ name = "typescript"
 formatter = { command = 'prettier', args = ["--parser", "typescript"] }
 auto-format = true
 
+[[language]]
+name = "htmldjango"
+scope = "source.htmldjango"
+file-types = []
+roots = []
+auto-format = true
+formatter = { command = "ruff", args = [] }
+
+[[grammar]]
+name = "htmldjango"
+source = { git = "https://github.com/interdependence/tree-sitter-htmldjango" , rev = "b2dba02eddab66be669022320273d0dfe1ff923d" } 
