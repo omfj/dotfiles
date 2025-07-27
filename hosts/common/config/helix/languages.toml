@@ -26,11 +26,25 @@ auto-format = true
 [[language]]
 name = "htmldjango"
 scope = "source.htmldjango"
-file-types = []
+file-types = ["html"]
 roots = []
-auto-format = true
-formatter = { command = "ruff", args = [] }
 
 [[grammar]]
 name = "htmldjango"
-source = { git = "https://github.com/interdependence/tree-sitter-htmldjango" , rev = "b2dba02eddab66be669022320273d0dfe1ff923d" } 
+source = { git = "https://github.com/interdependence/tree-sitter-htmldjango" , rev = "b2dba02eddab66be669022320273d0dfe1ff923d" }
+
+[[language]]
+name = "python"
+language-servers = ["pylsp", "ruff"]
+roots = ["pyproject.toml", "setup.py", ".git"]
+auto-format = true
+formatter = { command = 'ruff', args = ["format", "-q"] }
+
+[language-server.pylsp.config.pylsp]
+plugins.pylsp_mypy.enabled = true
+plugins.pylsp_mypy.live_mode = true
+
+[language-server.ruff]
+command = "ruff"
+args = ["server"]
+
