@@ -42,6 +42,11 @@ if = { hostname = "bekk-mac-2318.local" }
 source = "hosts/common/vimrc"
 target = "~/.vimrc"
 
+[[links]]
+source = "hosts/common/config/atuin"
+target = "~/.config/atuin"
+if = { hostname = "obook.local" }
+
 [[actions]]
 type = "shell-command"
 name = "Install Zap for zsh"
