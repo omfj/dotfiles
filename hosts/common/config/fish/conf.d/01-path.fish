@@ -3,6 +3,7 @@ fish_add_path $HOME/.cargo/bin
 fish_add_path $HOME/.emacs.d/bin
 fish_add_path $HOME/.local/bin
 fish_add_path $HOME/.deno/bin
+fish_add_path $HOME/.atuin/bin/
 fish_add_path $HOME/.composer/vendor/bin
 fish_add_path $HOME/go/bin
 
@@ -12,6 +13,7 @@ fish_add_path /usr/local/bin
 fish_add_path /usr/local/sbin
 fish_add_path /usr/local/opt/openjdk/bin
 
+# Homebrew
 fish_add_path /opt/homebrew/bin
 fish_add_path /opt/homebrew/opt/openjdk/bin
 fish_add_path /opt/homebrew/opt/llvm/bin
