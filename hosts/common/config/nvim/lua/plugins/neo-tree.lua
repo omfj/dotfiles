@@ -13,6 +13,27 @@ return {
 	config = function()
 		require("neo-tree").setup({
 			close_if_last_window = true,
+			default_component_configs = {
+				icon = {
+					folder_closed = "▸",
+					folder_open = "▾",
+					folder_empty = "▸",
+					default = "·",
+				},
+				git_status = {
+					symbols = {
+						added = "+",
+						modified = "~",
+						deleted = "-",
+						renamed = "→",
+						untracked = "?",
+						ignored = "◌",
+						unstaged = "✗",
+						staged = "✓",
+						conflict = "!",
+					}
+				},
+			},
 			filesystem = {
 				follow_current_file = {
 					enabled = true,
