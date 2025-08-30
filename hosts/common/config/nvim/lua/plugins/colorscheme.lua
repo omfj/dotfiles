@@ -1,11 +1,12 @@
 return {
-  {
-    "ellisonleao/gruvbox.nvim",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      vim.cmd([[colorscheme gruvbox]])
-    end,
-  },
+	{
+		"aktersnurra/no-clown-fiesta.nvim",
+		lazy = false,
+		priority = 1000,
+	},
+	{
+		"rebelot/kanagawa.nvim",
+		lazy = true,
+		priority = 1000,
+	},
 }
-
