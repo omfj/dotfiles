@@ -1,9 +1,9 @@
 # reload config with 
 # cmd + shift + ,
 
-theme = Dark Modern
+theme = Kanagawa
 
-font-family = JetBrainsMonoNL NFM Regular
+font-family = IosevkaTerm Nerd Font
 font-style = Regular
 font-size = 13
 font-thicken = true
