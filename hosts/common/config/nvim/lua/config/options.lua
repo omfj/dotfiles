@@ -1,7 +1,7 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
-vim.cmd([[colorscheme no-clown-fiesta]])
+vim.cmd([[colorscheme vscode]])
 
 vim.opt.autowrite = true -- Enable auto write
 vim.opt.clipboard = "unnamedplus" -- Sync with system clipboard
