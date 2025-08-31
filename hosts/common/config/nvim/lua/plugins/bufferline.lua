@@ -3,6 +3,8 @@ return {
 	version = "*",
 	dependencies = "nvim-tree/nvim-web-devicons",
 	config = function()
+		local bufremove = require("mini.bufremove")
+		
 		require("bufferline").setup({
 			options = {
 				mode = "buffers",
@@ -44,5 +46,15 @@ return {
 				sort_by = "insert_after_current",
 			},
 		})
+
+		-- Bufferline keymaps
+		vim.keymap.set("n", "<S-h>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev buffer" })
+		vim.keymap.set("n", "<S-l>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer" })
+		vim.keymap.set("n", "[b", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev buffer" })
+		vim.keymap.set("n", "]b", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer" })
+		vim.keymap.set("n", "<leader>bc", function() bufremove.delete(0, false) end, { desc = "Close current buffer" })
+		vim.keymap.set("n", "<leader>bd", "<cmd>BufferLinePickClose<cr>", { desc = "Pick buffer to close" })
+		vim.keymap.set("n", "<leader>bD", function() bufremove.delete(0, true) end, { desc = "Delete Buffer (force)" })
+		vim.keymap.set("n", "<leader>bo", "<cmd>BufferLineCloseOthers<cr>", { desc = "Delete Other Buffers" })
 	end,
 }
