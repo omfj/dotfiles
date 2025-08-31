@@ -1,12 +1,10 @@
 # dotfiles
 
-<!-- secret text!?!?! -->
-
 This repo contains all the dotfiles I use on a regular basis. Do not expect the config files to be well written. 
 
 ## screenshots
 
-![screenshot of the destop of my arch machine](assets/unixporn.png)
+![screenshot of the destop of my arch machine](.github/unixporn.png)
 
 ## other
 
