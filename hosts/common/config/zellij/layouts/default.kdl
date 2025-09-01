@@ -1,0 +1,46 @@
+layout {
+    default_tab_template {
+        children
+        pane size=1 borderless=true {
+            plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
+                format_left   "{mode} #[fg=#89B4FA,bold]{session} {tabs}"
+                format_right  "{command_git_branch} {datetime}"
+                format_space  ""
+
+                border_enabled  "false"
+                border_char     "─"
+                border_format   "#[fg=#6C7086]{char}"
+                border_position "top"
+
+                hide_frame_for_single_pane "true"
+
+                mode_normal        "#[bg=blue] NORMAL "
+                mode_tmux          "#[bg=#ffc387] TMUX "
+                mode_scroll        "#[bg=purple] SCROLL "
+                mode_resize        "#[bg=green] RESIZE "
+                mode_pane          "#[bg=cyan] PANE "
+                mode_move          "#[bg=yellow,fg=black] MOVE "
+                mode_tab           "#[bg=red] TAB "
+                mode_session       "#[bg=magenta] SESSION "
+                mode_locked        "#[bg=black,fg=white] LOCKED "
+                mode_search        "#[bg=orange,fg=black] SEARCH "
+                mode_entersearch   "#[bg=orange,fg=black] SEARCH "
+                mode_renametab     "#[bg=cyan,fg=black] RENAME TAB "
+                mode_renamepane    "#[bg=cyan,fg=black] RENAME PANE "
+
+                tab_normal   "#[fg=#6C7086] {index}:{name} "
+                tab_active   "#[bg=#3b8eea,fg=#eeeeee,bold] {index}:{name}* "
+
+                command_git_branch_command     "git rev-parse --abbrev-ref HEAD"
+                command_git_branch_format      "#[fg=blue] {stdout} "
+                command_git_branch_interval    "10"
+                command_git_branch_rendermode  "static"
+
+                datetime        "#[fg=#6C7086,bold] {format} "
+                datetime_format "%A, %d %b %Y %H:%M"
+                datetime_timezone "Europe/Berlin"
+            }
+        }
+    }
+}
+
