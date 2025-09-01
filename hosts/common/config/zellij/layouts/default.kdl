@@ -1,6 +1,5 @@
 layout {
     default_tab_template {
-        children
         pane size=1 borderless=true {
             plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
                 format_left   "{mode} #[fg=#89B4FA,bold]{session} {tabs}"
@@ -24,9 +23,9 @@ layout {
                 mode_session       "#[bg=magenta] SESSION "
                 mode_locked        "#[bg=black,fg=white] LOCKED "
                 mode_search        "#[bg=orange,fg=black] SEARCH "
-                mode_entersearch   "#[bg=orange,fg=black] SEARCH "
-                mode_renametab     "#[bg=cyan,fg=black] RENAME TAB "
-                mode_renamepane    "#[bg=cyan,fg=black] RENAME PANE "
+                mode_enter_search   "#[bg=orange,fg=black] SEARCH "
+                mode_rename_tab     "#[bg=cyan,fg=black] RENAME TAB "
+                mode_rename_pane    "#[bg=cyan,fg=black] RENAME PANE "
 
                 tab_normal   "#[fg=#6C7086] {index}:{name} "
                 tab_active   "#[bg=#3b8eea,fg=#eeeeee,bold] {index}:{name}* "
@@ -41,6 +40,7 @@ layout {
                 datetime_timezone "Europe/Berlin"
             }
         }
+        children
     }
 }
 
