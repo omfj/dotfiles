@@ -74,6 +74,8 @@ keybinds {
         bind "k" "Up" { ScrollUp; }
         bind "d" { HalfPageScrollDown; }
         bind "u" { HalfPageScrollUp; }
+        bind "Ctrl d" { PageScrollDown; }
+        bind "Ctrl u" { PageScrollUp; }
         bind "g" { ScrollToTop; }
         bind "G" { ScrollToBottom; }
         bind "/" { SwitchToMode "EnterSearch"; }
