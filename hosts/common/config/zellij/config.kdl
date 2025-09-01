@@ -56,6 +56,15 @@ keybinds {
         // Copy mode (scroll)
         bind "[" { SwitchToMode "Scroll"; }
 
+        // Pane mode
+        bind "Space" { SwitchToMode "Pane"; }
+
+        // Move mode  
+        bind "m" { SwitchToMode "Move"; }
+
+        // Lock mode
+        bind "Ctrl l" { SwitchToMode "Locked"; }
+
         // Exit tmux 
         bind "Ctrl c" "Esc" { SwitchToMode "Normal"; }
     }
@@ -70,6 +79,7 @@ keybinds {
         bind "/" { SwitchToMode "EnterSearch"; }
         bind "n" { Search "down"; }
         bind "N" { Search "up"; }
+        bind "Esc" "q" "Ctrl c" { ScrollToBottom; SwitchToMode "Normal"; }
     }
 
     resize clear-defaults=true {
@@ -152,7 +162,7 @@ keybinds {
             };
             SwitchToMode "Normal"
         }
-        bind "a" {
+        bind "i" {
             LaunchOrFocusPlugin "zellij:about" {
                 floating true
                 move_to_focused_tab true
@@ -167,20 +177,55 @@ keybinds {
             SwitchToMode "Normal"
         }
     }
+
+    pane clear-defaults=true {
+        bind "Ctrl c" "Esc" { SwitchToMode "Normal"; }
+        bind "h" "Left" { MoveFocus "Left"; }
+        bind "l" "Right" { MoveFocus "Right"; }
+        bind "j" "Down" { MoveFocus "Down"; }
+        bind "k" "Up" { MoveFocus "Up"; }
+        bind "p" { SwitchFocus; }
+        bind "n" { NewPane; SwitchToMode "Normal"; }
+        bind "d" { NewPane "Down"; SwitchToMode "Normal"; }
+        bind "r" { NewPane "Right"; SwitchToMode "Normal"; }
+        bind "x" { CloseFocus; SwitchToMode "Normal"; }
+        bind "f" { ToggleFocusFullscreen; SwitchToMode "Normal"; }
+        bind "z" { TogglePaneFrames; SwitchToMode "Normal"; }
+        bind "w" { ToggleFloatingPanes; SwitchToMode "Normal"; }
+        bind "e" { TogglePaneEmbedOrFloating; SwitchToMode "Normal"; }
+        bind "c" { SwitchToMode "RenamePane"; }
+    }
+
+    move clear-defaults=true {
+        bind "Ctrl c" "Esc" { SwitchToMode "Normal"; }
+        bind "n" "Tab" { MovePane; }
+        bind "p" { MovePaneBackwards; }
+        bind "h" "Left" { MovePane "Left"; }
+        bind "j" "Down" { MovePane "Down"; }
+        bind "k" "Up" { MovePane "Up"; }
+        bind "l" "Right" { MovePane "Right"; }
+    }
+
+    locked clear-defaults=true {
+        bind "Ctrl g" { SwitchToMode "Normal"; }
+    }
+
+    renamepane clear-defaults=true {
+        bind "Enter" { SwitchToMode "Normal"; }
+        bind "Esc" { UndoRenamePane; SwitchToMode "Pane"; }
+    }
 }
 
 plugins {
-    tab-bar location="zellij:tab-bar"
-    status-bar location="zellij:status-bar"
-    strider location="zellij:strider"
-    compact-bar location="zellij:compact-bar"
     session-manager location="zellij:session-manager"
-    filepicker location="zellij:strider" {
-        cwd "/"
-    }
     configuration location="zellij:configuration"
     plugin-manager location="zellij:plugin-manager"
     about location="zellij:about"
+    zjstatus location="file:~/.config/zellij/plugins/zjstatus.wasm"
+}
+
+load_plugins {
+    zjstatus {}
 }
 
 simplified_ui true
@@ -194,7 +239,7 @@ ui {
     }
 }
 
-default_layout "compact"
+default_layout "default"
 
 themes {
     code-dark-plus {
