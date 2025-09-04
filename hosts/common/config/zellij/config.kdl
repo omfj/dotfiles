@@ -241,8 +241,6 @@ ui {
     }
 }
 
-default_layout "default"
-
 themes {
     code-dark-plus {
         fg "#cccccc"

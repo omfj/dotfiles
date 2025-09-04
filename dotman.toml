@@ -38,6 +38,10 @@ target = "~/.config/atuin"
 source = "hosts/common/config/fish"
 target = "~/.config/fish"
 
+[[links]]
+source = "hosts/common/config/zed"
+target = "~/.config/zed"
+
 [[actions]]
 type = "shell-command"
 name = "Install tpm for tmux"
