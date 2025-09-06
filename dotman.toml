@@ -42,6 +42,26 @@ target = "~/.config/fish"
 source = "hosts/common/config/zed"
 target = "~/.config/zed"
 
+[[links]]
+source = "hosts/common/config/alacritty.toml"
+target = "~/.config/alacritty"
+
+[[links]]
+source = "hosts/common/config/btop"
+target = "~/.config/btop"
+
+[[links]]
+source = "hosts/common/config/jj"
+target = "~/.config/jj"
+
+[[links]]
+source = "hosts/common/config/lazydocker"
+target = "~/.config/lazydocker"
+
+[[links]]
+source = "hosts/common/config/lazygit"
+target = "~/.config/lazygit"
+
 [[actions]]
 type = "shell-command"
 name = "Install tpm for tmux"
