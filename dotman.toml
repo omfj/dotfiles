@@ -62,6 +62,10 @@ target = "~/.config/lazydocker"
 source = "hosts/common/config/lazygit"
 target = "~/.config/lazygit"
 
+[[links]]
+source = "hosts/common/config/cheat"
+target = "~/.config/cheat"
+
 [[actions]]
 type = "shell-command"
 name = "Install tpm for tmux"
