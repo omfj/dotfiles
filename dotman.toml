@@ -44,7 +44,7 @@ target = "~/.config/zed"
 
 [[links]]
 source = "hosts/common/config/alacritty.toml"
-target = "~/.config/alacritty"
+target = "~/.config/alacritty.toml"
 
 [[links]]
 source = "hosts/common/config/btop"
