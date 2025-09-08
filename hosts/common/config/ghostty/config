@@ -1,15 +1,12 @@
 # reload config with 
 # cmd + shift + ,
 
-theme = Dark Modern
+theme = GruvboxDarkHard
 
 font-family = IosevkaTerm Nerd Font
 font-style = Regular
 font-size = 13
 font-thicken = true
-
-background = 151515
-foreground = ffffff
 
 #background-opacity = 0.95
 
