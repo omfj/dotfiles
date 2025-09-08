@@ -33,11 +33,11 @@ keybinds {
         bind "x" { CloseFocus; SwitchToMode "Normal"; }
         bind "z" { ToggleFocusFullscreen; SwitchToMode "Normal"; }
 
-        // Pane navigation
-        bind "h" { MoveFocus "Left"; SwitchToMode "Normal"; }
-        bind "l" { MoveFocus "Right"; SwitchToMode "Normal"; }
-        bind "j" { MoveFocus "Down"; SwitchToMode "Normal"; }
-        bind "k" { MoveFocus "Up"; SwitchToMode "Normal"; }
+        // Pane navigation (with Ctrl like tmux)
+        bind "Ctrl h" { MoveFocus "Left"; SwitchToMode "Normal"; }
+        bind "Ctrl l" { MoveFocus "Right"; SwitchToMode "Normal"; }
+        bind "Ctrl j" { MoveFocus "Down"; SwitchToMode "Normal"; }
+        bind "Ctrl k" { MoveFocus "Up"; SwitchToMode "Normal"; }
         bind "o" { FocusNextPane; SwitchToMode "Normal"; }
 
         // Arrow keys for navigation
@@ -45,8 +45,25 @@ keybinds {
         bind "Right" { MoveFocus "Right"; SwitchToMode "Normal"; }
         bind "Down" { MoveFocus "Down"; SwitchToMode "Normal"; }
         bind "Up" { MoveFocus "Up"; SwitchToMode "Normal"; }
+        
+        // Window switching (like tmux Ctrl+Shift+h/l)
+        bind "Ctrl Shift h" { GoToPreviousTab; }
+        bind "Ctrl Shift l" { GoToNextTab; }
+        
+        // Pane swapping (like tmux J/K/H/L)
+        bind "J" { SwitchToMode "Move"; MovePane "Down"; SwitchToMode "Normal"; }
+        bind "K" { SwitchToMode "Move"; MovePane "Up"; SwitchToMode "Normal"; }
+        bind "Shift H" { SwitchToMode "Move"; MovePane "Left"; SwitchToMode "Normal"; }
+        bind "Shift L" { SwitchToMode "Move"; MovePane "Right"; SwitchToMode "Normal"; }
+        
+        // Config reload (like tmux r)
+        bind "r" { 
+            WriteChars "zellij action reload-config"; 
+            WriteChars "\n"; 
+            SwitchToMode "Normal"; 
+        }
 
-        // Pane resizing
+        // Pane resizing moved to resize mode only
         bind "H" { SwitchToMode "Resize"; }
         bind "Ctrl h" { SwitchToMode "Resize"; }
 
@@ -61,9 +78,6 @@ keybinds {
 
         // Move mode  
         bind "m" { SwitchToMode "Move"; }
-
-        // Lock mode
-        bind "Ctrl l" { SwitchToMode "Locked"; }
 
         // Exit tmux 
         bind "Ctrl c" "Esc" { SwitchToMode "Normal"; }
@@ -221,19 +235,16 @@ keybinds {
 plugins {
     session-manager location="zellij:session-manager"
     configuration location="zellij:configuration"
+    compact-bar location="zellij:compact-bar"
     plugin-manager location="zellij:plugin-manager"
     about location="zellij:about"
-    zjstatus location="file:~/.config/zellij/plugins/zjstatus.wasm"
-}
-
-load_plugins {
-    zjstatus {}
 }
 
 simplified_ui true
-mouse_mode false
+mouse_mode true
 copy_on_select false
 show_startup_tips false
+default_layout "compact"
 
 ui {
     pane_frames {
