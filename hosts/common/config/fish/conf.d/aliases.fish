@@ -14,6 +14,9 @@ abbr -a g "git"
 abbr -a ga "git add"
 abbr -a gc "git commit -m"
 
+# Lazygit
+abbr -a lg "lazygit"
+
 # dotdot
 abbr -a .. "cd .."
 abbr -a ... "cd ../.."
