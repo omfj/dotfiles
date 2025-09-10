@@ -9,6 +9,11 @@ abbr -a cat "bat"
 abbr -a uib "cd $HOME/Google\ Drive/My\ Drive/uib/"
 abbr -a minecraft "cd $HOME/Library/Application\ Support/minecraft"
 
+# Common git commands
+abbr -a g "git"
+abbr -a ga "git add"
+abbr -a gc "git commit -m"
+
 # dotdot
 abbr -a .. "cd .."
 abbr -a ... "cd ../.."
