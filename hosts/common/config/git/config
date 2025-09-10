@@ -13,7 +13,6 @@
 [core]
     editor = nvim
     pager = delta
-	hooksPath = /Users/olem/.git-hooks
 [alias]
 	ac = commit -S -am
 	s = status
