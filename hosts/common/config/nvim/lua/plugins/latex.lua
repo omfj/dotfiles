@@ -17,6 +17,9 @@ return {
 					"-file-line-error",
 					"-synctex=1",
 					"-interaction=nonstopmode",
+					"-pdf",
+					"-pdflatex=pdflatex",
+					"-bibtex",
 				},
 			}
 		end,
