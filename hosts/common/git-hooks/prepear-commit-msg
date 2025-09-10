@@ -1,6 +1,0 @@
-#!/bin/sh
-
-if [ -z "$2" ]; then
-    convmit --no-commit > "$1"
-fi
-
