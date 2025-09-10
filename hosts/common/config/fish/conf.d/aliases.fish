@@ -14,6 +14,11 @@ abbr -a g "git"
 abbr -a ga "git add"
 abbr -a gc "git commit -m"
 
+# brew
+abbr -a b "brew"
+abbr -a bi "brew install"
+abbr -a bu "brew update && brew upgrade && brew cleanup"
+
 # Lazygit
 abbr -a lg "lazygit"
 
