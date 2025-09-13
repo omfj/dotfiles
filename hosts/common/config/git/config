@@ -23,6 +23,7 @@
 	cleanup-branches = "!git fetch --prune && git branch -vv | awk '/: gone]/{print $1}' | xargs -r git branch -d"
 	yolo = push -f
     fl = push --force-with-lease
+    ai = "!convmit"
 [interactive]
     diffFilter = delta --color-only
 [delta]
