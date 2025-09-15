@@ -26,6 +26,7 @@ vim.opt.listchars = {
 	extends = "⟩",
 	precedes = "⟨",
 	nbsp = "·",
+	eol = "↴",
 }
 
 -- Setup lazy.nvim
