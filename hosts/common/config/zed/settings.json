@@ -8,7 +8,7 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   "icon_theme": "Catppuccin Mocha",
-  "theme": "Github Dark",
+  "theme": "Gruvbox Dark Hard",
   "vim_mode": true,
   "ui_font_size": 16,
   "buffer_line_height": "standard",
