@@ -1,7 +1,7 @@
 # reload config with 
 # cmd + shift + ,
 
-theme = GruvboxDarkHard
+theme = Gruvbox Dark Hard
 
 font-family = IosevkaTerm Nerd Font
 font-style = Regular
@@ -23,3 +23,4 @@ link-url = true
 copy-on-select = true
 
 keybind = shift+enter=text:\n
+
