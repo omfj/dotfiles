@@ -15,3 +15,4 @@ case "$1" in
             "${command[@]}" 0
             ;;
 esac
+
