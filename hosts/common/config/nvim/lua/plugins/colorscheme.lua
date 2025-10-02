@@ -27,7 +27,6 @@ return {
 				dim_inactive = false,
 				transparent_mode = false,
 			})
-			vim.cmd("colorscheme gruvbox")
 		end,
 	},
 	{
@@ -39,5 +38,11 @@ return {
 				italic_comments = true,
 			})
 		end,
+	},
+	{
+		"wtfox/jellybeans.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = {}, -- Optional
 	},
 }
