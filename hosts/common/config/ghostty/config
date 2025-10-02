@@ -1,7 +1,7 @@
 # reload config with 
 # cmd + shift + ,
 
-theme = Gruvbox Dark Hard
+theme = Jellybeans
 
 font-family = IosevkaTerm Nerd Font
 font-style = Regular
