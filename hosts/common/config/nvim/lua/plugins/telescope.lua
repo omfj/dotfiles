@@ -77,6 +77,13 @@ return {
 				desc = "Grep (root dir)",
 			},
 			{ "<leader>sG", "<cmd>Telescope live_grep cwd=false<cr>", desc = "Grep (cwd)" },
+			{
+				"<leader>sf",
+				function()
+					require("telescope.builtin").live_grep({ cwd = vim.fn.getcwd() })
+				end,
+				desc = "Grep current folder",
+			},
 			{ "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
 			{
 				"<leader>sH",
@@ -140,4 +147,3 @@ return {
 		end,
 	},
 }
-
