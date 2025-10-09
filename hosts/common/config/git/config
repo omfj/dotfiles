@@ -16,6 +16,7 @@
 [alias]
 	ac = commit -S -am
 	s = status
+	st = status
 	cm = commit -m
 	c = clone
 	lg = log --oneline --graph
@@ -24,6 +25,7 @@
 	yolo = push -f
     fl = push --force-with-lease
     ai = "!convmit"
+    rc = rebase --continue
 [interactive]
     diffFilter = delta --color-only
 [delta]
