@@ -9,3 +9,13 @@ if test -d /opt/homebrew/opt/icu4c@77/sbin
     fish_add_path /opt/homebrew/opt/icu4c@77/sbin
 end
 
+if test -d /opt/homebrew/opt/icu4c@76/bin
+  fish_add_path /opt/homebrew/opt/icu4c@76/bin
+  fish_add_path /opt/homebrew/opt/icu4c@76/sbin
+
+  set -gx LDFLAGS "-L/opt/homebrew/opt/icu4c@76/lib"
+  set -gx CPPFLAGS "-I/opt/homebrew/opt/icu4c@76/include"
+
+  set -gx PKG_CONFIG_PATH "/opt/homebrew/opt/icu4c@76/lib/pkgconfig"
+end
+
