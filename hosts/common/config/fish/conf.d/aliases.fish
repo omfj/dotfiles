@@ -38,3 +38,4 @@ abbr -a conf "cd $HOME/.config"
 # Docker aliases
 abbr -a dcu "docker-compose up --build"
 abbr -a dcd "docker-compose down"
+
