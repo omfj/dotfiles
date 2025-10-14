@@ -11,5 +11,4 @@ set -gx BUN_INSTALL $HOME/.bun
 set -gx PNPM_HOME $HOME/Library/pnpm
 set -gx PYENV_ROOT $HOME/.pyenv
 set -gx PHP_INI_SCAN_DIR $HOME/.config/herd-lite/bin:$PHP_INI_SCAN_DIR
-set -gx SDKROOT (xcrun --show-sdk-path)
 
