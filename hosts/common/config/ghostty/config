@@ -1,5 +1,7 @@
 # reload config with 
 # cmd + shift + ,
+# or
+# ctrl + shift + ,
 
 theme = Jellybeans
 
@@ -12,8 +14,9 @@ font-thicken = true
 
 title = ""
 
-window-padding-x = 5
-window-padding-y = 5
+window-padding-x = 20
+window-padding-y = 20
+window-padding-color = extend
 
 cursor-style = block
 cursor-style-blink = true
