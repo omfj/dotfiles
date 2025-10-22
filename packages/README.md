@@ -11,5 +11,6 @@
 ## Mac
 
 ```bash
-brew bundle dump
+brew bundle dump --no-vscode
 ```
+
