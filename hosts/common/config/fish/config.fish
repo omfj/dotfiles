@@ -7,3 +7,6 @@ if status is-interactive
     # ...
 end
 
+
+# Added by Antigravity
+fish_add_path /Users/olem/.antigravity/antigravity/bin
