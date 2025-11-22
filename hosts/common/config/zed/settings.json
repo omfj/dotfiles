@@ -7,15 +7,34 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "icon_theme": "Catppuccin Mocha",
-  "theme": "Gruvbox Dark Hard",
+  "ensure_final_newline_on_save": true,
+  "agent_ui_font_size": 15.0,
+  "agent": {
+    "play_sound_when_agent_done": true,
+    "always_allow_tool_actions": false,
+    "model_parameters": []
+  },
+  "formatter": "language_server",
+  "features": {
+    "edit_prediction_provider": "copilot"
+  },
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": true
+  },
+  "tabs": {
+    "show_diagnostics": "all"
+  },
+  "ui_font_weight": 500.0,
+  "icon_theme": "Zed (Default)",
+  "theme": "VSCode Dark Modern",
   "vim_mode": true,
-  "ui_font_size": 16,
+  "ui_font_size": 15.0,
   "buffer_line_height": "standard",
-  "buffer_font_size": 16,
-  "ui_font_family": "IosevkaTerm Nerd Font",
-  "buffer_font_family": "IosevkaTerm Nerd Font",
-  "relative_line_numbers": true,
+  "buffer_font_size": 16.0,
+  "ui_font_family": ".ZedSans",
+  "buffer_font_family": "Iosevka Nerd Font Mono",
+  "relative_line_numbers": "enabled",
   "show_whitespaces": "all",
-  "format_on_save": "language_server"
+  "format_on_save": "on"
 }
