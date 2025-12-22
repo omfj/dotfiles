@@ -5,8 +5,6 @@
 
 theme = Jellybeans
 
-macos-icon = xray
-
 font-family = IosevkaTerm Nerd Font
 font-style = Regular
 font-size = 13
