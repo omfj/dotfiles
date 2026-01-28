@@ -1,4 +1,4 @@
 function claude
-    env SHELL=/bin/bash command claude $argv
+    env SHELL=/usr/bin/bash claude $argv
 end
 
