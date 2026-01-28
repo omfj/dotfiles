@@ -1,3 +1,3 @@
 if command -q starship
-    source ~/.config/fish/functions/starship_init.fish
+    starship init fish | source
 end
