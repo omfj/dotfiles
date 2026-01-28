@@ -7,5 +7,7 @@ if status is-interactive
     # ...
 end
 
-# Added by Antigravity
-fish_add_path /Users/olem/.antigravity/antigravity/bin
+if test "$USER" = "ojohnsen"
+    fish_add_path /home/ojohnsen/.opencode/bin
+end
+
