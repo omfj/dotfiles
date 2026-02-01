@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+echo "════════════════════════════════════════"
+echo "✨ Running system wide updates... "
+echo "════════════════════════════════════════"
+echo ""
+
+
+echo "🍺 Updating Homebrew..."
+brew update
+echo "📋 Checking what's outdated..."
+brew outdated
+echo "⬆️  Upgrading packages..."
+brew upgrade
+echo "🖥️  Upgrading casks..."
+brew upgrade --cask
+echo "🧹 Cleaning up..."
+brew cleanup
+echo "✅ Homebrew done!"
+
+echo ""
+echo "🦀 Updating Rust..."
+rustup update
+echo "📦 Updating cargo binaries..."
+cargo install-update -a
+echo "✅ Rust done!"
+
+echo ""
+echo "📮 Updating npm globals..."
+npm update -g
+echo "✅ npm done!"
+
+echo ""
+echo "📦 Updating pnpm globals..."
+pnpm update -g
+echo "✅ pnpm done!"
+
+echo ""
+echo "════════════════════════════════════════"
+echo "✨ All global dependencies updated! 🎉"
+echo "════════════════════════════════════════"
