@@ -15,7 +15,7 @@ abbr -a gc "git commit -m"
 # brew
 abbr -a b "brew"
 abbr -a bi "brew install"
-abbr -a bu "./bin/update-mac"
+abbr -a bu "$DOTFILES/bin/update-mac"
 
 # Lazygit
 abbr -a lg "lazygit"
