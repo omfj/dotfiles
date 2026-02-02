@@ -27,10 +27,10 @@ macos-option-as-alt = true
 keybind = shift+enter=text:\x1b\r
 
 # pane management
-keybind = ctrl+h=goto_split:left
-keybind = ctrl+j=goto_split:bottom
-keybind = ctrl+k=goto_split:top
-keybind = ctrl+l=goto_split:right
+keybind = alt+h=goto_split:left
+keybind = alt+j=goto_split:bottom
+keybind = alt+k=goto_split:top
+keybind = alt+l=goto_split:right
 
 # create new splits
 keybind = ctrl+a>h=new_split:left
