@@ -1,10 +1,7 @@
 [[links]]
 source = "hosts/common/config/git"
 target = "~/.config/git"
-
-[[links]]
-source = "hosts/common/config/tmux"
-target = "~/.config/tmux"
+if = { hostname = ["obook.local", "oarch"] }
 
 [[links]]
 source = "hosts/common/config/ghostty"
@@ -17,14 +14,11 @@ target = "~/.config/helix"
 [[links]]
 source = "hosts/common/config/nvim"
 target = "~/.config/nvim"
+if = { hostname = ["obook.local", "oarch"] }
 
 [[links]]
 source = "hosts/common/config/starship.toml"
 target = "~/.config/starship.toml"
-
-[[links]]
-source = "hosts/mac/zshrc"
-target = "~/.zshrc"
 
 [[links]]
 source = "hosts/common/vimrc"
@@ -35,20 +29,18 @@ source = "hosts/common/config/atuin"
 target = "~/.config/atuin"
 
 [[links]]
-source = "hosts/common/config/fish"
+source = "hosts/obook/config/fish"
 target = "~/.config/fish"
+if = { hostname = "obook.local" }
+
+[[links]]
+source = "hosts/oarch/config/fish"
+target = "~/.config/fish"
+if = { hostname = "oarch" }
 
 [[links]]
 source = "hosts/common/config/zed"
 target = "~/.config/zed"
-
-[[links]]
-source = "hosts/common/config/alacritty.toml"
-target = "~/.config/alacritty.toml"
-
-[[links]]
-source = "hosts/common/config/btop"
-target = "~/.config/btop"
 
 [[links]]
 source = "hosts/common/config/jj"
@@ -66,8 +58,8 @@ target = "~/.config/lazygit"
 source = "hosts/common/config/cheat"
 target = "~/.config/cheat"
 
-[[actions]]
-type = "shell-command"
-name = "Install tpm for tmux"
-run = "git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm"
-if-not = { run = "test -d ~/.tmux/plugins/tpm" }
+# [[actions]]
+# type = "shell-command"
+# name = "Install tpm for tmux"
+# run = "git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm"
+# if-not = { run = "test -d ~/.tmux/plugins/tpm" }
