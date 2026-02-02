@@ -1,7 +1,3 @@
-[[links]]
-source = "hosts/common/config/git"
-target = "~/.config/git"
-if = { hostname = ["obook.local", "oarch"] }
 
 [[links]]
 source = "hosts/common/config/ghostty"
@@ -10,11 +6,6 @@ target = "~/.config/ghostty"
 [[links]]
 source = "hosts/common/config/helix"
 target = "~/.config/helix"
-
-[[links]]
-source = "hosts/common/config/nvim"
-target = "~/.config/nvim"
-if = { hostname = ["obook.local", "oarch"] }
 
 [[links]]
 source = "hosts/common/config/starship.toml"
@@ -27,16 +18,6 @@ target = "~/.vimrc"
 [[links]]
 source = "hosts/common/config/atuin"
 target = "~/.config/atuin"
-
-[[links]]
-source = "hosts/obook/config/fish"
-target = "~/.config/fish"
-if = { hostname = "obook.local" }
-
-[[links]]
-source = "hosts/oarch/config/fish"
-target = "~/.config/fish"
-if = { hostname = "oarch" }
 
 [[links]]
 source = "hosts/common/config/zed"
@@ -57,6 +38,87 @@ target = "~/.config/lazygit"
 [[links]]
 source = "hosts/common/config/cheat"
 target = "~/.config/cheat"
+
+#
+# Shared between main computers
+#
+
+[[links]]
+source = "hosts/common/config/git"
+target = "~/.config/git"
+if = { hostname = ["obook.local", "oarch"] }
+
+[[links]]
+source = "hosts/common/config/nvim"
+target = "~/.config/nvim"
+if = { hostname = ["obook.local", "oarch"] }
+
+#
+# Mac
+#
+
+[[links]]
+source = "hosts/obook/config/fish"
+target = "~/.config/fish"
+if = { hostname = "obook.local" }
+
+#
+# Arch
+#
+
+[[links]]
+source = "hosts/oarch/config/fish"
+target = "~/.config/fish"
+if = { hostname = "oarch" }
+
+[[links]]
+source = "hosts/oarch/config/bspwm"
+target = "~/.config/bspwm"
+if = { hostname = "oarch" }
+
+[[links]]
+source = "hosts/oarch/config/sxhkd"
+target = "~/.config/sxhkd"
+if = { hostname = "oarch" }
+
+[[links]]
+source = "hosts/oarch/config/dunst"
+target = "~/.config/dunst"
+if = { hostname = "oarch" }
+
+[[links]]
+source = "hosts/oarch/config/picom"
+target = "~/.config/picom"
+if = { hostname = "oarch" }
+
+[[links]]
+source = "hosts/oarch/config/rofi"
+target = "~/.config/rofi"
+if = { hostname = "oarch" }
+
+[[links]]
+source = "hosts/oarch/config/polybar"
+target = "~/.config/polybar"
+if = { hostname = "oarch" }
+
+[[links]]
+source = "hosts/oarch/config/betterlockscreenrc"
+target = "~/.config/betterlockscreenrc"
+if = { hostname = "oarch" }
+
+[[links]]
+source = "hosts/oarch/config/user-dirs.dirs"
+target = "~/.config/user-dirs.dirs"
+if = { hostname = "oarch" }
+
+[[links]]
+source = "hosts/oarch/config/xfce4/terminal/user-dirs.locale"
+target = "~/.config/xfce4/terminal/user-dirs.locale"
+if = { hostname = "oarch" }
+
+# ------------
+# OLD
+# ------------
 
 # [[actions]]
 # type = "shell-command"
