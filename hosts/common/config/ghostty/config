@@ -10,6 +10,8 @@ font-style = Regular
 font-size = 20
 font-thicken = true
 
+shell-integration = fish
+
 window-padding-x = 20
 window-padding-y = 20
 
