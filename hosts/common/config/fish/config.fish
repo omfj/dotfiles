@@ -6,8 +6,3 @@ set -g fish_greeting
 if status is-interactive
     # ...
 end
-
-if test "$USER" = "ojohnsen"
-    fish_add_path /home/ojohnsen/.opencode/bin
-end
-
