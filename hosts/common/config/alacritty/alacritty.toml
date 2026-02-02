@@ -16,9 +16,3 @@ size = 18
 
 [window]
 padding = { x = 15, y = 15 }
-
-[terminal.shell]
-program = "/bin/zsh"
-args = ["-l", "-c", "tmux attach || tmux"]
-
-
