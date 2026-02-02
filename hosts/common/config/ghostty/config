@@ -25,3 +25,4 @@ link-url = true
 copy-on-select = true
 
 keybind = shift+enter=text:\x1b\r
+
