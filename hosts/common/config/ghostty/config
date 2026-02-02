@@ -1,4 +1,4 @@
-# reload config with 
+# reload config with
 # cmd + shift + ,
 # or
 # ctrl + shift + ,
@@ -10,10 +10,6 @@ font-style = Regular
 font-size = 13
 font-thicken = true
 
-#background-opacity = 0.95
-
-title = ""
-
 window-padding-x = 20
 window-padding-y = 20
 
@@ -23,6 +19,32 @@ cursor-style-blink = true
 link-url = true
 
 copy-on-select = true
+window-save-state = always
 
+# claude code?
 keybind = shift+enter=text:\x1b\r
 
+# pane management
+keybind = ctrl+h=goto_split:left
+keybind = ctrl+j=goto_split:bottom
+keybind = ctrl+k=goto_split:top
+keybind = ctrl+l=goto_split:right
+
+# create new splits
+keybind = ctrl+a>h=new_split:left
+keybind = ctrl+a>j=new_split:down
+keybind = ctrl+a>k=new_split:up
+keybind = ctrl+a>l=new_split:right
+
+# resize splits
+keybind = ctrl+shift+j=resize_split:up,10
+keybind = ctrl+shift+k=resize_split:down,10
+keybind = ctrl+shift+h=resize_split:left,10
+keybind = ctrl+shift+l=resize_split:right,10
+keybind = ctrl+shift+e=equalize_splits
+
+# fullscreen (monocle) split
+keybind = ctrl+a>f=toggle_split_zoom
+
+# rename tabs
+keybind = ctrl+shift+r=prompt_surface_title

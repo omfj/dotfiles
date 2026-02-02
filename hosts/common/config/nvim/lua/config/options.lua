@@ -46,6 +46,7 @@ vim.opt.virtualedit = "block" -- Allow cursor to move where there is no text in 
 vim.opt.wildmode = "longest:full,full" -- Command-line completion mode
 vim.opt.winminwidth = 5 -- Minimum window width
 vim.opt.wrap = false -- Disable line wrap
+vim.opt.fixendofline = false -- Don't automatically add newline at end of file
 
 if vim.fn.has("nvim-0.10") == 1 then
 	vim.opt.smoothscroll = true
