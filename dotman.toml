@@ -112,8 +112,13 @@ target = "~/.config/user-dirs.dirs"
 if = { hostname = "oarch" }
 
 [[links]]
-source = "hosts/oarch/config/xfce4/terminal/user-dirs.locale"
-target = "~/.config/xfce4/terminal/user-dirs.locale"
+source = "hosts/oarch/config/user-dirs.locale"
+target = "~/.config/user-dirs.locale"
+if = { hostname = "oarch" }
+
+[[links]]
+source = "hosts/oarch/config/hypr"
+target = "~/.config/hypr"
 if = { hostname = "oarch" }
 
 # ------------
