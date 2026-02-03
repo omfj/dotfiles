@@ -17,6 +17,7 @@ window-padding-y = 20
 
 cursor-style = block
 cursor-style-blink = true
+shell-integration-features = no-cursor
 
 link-url = true
 
