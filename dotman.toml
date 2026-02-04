@@ -1,4 +1,3 @@
-
 [[links]]
 source = "hosts/common/config/ghostty"
 target = "~/.config/ghostty"
@@ -18,14 +17,6 @@ target = "~/.vimrc"
 [[links]]
 source = "hosts/common/config/atuin"
 target = "~/.config/atuin"
-
-[[links]]
-source = "hosts/common/config/zed"
-target = "~/.config/zed"
-
-[[links]]
-source = "hosts/common/config/jj"
-target = "~/.config/jj"
 
 [[links]]
 source = "hosts/common/config/lazydocker"
@@ -60,6 +51,16 @@ if = { hostname = ["obook.local", "oarch"] }
 [[links]]
 source = "hosts/obook/config/fish"
 target = "~/.config/fish"
+if = { hostname = "obook.local" }
+
+[[links]]
+source = "hosts/common/config/zed"
+target = "~/.config/zed"
+if = { hostname = "obook.local" }
+
+[[links]]
+source = "hosts/common/config/jj"
+target = "~/.config/jj"
 if = { hostname = "obook.local" }
 
 #
@@ -120,6 +121,15 @@ if = { hostname = "oarch" }
 source = "hosts/oarch/config/hypr"
 target = "~/.config/hypr"
 if = { hostname = "oarch" }
+
+#
+# obuntu
+#
+
+[[links]]
+source = "hosts/obuntu/config/fish"
+target = "~/.config/fish"
+if = { file_exists = ["~/.obuntu"] }
 
 # ------------
 # OLD
