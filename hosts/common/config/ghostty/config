@@ -4,6 +4,7 @@
 # ctrl + shift + ,
 
 theme = Jellybeans
+background = #0a0a0a
 
 font-family = IosevkaTerm Nerd Font
 font-style = Regular
@@ -23,8 +24,6 @@ link-url = true
 
 copy-on-select = true
 window-save-state = always
-
-macos-option-as-alt = true
 
 # claude code?
 keybind = shift+enter=text:\x1b\r
