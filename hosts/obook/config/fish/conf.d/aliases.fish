@@ -34,5 +34,9 @@ abbr -a dots "cd $DOTFILES"
 abbr -a conf "cd $HOME/.config"
 
 # UUID
-abbr -a uuid "echo \"$(uuidgen)\" | tr \"[:upper:][:lower:]\" \"[:lower:][:upper:]\""
+function uuid
+    set id (uuidgen)
+    echo $id | tr "[:upper:][:lower:]" "[:lower:][:upper:]" | pbcopy
+    echo $id | tr "[:upper:][:lower:]" "[:lower:][:upper:]"
+end
 
