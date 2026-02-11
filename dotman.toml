@@ -42,7 +42,7 @@ if = { hostname = ["obook.local", "oarch"] }
 [[links]]
 source = "hosts/common/config/nvim"
 target = "~/.config/nvim"
-if = { hostname = ["obook.local", "oarch"] }
+if = { hostname = ["obook.local", "oarch", "obuntu"] }
 
 #
 # Mac
