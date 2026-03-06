@@ -97,6 +97,7 @@ return {
 					},
 				},
 				eslint = {},
+				tinymist = {},
 			}
 
 			for server, config in pairs(servers) do
@@ -128,6 +129,8 @@ return {
 				"prettier",
 				"rustfmt",
 				"ktlint",
+				"tinymist",
+				"typstyle",
 			},
 		},
 		config = function(_, opts)
@@ -157,4 +160,3 @@ return {
 		end,
 	},
 }
-
