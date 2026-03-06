@@ -7,28 +7,50 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "theme": {
+    "mode": "system",
+    "light": "VSCode Dark Modern",
+    "dark": "VSCode Dark Modern"
+  },
+  "edit_predictions": {
+    "provider": "copilot"
+  },
   "ensure_final_newline_on_save": true,
   "agent_ui_font_size": 15.0,
   "agent": {
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-5-mini",
+      "enable_thinking": false
+    },
     "play_sound_when_agent_done": true,
-    "always_allow_tool_actions": false,
     "model_parameters": []
   },
   "formatter": "language_server",
-  "features": {
-    "edit_prediction_provider": "copilot"
-  },
   "telemetry": {
     "diagnostics": false,
-    "metrics": true
+    "metrics": false
   },
   "tabs": {
     "show_diagnostics": "all"
   },
-  "ui_font_weight": 500.0,
-  "icon_theme": "Zed (Default)",
-  "theme": "VSCode Dark Modern",
+  "vim": {
+    "default_mode": "normal",
+    "toggle_relative_line_numbers": true,
+    "cursor_shape": {
+      "insert": "bar",
+      "normal": "block",
+      "replace": "block",
+      "visual": "block"
+    }
+  },
   "vim_mode": true,
+  "ui_font_weight": 500.0,
+  "icon_theme": {
+    "mode": "system",
+    "light": "Zed (Default)",
+    "dark": "VSCode Icons for Zed (Dark)"
+  },
   "ui_font_size": 15.0,
   "buffer_line_height": "standard",
   "buffer_font_size": 16.0,
