@@ -60,4 +60,17 @@ return {
 			-- vim.cmd("colorscheme orng")
 		end,
 	},
+	{ "catppuccin/nvim", name = "catppuccin", lazy = true, priority = 1000 },
+	{ "folke/tokyonight.nvim", lazy = true, priority = 1000 },
+	{ "rebelot/kanagawa.nvim", lazy = true, priority = 1000 },
+	{ "EdenEast/nightfox.nvim", lazy = true, priority = 1000 },
+	{ "navarasu/onedark.nvim", lazy = true, priority = 1000 },
+	{ "sainnhe/everforest", lazy = true, priority = 1000 },
+	{ "rose-pine/neovim", name = "rose-pine", lazy = true, priority = 1000 },
+	{ "sainnhe/gruvbox-material", lazy = true, priority = 1000 },
+	{ "bluz71/vim-moonfly-colors", name = "moonfly", lazy = true, priority = 1000 },
+	{ "Mofiqul/dracula.nvim", lazy = true, priority = 1000 },
+	{ "projekt0n/github-nvim-theme", lazy = true, priority = 1000 },
+	{ "NLKNguyen/papercolor-theme", lazy = true, priority = 1000 },
+	{ "sainnhe/edge", lazy = true, priority = 1000 },
 }
