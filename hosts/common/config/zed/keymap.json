@@ -9,14 +9,31 @@
   {
     "context": "Workspace",
     "bindings": {
-      // "shift shift": "file_finder::Toggle"
+      "shift shift": "file_finder::Toggle"
     }
   },
   {
-    "context": "Editor",
+    "context": "Editor && vim_mode == insert",
     "bindings": {
-      "j k": ["workspace::SendKeystrokes", "escape"],
+      "j k": [
+        "workspace::SendKeystrokes",
+        "escape"
+      ],
       "cmd-i": "editor::ShowCompletions"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "j k": null,
+      "j j": null
+    }
+  },
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      "j k": null,
+      "j j": null
     }
   }
 ]
