@@ -8,6 +8,7 @@ return {
 				"nvim-telescope/telescope-fzf-native.nvim",
 				build = "make",
 			},
+			"nvim-telescope/telescope-ui-select.nvim",
 		},
 		cmd = "Telescope",
 		keys = {
@@ -129,11 +130,17 @@ return {
 			local telescope = require("telescope")
 			telescope.setup(opts)
 			telescope.load_extension("fzf")
+			telescope.load_extension("ui-select")
 		end,
 		opts = function()
 			local actions = require("telescope.actions")
 
 			return {
+				extensions = {
+					["ui-select"] = {
+						require("telescope.themes").get_dropdown(),
+					},
+				},
 				defaults = {
 					prompt_prefix = " ",
 					selection_caret = ">",
