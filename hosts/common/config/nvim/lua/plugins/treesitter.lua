@@ -39,6 +39,8 @@ return {
 				"xml",
 				"typst",
 				"yaml",
+				"go",
+				"sql",
 			},
 			incremental_selection = {
 				enable = true,
