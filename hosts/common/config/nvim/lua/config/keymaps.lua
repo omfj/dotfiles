@@ -27,11 +27,11 @@ map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window", remap = true })
 map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window", remap = true })
 map("n", "<C-l>", "<C-w>l", { desc = "Go to right window", remap = true })
 
--- Resize window using <leader>w + HJKL
-map("n", "<leader>wK", "<cmd>resize +2<cr>", { desc = "Increase window height" })
-map("n", "<leader>wJ", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
-map("n", "<leader>wH", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
-map("n", "<leader>wL", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
+-- Resize window using <C-w> + HJKL
+map("n", "<C-w>K", "<cmd>resize +2<cr>", { desc = "Increase window height" })
+map("n", "<C-w>J", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
+map("n", "<C-w>H", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
+map("n", "<C-w>L", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
 
 -- Move Lines
 map("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move down" })
