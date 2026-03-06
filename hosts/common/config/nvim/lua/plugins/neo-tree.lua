@@ -31,7 +31,7 @@ return {
 						unstaged = "✗",
 						staged = "✓",
 						conflict = "!",
-					}
+					},
 				},
 			},
 			filesystem = {
@@ -42,6 +42,7 @@ return {
 			},
 			window = {
 				width = 30,
+				position = "left",
 			},
 		})
 	end,

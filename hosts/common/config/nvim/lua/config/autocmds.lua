@@ -80,13 +80,3 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 -- Toggle relative line numbers based on mode
 vim.api.nvim_create_autocmd("InsertEnter", { command = [[set norelativenumber]] })
 vim.api.nvim_create_autocmd("InsertLeave", { command = [[set relativenumber]] })
-
--- Auto format on save
-vim.api.nvim_create_autocmd("BufWritePre", {
-	group = augroup("auto_format"),
-	callback = function()
-		if vim.g.autoformat ~= false and vim.b.autoformat ~= false then
-			vim.lsp.buf.format({ async = false })
-		end
-	end,
-})
