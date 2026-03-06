@@ -3,7 +3,6 @@ return {
 	priority = 1000,
 	lazy = false,
 	opts = {
-		dashboard = { enabled = true },
 		input = { enabled = true },
 		lazygit = { enabled = true },
 		scratch = { enabled = true },

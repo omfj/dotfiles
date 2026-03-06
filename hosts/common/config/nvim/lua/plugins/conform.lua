@@ -28,8 +28,7 @@ return {
 			mdx = { "prettierd", "prettier", stop_after_first = true },
 			astro = { "prettierd", "prettier", stop_after_first = true },
 			kotlin = { "ktlint" },
-			rust = { "rustfmt" },
-		},
+	},
 		formatters = {
 			prettier = {
 				require_cwd = true,
