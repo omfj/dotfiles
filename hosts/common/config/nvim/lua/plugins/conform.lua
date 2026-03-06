@@ -26,6 +26,8 @@ return {
 			yaml = { "prettierd", "prettier", stop_after_first = true },
 			markdown = { "prettierd", "prettier", stop_after_first = true },
 			mdx = { "prettierd", "prettier", stop_after_first = true },
+			astro = { "prettierd", "prettier", stop_after_first = true },
+			kotlin = { "ktlint" },
 			rust = { "rustfmt" },
 		},
 		formatters = {

@@ -75,6 +75,10 @@ return {
 				},
 				ts_ls = {},
 				svelte = {},
+				astro = {},
+				html = {},
+				cssls = {},
+				kotlin_language_server = {},
 				rust_analyzer = {
 					settings = {
 						["rust-analyzer"] = {
@@ -114,11 +118,16 @@ return {
 				"shfmt",
 				"typescript-language-server",
 				"svelte-language-server",
+				"astro-language-server",
+				"html-lsp",
+				"css-lsp",
+				"kotlin-language-server",
 				"rust-analyzer",
 				"eslint-lsp",
 				"prettierd",
 				"prettier",
 				"rustfmt",
+				"ktlint",
 			},
 		},
 		config = function(_, opts)
