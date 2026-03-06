@@ -37,6 +37,7 @@ return {
 				"vim",
 				"vimdoc",
 				"xml",
+				"typst",
 				"yaml",
 			},
 			incremental_selection = {
