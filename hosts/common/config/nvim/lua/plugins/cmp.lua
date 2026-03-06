@@ -47,8 +47,6 @@ return {
 						local copilot = require("copilot.suggestion")
 						if copilot.is_visible() then
 							copilot.accept()
-						elseif cmp.visible() then
-							cmp.select_next_item()
 						elseif luasnip.expand_or_locally_jumpable() then
 							luasnip.expand_or_jump()
 						else
@@ -108,9 +106,7 @@ return {
 					end,
 				},
 				experimental = {
-					ghost_text = {
-						hl_group = "CmpGhostText",
-					},
+					ghost_text = false,
 				},
 				sorting = defaults.sorting,
 			}
