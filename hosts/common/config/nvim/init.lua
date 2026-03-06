@@ -27,6 +27,7 @@ vim.opt.listchars = {
 	precedes = "⟨",
 	nbsp = "·",
 	eol = "↴",
+	lead = "·",
 }
 
 -- Setup lazy.nvim

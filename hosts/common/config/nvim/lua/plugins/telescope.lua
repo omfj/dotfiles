@@ -2,7 +2,13 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.5",
-		dependencies = { "nvim-lua/plenary.nvim" },
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			{
+				"nvim-telescope/telescope-fzf-native.nvim",
+				build = "make",
+			},
+		},
 		cmd = "Telescope",
 		keys = {
 			{
@@ -119,6 +125,11 @@ return {
 				desc = "Colorscheme with preview",
 			},
 		},
+		config = function(_, opts)
+			local telescope = require("telescope")
+			telescope.setup(opts)
+			telescope.load_extension("fzf")
+		end,
 		opts = function()
 			local actions = require("telescope.actions")
 

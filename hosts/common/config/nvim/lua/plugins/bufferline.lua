@@ -44,6 +44,14 @@ return {
 					reveal = { "close" },
 				},
 				sort_by = "insert_after_current",
+				offsets = {
+					{
+						filetype = "neo-tree",
+						text = "Explorer",
+						highlight = "Directory",
+						text_align = "left",
+					},
+				},
 			},
 		})
 
@@ -62,4 +70,3 @@ return {
 		vim.keymap.set("n", "<leader>bo", "<cmd>BufferLineCloseOthers<cr>", { desc = "Delete Other Buffers" })
 	end,
 }
-
