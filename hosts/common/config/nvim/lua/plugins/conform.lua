@@ -29,6 +29,7 @@ return {
 			astro = { "prettierd", "prettier", stop_after_first = true },
 			kotlin = { "ktlint" },
 		typst = { "typstyle" },
+		go = { "goimports", "gofumpt" },
 	},
 		formatters = {
 			prettier = {

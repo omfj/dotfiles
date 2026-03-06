@@ -98,12 +98,29 @@ return {
 				},
 				eslint = {},
 				tinymist = {},
+				gopls = {
+					settings = {
+						gopls = {
+							analyses = {
+								unusedparams = true,
+								shadow = true,
+								ST1000 = false,
+								ST1003 = false,
+							},
+							staticcheck = true,
+							gofumpt = true,
+						},
+					},
+				},
 			}
 
 			for server, config in pairs(servers) do
-				vim.lsp.config(server, vim.tbl_deep_extend("force", {
-					capabilities = capabilities,
-				}, config))
+				vim.lsp.config(
+					server,
+					vim.tbl_deep_extend("force", {
+						capabilities = capabilities,
+					}, config)
+				)
 				vim.lsp.enable(server)
 			end
 		end,
@@ -131,6 +148,9 @@ return {
 				"ktlint",
 				"tinymist",
 				"typstyle",
+				"gopls",
+				"goimports",
+				"gofumpt",
 			},
 		},
 		config = function(_, opts)
