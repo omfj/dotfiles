@@ -1,11 +1,21 @@
 return {
 	{
-		"ellisonleao/gruvbox.nvim",
+		"wtfox/jellybeans.nvim",
 		lazy = false,
 		priority = 1000,
 		config = function()
+			require("jellybeans").setup({
+				transparent = true,
+			})
+			vim.cmd.colorscheme("jellybeans")
+		end,
+	},
+	{
+		"ellisonleao/gruvbox.nvim",
+		event = "VeryLazy",
+		config = function()
 			require("gruvbox").setup({
-				terminal_colors = true, -- add neovim terminal colors
+				terminal_colors = true,
 				undercurl = true,
 				underline = true,
 				bold = true,
@@ -20,8 +30,8 @@ return {
 				invert_selection = false,
 				invert_signs = false,
 				invert_tabline = false,
-				inverse = true, -- invert background for search, diffs, statuslines and errors
-				contrast = "hard", -- can be "hard", "soft" or empty string
+				inverse = true,
+				contrast = "hard",
 				palette_overrides = {},
 				overrides = {},
 				dim_inactive = false,
@@ -29,48 +39,18 @@ return {
 			})
 		end,
 	},
-	{
-		"Mofiqul/vscode.nvim",
-		lazy = true,
-		priority = 1000,
-		config = function()
-			require("vscode").setup({
-				italic_comments = true,
-			})
-		end,
-	},
-	{
-		"wtfox/jellybeans.nvim",
-		lazy = false,
-		priority = 1000,
-		opts = {
-			transparent = true,
-		},
-	},
-	{
-		"roerohan/orng.nvim",
-		lazy = false,
-		priority = 1000,
-		config = function()
-			require("orng").setup({
-				variant = "dark", -- "dark" or "light"
-				transparent = false,
-				italic_comment = true,
-			})
-			-- vim.cmd("colorscheme orng")
-		end,
-	},
-	{ "catppuccin/nvim", name = "catppuccin", lazy = true, priority = 1000 },
-	{ "folke/tokyonight.nvim", lazy = true, priority = 1000 },
-	{ "rebelot/kanagawa.nvim", lazy = true, priority = 1000 },
-	{ "EdenEast/nightfox.nvim", lazy = true, priority = 1000 },
-	{ "navarasu/onedark.nvim", lazy = true, priority = 1000 },
-	{ "sainnhe/everforest", lazy = true, priority = 1000 },
-	{ "rose-pine/neovim", name = "rose-pine", lazy = true, priority = 1000 },
-	{ "sainnhe/gruvbox-material", lazy = true, priority = 1000 },
-	{ "bluz71/vim-moonfly-colors", name = "moonfly", lazy = true, priority = 1000 },
-	{ "Mofiqul/dracula.nvim", lazy = true, priority = 1000 },
-	{ "projekt0n/github-nvim-theme", lazy = true, priority = 1000 },
-	{ "NLKNguyen/papercolor-theme", lazy = true, priority = 1000 },
-	{ "sainnhe/edge", lazy = true, priority = 1000 },
+	{ "Mofiqul/vscode.nvim", event = "VeryLazy" },
+	{ "catppuccin/nvim", name = "catppuccin", event = "VeryLazy" },
+	{ "folke/tokyonight.nvim", event = "VeryLazy" },
+	{ "rebelot/kanagawa.nvim", event = "VeryLazy" },
+	{ "EdenEast/nightfox.nvim", event = "VeryLazy" },
+	{ "navarasu/onedark.nvim", event = "VeryLazy" },
+	{ "sainnhe/everforest", event = "VeryLazy" },
+	{ "rose-pine/neovim", name = "rose-pine", event = "VeryLazy" },
+	{ "sainnhe/gruvbox-material", event = "VeryLazy" },
+	{ "bluz71/vim-moonfly-colors", name = "moonfly", event = "VeryLazy" },
+	{ "Mofiqul/dracula.nvim", event = "VeryLazy" },
+	{ "projekt0n/github-nvim-theme", event = "VeryLazy" },
+	{ "NLKNguyen/papercolor-theme", event = "VeryLazy" },
+	{ "sainnhe/edge", event = "VeryLazy" },
 }
