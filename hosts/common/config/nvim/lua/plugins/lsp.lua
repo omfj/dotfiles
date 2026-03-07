@@ -111,6 +111,25 @@ return {
 					},
 				},
 				eslint = {},
+				basedpyright = {
+					settings = {
+						basedpyright = {
+							analysis = {
+								autoSearchPaths = true,
+								useLibraryCodeForTypes = true,
+								diagnosticMode = "openFilesOnly",
+							},
+						},
+					},
+					before_init = function(_, config)
+						-- Detect uv venv: .venv in project root takes priority
+						local venv = vim.fn.getcwd() .. "/.venv"
+						if vim.fn.isdirectory(venv) == 1 then
+							config.settings.basedpyright.pythonPath = venv .. "/bin/python"
+						end
+					end,
+				},
+				ruff = {},
 				tinymist = {},
 				yamlls = {
 					on_attach = function(client)
@@ -172,6 +191,8 @@ return {
 				"gofumpt",
 				"yaml-language-server",
 				"taplo",
+				"basedpyright",
+				"ruff",
 			},
 		},
 		config = function(_, opts)
