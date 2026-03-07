@@ -164,7 +164,6 @@ return {
 				"eslint-lsp",
 				"prettierd",
 				"prettier",
-				"rustfmt",
 				"ktlint",
 				"tinymist",
 				"typstyle",
