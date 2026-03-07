@@ -3,7 +3,6 @@ return {
 	branch = "v3.x",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
-		"nvim-tree/nvim-web-devicons",
 		"MunifTanjim/nui.nvim",
 	},
 	keys = {
@@ -60,6 +59,26 @@ return {
 				},
 			},
 			filesystem = {
+				renderers = {
+					directory = {
+						{ "indent" },
+						{ "icon" },
+						{ "current_filter" },
+						{ "name", use_git_status_colors = true },
+						{ "clipboard" },
+						{ "diagnostics", errors_only = true },
+						{ "git_status" },
+					},
+					file = {
+						{ "indent" },
+						{ "name", use_git_status_colors = true },
+						{ "clipboard" },
+						{ "bufnr" },
+						{ "modified", zindex = 20, align = "right" },
+						{ "diagnostics" },
+						{ "git_status", zindex = 10, align = "right" },
+					},
+				},
 				follow_current_file = {
 					enabled = true,
 				},
@@ -68,6 +87,10 @@ return {
 					visible = true,
 					hide_dotfiles = false,
 					hide_gitignored = false,
+					never_show = {
+						".DS_Store",
+						".git",
+					},
 				},
 			},
 			window = {
