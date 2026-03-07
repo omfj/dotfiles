@@ -4,6 +4,7 @@ return {
 	lazy = false,
 	opts = {
 		input = { enabled = true },
+		picker = { enabled = true },
 		lazygit = { enabled = true },
 		scratch = { enabled = true },
 		terminal = { enabled = true },
