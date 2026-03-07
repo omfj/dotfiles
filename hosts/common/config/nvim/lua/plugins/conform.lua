@@ -38,12 +38,12 @@ return {
 			markdown = { "prettierd", "prettier", stop_after_first = true },
 			mdx = { "prettierd", "prettier", stop_after_first = true },
 			astro = { "prettierd", "prettier", stop_after_first = true },
+			python = { "ruff_format", "ruff_organize_imports" },
 			kotlin = { "ktlint" },
 			typst = { "typstyle" },
 			go = { "goimports", "gofumpt" },
 			toml = { "taplo" },
 			rust = { "rustfmt" },
-			["*"] = { "trailing_newline" },
 		},
 		formatters = {
 			prettier = {
@@ -51,14 +51,6 @@ return {
 			},
 			prettierd = {
 				require_cwd = true,
-			},
-			trailing_newline = {
-				format = function(self, ctx, lines, callback)
-					if lines[#lines] ~= "" then
-						table.insert(lines, "")
-					end
-					callback(nil, lines)
-				end,
 			},
 		},
 		format_on_save = function(bufnr)
