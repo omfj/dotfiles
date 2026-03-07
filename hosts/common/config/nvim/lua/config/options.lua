@@ -32,7 +32,8 @@ vim.opt.sidescrolloff = 8 -- Columns of context
 vim.opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
 vim.opt.smartcase = true -- Don't ignore case with capitals
 vim.opt.smartindent = true -- Insert indents automatically
-vim.opt.spelllang = { "en" }
+vim.opt.spelllang = { "en", "nb" }
+vim.api.nvim_set_hl(0, "SpellRare", {})
 vim.opt.splitbelow = true -- Put new windows below current
 vim.opt.splitkeep = "screen"
 vim.opt.splitright = true -- Put new windows right of current
