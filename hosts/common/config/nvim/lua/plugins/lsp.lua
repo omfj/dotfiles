@@ -40,14 +40,28 @@ return {
 				group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 				callback = function(ev)
 					local opts = { buffer = ev.buf }
-					vim.keymap.set("n", "gD", function() Snacks.picker.lsp_declarations() end, opts)
-					vim.keymap.set("n", "gd", function() Snacks.picker.lsp_definitions() end, opts)
+					vim.keymap.set("n", "gD", function()
+						Snacks.picker.lsp_declarations()
+					end, opts)
+					vim.keymap.set("n", "gd", function()
+						Snacks.picker.lsp_definitions()
+					end, opts)
 					vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-					vim.keymap.set("n", "gi", function() Snacks.picker.lsp_implementations() end, opts)
+					vim.keymap.set("n", "gi", function()
+						Snacks.picker.lsp_implementations()
+					end, opts)
 					vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
 					vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 					vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
-					vim.keymap.set("n", "gr", function() Snacks.picker.lsp_references() end, opts)
+					vim.keymap.set("n", "gr", function()
+						Snacks.picker.lsp_references()
+					end, opts)
+				end,
+			})
+
+			vim.api.nvim_create_autocmd("CursorHold", {
+				callback = function()
+					vim.diagnostic.open_float(nil, { focus = false })
 				end,
 			})
 
@@ -157,8 +171,8 @@ return {
 				"gopls",
 				"goimports",
 				"gofumpt",
-			"yaml-language-server",
-			"taplo",
+				"yaml-language-server",
+				"taplo",
 			},
 		},
 		config = function(_, opts)
