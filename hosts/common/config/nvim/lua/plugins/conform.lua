@@ -43,6 +43,7 @@ return {
 			go = { "goimports", "gofumpt" },
 			toml = { "taplo" },
 			rust = { "rustfmt" },
+			["*"] = { "trailing_newline" },
 		},
 		formatters = {
 			prettier = {
@@ -51,8 +52,13 @@ return {
 			prettierd = {
 				require_cwd = true,
 			},
-			taplo = {
-				args = { "format", "--option", "trailing_newline=true", "-" },
+			trailing_newline = {
+				format = function(self, ctx, lines, callback)
+					if lines[#lines] ~= "" then
+						table.insert(lines, "")
+					end
+					callback(nil, lines)
+				end,
 			},
 		},
 		format_on_save = function(bufnr)
