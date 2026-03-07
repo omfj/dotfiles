@@ -42,6 +42,7 @@ return {
 			typst = { "typstyle" },
 			go = { "goimports", "gofumpt" },
 			toml = { "taplo" },
+			rust = { "rustfmt" },
 		},
 		formatters = {
 			prettier = {
