@@ -1,3 +1,7 @@
+-- fingers find the keys
+-- plugins bloom in the dark
+-- the buffer breathes on
+
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
