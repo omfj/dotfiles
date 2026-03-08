@@ -21,7 +21,6 @@ map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent =
 map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
-
 -- Resize window using <C-w> + HJKL
 map("n", "<C-w>K", "<cmd>resize +2<cr>", { desc = "Increase window height" })
 map("n", "<C-w>J", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
