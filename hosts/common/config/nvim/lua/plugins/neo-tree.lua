@@ -46,6 +46,14 @@ return {
 	config = function()
 		require("neo-tree").setup({
 			close_if_last_window = true,
+			diagnostics = {
+				enabled = true,
+				show_on_dirs = true,
+				severity = {
+					min = vim.diagnostic.severity.WARN,
+					max = vim.diagnostic.severity.ERROR,
+				},
+			},
 			default_component_configs = {
 				icon = {
 					folder_closed = "▸",
@@ -102,20 +110,20 @@ return {
 					},
 				},
 			},
-		window = {
-			width = 35,
-			position = "left",
-			mappings = {},
-		},
-		event_handlers = {
-			{
-				event = "neo_tree_window_after_open",
-				handler = function()
-					vim.opt_local.number = false
-					vim.opt_local.relativenumber = false
-				end,
+			window = {
+				width = 35,
+				position = "left",
+				mappings = {},
 			},
-		},
+			event_handlers = {
+				{
+					event = "neo_tree_window_after_open",
+					handler = function()
+						vim.opt_local.number = false
+						vim.opt_local.relativenumber = false
+					end,
+				},
+			},
 		})
 	end,
 }
