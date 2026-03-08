@@ -24,6 +24,15 @@ return {
 	lazy = false,
 	-- Opens Neo-tree when entering a directory or opening Neovim without a file
 	init = function()
+		vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter" }, {
+			pattern = "*",
+			callback = function()
+				if vim.bo.filetype == "neo-tree" then
+					vim.opt_local.number = false
+					vim.opt_local.relativenumber = false
+				end
+			end,
+		})
 		vim.api.nvim_create_autocmd("BufEnter", {
 			callback = function()
 				-- Don't open Neo-tree if the buffer is a special type (like alpha) or if it's already a file
@@ -93,10 +102,20 @@ return {
 					},
 				},
 			},
-			window = {
-				width = 35,
-				position = "left",
+		window = {
+			width = 35,
+			position = "left",
+			mappings = {},
+		},
+		event_handlers = {
+			{
+				event = "neo_tree_window_after_open",
+				handler = function()
+					vim.opt_local.number = false
+					vim.opt_local.relativenumber = false
+				end,
 			},
+		},
 		})
 	end,
 }
