@@ -87,6 +87,19 @@ map("n", "<leader>fy", function()
 	vim.notify("Copied: " .. path)
 end, { desc = "Copy Relative Path" })
 
+-- copy relative path with line range (visual mode)
+map("v", "<leader>fy", function()
+	local path = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":~:.")
+	local start_line = vim.fn.line("v")
+	local end_line = vim.fn.line(".")
+	if start_line > end_line then
+		start_line, end_line = end_line, start_line
+	end
+	local result = path .. ":" .. start_line .. "-" .. end_line
+	vim.fn.setreg("+", result)
+	vim.notify("Copied: " .. result)
+end, { desc = "Copy Relative Path with Line Range" })
+
 map("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List" })
 map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
 
