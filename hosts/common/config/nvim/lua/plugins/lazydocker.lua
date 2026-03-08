@@ -1,7 +1,12 @@
 return {
 	"crnvl96/lazydocker.nvim",
 	keys = {
-		{ "<leader>gd", "<cmd>Lazydocker<cr>", desc = "LazyDocker" },
+		{
+			"<leader>gd",
+			"<cmd>lua require('lazydocker').toggle({ engine = 'docker' })<cr>",
+			mode = { "n", "t" },
+			desc = "LazyDocker",
+		},
 	},
 	config = function()
 		require("lazydocker").setup({
