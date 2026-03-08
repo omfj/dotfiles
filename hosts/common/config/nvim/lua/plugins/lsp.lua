@@ -7,7 +7,7 @@ return {
 			"williamboman/mason-lspconfig.nvim",
 		},
 		config = function()
-			-- Setup diagnostics
+			-- Set up diagnostics
 			vim.diagnostic.config({
 				underline = true,
 				update_in_insert = false,
@@ -15,11 +15,12 @@ return {
 					spacing = 4,
 					source = "if_many",
 					prefix = "●",
+					severity = { min = vim.diagnostic.severity.INFO },
 				},
 				severity_sort = true,
 			})
 
-			-- Setup diagnostic signs
+			-- Set up diagnostic signs
 			local signs = { Error = "✘", Warn = "▲", Hint = "⚑", Info = "»" }
 			for name, icon in pairs(signs) do
 				vim.diagnostic.config({
@@ -53,7 +54,7 @@ return {
 					vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
 					vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 					vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
-				vim.keymap.set({ "n", "v" }, "<C-.>", vim.lsp.buf.code_action, opts)
+					vim.keymap.set({ "n", "v" }, "<C-.>", vim.lsp.buf.code_action, opts)
 					vim.keymap.set("n", "gr", function()
 						Snacks.picker.lsp_references()
 					end, opts)
@@ -73,7 +74,7 @@ return {
 				capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 			end
 
-			-- Setup language servers
+			-- Set up language servers
 			local servers = {
 				lua_ls = {
 					settings = {
@@ -138,6 +139,13 @@ return {
 					end,
 				},
 				taplo = {},
+				harper_ls = {
+					settings = {
+						["harper-ls"] = {
+							isolateEnglish = true,
+						},
+					},
+				},
 				gopls = {
 					settings = {
 						gopls = {
@@ -194,6 +202,7 @@ return {
 				"taplo",
 				"basedpyright",
 				"ruff",
+				"harper-ls",
 			},
 		},
 		config = function(_, opts)

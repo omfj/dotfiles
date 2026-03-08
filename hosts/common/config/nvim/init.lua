@@ -25,7 +25,7 @@ vim.g.maplocalleader = "\\"
 -- Enable list mode immediately to show whitespace
 vim.opt.list = true
 vim.opt.listchars = {
-	tab = "→ ",
+	tab = "➙ ",
 	trail = "␣",
 	extends = "⟩",
 	precedes = "⟨",
