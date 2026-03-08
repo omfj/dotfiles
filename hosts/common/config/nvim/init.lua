@@ -26,11 +26,11 @@ vim.g.maplocalleader = "\\"
 vim.opt.list = true
 vim.opt.listchars = {
 	tab = "→ ",
-	trail = "⋅",
+	trail = "␣",
 	extends = "⟩",
 	precedes = "⟨",
 	nbsp = "·",
-	eol = "↴",
+	eol = "¬",
 	lead = "·",
 }
 
