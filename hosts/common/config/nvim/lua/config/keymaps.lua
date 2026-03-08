@@ -95,7 +95,7 @@ map("v", "<leader>fy", function()
 	if start_line > end_line then
 		start_line, end_line = end_line, start_line
 	end
-	local result = path .. ":" .. start_line .. "-" .. end_line
+	local result = path .. "#" .. start_line .. "-" .. end_line
 	vim.fn.setreg("+", result)
 	vim.notify("Copied: " .. result)
 end, { desc = "Copy Relative Path with Line Range" })
