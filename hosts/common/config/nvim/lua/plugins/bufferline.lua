@@ -29,7 +29,7 @@ return {
 				tab_size = 21,
 				diagnostics = "nvim_lsp",
 				diagnostics_update_in_insert = false,
-				show_buffer_icons = true,
+				show_buffer_icons = false,
 				show_buffer_close_icons = true,
 				show_close_icon = true,
 				show_tab_indicators = true,

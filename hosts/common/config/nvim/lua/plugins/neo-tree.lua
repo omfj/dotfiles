@@ -22,18 +22,6 @@ return {
 		},
 	},
 	lazy = false,
-	-- Opens Neo-tree when entering a directory or opening Neovim without a file
-	init = function()
-		vim.api.nvim_create_autocmd("BufEnter", {
-			callback = function()
-				-- Don't open Neo-tree if the buffer is a special type (like alpha) or if it's already a file
-				if vim.bo.buftype == "" and vim.bo.filetype ~= "alpha" and vim.bo.filetype ~= "" then
-					vim.cmd("Neotree show")
-					return true -- removes the autocmd after first trigger
-				end
-			end,
-		})
-	end,
 	config = function()
 		require("neo-tree").setup({
 			close_if_last_window = true,
@@ -102,9 +90,10 @@ return {
 				},
 			},
 			window = {
-				width = 35,
+				width = 40,
 				position = "left",
 				mappings = {},
+				title = "",
 			},
 			event_handlers = {
 				{
