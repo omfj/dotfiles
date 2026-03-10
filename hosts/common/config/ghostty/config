@@ -40,6 +40,9 @@ keybind = ctrl+a>j=new_split:down
 keybind = ctrl+a>k=new_split:up
 keybind = ctrl+a>l=new_split:right
 
+# destory splits
+# ctrl+w or ctrl+shift+w depending on mac or linux
+
 # resize splits
 keybind = ctrl+shift+j=resize_split:up,10
 keybind = ctrl+shift+k=resize_split:down,10
