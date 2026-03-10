@@ -19,8 +19,11 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- globals
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
+
+vim.g.colorcolumn = "100"
 
 -- Enable list mode immediately to show whitespace
 vim.opt.list = true
