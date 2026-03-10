@@ -62,6 +62,8 @@ return {
 						["if"] = "@function.inner",
 						["ac"] = "@class.outer",
 						["ic"] = "@class.inner",
+						["at"] = "@tag.outer",
+						["it"] = "@tag.inner",
 					},
 				},
 				move = {

@@ -7,7 +7,10 @@ return {
 		picker = { enabled = true },
 		lazygit = { enabled = true },
 		scratch = { enabled = true },
-		terminal = { enabled = true },
+		terminal = {
+			enabled = true,
+			win = { border = "rounded" },
+		},
 		words = { enabled = true },
 		gh = { enabled = true },
 	},

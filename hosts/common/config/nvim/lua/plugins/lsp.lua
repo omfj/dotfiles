@@ -61,12 +61,6 @@ return {
 				end,
 			})
 
-			vim.api.nvim_create_autocmd("CursorHold", {
-				callback = function()
-					vim.diagnostic.open_float(nil, { focus = false })
-				end,
-			})
-
 			-- Get capabilities for completion
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
