@@ -106,6 +106,20 @@ map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
 map("n", "[q", vim.cmd.cprev, { desc = "Previous quickfix" })
 map("n", "]q", vim.cmd.cnext, { desc = "Next quickfix" })
 
+-- toggle cursorline
+map("n", "<leader>uv", function()
+	vim.wo.cursorline = not vim.wo.cursorline
+end, { desc = "Toggle Cursorline" })
+
+-- toggle colorcolumn
+map("n", "<leader>uS", function()
+	if vim.wo.colorcolumn == "" then
+		vim.wo.colorcolumn = vim.g.colorcolumn or "100"
+	else
+		vim.wo.colorcolumn = ""
+	end
+end, { desc = "Toggle ColorColumn" })
+
 -- formatting
 map({ "n", "v" }, "<leader>cf", function()
 	vim.lsp.buf.format({ async = true })
