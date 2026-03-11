@@ -8,13 +8,13 @@ return {
 				transparent = true,
 			})
 			vim.cmd.colorscheme("jellybeans")
-		vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#222222" })
-		vim.api.nvim_set_hl(0, "CursorLine", { bg = "#222222" })
-		vim.api.nvim_set_hl(0, "NonText", { fg = "#222222" })
-		vim.api.nvim_set_hl(0, "SpecialKey", { fg = "#222222" })
-		-- Snacks picker: make file names and directory paths visible
-		vim.api.nvim_set_hl(0, "SnacksPickerFile", { fg = "#e8e8d3" })
-		vim.api.nvim_set_hl(0, "SnacksPickerDir", { fg = "#888888" })
+			vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#222222" })
+			vim.api.nvim_set_hl(0, "CursorLine", { bg = "#222222" })
+			vim.api.nvim_set_hl(0, "NonText", { fg = "#222222" })
+			vim.api.nvim_set_hl(0, "SpecialKey", { fg = "#222222" })
+			-- Snacks picker: make file names and directory paths visible
+			vim.api.nvim_set_hl(0, "SnacksPickerFile", { fg = "#e8e8d3" })
+			vim.api.nvim_set_hl(0, "SnacksPickerDir", { fg = "#888888" })
 		end,
 	},
 	{
@@ -36,7 +36,6 @@ return {
 				strikethrough = true,
 				invert_selection = false,
 				invert_signs = false,
-				invert_tabline = false,
 				inverse = true,
 				contrast = "hard",
 				palette_overrides = {},
