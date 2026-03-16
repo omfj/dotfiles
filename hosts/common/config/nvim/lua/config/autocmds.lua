@@ -77,18 +77,29 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 	end,
 })
 
--- Toggle harper_ls (spelling LSP)
+-- Toggle harper_ls (spelling LSP) — global + persistent across restarts
+local harper_flag = vim.fn.stdpath("data") .. "/harper_disabled"
 vim.api.nvim_create_user_command("ToggleHarper", function()
-	local clients = vim.lsp.get_clients({ name = "harper_ls", bufnr = 0 })
-	if #clients > 0 then
-		for _, client in ipairs(clients) do
+	local disabled = vim.uv.fs_stat(harper_flag) ~= nil
+	if disabled then
+		vim.uv.fs_unlink(harper_flag, function() end)
+		vim.lsp.enable("harper_ls")
+		for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+			if vim.api.nvim_buf_is_loaded(buf) then
+				vim.api.nvim_exec_autocmds("FileType", { buf = buf })
+			end
+		end
+		vim.notify("Harper enabled")
+	else
+		local fd = io.open(harper_flag, "w")
+		if fd then
+			fd:close()
+		end
+		vim.lsp.enable("harper_ls", false)
+		for _, client in ipairs(vim.lsp.get_clients({ name = "harper_ls" })) do
 			client:stop()
 		end
 		vim.notify("Harper disabled")
-	else
-		vim.lsp.enable("harper_ls")
-		vim.api.nvim_exec_autocmds("FileType", { buf = 0 })
-		vim.notify("Harper enabled")
 	end
 end, { desc = "Toggle harper_ls spelling LSP" })
 
