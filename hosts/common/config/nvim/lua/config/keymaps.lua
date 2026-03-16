@@ -128,10 +128,9 @@ end, { desc = "Format" })
 
 -- diagnostic
 local diagnostic_goto = function(next, severity)
-	local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
 	severity = severity and vim.diagnostic.severity[severity] or nil
 	return function()
-		go({ severity = severity })
+		vim.diagnostic.jump({ count = next and 1 or -1, severity = severity })
 	end
 end
 
@@ -148,13 +147,13 @@ map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 -- toggle options
 map("n", "<leader>uf", function() vim.g.autoformat = not vim.g.autoformat end, { desc = "Toggle auto format (global)" })
 map("n", "<leader>uF", function() vim.b.autoformat = not vim.b.autoformat end, { desc = "Toggle auto format (buffer)" })
-map("n", "<leader>us", function() vim.opt_local.spell = not vim.opt_local.spell:get() end, { desc = "Toggle Spelling" })
-map("n", "<leader>uw", function() vim.opt_local.wrap = not vim.opt_local.wrap:get() end, { desc = "Toggle Word Wrap" })
-map("n", "<leader>uL", function() vim.opt_local.relativenumber = not vim.opt_local.relativenumber:get() end, { desc = "Toggle Relative Line Numbers" })
-map("n", "<leader>ul", function() vim.opt_local.number = not vim.opt_local.number:get() end, { desc = "Toggle Line Numbers" })
+map("n", "<leader>us", function() vim.wo.spell = not vim.wo.spell end, { desc = "Toggle Spelling" })
+map("n", "<leader>uw", function() vim.wo.wrap = not vim.wo.wrap end, { desc = "Toggle Word Wrap" })
+map("n", "<leader>uL", function() vim.wo.relativenumber = not vim.wo.relativenumber end, { desc = "Toggle Relative Line Numbers" })
+map("n", "<leader>ul", function() vim.wo.number = not vim.wo.number end, { desc = "Toggle Line Numbers" })
 map("n", "<leader>ud", function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end, { desc = "Toggle Diagnostics" })
 local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
-map("n", "<leader>uc", function() vim.opt_local.conceallevel = vim.opt_local.conceallevel:get() == 0 and conceallevel or 0 end, { desc = "Toggle Conceal" })
+map("n", "<leader>uc", function() vim.wo.conceallevel   = vim.wo.conceallevel == 0 and conceallevel or 0 end, { desc = "Toggle Conceal" })
 if vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint then
   map("n", "<leader>uh", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, { desc = "Toggle Inlay Hints" })
 end

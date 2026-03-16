@@ -18,23 +18,15 @@ return {
 					severity = { min = vim.diagnostic.severity.INFO },
 				},
 				severity_sort = true,
-			})
-
-			-- Set up diagnostic signs
-			local signs = { Error = "✘", Warn = "▲", Hint = "⚑", Info = "»" }
-			for name, icon in pairs(signs) do
-				vim.diagnostic.config({
-					signs = {
-						text = {
-							[vim.diagnostic.severity.ERROR] = signs.Error,
-							[vim.diagnostic.severity.WARN] = signs.Warn,
-							[vim.diagnostic.severity.HINT] = signs.Hint,
-							[vim.diagnostic.severity.INFO] = signs.Info,
-						},
+				signs = {
+					text = {
+						[vim.diagnostic.severity.ERROR] = "✘",
+						[vim.diagnostic.severity.WARN]  = "▲",
+						[vim.diagnostic.severity.HINT]  = "⚑",
+						[vim.diagnostic.severity.INFO]  = "»",
 					},
-				})
-				break
-			end
+				},
+			})
 
 			-- LSP keymaps
 			vim.api.nvim_create_autocmd("LspAttach", {
@@ -106,7 +98,18 @@ return {
 						},
 					},
 				},
-				ts_ls = {},
+				bashls = {},
+				denols = {
+					root_dir = function(fname)
+						return vim.fs.root(fname, { "deno.json", "deno.jsonc" })
+					end,
+				},
+				ts_ls = {
+					root_dir = function(fname)
+						return vim.fs.root(fname, { "package.json", "tsconfig.json" })
+					end,
+					single_file_support = false,
+				},
 				svelte = {},
 				astro = {},
 				html = {},
@@ -141,10 +144,13 @@ return {
 						},
 					},
 					before_init = function(_, config)
-						-- Detect uv venv: .venv in project root takes priority
-						local venv = vim.fn.getcwd() .. "/.venv"
-						if vim.fn.isdirectory(venv) == 1 then
-							config.settings.basedpyright.pythonPath = venv .. "/bin/python"
+						local cwd = vim.fn.getcwd()
+						for _, name in ipairs({ ".venv", "venv", "env" }) do
+							local venv = cwd .. "/" .. name
+							if vim.fn.isdirectory(venv) == 1 then
+								config.settings.basedpyright.pythonPath = venv .. "/bin/python"
+								break
+							end
 						end
 					end,
 				},
@@ -199,8 +205,11 @@ return {
 			ui = { border = "rounded" },
 			ensure_installed = {
 				"stylua",
+				"lua-language-server",
 				"shfmt",
+				"bash-language-server",
 				"typescript-language-server",
+				"deno",
 				"svelte-language-server",
 				"astro-language-server",
 				"html-lsp",
