@@ -2,6 +2,7 @@ return {
 	"lewis6991/gitsigns.nvim",
 	event = { "BufReadPre", "BufNewFile" },
 	opts = {
+		current_line_blame = true,
 		signs = {
 			add = { text = "│" },
 			change = { text = "│" },
@@ -11,7 +12,7 @@ return {
 			untracked = { text = "┆" },
 		},
 		on_attach = function(bufnr)
-			local gs = package.loaded.gitsigns
+			local gs = require("gitsigns")
 
 			local function map(mode, l, r, opts)
 				opts = opts or {}
@@ -56,6 +57,9 @@ return {
 			map("n", "<leader>hb", function()
 				gs.blame_line({ full = true })
 			end, { desc = "Blame line" })
+			map("n", "<leader>gb", function()
+				gs.blame()
+			end, { desc = "Blame file" })
 			map("n", "<leader>tb", gs.toggle_current_line_blame, { desc = "Toggle line blame" })
 			map("n", "<leader>hd", gs.diffthis, { desc = "Diff this" })
 			map("n", "<leader>hD", function()

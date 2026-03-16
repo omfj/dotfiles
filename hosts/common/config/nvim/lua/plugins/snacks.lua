@@ -4,13 +4,24 @@ return {
 	lazy = false,
 	opts = {
 		input = { enabled = true },
-		picker = { enabled = true },
+		picker = {
+			enabled = true,
+			layout = {
+				preset = "default",
+				layout = {
+					width = 0.85,
+					height = 0.85,
+				},
+			},
+		},
 		lazygit = { enabled = true },
 		scratch = { enabled = true },
 		terminal = {
 			enabled = true,
 			win = { border = "rounded" },
 		},
+		scroll = { enabled = true },
+		notifier = { enabled = true },
 		words = { enabled = true },
 		gh = { enabled = true },
 	},

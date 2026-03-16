@@ -1,7 +1,15 @@
 return {
 	"folke/trouble.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
-	opts = {},
+	opts = {
+		modes = {
+			symbols = { win = { size = 55 } },
+			lsp = { win = { size = 55 } },
+			diagnostics = { win = { size = 20 } },
+			loclist = { win = { size = 20 } },
+			qflist = { win = { size = 20 } },
+		},
+	},
 	cmd = "Trouble",
 	keys = {
 		{

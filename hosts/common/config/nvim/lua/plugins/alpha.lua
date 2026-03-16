@@ -88,7 +88,6 @@ return {
 		config = function()
 			local alpha = require("alpha")
 			local dashboard = require("alpha.themes.dashboard")
-			dashboard.section.header.val = pryda
 			-- Add a button to load the last session
 			dashboard.section.buttons.val = {
 				dashboard.button("e", "   New file", ":ene <BAR> startinsert <CR>"),

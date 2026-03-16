@@ -51,10 +51,33 @@ return {
 					vim.keymap.set("n", "gi", function()
 						Snacks.picker.lsp_implementations()
 					end, vim.tbl_extend("force", opts, { desc = "Goto Implementation" }))
-					vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, vim.tbl_extend("force", opts, { desc = "Signature Help" }))
-					vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, vim.tbl_extend("force", opts, { desc = "Rename" }))
-					vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, vim.tbl_extend("force", opts, { desc = "Code Action" }))
-					vim.keymap.set({ "n", "v" }, "<C-.>", vim.lsp.buf.code_action, vim.tbl_extend("force", opts, { desc = "Code Action" }))
+					vim.keymap.set(
+						"n",
+						"<C-k>",
+						vim.lsp.buf.signature_help,
+						vim.tbl_extend("force", opts, { desc = "Signature Help" })
+					)
+					vim.keymap.set(
+						"n",
+						"<leader>cr",
+						vim.lsp.buf.rename,
+						vim.tbl_extend("force", opts, { desc = "Rename" })
+					)
+					vim.keymap.set(
+						{ "n", "v" },
+						"<leader>ca",
+						vim.lsp.buf.code_action,
+						vim.tbl_extend("force", opts, { desc = "Code Action" })
+					)
+					vim.keymap.set("n", "<leader>cA", function()
+						vim.lsp.buf.code_action({ context = { only = { "source" }, diagnostics = {} } })
+					end, vim.tbl_extend("force", opts, { desc = "Source Action" }))
+					vim.keymap.set(
+						{ "n", "v" },
+						"<C-.>",
+						vim.lsp.buf.code_action,
+						vim.tbl_extend("force", opts, { desc = "Code Action" })
+					)
 					vim.keymap.set("n", "gr", function()
 						Snacks.picker.lsp_references()
 					end, vim.tbl_extend("force", opts, { desc = "Goto References" }))
@@ -173,6 +196,7 @@ return {
 		cmd = "Mason",
 		build = ":MasonUpdate",
 		opts = {
+			ui = { border = "rounded" },
 			ensure_installed = {
 				"stylua",
 				"shfmt",

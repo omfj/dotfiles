@@ -76,6 +76,7 @@ map("v", ">", ">gv", { desc = "Indent right" })
 
 -- lazy
 map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
+map("n", "<leader>m", "<cmd>Mason<cr>", { desc = "Mason" })
 
 -- new file
 map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
@@ -158,12 +159,17 @@ if vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint then
   map("n", "<leader>uh", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, { desc = "Toggle Inlay Hints" })
 end
 map("n", "<leader>uT", function() if vim.b.ts_highlight then vim.treesitter.stop() else vim.treesitter.start() end end, { desc = "Toggle Treesitter Highlight" })
+map("n", "<leader>uH", "<cmd>ToggleHarper<cr>", { desc = "Toggle Harper (spelling)" })
 
 -- quit
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
 
 -- highlights under cursor
 map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
+
+-- notifications
+map("n", "<leader>sn", function() Snacks.notifier.show_history() end, { desc = "Notification History" })
+map("n", "<leader>sN", function() Snacks.notifier.hide() end, { desc = "Dismiss Notifications" })
 
 
 

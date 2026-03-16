@@ -31,8 +31,8 @@ return {
 					},
 					{
 						function()
-							local clients = vim.lsp.get_clients({ bufnr = 0, name = "copilot" })
-							return #clients > 0 and "" or ""
+							if vim.g.copilot_suggestion_enabled == false then return "\u{f4b9}" end -- copilot disabled icon (nerd font)
+							return "\u{f4b8}" -- copilot icon (nerd font)
 						end,
 					},
 					{
