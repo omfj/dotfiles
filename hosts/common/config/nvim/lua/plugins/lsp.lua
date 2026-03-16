@@ -99,17 +99,8 @@ return {
 					},
 				},
 				bashls = {},
-				denols = {
-					root_dir = function(fname)
-						return vim.fs.root(fname, { "deno.json", "deno.jsonc" })
-					end,
-				},
-				ts_ls = {
-					root_dir = function(fname)
-						return vim.fs.root(fname, { "package.json", "tsconfig.json" })
-					end,
-					single_file_support = false,
-				},
+				denols = {},
+				ts_ls = {},
 				svelte = {},
 				astro = {},
 				html = {},
@@ -185,14 +176,15 @@ return {
 				},
 			}
 
+			local harper_disabled = vim.uv.fs_stat(vim.fn.stdpath("data") .. "/harper_disabled") ~= nil
+
 			for server, config in pairs(servers) do
-				vim.lsp.config(
-					server,
-					vim.tbl_deep_extend("force", {
-						capabilities = capabilities,
-					}, config)
-				)
-				vim.lsp.enable(server)
+				vim.lsp.config(server, vim.tbl_deep_extend("force", {
+					capabilities = capabilities,
+				}, config))
+				if not (server == "harper_ls" and harper_disabled) then
+					vim.lsp.enable(server)
+				end
 			end
 		end,
 	},
