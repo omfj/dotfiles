@@ -43,6 +43,7 @@ require("lazy").setup({
 		{ import = "plugins" },
 	},
 	checker = { enabled = true },
+	ui = { border = "rounded" },
 	performance = {
 		rtp = {
 			disabled_plugins = {
@@ -58,6 +59,15 @@ require("lazy").setup({
 		},
 	},
 })
+
+if vim.g.neovide then
+	vim.api.nvim_set_hl(0, "Normal", { bg = "#0a0a0a" })
+	vim.o.guifont = "BlexMono Nerd Font:h14"
+	vim.g.neovide_padding_top = 16
+	vim.g.neovide_padding_bottom = 16
+	vim.g.neovide_padding_left = 16
+	vim.g.neovide_padding_right = 16
+end
 
 require("config.options")
 require("config.keymaps")

@@ -77,6 +77,21 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 	end,
 })
 
+-- Toggle harper_ls (spelling LSP)
+vim.api.nvim_create_user_command("ToggleHarper", function()
+	local clients = vim.lsp.get_clients({ name = "harper_ls", bufnr = 0 })
+	if #clients > 0 then
+		for _, client in ipairs(clients) do
+			client:stop()
+		end
+		vim.notify("Harper disabled")
+	else
+		vim.lsp.enable("harper_ls")
+		vim.api.nvim_exec_autocmds("FileType", { buf = 0 })
+		vim.notify("Harper enabled")
+	end
+end, { desc = "Toggle harper_ls spelling LSP" })
+
 -- Toggle relative line numbers based on mode
 vim.api.nvim_create_autocmd("InsertEnter", { command = [[set norelativenumber]] })
 vim.api.nvim_create_autocmd("InsertLeave", { command = [[set relativenumber]] })

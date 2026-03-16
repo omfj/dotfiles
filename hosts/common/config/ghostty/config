@@ -6,7 +6,7 @@
 theme = Jellybeans
 background = #0a0a0a
 
-font-family = IosevkaTerm Nerd Font
+font-family = BlexMono Nerd Font
 font-style = Regular
 font-size = 20
 font-thicken = true

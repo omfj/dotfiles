@@ -29,7 +29,7 @@ return {
 			},
 			{
 				"<leader><space>",
-				"<cmd>Telescope find_files<cr>",
+				"<cmd>Telescope find_files hidden=true<cr>",
 				desc = "Find Files (root dir)",
 			},
 			-- find
@@ -38,11 +38,6 @@ return {
 				"<leader>fc",
 				"<cmd>Telescope find_files cwd=false<cr>",
 				desc = "Find Config File",
-			},
-			{
-				"<leader>ff",
-				"<cmd>Telescope find_files<cr>",
-				desc = "Find Files (root dir)",
 			},
 			{
 				"<leader>fF",
@@ -102,6 +97,7 @@ return {
 			{ "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
 			{ "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
 			{ "<leader>sR", "<cmd>Telescope resume<cr>", desc = "Resume" },
+			{ "<leader>ss", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Symbols" },
 			{
 				"<leader>sw",
 				"<cmd>Telescope grep_string word_match=-w<cr>",
@@ -142,6 +138,7 @@ return {
 					},
 				},
 				defaults = {
+					file_ignore_patterns = { "^.git/", "^node_modules/", "^.next/", "^dist/", "^build/", "^target/", "^.svelte%-kit/", "^.astro/", "^.turbo/" },
 					prompt_prefix = " ",
 					selection_caret = ">",
 					get_selection_window = function()
