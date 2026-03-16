@@ -5,7 +5,9 @@ local function start_zathura_preview()
 	local input = vim.api.nvim_buf_get_name(bufnr)
 	local output = input:gsub("%.typ$", ".pdf")
 
-	if jobs[bufnr] then return end
+	if jobs[bufnr] then
+		return
+	end
 
 	local watch_id = vim.fn.jobstart({ "typst", "watch", input, output }, {
 		detach = false,
@@ -17,7 +19,9 @@ end
 
 local function stop_zathura_preview()
 	local bufnr = vim.api.nvim_get_current_buf()
-	if not jobs[bufnr] then return end
+	if not jobs[bufnr] then
+		return
+	end
 	vim.fn.jobstop(jobs[bufnr].watch)
 	vim.fn.jobstop(jobs[bufnr].zathura)
 	jobs[bufnr] = nil
@@ -57,7 +61,6 @@ return {
 		},
 	},
 	keys = {
-		{ "<leader>a", nil, desc = "Typst" },
 		{ "<leader>tp", "<cmd>TypstPreviewToggle<cr>", desc = "Toggle Typst Preview" },
 		{ "<leader>tu", "<cmd>TypstPreviewUpdate<cr>", desc = "Update Typst Preview" },
 		{ "<leader>tf", "<cmd>TypstPreviewFollowCursorToggle<cr>", desc = "Toggle Follow Cursor" },
