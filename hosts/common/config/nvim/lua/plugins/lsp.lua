@@ -104,7 +104,16 @@ return {
 				svelte = {},
 				astro = {},
 				html = {},
-				cssls = {},
+				cssls = {
+				settings = {
+					css = {
+						lint = {
+							unknownAtRules = "ignore",
+						},
+					},
+				},
+			},
+			tailwindcss = {},
 				kotlin_language_server = {},
 				rust_analyzer = {
 					settings = {
@@ -206,6 +215,7 @@ return {
 				"astro-language-server",
 				"html-lsp",
 				"css-lsp",
+				"tailwindcss-language-server",
 				"kotlin-language-server",
 				"rust-analyzer",
 				"eslint-lsp",
