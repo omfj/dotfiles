@@ -24,6 +24,7 @@ return {
 		notifier = { enabled = true },
 		words = { enabled = true },
 		gh = { enabled = true },
+		bigfile = { enabled = true },
 	},
 	keys = {
 		{
