@@ -159,6 +159,27 @@ if vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint then
 end
 map("n", "<leader>uT", function() if vim.b.ts_highlight then vim.treesitter.stop() else vim.treesitter.start() end end, { desc = "Toggle Treesitter Highlight" })
 map("n", "<leader>uH", "<cmd>ToggleHarper<cr>", { desc = "Toggle Harper (spelling)" })
+map("n", "<leader>uA", function()
+  local buf = vim.api.nvim_get_current_buf()
+  local clients = vim.lsp.get_clients({ bufnr = buf })
+  if #clients > 0 then
+    vim.b.detached_lsp_clients = vim.tbl_map(function(c) return c.id end, clients)
+    for _, client in ipairs(clients) do
+      vim.lsp.buf_detach_client(buf, client.id)
+    end
+    vim.notify("LSP detached", vim.log.levels.INFO)
+  else
+    local ids = vim.b.detached_lsp_clients or {}
+    for _, id in ipairs(ids) do
+      local client = vim.lsp.get_client_by_id(id)
+      if client then
+        vim.lsp.buf_attach_client(buf, id)
+      end
+    end
+    vim.b.detached_lsp_clients = nil
+    vim.notify("LSP reattached", vim.log.levels.INFO)
+  end
+end, { desc = "Toggle LSP (buffer)" })
 
 -- quit
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
