@@ -20,7 +20,7 @@ return {
 			enabled = true,
 			win = { border = "rounded" },
 		},
-		scroll = { enabled = true },
+		scroll = { enabled = false },
 		notifier = { enabled = true },
 		words = { enabled = true },
 		gh = { enabled = true },

@@ -47,7 +47,6 @@ vim.opt.winminwidth = 5 -- Minimum window width
 vim.opt.wrap = false -- Disable line wrap
 vim.opt.linebreak = true -- Wrap long lines at word boundaries
 vim.opt.fixendofline = true -- Ensure newline at end of file
-vim.opt.smoothscroll = true -- Enable smooth scrolling
 vim.opt.foldlevel = 99 -- Open all folds by default
 vim.opt.foldlevelstart = 99 -- Start with all folds open
 vim.opt.foldenable = true -- Enable folding
