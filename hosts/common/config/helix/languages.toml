@@ -1,27 +1,175 @@
-[[language]]
-name = "html"
-formatter = { command = 'prettier', args = ["--parser", "html"] }
-auto-format = true
+# Language Servers ──────────────────────────────────────────────────────────
+
+[language-server.basedpyright]
+command = "basedpyright-langserver"
+args = ["--stdio"]
+
+[language-server.ruff]
+command = "ruff"
+args = ["server"]
+
+[language-server.gopls.config.gopls]
+gofumpt = true
+analyses = { shadow = true, unusedparams = true }
+staticcheck = true
+
+[language-server.rust-analyzer.config]
+check = { command = "clippy", features = "all" }
+procMacro = { enable = true }
+
+[language-server.tailwindcss-ls]
+command = "tailwindcss-language-server"
+args = ["--stdio"]
+
+[language-server.vscode-eslint-language-server]
+command = "vscode-eslint-language-server"
+args = ["--stdio"]
+
+[language-server.vscode-eslint-language-server.config]
+validate = "on"
+experimental = { useFlatConfig = false }
+rulesCustomizations = []
+run = "onType"
+problems = { shortenToSingleLine = false }
+nodePath = ""
+
+[language-server.svelteserver]
+command = "svelteserver"
+args = ["--stdio"]
+
+[language-server.astro-ls]
+command = "astro-ls"
+args = ["--stdio"]
+
+[language-server.lua-language-server]
+command = "lua-language-server"
+
+[language-server.lua-language-server.config.Lua]
+runtime = { version = "LuaJIT" }
+workspace = { library = ["${3rd}/luv/library"], checkThirdParty = false }
+diagnostics = { globals = ["vim"] }
+
+[language-server.tinymist]
+command = "tinymist"
+
+[language-server.kotlin-language-server]
+command = "kotlin-language-server"
+
+[language-server.harper-ls]
+command = "harper-ls"
+args = ["--stdio"]
+
+[language-server.harper-ls.config.harper-ls]
+linters.spell-check = true
+linters.sentence-capitalization = false
+dialect = "American"
+
+# Languages
 
 [[language]]
-name = "json"
-formatter = { command = 'prettier', args = ["--parser", "json"] }
+name = "python"
+language-servers = ["basedpyright", "ruff"]
+roots = ["pyproject.toml", "setup.py", ".git"]
 auto-format = true
+formatter = { command = "ruff", args = ["format", "--stdin-filename", "file.py", "-q", "-"] }
 
 [[language]]
-name = "css"
-formatter = { command = 'prettier', args = ["--parser", "css"] }
+name = "go"
+language-servers = ["gopls"]
 auto-format = true
+formatter = { command = "goimports" }
 
 [[language]]
-name = "javascript"
-formatter = { command = 'prettier', args = ["--parser", "typescript"] }
+name = "rust"
+language-servers = ["rust-analyzer"]
 auto-format = true
 
 [[language]]
 name = "typescript"
-formatter = { command = 'prettier', args = ["--parser", "typescript"] }
+language-servers = ["typescript-language-server", "vscode-eslint-language-server"]
 auto-format = true
+formatter = { command = "prettierd", args = ["--parser", "typescript"] }
+
+[[language]]
+name = "tsx"
+language-servers = ["typescript-language-server", "vscode-eslint-language-server", "tailwindcss-ls"]
+auto-format = true
+formatter = { command = "prettierd", args = ["--parser", "typescript"] }
+
+[[language]]
+name = "javascript"
+language-servers = ["typescript-language-server", "vscode-eslint-language-server"]
+auto-format = true
+formatter = { command = "prettierd", args = ["--parser", "typescript"] }
+
+[[language]]
+name = "jsx"
+language-servers = ["typescript-language-server", "vscode-eslint-language-server", "tailwindcss-ls"]
+auto-format = true
+formatter = { command = "prettierd", args = ["--parser", "typescript"] }
+
+[[language]]
+name = "html"
+language-servers = ["vscode-html-language-server", "tailwindcss-ls"]
+auto-format = true
+formatter = { command = "prettierd", args = ["--parser", "html"] }
+
+[[language]]
+name = "css"
+language-servers = ["vscode-css-language-server", "tailwindcss-ls"]
+auto-format = true
+formatter = { command = "prettierd", args = ["--parser", "css"] }
+
+[[language]]
+name = "json"
+auto-format = true
+formatter = { command = "prettierd", args = ["--parser", "json"] }
+
+[[language]]
+name = "svelte"
+language-servers = ["svelteserver", "tailwindcss-ls"]
+auto-format = true
+formatter = { command = "prettierd", args = ["--parser", "svelte"] }
+
+[[language]]
+name = "astro"
+language-servers = ["astro-ls"]
+auto-format = true
+formatter = { command = "prettierd", args = ["--parser", "astro"] }
+
+[[language]]
+name = "lua"
+language-servers = ["lua-language-server"]
+auto-format = true
+formatter = { command = "stylua", args = ["-"] }
+
+[[language]]
+name = "typst"
+language-servers = ["tinymist"]
+auto-format = true
+formatter = { command = "typstyle" }
+
+[[language]]
+name = "toml"
+auto-format = true
+formatter = { command = "taplo", args = ["format", "-"] }
+
+[[language]]
+name = "markdown"
+language-servers = ["marksman", "harper-ls"]
+auto-format = false
+formatter = { command = "prettierd", args = ["--parser", "markdown"] }
+
+[[language]]
+name = "yaml"
+language-servers = ["yaml-language-server"]
+auto-format = false
+
+[[language]]
+name = "kotlin"
+language-servers = ["kotlin-language-server"]
+auto-format = true
+formatter = { command = "ktlint", args = ["--stdin", "--format"] }
 
 [[language]]
 name = "htmldjango"
@@ -31,20 +179,4 @@ roots = []
 
 [[grammar]]
 name = "htmldjango"
-source = { git = "https://github.com/interdependence/tree-sitter-htmldjango" , rev = "b2dba02eddab66be669022320273d0dfe1ff923d" }
-
-[[language]]
-name = "python"
-language-servers = ["pylsp", "ruff"]
-roots = ["pyproject.toml", "setup.py", ".git"]
-auto-format = true
-formatter = { command = 'ruff', args = ["format", "-q"] }
-
-[language-server.pylsp.config.pylsp]
-plugins.pylsp_mypy.enabled = true
-plugins.pylsp_mypy.live_mode = true
-
-[language-server.ruff]
-command = "ruff"
-args = ["server"]
-
+source = { git = "https://github.com/interdependence/tree-sitter-htmldjango", rev = "b2dba02eddab66be669022320273d0dfe1ff923d" }

@@ -1,18 +1,68 @@
-theme = "dark_plus"
+theme = "jellybeens"
 
 [editor]
 line-number = "relative"
 auto-format = true
 true-color = true
+cursorline = true
+rulers = [100]
+scrolloff = 5
+mouse = true
+idle-timeout = 200
+color-modes = true
+bufferline = "multiple"
+text-width = 100
 
 [editor.lsp]
 display-messages = true
+auto-signature-help = true
+display-inlay-hints = true
+display-signature-help-docs = true
+snippets = true
 
 [editor.cursor-shape]
 insert = "bar"
 normal = "block"
-select = "underline"
+
+[editor.file-picker]
+hidden = false
+
+[editor.search]
+smart-case = true
+wrap-around = true
+
+[editor.indent-guides]
+render = true
+character = "│"
+skip-levels = 1
+
+[editor.gutters]
+layout = ["diagnostics", "spacer", "diff", "line-numbers", "spacer"]
+
+[editor.soft-wrap]
+enable = false
+
+[editor.statusline]
+left = ["mode", "spinner", "file-name", "file-modification-indicator"]
+center = []
+right = ["diagnostics", "selections", "register", "position", "file-encoding", "file-line-ending", "file-type"]
+separator = "│"
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
 
 [keys.normal]
 G = "goto_file_end"
+C-h = "jump_view_left"
+C-j = "jump_view_down"
+C-k = "jump_view_up"
+C-l = "jump_view_right"
+C-s = ":write"
+H = "goto_previous_buffer"
+L = "goto_next_buffer"
 
+[keys.normal.space.c]
+f = ":format"
+
+[keys.insert]
+C-s = ["normal_mode", ":write"]
