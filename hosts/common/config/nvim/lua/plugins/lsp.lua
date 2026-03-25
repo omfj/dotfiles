@@ -99,21 +99,42 @@ return {
 					},
 				},
 				bashls = {},
-				denols = {},
-				ts_ls = {},
+				denols = {
+					root_markers = { "deno.json", "deno.jsonc" },
+				},
+				ts_ls = {
+					root_markers = { "package.json", "tsconfig.json" },
+					init_options = {
+						plugins = {
+							{
+								name = "@vue/typescript-plugin",
+								location = vim.fn.expand("$MASON/packages/vue-language-server/node_modules/@vue/language-server"),
+								languages = { "vue" },
+							},
+						},
+					},
+					filetypes = {
+						"javascript",
+						"javascriptreact",
+						"javascript.jsx",
+						"typescript",
+						"typescriptreact",
+						"typescript.tsx",
+						"vue",
+					},
+				},
 				svelte = {},
 				astro = {},
 				html = {},
 				cssls = {
-				settings = {
-					css = {
-						lint = {
-							unknownAtRules = "ignore",
+					settings = {
+						css = {
+							lint = {
+								unknownAtRules = "ignore",
+							},
 						},
 					},
 				},
-			},
-			tailwindcss = {},
 				kotlin_language_server = {
 					settings = {
 						kotlin = {
@@ -210,14 +231,20 @@ return {
 						},
 					},
 				},
+				vue_language_server = {
+					filetypes = { "vue" },
+				},
 			}
 
 			local harper_disabled = vim.uv.fs_stat(vim.fn.stdpath("data") .. "/harper_disabled") ~= nil
 
 			for server, config in pairs(servers) do
-				vim.lsp.config(server, vim.tbl_deep_extend("force", {
-					capabilities = capabilities,
-				}, config))
+				vim.lsp.config(
+					server,
+					vim.tbl_deep_extend("force", {
+						capabilities = capabilities,
+					}, config)
+				)
 				if not (server == "harper_ls" and harper_disabled) then
 					vim.lsp.enable(server)
 				end
@@ -260,6 +287,7 @@ return {
 				"ruff",
 				"harper-ls",
 				"fixjson",
+				"vue-language-server",
 			},
 		},
 		config = function(_, opts)
