@@ -114,7 +114,22 @@ return {
 				},
 			},
 			tailwindcss = {},
-				kotlin_language_server = {},
+				kotlin_language_server = {
+					settings = {
+						kotlin = {
+							compiler = {
+								jvm = {
+									target = "17",
+								},
+							},
+							completion = {
+								snippets = {
+									enabled = true,
+								},
+							},
+						},
+					},
+				},
 				rust_analyzer = {
 					settings = {
 						["rust-analyzer"] = {
