@@ -41,6 +41,7 @@ return {
 				"yaml",
 				"go",
 				"sql",
+				"vue",
 			},
 			incremental_selection = {
 				enable = true,
