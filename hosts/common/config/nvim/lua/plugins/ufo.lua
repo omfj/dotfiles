@@ -32,16 +32,20 @@ return {
 				end,
 				desc = "Close folds with",
 			},
-			{
-				"K",
-				function()
-					local winid = require("ufo").peekFoldedLinesUnderCursor()
-					if not winid then
-						vim.lsp.buf.hover()
-					end
-				end,
-				desc = "Peek fold or hover",
-			},
+		{
+			"K",
+			function()
+				-- Only peek fold if cursor is actually on a closed fold.
+				-- This prevents ufo's global K from shadowing the buffer-local LSP hover.
+				local foldclosed = vim.fn.foldclosed(vim.fn.line("."))
+				if foldclosed ~= -1 then
+					require("ufo").peekFoldedLinesUnderCursor()
+				else
+					vim.lsp.buf.hover()
+				end
+			end,
+			desc = "Peek fold or hover",
+		},
 		},
 		opts = {
 			provider_selector = function()
