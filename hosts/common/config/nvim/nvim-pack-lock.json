@@ -185,7 +185,7 @@
       "src": "https://github.com/rose-pine/neovim"
     },
     "satellite.nvim": {
-      "rev": "633d60d45d7b266dabcc82261bea51385a972e8b",
+      "rev": "62b0aa1a941e35e694e8a50b589150bcca8c084d",
       "src": "https://github.com/lewis6991/satellite.nvim"
     },
     "snacks.nvim": {
