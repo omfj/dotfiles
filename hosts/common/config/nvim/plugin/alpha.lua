@@ -25,7 +25,7 @@ dashboard.section.footer.val =
 -- To use a banner as the header, comment out the following lines:
 --local banners = require("banners")
 --dashboard.section.header.val = banners.pryda
+--vim.api.nvim_set_hl(0, "AlphaHeader", { fg = "#f31019" })
 
-vim.api.nvim_set_hl(0, "AlphaHeader", { fg = "#f31019" })
 dashboard.section.header.opts.hl = "AlphaHeader"
 alpha.setup(dashboard.opts)

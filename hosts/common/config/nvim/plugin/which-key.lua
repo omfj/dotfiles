@@ -5,11 +5,16 @@ vim.pack.add({
 local wk = require("which-key")
 wk.setup({ plugins = { spelling = true } })
 wk.add({
+	{ "<leader>:", icon = "󰋚" },
+	{ "<leader>/", icon = "󰍉" },
+	{ "<leader>a", group = "Agents", icon = "󰚩" },
 	{ "<leader>b", group = "Buffers" },
+	{ "<leader>C", group = "Crate (Rust)", icon = "󰏗" },
 	{ "<leader>c", group = "Code" },
 	{ "<leader>f", group = "Files" },
 	{ "<leader>g", group = "Git" },
 	{ "<leader>h", group = "Git Hunks" },
+	{ "<leader>m", group = "Mason", icon = "󱌣" },
 	{ "<leader>q", group = "Sessions" },
 	{ "<leader>s", group = "Search" },
 	{ "<leader>t", group = "Toggle" },
