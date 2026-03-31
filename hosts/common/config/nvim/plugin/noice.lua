@@ -4,6 +4,12 @@ vim.pack.add({
 })
 
 require("noice").setup({
+	views = {
+		hover = {
+			border = { style = "single" },
+			size = { max_width = 120, max_height = 25 },
+		},
+	},
 	cmdline = { enabled = false },
 	notify = { enabled = false },
 	messages = { enabled = false },

@@ -4,6 +4,7 @@ vim.pack.add({
 })
 
 require("trouble").setup({
+	win = { border = "single" },
 	modes = {
 		symbols = { win = { size = 55 } },
 		lsp = { win = { size = 55 } },
