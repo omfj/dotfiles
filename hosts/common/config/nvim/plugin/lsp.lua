@@ -1,3 +1,15 @@
+vim.api.nvim_create_autocmd("PackChanged", {
+	callback = function(ev)
+		local name, kind = ev.data.spec.name, ev.data.kind
+		if name == "mason.nvim" and (kind == "install" or kind == "update") then
+			vim.schedule(function()
+				if not ev.data.active then vim.cmd.packadd("mason.nvim") end
+				vim.cmd("MasonUpdate")
+			end)
+		end
+	end,
+})
+
 vim.pack.add({
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/williamboman/mason.nvim" },
