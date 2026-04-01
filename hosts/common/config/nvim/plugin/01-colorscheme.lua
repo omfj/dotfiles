@@ -3,7 +3,6 @@ vim.pack.add({
 	{ src = "https://github.com/ellisonleao/gruvbox.nvim" },
 	{ src = "https://github.com/Mofiqul/vscode.nvim" },
 	{ src = "https://github.com/rebelot/kanagawa.nvim" },
-	{ src = "https://github.com/NLKNguyen/papercolor-theme" },
 })
 
 require("jellybeans").setup({ transparent = true })
