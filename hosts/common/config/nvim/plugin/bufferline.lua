@@ -11,7 +11,7 @@ require("bufferline").setup({
 	options = {
 		mode = "buffers",
 		themable = true,
-		numbers = "none",
+		numbers = "ordinal",
 		close_command = "bdelete! %d",
 		right_mouse_command = "bdelete! %d",
 		left_mouse_command = "buffer %d",
@@ -70,3 +70,7 @@ vim.keymap.set("n", "<leader>bD", function()
 	bufremove.delete(0, true)
 end, { desc = "Delete Buffer (force)" })
 vim.keymap.set("n", "<leader>bo", "<cmd>BufferLineCloseOthers<cr>", { desc = "Delete Other Buffers" })
+
+for i = 1, 9 do
+	vim.keymap.set("n", "<C-w>" .. i, "<cmd>BufferLineGoToBuffer " .. i .. "<cr>", { desc = "Go to buffer " .. i })
+end
