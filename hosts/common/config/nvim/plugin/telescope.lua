@@ -60,7 +60,9 @@ telescope.load_extension("ui-select")
 
 vim.keymap.set("n", "<leader>,", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", { desc = "Switch Buffer" })
 vim.keymap.set("n", "<leader>/", "<cmd>Telescope live_grep<cr>", { desc = "Grep (root dir)" })
-vim.keymap.set("n", "<leader>:", "<cmd>Telescope command_history<cr>", { desc = "Command History" })
+vim.keymap.set("n", "<leader>:", function()
+	require("noice").cmd("history")
+end, { desc = "Command History" })
 vim.keymap.set("n", "<leader><space>", "<cmd>Telescope find_files hidden=true<cr>", { desc = "Find Files (root dir)" })
 
 -- find
@@ -78,7 +80,9 @@ vim.keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<CR>", { desc = "sta
 vim.keymap.set("n", '<leader>s"', "<cmd>Telescope registers<cr>", { desc = "Registers" })
 vim.keymap.set("n", "<leader>sa", "<cmd>Telescope autocommands<cr>", { desc = "Auto Commands" })
 vim.keymap.set("n", "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", { desc = "Buffer" })
-vim.keymap.set("n", "<leader>sc", "<cmd>Telescope command_history<cr>", { desc = "Command History" })
+vim.keymap.set("n", "<leader>sc", function()
+	require("noice").cmd("history")
+end, { desc = "Command History" })
 vim.keymap.set("n", "<leader>sC", "<cmd>Telescope commands<cr>", { desc = "Commands" })
 vim.keymap.set("n", "<leader>sd", "<cmd>Telescope diagnostics bufnr=0<cr>", { desc = "Document diagnostics" })
 vim.keymap.set("n", "<leader>sD", "<cmd>Telescope diagnostics<cr>", { desc = "Workspace diagnostics" })

@@ -18,12 +18,10 @@ require("snacks").setup({
 	scratch = { enabled = true },
 	terminal = {
 		enabled = true,
-		win = { border = "rounded" },
+		win = { border = "single" },
 	},
-	scroll = { enabled = false },
 	notifier = { enabled = true },
 	words = { enabled = true },
-	gh = { enabled = true },
 	bigfile = { enabled = true },
 })
 
