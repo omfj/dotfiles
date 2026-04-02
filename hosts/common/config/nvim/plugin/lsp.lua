@@ -243,6 +243,9 @@ local servers = {
 	vue_language_server = {
 		filetypes = { "vue" },
 	},
+	oxlint = {
+		root_markers = { ".oxlintrc.json" },
+	},
 }
 
 local harper_disabled = vim.uv.fs_stat(vim.fn.stdpath("data") .. "/harper_disabled") ~= nil
@@ -277,6 +280,7 @@ local mason_opts = {
 		"kotlin-language-server",
 		"rust-analyzer",
 		"eslint-lsp",
+		"oxlint",
 		"prettierd",
 		"prettier",
 		"ktlint",

@@ -3,12 +3,22 @@ vim.pack.add({
 })
 
 require("conform").setup({
+	formatters = {
+		oxfmt = {
+			condition = function(_, ctx)
+				return vim.fs.find(
+					{ ".oxfmtrc.json", ".oxfmtrc.jsonc" },
+					{ path = ctx.filename, upward = true }
+				)[1] ~= nil
+			end,
+		},
+	},
 	formatters_by_ft = {
 		lua = { "stylua" },
-		javascript = { "prettierd", "prettier", stop_after_first = true },
-		typescript = { "prettierd", "prettier", stop_after_first = true },
-		javascriptreact = { "prettierd", "prettier", stop_after_first = true },
-		typescriptreact = { "prettierd", "prettier", stop_after_first = true },
+		javascript = { "oxfmt", "prettierd", "prettier", stop_after_first = true },
+		typescript = { "oxfmt", "prettierd", "prettier", stop_after_first = true },
+		javascriptreact = { "oxfmt", "prettierd", "prettier", stop_after_first = true },
+		typescriptreact = { "oxfmt", "prettierd", "prettier", stop_after_first = true },
 		svelte = { "prettierd", "prettier", stop_after_first = true },
 		vue = { "prettierd", "prettier", stop_after_first = true },
 		css = { "prettierd", "prettier", stop_after_first = true },
