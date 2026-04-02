@@ -1,6 +1,5 @@
 vim.pack.add({
 	{ src = "https://github.com/coder/claudecode.nvim" },
-	{ src = "https://github.com/nickjvandyke/opencode.nvim" },
 })
 
 require("claudecode").setup()
@@ -14,12 +13,3 @@ vim.keymap.set("n", "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>", { desc = "Add curr
 vim.keymap.set("v", "<leader>as", "<cmd>ClaudeCodeSend<cr>", { desc = "Send to Claude" })
 vim.keymap.set("n", "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", { desc = "Accept diff" })
 vim.keymap.set("n", "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", { desc = "Deny diff" })
-
-vim.keymap.set({ "n", "v" }, "<leader>ao", function()
-	require("opencode").ask()
-end, { desc = "Ask opencode" })
-vim.keymap.set("n", "<leader>at", function()
-	require("opencode").toggle()
-end, { desc = "Toggle opencode" })
-vim.g.opencode_opts = {}
-vim.o.autoread = true

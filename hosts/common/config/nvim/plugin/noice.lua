@@ -9,10 +9,14 @@ require("noice").setup({
 			border = { style = "single" },
 			size = { max_width = 120, max_height = 25 },
 		},
+		cmdline_popup = {
+			position = {
+				row = 10,
+				col = "50%",
+			},
+		},
 	},
-	cmdline = { enabled = false },
-	notify = { enabled = false },
-	messages = { enabled = false },
+	cmdline = { enabled = true, view = "cmdline_popup" },
 	lsp = {
 		override = {
 			["vim.lsp.util.convert_input_to_markdown_lines"] = true,

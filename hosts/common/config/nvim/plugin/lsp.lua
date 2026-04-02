@@ -3,7 +3,9 @@ vim.api.nvim_create_autocmd("PackChanged", {
 		local name, kind = ev.data.spec.name, ev.data.kind
 		if name == "mason.nvim" and (kind == "install" or kind == "update") then
 			vim.schedule(function()
-				if not ev.data.active then vim.cmd.packadd("mason.nvim") end
+				if not ev.data.active then
+					vim.cmd.packadd("mason.nvim")
+				end
 				vim.cmd("MasonUpdate")
 			end)
 		end
@@ -58,12 +60,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			vim.lsp.buf.signature_help,
 			vim.tbl_extend("force", opts, { desc = "Signature Help" })
 		)
-		vim.keymap.set(
-			"n",
-			"<leader>cr",
-			vim.lsp.buf.rename,
-			vim.tbl_extend("force", opts, { desc = "Rename" })
-		)
+		vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, vim.tbl_extend("force", opts, { desc = "Rename" }))
 		vim.keymap.set(
 			{ "n", "v" },
 			"<leader>ca",
@@ -263,7 +260,7 @@ for server, config in pairs(servers) do
 end
 
 -- Mason setup
-local mason_opts = {
+require("mason").setup({
 	ui = { border = "single" },
 	ensure_installed = {
 		"stylua",
@@ -297,25 +294,4 @@ local mason_opts = {
 		"fixjson",
 		"vue-language-server",
 	},
-}
-
-require("mason").setup(mason_opts)
-local mr = require("mason-registry")
-mr:on("package:install:success", function()
-	vim.defer_fn(function()
-		vim.api.nvim_exec_autocmds("FileType", { buf = vim.api.nvim_get_current_buf() })
-	end, 100)
-end)
-local function ensure_installed()
-	for _, tool in ipairs(mason_opts.ensure_installed) do
-		local p = mr.get_package(tool)
-		if not p:is_installed() then
-			p:install()
-		end
-	end
-end
-if mr.refresh then
-	mr.refresh(ensure_installed)
-else
-	ensure_installed()
-end
+})
