@@ -6,11 +6,8 @@
 theme = Jellybeans
 background = #0a0a0a
 
-#font-family = IosevkaTerm Nerd Font
-font-family = CozetteVector
-#font-style = Regular
-#font-size = 20
-#font-thicken = true
+font-family = IosevkaTerm Nerd Font
+font-size = 14
 
 shell-integration = fish
 
