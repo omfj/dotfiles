@@ -50,7 +50,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "gd", function()
 			Snacks.picker.lsp_definitions()
 		end, vim.tbl_extend("force", opts, { desc = "Goto Definition" }))
-		vim.keymap.set("n", "K", vim.lsp.buf.hover, vim.tbl_extend("force", opts, { desc = "Hover" }))
 		vim.keymap.set("n", "gi", function()
 			Snacks.picker.lsp_implementations()
 		end, vim.tbl_extend("force", opts, { desc = "Goto Implementation" }))
@@ -118,9 +117,9 @@ vim.api.nvim_create_user_command("LspInfo", "checkhealth vim.lsp", {
 
 -- Get capabilities for completion
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if has_cmp then
-	capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+local has_blink, blink = pcall(require, "blink.cmp")
+if has_blink then
+	capabilities = blink.get_lsp_capabilities(capabilities)
 end
 
 -- Set up language servers
@@ -214,7 +213,10 @@ local servers = {
 			if vim.fs.find(".oxlintrc.json", { upward = true, path = fname })[1] then
 				return nil
 			end
-			return vim.fs.root(fname, { "package.json", ".eslintrc.js", ".eslintrc.cjs", ".eslintrc.json", ".eslintrc" })
+			return vim.fs.root(
+				fname,
+				{ "package.json", ".eslintrc.js", ".eslintrc.cjs", ".eslintrc.json", ".eslintrc" }
+			)
 		end,
 	},
 	basedpyright = {
