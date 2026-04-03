@@ -14,8 +14,8 @@ vim.api.nvim_create_autocmd("PackChanged", {
 
 vim.pack.add({
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
-	{ src = "https://github.com/williamboman/mason.nvim" },
-	{ src = "https://github.com/williamboman/mason-lspconfig.nvim" },
+	{ src = "https://github.com/mason-org/mason.nvim" },
+	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" },
 })
 
 -- Set up diagnostics
@@ -79,6 +79,42 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "gr", function()
 			Snacks.picker.lsp_references()
 		end, vim.tbl_extend("force", opts, { desc = "Goto References" }))
+	end,
+})
+
+-- Get the LSP info
+vim.api.nvim_create_autocmd("LspInfo", "checkhealth vim.lsp", {
+	desc = "Check LSP health",
+})
+
+-- Get the latest LSP log
+vim.api.nvim_create_user_command("LspLog", function(_)
+	local state_path = vim.fn.stdpath("state")
+	local log_path = vim.fs.joinpath(state_path, "lsp.log")
+
+	vim.cmd(string.format("edit %s", log_path))
+end, {
+	desc = "Show LSP log",
+})
+
+-- Restart the LSP servers
+vim.api.nvim_create_user_command("LspRestart", "lsp restart", {
+	desc = "Restart LSP",
+})
+
+-- Show LSP progress
+vim.api.nvim_create_autocmd("LspProgress", {
+	callback = function(ev)
+		vim.print(ev.data)
+		local value = ev.data.params.value
+		vim.api.nvim_echo({ { value.message or "done" } }, false, {
+			id = "lsp." .. ev.data.client_id,
+			kind = "progress",
+			source = "vim.lsp",
+			title = value.title,
+			status = value.kind ~= "end" and "running" or "success",
+			percent = value.percentage,
+		})
 	end,
 })
 
