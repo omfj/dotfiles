@@ -174,6 +174,7 @@ end, { desc = "Toggle LSP (buffer)" })
 
 -- quit
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
+map("n", "<leader>R", "<cmd>restart<cr>", { desc = "Restart Neovim" })
 
 -- highlights under cursor
 map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })

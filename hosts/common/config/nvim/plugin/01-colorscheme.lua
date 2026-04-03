@@ -1,8 +1,6 @@
 vim.pack.add({
 	{ src = "https://github.com/wtfox/jellybeans.nvim" },
 	{ src = "https://github.com/ellisonleao/gruvbox.nvim" },
-	{ src = "https://github.com/Mofiqul/vscode.nvim" },
-	{ src = "https://github.com/rebelot/kanagawa.nvim" },
 })
 
 require("jellybeans").setup({ transparent = true })
