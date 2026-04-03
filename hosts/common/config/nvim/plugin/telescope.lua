@@ -58,7 +58,12 @@ telescope.setup({
 pcall(telescope.load_extension, "fzf")
 telescope.load_extension("ui-select")
 
-vim.keymap.set("n", "<leader>,", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", { desc = "Switch Buffer" })
+vim.keymap.set(
+	"n",
+	"<leader>,",
+	"<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>",
+	{ desc = "Switch Buffer" }
+)
 vim.keymap.set("n", "<leader>/", "<cmd>Telescope live_grep<cr>", { desc = "Grep (root dir)" })
 vim.keymap.set("n", "<leader>:", function()
 	require("noice").cmd("history")
@@ -103,4 +108,9 @@ vim.keymap.set("n", "<leader>sw", "<cmd>Telescope grep_string word_match=-w<cr>"
 vim.keymap.set("n", "<leader>sW", "<cmd>Telescope grep_string cwd=false word_match=-w<cr>", { desc = "Word (cwd)" })
 vim.keymap.set("v", "<leader>sw", "<cmd>Telescope grep_string<cr>", { desc = "Selection (root dir)" })
 vim.keymap.set("v", "<leader>sW", "<cmd>Telescope grep_string cwd=false<cr>", { desc = "Selection (cwd)" })
-vim.keymap.set("n", "<leader>uC", "<cmd>Telescope colorscheme enable_preview=true<cr>", { desc = "Colorscheme with preview" })
+vim.keymap.set(
+	"n",
+	"<leader>uC",
+	"<cmd>Telescope colorscheme enable_preview=true<cr>",
+	{ desc = "Colorscheme with preview" }
+)
