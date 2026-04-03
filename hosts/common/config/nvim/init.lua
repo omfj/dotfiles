@@ -1,4 +1,3 @@
--- Load plugins
 vim.loader.enable()
 vim.g.start_time = vim.uv.hrtime()
 

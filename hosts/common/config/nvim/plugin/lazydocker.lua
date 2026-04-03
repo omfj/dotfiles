@@ -5,9 +5,9 @@ vim.pack.add({
 require("lazydocker").setup({
 	window = {
 		settings = {
-			width = 0.618,
-			height = 0.618,
-			border = "rounded",
+			width = 0.8,
+			height = 0.8,
+			border = "single",
 			relative = "editor",
 		},
 	},

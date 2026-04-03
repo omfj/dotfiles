@@ -14,6 +14,37 @@ require("snacks").setup({
 			},
 		},
 	},
+	dashboard = {
+		enabled = true,
+		-- Override sections to avoid the default `startup` section which requires lazy.nvim
+		sections = {
+			{ section = "header" },
+			{ section = "keys", gap = 1, padding = 1 },
+			{
+				text = {
+					string.format(
+						"  nvim %d.%d.%d   %.0fms",
+						vim.version().major, vim.version().minor, vim.version().patch,
+						(vim.uv.hrtime() - vim.g.start_time) / 1e6
+					),
+					align = "center",
+					hl = "SnacksDashboardFooter",
+				},
+				padding = 1,
+			},
+		},
+		preset = {
+			keys = {
+				{ icon = " ", key = "e", desc = "New file", action = ":ene | startinsert" },
+				{ icon = " ", key = "f", desc = "Find file", action = function() Snacks.picker.files({ hidden = true }) end },
+				{ icon = " ", key = "r", desc = "Recent files", action = function() Snacks.picker.recent() end },
+				{ icon = " ", key = "g", desc = "Find word", action = function() Snacks.picker.grep() end },
+				{ icon = " ", key = "s", desc = "Restore Session", action = function() require("persistence").load() end },
+				{ icon = " ", key = "S", desc = "Select Session", action = function() require("persistence").select() end },
+				{ icon = " ", key = "q", desc = "Quit", action = ":qa" },
+			},
+		},
+	},
 	lazygit = { enabled = true },
 	scratch = { enabled = true },
 	terminal = {

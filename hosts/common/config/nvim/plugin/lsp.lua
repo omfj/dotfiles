@@ -82,9 +82,19 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
--- Get the LSP info
-vim.api.nvim_create_autocmd("LspInfo", "checkhealth vim.lsp", {
-	desc = "Check LSP health",
+-- Show LSP progress in the cmdline
+vim.api.nvim_create_autocmd("LspProgress", {
+	callback = function(ev)
+		local value = ev.data.params.value
+		vim.api.nvim_echo({ { value.message or "done" } }, false, {
+			id = "lsp." .. ev.data.client_id,
+			kind = "progress",
+			source = "vim.lsp",
+			title = value.title,
+			status = value.kind ~= "end" and "running" or "success",
+			percent = value.percentage,
+		})
+	end,
 })
 
 -- Get the latest LSP log
@@ -102,20 +112,8 @@ vim.api.nvim_create_user_command("LspRestart", "lsp restart", {
 	desc = "Restart LSP",
 })
 
--- Show LSP progress
-vim.api.nvim_create_autocmd("LspProgress", {
-	callback = function(ev)
-		vim.print(ev.data)
-		local value = ev.data.params.value
-		vim.api.nvim_echo({ { value.message or "done" } }, false, {
-			id = "lsp." .. ev.data.client_id,
-			kind = "progress",
-			source = "vim.lsp",
-			title = value.title,
-			status = value.kind ~= "end" and "running" or "success",
-			percent = value.percentage,
-		})
-	end,
+vim.api.nvim_create_user_command("LspInfo", "checkhealth vim.lsp", {
+	desc = "Check LSP health",
 })
 
 -- Get capabilities for completion
@@ -210,7 +208,15 @@ local servers = {
 			},
 		},
 	},
-	eslint = {},
+	eslint = {
+		-- Don't activate when oxlint is present for this project
+		root_dir = function(fname)
+			if vim.fs.find(".oxlintrc.json", { upward = true, path = fname })[1] then
+				return nil
+			end
+			return vim.fs.root(fname, { "package.json", ".eslintrc.js", ".eslintrc.cjs", ".eslintrc.json", ".eslintrc" })
+		end,
+	},
 	basedpyright = {
 		settings = {
 			basedpyright = {
