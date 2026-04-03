@@ -32,7 +32,15 @@ map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 
 -- Clear search with <esc>
-map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
+map("n", "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
+map("i", "<esc>", function()
+	if require("copilot.suggestion").is_visible() then
+		require("copilot.suggestion").dismiss()
+	else
+		vim.cmd("noh")
+		vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<esc>", true, false, true), "n", false)
+	end
+end, { desc = "Escape or dismiss Copilot suggestion" })
 
 -- Clear search, diff update and redraw
 -- taken from runtime/lua/_editor.lua

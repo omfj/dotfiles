@@ -9,9 +9,9 @@ vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#222222" })
 vim.api.nvim_set_hl(0, "CursorLine", { bg = "#222222" })
 vim.api.nvim_set_hl(0, "NonText", { fg = "#222222" })
 vim.api.nvim_set_hl(0, "SpecialKey", { fg = "#222222" })
+vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#444444", bg = "NONE" })
 vim.api.nvim_set_hl(0, "SnacksPickerFile", { fg = "#e8e8d3" })
 vim.api.nvim_set_hl(0, "SnacksPickerDir", { fg = "#888888" })
-vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#444444", bg = "NONE" })
 
 require("gruvbox").setup({
 	terminal_colors = true,

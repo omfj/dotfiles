@@ -6,7 +6,7 @@ vim.pack.add({
 require("noice").setup({
 	views = {
 		hover = {
-			border = { style = "single" },
+			border = { style = "none" },
 			size = { max_width = 120, max_height = 25 },
 		},
 	},
@@ -14,7 +14,6 @@ require("noice").setup({
 		override = {
 			["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 			["vim.lsp.util.stylize_markdown"] = true,
-			["cmp.entry.get_documentation"] = true,
 		},
 	},
 	presets = {
