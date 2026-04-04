@@ -1,16 +1,38 @@
-" Settings
-let mapleader = " "
-set backspace=indent,eol,start
-set nu rnu
-set mouse=a
-set so=5
+" Basic Settings
+set nocompatible
+set encoding=utf-8
 
-" Write and quit
-nnoremap <leader>qq :q<CR>
+set number
+set relativenumber
+set ruler
+set wildmenu
+set wildmode=full
 
-" Window Navigation with Ctrl-[hjkl]
-noremap <C-J> <C-W>j
-noremap <C-K> <C-W>k
-noremap <C-H> <C-W>h
-noremap <C-L> <C-W>l
+set scrolloff=5
+set sidescrolloff=10
 
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+
+set autoindent
+set smartindent
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set shiftround
+
+syntax on
+set background=dark
+
+let mapleader=" "
+nnoremap <leader>q :q<CR>     " Quick quit
+nnoremap <leader>w :w<CR>     " Quick save
+nnoremap <leader>qq :qa!<CR>  " Quit all without saving
+
+" Window Navigation
+nnoremap <C-J> <C-W>j   " Move to window below
+nnoremap <C-K> <C-W>k   " Move to window above
+nnoremap <C-H> <C-W>h   " Move to window left
+nnoremap <C-L> <C-W>l   " Move to window right
