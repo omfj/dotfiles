@@ -183,7 +183,7 @@ fi
 # Vite+
 
 if [[ -f "$HOME/.vite-plus/env.zsh" ]]; then
-    source "$HOME/.vite-plus/env.zsh"
+    source "$HOME/.vite-plus/env"
 fi
 
 # Zap
