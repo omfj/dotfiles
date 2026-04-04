@@ -19,6 +19,10 @@ export PYENV_ROOT=$HOME/.pyenv
 export PHP_INI_SCAN_DIR=$HOME/.config/herd-lite/bin:$PHP_INI_SCAN_DIR
 export DOCKERHOST=unix://$COLIMA_HOME/default/docker.sock
 
+# Set to Emacs keybindings, since Zsh automatically uses Vi keybinds
+# if it detects "vi" in $EDITOR or $VISUAL, which is the case for Neovim.
+bindkey -e
+
 # Homebrew
 if [[ -x /opt/homebrew/bin/brew ]]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
