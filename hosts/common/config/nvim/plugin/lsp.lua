@@ -209,8 +209,14 @@ local servers = {
 	},
 	eslint = {
 		-- Don't activate when oxlint is present for this project
-		root_dir = function(fname)
-			if vim.fs.find(".oxlintrc.json", { upward = true, path = fname })[1] then
+		root_dir = function(bufnr)
+			local fname = type(bufnr) == "number" and vim.api.nvim_buf_get_name(bufnr) or bufnr
+			if type(fname) ~= "string" or fname == "" then
+				return nil
+			end
+
+			local path = vim.fs.dirname(fname)
+			if vim.fs.find({ ".oxlintrc.json", ".oxlintrc", "oxlint.json", "oxlint.jsonc" }, { upward = true, path = path })[1] then
 				return nil
 			end
 			return vim.fs.root(
