@@ -67,6 +67,11 @@ source = "hosts/common/config/jj"
 target = "~/.config/jj"
 if = { hostname = "obook.local" }
 
+[[links]]
+source = "hosts/obook/zshrc"
+target = "~/.zshrc"
+if = { hostname = "obook.local" }
+
 #
 # Arch
 #

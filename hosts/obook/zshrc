@@ -1,0 +1,209 @@
+# Functions
+
+function has() {
+    command -v "$1" &>/dev/null
+}
+
+# Environment variables
+
+export EDITOR=nvim
+export GOPATH=$HOME/go
+export CARGO_NAME="Ole Magnus Johnsen"
+export CARGO_EMAIL="ole.magnus@me.com"
+export XDG_CONFIG_HOME=$HOME/.config
+export PROGRAMMING=$HOME/Developer
+export DOTFILES=$PROGRAMMING/github/dotfiles
+export BUN_INSTALL=$HOME/.bun
+export PNPM_HOME=$HOME/Library/pnpm
+export PYENV_ROOT=$HOME/.pyenv
+export PHP_INI_SCAN_DIR=$HOME/.config/herd-lite/bin:$PHP_INI_SCAN_DIR
+export DOCKERHOST=unix://$COLIMA_HOME/default/docker.sock
+
+# Homebrew
+if [[ -x /opt/homebrew/bin/brew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+    export HOMEBREW_NO_ANALYTICS=1
+fi
+
+# PATH
+
+typeset -U path
+
+path=(
+    $HOME/.ghcup/bin
+    $HOME/.cargo/bin
+    $HOME/.emacs.d/bin
+    $HOME/.local/bin
+    $HOME/.deno/bin
+    $HOME/.atuin/bin
+    $HOME/.composer/vendor/bin
+    $HOME/go/bin
+    $HOME/.slack/bin
+    $BUN_INSTALL/bin
+
+    /usr/local/bin
+    /usr/local/sbin
+    /usr/local/opt/openjdk/bin
+
+    /opt/homebrew/bin
+    /opt/homebrew/opt/openjdk/bin
+    /opt/homebrew/opt/llvm/bin
+    /opt/homebrew/opt/postgresql@15/bin
+    /opt/homebrew/opt/openjdk@17/bin
+    /opt/homebrew/opt/sqlite/bin
+    /opt/homebrew/opt/rustup/bin
+
+    /Library/Developer/CommandLineTools/usr/bin
+    /Library/Frameworks/Python.framework/Versions/3.10/bin
+
+    $path
+)
+
+if [[ -d $PNPM_HOME ]]; then
+    path=($PNPM_HOME $path)
+fi
+
+if [[ -d $PYENV_ROOT/bin ]]; then
+    path=($PYENV_ROOT/bin $path)
+fi
+
+# icu4c - should be removed, but homebrew forces me to have both for some reason
+
+if [[ -d /opt/homebrew/opt/icu4c@77/bin ]]; then
+    path=(/opt/homebrew/opt/icu4c@77/bin /opt/homebrew/opt/icu4c@77/sbin $path)
+fi
+
+if [[ -d /opt/homebrew/opt/icu4c@76/bin ]]; then
+    path=(/opt/homebrew/opt/icu4c@76/bin /opt/homebrew/opt/icu4c@76/sbin $path)
+    export LDFLAGS="-L/opt/homebrew/opt/icu4c@76/lib"
+    export CPPFLAGS="-I/opt/homebrew/opt/icu4c@76/include"
+    export PKG_CONFIG_PATH="/opt/homebrew/opt/icu4c@76/lib/pkgconfig"
+fi
+
+export PATH
+
+# Xcode
+
+if has xcrun; then
+    export SDKROOT=$(xcrun --show-sdk-path 2>/dev/null)
+fi
+
+# Go
+
+export CC=/Library/Developer/CommandLineTools/usr/bin/cc
+export CGO_CFLAGS="-O2 -g -isysroot $SDKROOT"
+
+# Aliases
+
+alias l="eza"
+alias ls="eza"
+alias la="eza -a"
+alias ll="eza -l"
+alias lla="eza -la"
+
+alias g="git"
+alias ga="git add"
+alias gc="git commit -m"
+
+alias b="brew"
+alias bi="brew install"
+alias bu="$DOTFILES/bin/update-mac"
+
+alias lg="lazygit"
+
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
+alias .........="cd ../../../../../.."
+alias ..........="cd ../../../../../../.."
+
+alias dots="cd $DOTFILES"
+alias conf="cd $HOME/.config"
+
+# Functions
+
+function uuid() {
+    local id=$(uuidgen | tr '[:upper:]' '[:lower:]')
+    echo "$id" | pbcopy
+    echo "$id"
+}
+
+function claude() {
+    env SHELL=/usr/bin/bash claude "$@"
+}
+
+# bat
+
+if has batcat; then
+    alias bat="batcat"
+    alias cat="bat"
+elif has bat; then
+    alias cat="bat"
+fi
+
+# GHCup
+
+if [[ -f "$HOME/.ghcup/env" ]]; then
+    source "$HOME/.ghcup/env"
+fi
+
+# Rustup
+
+if [[ -f "$HOME/.cargo/env" ]]; then
+    source "$HOME/.cargo/env"
+fi
+
+# SDKMAN
+
+export SDKMAN_DIR="$HOME/.sdkman"
+if [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]]; then
+    source "$SDKMAN_DIR/bin/sdkman-init.sh"
+fi
+
+# fnm
+
+if has fnm; then
+    eval "$(fnm env --use-on-cd --shell zsh)"
+fi
+
+# Zoxide
+
+if has zoxide; then
+    eval "$(zoxide init --cmd cd zsh)"
+fi
+
+# Atuin
+
+if has atuin; then
+    eval "$(atuin init zsh --disable-up-arrow)"
+fi
+
+# Vite+
+
+if [[ -f "$HOME/.vite-plus/env.zsh" ]]; then
+    source "$HOME/.vite-plus/env.zsh"
+fi
+
+# Zap
+
+# Install Zap if not already installed, and source it
+if [[ ! -f "$HOME/.local/share/zap/zap.zsh" ]]; then
+    zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1 --keep-zshrc
+fi
+
+source "$HOME/.local/share/zap/zap.zsh"
+
+plug "zsh-users/zsh-autosuggestions"
+plug "zsh-users/zsh-syntax-highlighting"
+
+ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=blue,underline
+ZSH_HIGHLIGHT_STYLES[precommand]=fg=blue,underline
+ZSH_HIGHLIGHT_STYLES[arg0]=fg=blue
+
+# Starship (last, so prompt wraps everything above)
+
+if has starship; then
+    eval "$(starship init zsh)"
+fi
