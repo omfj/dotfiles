@@ -89,15 +89,18 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
-require("blink.cmp").setup({
+	require("blink.cmp").setup({
 	keymap = {
 		preset = "none",
 		["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
+		["<C-.>"] = { "show", "show_documentation", "hide_documentation" },
 		["<C-e>"] = { "hide", "fallback" },
 		["<CR>"] = { "accept", "fallback" },
 		["<C-CR>"] = { "cancel", "fallback" },
 		["<C-p>"] = { "show", "select_prev", "fallback" },
 		["<C-n>"] = { "show", "select_next", "fallback" },
+		["<Up>"] = { "select_prev", "fallback" },
+		["<Down>"] = { "select_next", "fallback" },
 		["<C-b>"] = { "scroll_documentation_up", "fallback" },
 		["<C-f>"] = { "scroll_documentation_down", "fallback" },
 		["<Tab>"] = {

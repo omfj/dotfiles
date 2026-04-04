@@ -36,7 +36,7 @@ require("bufferline").setup({
 		show_close_icon = true,
 		show_tab_indicators = true,
 		show_duplicate_prefix = true,
-		persist_buffer_sort = true,
+		persist_buffer_sort = false,
 		separator_style = "thin",
 		enforce_regular_tabs = true,
 		always_show_bufferline = true,
@@ -45,7 +45,7 @@ require("bufferline").setup({
 			delay = 200,
 			reveal = { "close" },
 		},
-		sort_by = "insert_after_current",
+		sort_by = "id",
 		offsets = {
 			{
 				filetype = "neo-tree",
