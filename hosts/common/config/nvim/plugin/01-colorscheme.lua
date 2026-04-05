@@ -12,6 +12,12 @@ vim.api.nvim_set_hl(0, "SpecialKey", { fg = "#222222" })
 vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#444444", bg = "NONE" })
 vim.api.nvim_set_hl(0, "SnacksPickerFile", { fg = "#e8e8d3" })
 vim.api.nvim_set_hl(0, "SnacksPickerDir", { fg = "#888888" })
+vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", { fg = "#555555", italic = true })
+-- Native diff view colors (matches MiniDiff palette from diffgit.lua)
+vim.api.nvim_set_hl(0, "DiffAdd", { bg = "#3a4a3a" })
+vim.api.nvim_set_hl(0, "DiffDelete", { bg = "#4a2a2a" })
+vim.api.nvim_set_hl(0, "DiffChange", { bg = "#4a4a2a" })
+vim.api.nvim_set_hl(0, "DiffText", { bg = "#4a4a2a", bold = true })
 
 require("gruvbox").setup({
 	terminal_colors = true,

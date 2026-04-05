@@ -1,3 +1,28 @@
+vim.pack.add({ { src = "https://github.com/lewis6991/gitsigns.nvim" } })
+
+-- We only use gitsigns to show the current line blame, since mini.diff doesnt support that.
+-- We disable the signs so not to conflict with mini diff.
+require("gitsigns").setup({
+	signs = {
+		add = { text = "" },
+		change = { text = "" },
+		delete = { text = "" },
+		topdelete = { text = "" },
+		changedelete = { text = "" },
+		untracked = { text = "" },
+	},
+	signs_staged_enable = false,
+	current_line_blame = true,
+	on_attach = function(bufnr)
+		local gs = require("gitsigns")
+		-- stylua: ignore start
+		vim.keymap.set("n", "<leader>gb", gs.blame_line, { buffer = bufnr, desc = "Blame line" })
+		vim.keymap.set("n", "<leader>gB", function() gs.blame_line({ full = true }) end, { buffer = bufnr, desc = "Blame line (full)" })
+		vim.keymap.set("n", "<leader>gl", gs.blame, { buffer = bufnr, desc = "Blame file" })
+		-- stylua: ignore end
+	end,
+})
+
 local diff = require("mini.diff")
 diff.setup({
 	view = {
@@ -47,9 +72,6 @@ vim.keymap.set("n", "<leader>hr", function()
 end, { desc = "Reset hunk" })
 vim.keymap.set("n", "<leader>hp", diff.toggle_overlay, { desc = "Toggle diff overlay" })
 vim.keymap.set("n", "<leader>hb", git.show_at_cursor, { desc = "Show git object at cursor" })
-vim.keymap.set("n", "<leader>gb", function()
-	git.show_at_cursor({ split = "below" })
-end, { desc = "Blame line (below)" })
 
 -- Text object
 vim.keymap.set({ "o", "x" }, "ih", diff.operator, { desc = "MiniDiff select hunk" })
