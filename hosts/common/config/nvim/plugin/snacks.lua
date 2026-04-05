@@ -103,8 +103,8 @@ vim.keymap.set("n", "<leader>.", function() Snacks.scratch() end, { desc = "Scra
 
 vim.keymap.set("n", "<leader>,", function() Snacks.picker.buffers() end, { desc = "Switch Buffer" })
 vim.keymap.set("n", "<leader>/", function() Snacks.picker.grep() end, { desc = "Grep" })
-vim.keymap.set("n", "<leader>:", function() require("noice").cmd("history") end, { desc = "Command History" })
-vim.keymap.set("n", "<leader><space>", function() Snacks.picker.files({ hidden = true }) end, { desc = "Find Files" })
+vim.keymap.set("n", "<leader><space>", function() Snacks.picker.smart({ hidden = true }) end, { desc = "Find Files" })
+vim.keymap.set("n", "<leader>n", function() Snacks.picker.notifications() end, { desc = "Notifications History" })
 
 -- find
 vim.keymap.set("n", "<leader>fb", function() Snacks.picker.buffers() end, { desc = "Buffers" })
