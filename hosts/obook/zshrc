@@ -34,6 +34,7 @@ fi
 typeset -U path
 
 path=(
+    $HOME/.vite-plus/bin
     $HOME/.ghcup/bin
     $HOME/.cargo/bin
     $HOME/.emacs.d/bin
@@ -58,7 +59,7 @@ path=(
     /opt/homebrew/opt/rustup/bin
 
     /Library/Developer/CommandLineTools/usr/bin
-    /Library/Frameworks/Python.framework/Versions/3.10/bin
+    /Library/Frameworks/Python.framework/Versions/3.13/bin
 
     $path
 )
@@ -166,12 +167,6 @@ if [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]]; then
     source "$SDKMAN_DIR/bin/sdkman-init.sh"
 fi
 
-# fnm
-
-if has fnm; then
-    eval "$(fnm env --use-on-cd --shell zsh)"
-fi
-
 # Zoxide
 
 if has zoxide; then
@@ -206,7 +201,7 @@ ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=blue,underline
 ZSH_HIGHLIGHT_STYLES[precommand]=fg=blue,underline
 ZSH_HIGHLIGHT_STYLES[arg0]=fg=blue
 
-# Starship (last, so prompt wraps everything above)
+# Starship (should be last)
 
 if has starship; then
     eval "$(starship init zsh)"
