@@ -50,7 +50,6 @@ end, 100)
 
 vim.pack.add({
 	{ src = "https://github.com/Saghen/blink.cmp" },
-	{ src = "https://github.com/rafamadriz/friendly-snippets" },
 })
 
 local icons = {
@@ -130,9 +129,8 @@ vim.api.nvim_create_autocmd("FileType", {
 		nerd_font_variant = "mono",
 	},
 	sources = {
-		default = { "lsp", "path", "snippets" },
+		default = { "lsp", "path" },
 	},
-	snippets = { preset = "default" },
 	completion = {
 		accept = { auto_brackets = { enabled = false } },
 		list = {
