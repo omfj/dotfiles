@@ -36,11 +36,14 @@ map("n", "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
 map("i", "<esc>", function()
 	if require("copilot.suggestion").is_visible() then
 		require("copilot.suggestion").dismiss()
+	elseif vim.fn.reg_recording() ~= "" then
+		-- Plain escape during macro recording so it gets captured correctly
+		return "<esc>"
 	else
 		vim.cmd("noh")
 		vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<esc>", true, false, true), "n", false)
 	end
-end, { desc = "Escape or dismiss Copilot suggestion" })
+end, { desc = "Escape or dismiss Copilot suggestion", expr = true })
 
 -- Clear search, diff update and redraw
 -- taken from runtime/lua/_editor.lua
@@ -207,8 +210,6 @@ map("n", "<leader>ww", "<C-W>p", { desc = "Other window", remap = true })
 map("n", "<leader>wd", "<C-W>c", { desc = "Delete window", remap = true })
 map("n", "<leader>w-", "<C-W>s", { desc = "Split window below", remap = true })
 map("n", "<leader>w|", "<C-W>v", { desc = "Split window right", remap = true })
-map("n", "<leader>-", "<C-W>s", { desc = "Split window below", remap = true })
-map("n", "<leader>|", "<C-W>v", { desc = "Split window right", remap = true })
 
 -- tabs
 map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
