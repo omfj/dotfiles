@@ -18,15 +18,21 @@ require("mini.pairs").setup()
 require("mini.comment").setup()
 require("mini.move").setup()
 require("mini.ai").setup()
+vim.api.nvim_set_hl(0, "HipatternsFixme", { fg = "#ff0000", bold = true })
+vim.api.nvim_set_hl(0, "HipatternsHack", { fg = "#ffaa00", bold = true })
+vim.api.nvim_set_hl(0, "HipatternsTodo", { fg = "#00ff00", bold = true })
+vim.api.nvim_set_hl(0, "HipatternsNote", { fg = "#00aaff", bold = true })
+vim.api.nvim_set_hl(0, "HipatternsWarn", { fg = "#ffaa00", bold = true })
+
 local hipatterns = require("mini.hipatterns")
 hipatterns.setup({
 	highlighters = {
+		fixme = { pattern = "%f[%w]()FIXME.*", group = "MiniHipatternsFixme" },
+		hack = { pattern = "%f[%w]()HACK.*", group = "MiniHipatternsHack" },
+		todo = { pattern = "%f[%w]()TODO.*", group = "MiniHipatternsTodo" },
+		note = { pattern = "%f[%w]()NOTE.*", group = "MiniHipatternsNote" },
+		warn = { pattern = "%f[%w]()WARN.*", group = "MiniHipatternsWarn" },
 		hex_color = hipatterns.gen_highlighter.hex_color(),
-		fixme = { pattern = "%f[%w]()FIXME:?()%f[%W]", group = "DiagnosticError" },
-		hack = { pattern = "%f[%w]()HACK:?()%f[%W]", group = "DiagnosticWarn" },
-		todo = { pattern = "%f[%w]()TODO:?()%f[%W]", group = "DiagnosticOk" },
-		note = { pattern = "%f[%w]()NOTE:?()%f[%W]", group = "DiagnosticInfo" },
-		warn = { pattern = "%f[%w]()WARN:?()%f[%W]", group = "DiagnosticWarn" },
 	},
 })
 require("mini.bufremove").setup()
