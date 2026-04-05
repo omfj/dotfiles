@@ -1,5 +1,5 @@
 vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+vim.g.maplocalleader = ","
 vim.g.colorcolumn = "100" -- Used by toggle keymap (<leader>uS) to restore the column position
 vim.opt.list = true -- Show some invisible characters (tabs, trailing spaces, etc.)
 vim.opt.listchars = {
@@ -12,6 +12,10 @@ vim.opt.listchars = {
 	lead = "·",
 }
 vim.opt.autowrite = true -- Enable auto write
+vim.opt.autoread = true -- Reload files changed outside nvim
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
+	command = "checktime",
+})
 vim.opt.clipboard = "unnamedplus" -- Sync with system clipboard
 vim.opt.completeopt = "menu,menuone,noselect"
 vim.opt.conceallevel = 0 -- Disable concealing - show all characters
