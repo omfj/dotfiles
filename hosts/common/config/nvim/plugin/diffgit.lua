@@ -28,17 +28,17 @@ diff.setup({
 	view = {
 		style = "sign",
 		signs = {
-			add = "│",
-			change = "│",
-			delete = "_",
+			add = "▌",
+			change = "▌",
+			delete = "▁",
 		},
 	},
 })
 
 -- Sign column colors (set after setup so mini.diff doesn't override them)
 vim.api.nvim_set_hl(0, "MiniDiffSignAdd", { fg = "#a9dd9d" })
-vim.api.nvim_set_hl(0, "MiniDiffSignChange", { fg = "#e3c78a" })
-vim.api.nvim_set_hl(0, "MiniDiffSignDelete", { fg = "#cf6a4c" })
+vim.api.nvim_set_hl(0, "MiniDiffSignChange", { fg = "#f0922b" })
+vim.api.nvim_set_hl(0, "MiniDiffSignDelete", { fg = "#e03030" })
 -- Overlay colors
 vim.api.nvim_set_hl(0, "MiniDiffOverAdd", { bg = "#3a4a3a" })
 vim.api.nvim_set_hl(0, "MiniDiffOverChange", { bg = "#4a4a2a" })
