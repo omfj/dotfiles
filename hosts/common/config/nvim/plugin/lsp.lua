@@ -44,22 +44,22 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 	callback = function(ev)
 		local opts = { buffer = ev.buf }
-		vim.keymap.set("n", "gD", function()
-			Snacks.picker.lsp_declarations()
-		end, vim.tbl_extend("force", opts, { desc = "Goto Declaration" }))
-		vim.keymap.set("n", "gd", function()
-			Snacks.picker.lsp_definitions()
-		end, vim.tbl_extend("force", opts, { desc = "Goto Definition" }))
-		vim.keymap.set("n", "gi", function()
-			Snacks.picker.lsp_implementations()
-		end, vim.tbl_extend("force", opts, { desc = "Goto Implementation" }))
+
+		-- stylua: ignore start
+		vim.keymap.set("n", "gD", function() Snacks.picker.lsp_declarations() end, vim.tbl_extend("force", opts, { desc = "Goto Declaration" }))
+		vim.keymap.set("n", "gd", function() Snacks.picker.lsp_definitions() end, vim.tbl_extend("force", opts, { desc = "Goto Definition" }))
+		vim.keymap.set("n", "gi", function() Snacks.picker.lsp_implementations() end, vim.tbl_extend("force", opts, { desc = "Goto Implementation" }))
+		vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, vim.tbl_extend("force", opts, { desc = "Rename" }))
+		vim.keymap.set("n", "<leader>cS", function() require("config.copilot-rename").suggest() end, vim.tbl_extend("force", opts, { desc = "Suggest name (Copilot)" }))
+		vim.keymap.set("n", "gr", function() Snacks.picker.lsp_references() end, vim.tbl_extend("force", opts, { desc = "Goto References" }))
+		-- stylua: ignore end
+
 		vim.keymap.set(
 			"n",
 			"<C-k>",
 			vim.lsp.buf.signature_help,
 			vim.tbl_extend("force", opts, { desc = "Signature Help" })
 		)
-		vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, vim.tbl_extend("force", opts, { desc = "Rename" }))
 		vim.keymap.set(
 			{ "n", "v" },
 			"<leader>ca",
@@ -75,9 +75,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			vim.lsp.buf.code_action,
 			vim.tbl_extend("force", opts, { desc = "Code Action" })
 		)
-		vim.keymap.set("n", "gr", function()
-			Snacks.picker.lsp_references()
-		end, vim.tbl_extend("force", opts, { desc = "Goto References" }))
 	end,
 })
 
@@ -216,7 +213,12 @@ local servers = {
 			end
 
 			local path = vim.fs.dirname(fname)
-			if vim.fs.find({ ".oxlintrc.json", ".oxlintrc", "oxlint.json", "oxlint.jsonc" }, { upward = true, path = path })[1] then
+			if
+				vim.fs.find(
+					{ ".oxlintrc.json", ".oxlintrc", "oxlint.json", "oxlint.jsonc" },
+					{ upward = true, path = path }
+				)[1]
+			then
 				return nil
 			end
 			return vim.fs.root(
