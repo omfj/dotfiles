@@ -30,9 +30,9 @@ target = "~/.config/lazygit"
 source = "hosts/common/config/cheat"
 target = "~/.config/cheat"
 
-[[links]]
-source = "hosts/common/config/tmux"
-target = "~/.config/tmux"
+# [[links]]
+# source = "hosts/common/config/tmux"
+# target = "~/.config/tmux"
 
 #
 # Shared between main computers
