@@ -181,7 +181,7 @@ fi
 
 # Vite+
 
-if [[ -f "$HOME/.vite-plus/env.zsh" ]]; then
+if [[ -f "$HOME/.vite-plus/env" ]]; then
     source "$HOME/.vite-plus/env"
 fi
 
