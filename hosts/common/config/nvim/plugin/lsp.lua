@@ -16,6 +16,7 @@ vim.pack.add({
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/mason-org/mason.nvim" },
 	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" },
+	{ src = "https://github.com/b0o/SchemaStore.nvim" },
 })
 
 -- Set up diagnostics
@@ -267,6 +268,14 @@ local servers = {
 			client.server_capabilities.documentFormattingProvider = false
 		end,
 	},
+	jsonls = {
+		settings = {
+			json = {
+				schemas = require("schemastore").json.schemas(),
+				validate = { enable = true },
+			},
+		},
+	},
 	taplo = {},
 	harper_ls = {
 		settings = {
@@ -344,6 +353,7 @@ require("mason").setup({
 		"ruff",
 		"harper-ls",
 		"fixjson",
+		"json-lsp",
 		"vue-language-server",
 	},
 })
