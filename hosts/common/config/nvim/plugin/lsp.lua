@@ -304,6 +304,7 @@ local servers = {
 	oxlint = {
 		root_markers = { ".oxlintrc.json" },
 	},
+	zls = {},
 }
 
 local harper_disabled = vim.uv.fs_stat(vim.fn.stdpath("data") .. "/harper_disabled") ~= nil
@@ -355,5 +356,6 @@ require("mason").setup({
 		"fixjson",
 		"json-lsp",
 		"vue-language-server",
+		"zls",
 	},
 })
