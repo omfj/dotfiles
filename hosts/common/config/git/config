@@ -26,6 +26,7 @@
     fl = push --force-with-lease
     ai = "!convmit --edit"
     rc = rebase --continue
+    pb = "!git switch $(git branch | grep -v HEAD | fzf | tr -d ' ')"
 [interactive]
     diffFilter = delta --color-only
 [delta]
