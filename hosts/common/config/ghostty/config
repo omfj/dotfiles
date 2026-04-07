@@ -9,53 +9,72 @@ background = #0a0a0a
 font-family = IosevkaTerm Nerd Font
 font-size = 14
 
-shell-integration = fish
+shell-integration = zsh
 
+# padding around
 window-padding-x = 20
 window-padding-y = 20
 
+# make block cursor work on fish
 cursor-style = block
 cursor-style-blink = true
 shell-integration-features = no-cursor
 
+# underline links when you hold cmd or ctrl
 link-url = true
 
 copy-on-select = true
 window-save-state = always
 
+# dont ask to confirm when closing a window
 confirm-close-surface = false
 
-# macos stuff
+# move tabs to the titlebar on macos
 macos-titlebar-style = tabs
 
 # claude code?
 keybind = shift+enter=text:\x1b\r
 
 # pane management
-keybind = alt+h=goto_split:left
-keybind = alt+j=goto_split:bottom
-keybind = alt+k=goto_split:top
-keybind = alt+l=goto_split:right
+keybind = ctrl+a>h=goto_split:left
+keybind = ctrl+a>j=goto_split:bottom
+keybind = ctrl+a>k=goto_split:top
+keybind = ctrl+a>l=goto_split:right
 
 # create new splits
 keybind = ctrl+a>-=new_split:down
-keybind = ctrl+a>alt+8=new_split:right
+keybind = ctrl+a>alt+7=new_split:right
 
 # destory splits
 # ctrl+w or ctrl+shift+w depending on mac or linux
 
 # resize splits
-keybind = ctrl+shift+j=resize_split:up,10
-keybind = ctrl+shift+k=resize_split:down,10
-keybind = ctrl+shift+h=resize_split:left,10
-keybind = ctrl+shift+l=resize_split:right,10
-keybind = ctrl+shift+e=equalize_splits
+#
+# i use ctrl+a>r to activate the resize key table, which
+# basically means that after pressing ctrl+a>r, the next
+# keybinds will be for resizing splits, making me not have
+# to hold ctrl while resizing.
+#
+# use esc or any other key that is not h,j,k,l to exit the resize key table
+keybind = ctrl+a>r=activate_key_table:resize
+
+# resize splits with hjkl
+keybind = resize/h=resize_split:left,10
+keybind = resize/j=resize_split:down,10
+keybind = resize/k=resize_split:up,10
+keybind = resize/l=resize_split:right,10
+
+# exit resize mode with escape or any other key
+keybind = resize/catch_all=deactivate_key_table
+
+# resize splits equally
+keybind = ctrl+shift+E=equalize_splits
 
 # fullscreen (monocle) split
 keybind = ctrl+a>f=toggle_split_zoom
 
 # rename tabs
-keybind = ctrl+a>r=prompt_surface_title
+keybind = ctrl+a>e=prompt_surface_title
 
 # scrolling configuration
 mouse-scroll-multiplier = 3
