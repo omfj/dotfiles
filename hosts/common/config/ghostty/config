@@ -79,8 +79,3 @@ keybind = ctrl+a>e=prompt_surface_title
 # scrolling configuration
 mouse-scroll-multiplier = 3
 scrollback-limit = 500000000
-
-# option key word navigation and deletion
-keybind = opt+left=text:\x1b[1;5D
-keybind = opt+right=text:\x1b[1;5C
-keybind = opt+backspace=text:\x17
