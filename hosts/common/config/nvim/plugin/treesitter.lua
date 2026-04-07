@@ -49,6 +49,7 @@ local ensure_installed = {
 	"go",
 	"sql",
 	"vue",
+	"zig",
 }
 
 -- Install any missing parsers on startup
