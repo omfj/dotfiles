@@ -5,7 +5,7 @@ vim.pack.add({
 
 require("lualine").setup({
 	options = {
-		theme = "auto",
+		theme = "jellybeans-nvim",
 		component_separators = { left = "", right = "" },
 		section_separators = { left = "", right = "" },
 		globalstatus = true,
