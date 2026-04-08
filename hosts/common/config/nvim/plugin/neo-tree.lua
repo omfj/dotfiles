@@ -88,11 +88,4 @@ require("neo-tree").setup({
 	},
 })
 
-vim.keymap.set("n", "<leader>o", "<cmd>Neotree toggle<cr>", { desc = "Toggle explorer" })
-vim.keymap.set("n", "<leader>e", function()
-	if vim.bo.filetype == "neo-tree" then
-		vim.cmd("wincmd p")
-	else
-		vim.cmd("Neotree focus")
-	end
-end, { desc = "Toggle explorer focus" })
+vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Toggle explorer" })
