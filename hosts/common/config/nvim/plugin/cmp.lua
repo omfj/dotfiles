@@ -140,13 +140,11 @@ vim.api.nvim_create_autocmd("FileType", {
 			},
 		},
 		menu = {
-			border = "single",
 			winhighlight = "Normal:Normal,CursorLine:BlinkCmpMenuSelection,Search:None",
 		},
 		documentation = {
 			auto_show = true,
 			window = {
-				border = "single",
 				winhighlight = "Normal:Normal",
 			},
 		},

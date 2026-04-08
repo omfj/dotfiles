@@ -27,6 +27,9 @@ wk.add({
 	{ "<leader>w", group = "Windows" },
 	{ "<leader>x", group = "Diagnostics" },
 	{ "<leader><tab>", group = "Tabs" },
+	-- overrides
+	{ "grt", desc = "Goto Type Definition" },
+	{ "grx", desc = "Run codelens" },
 })
 -- stylua: ignore end
 
