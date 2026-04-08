@@ -11,6 +11,7 @@ if vim.g.neovide then
 	vim.g.neovide_padding_right = 16
 end
 
+require("vim._core.ui2").enable()
 require("config.options")
 require("config.keymaps")
 require("config.autocmds")

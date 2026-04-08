@@ -16,7 +16,6 @@ require("snacks").setup({
 	},
 	dashboard = {
 		enabled = true,
-		-- Override sections to avoid the default `startup` section which requires lazy.nvim
 		sections = {
 			{ section = "header" },
 			{ section = "keys", gap = 1, padding = 1 },
