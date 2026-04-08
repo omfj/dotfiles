@@ -83,7 +83,7 @@ require("snacks").setup({
 	},
 	lazygit = { enabled = true },
 	scratch = { enabled = true },
-	terminal = { enabled = true, win = { border = "single" } },
+	terminal = { enabled = true },
 	notifier = { enabled = true },
 	words = { enabled = true },
 	bigfile = { enabled = true },

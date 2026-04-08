@@ -6,7 +6,6 @@ vim.pack.add({
 require("noice").setup({
 	views = {
 		hover = {
-			border = { style = "none" },
 			size = { max_width = 120, max_height = 25 },
 		},
 	},
@@ -23,6 +22,5 @@ require("noice").setup({
 		command_palette = false,
 		long_message_to_split = true,
 		inc_rename = false,
-		lsp_doc_border = false,
 	},
 })
