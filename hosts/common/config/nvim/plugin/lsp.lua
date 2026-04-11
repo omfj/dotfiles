@@ -132,6 +132,7 @@ local servers = {
 	"astro",
 	"html",
 	"cssls",
+	"tailwindcss",
 	"kotlin_language_server",
 	"rust_analyzer",
 	"eslint",
