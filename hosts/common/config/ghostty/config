@@ -18,7 +18,7 @@ window-padding-y = 20
 # make block cursor work on fish
 cursor-style = block
 cursor-style-blink = true
-shell-integration-features = no-cursor
+shell-integration-features = ssh-env,no-cursor
 
 # underline links when you hold cmd or ctrl
 link-url = true
