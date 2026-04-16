@@ -146,6 +146,7 @@ local servers = {
 	"vue_language_server",
 	"oxlint",
 	"zls",
+	"jinja_lsp",
 }
 
 -- Optionally enable Harper LSP if not disabled
@@ -192,5 +193,7 @@ require("mason").setup({
 		"json-lsp",
 		"vue-language-server",
 		"zls",
+		"jinja-lsp",
+		"djlint",
 	},
 })

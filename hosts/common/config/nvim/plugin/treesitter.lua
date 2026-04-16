@@ -50,6 +50,7 @@ local ensure_installed = {
 	"sql",
 	"vue",
 	"zig",
+	"jinja",
 }
 
 -- Install any missing parsers on startup
