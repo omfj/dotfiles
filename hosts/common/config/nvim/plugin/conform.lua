@@ -32,6 +32,7 @@ require("conform").setup({
 		toml = { "taplo" },
 		rust = { "rustfmt" },
 		zig = { "zigfmt" },
+		jinja = { "djlint" },
 	},
 	format_on_save = function(bufnr)
 		if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
