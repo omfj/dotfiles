@@ -86,7 +86,7 @@ vim.api.nvim_create_user_command("ToggleHarper", function()
 		vim.lsp.enable("harper_ls")
 		for _, buf in ipairs(vim.api.nvim_list_bufs()) do
 			if vim.api.nvim_buf_is_loaded(buf) then
-				vim.api.nvim_exec_autocmds("FileType", { buf = buf })
+				vim.api.nvim_exec_autocmds({ "FileType" }, { buffer = buf })
 			end
 		end
 		vim.notify("Harper enabled")
