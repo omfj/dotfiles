@@ -150,7 +150,10 @@ map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 map("n", "<leader>uf", function() vim.g.autoformat = not vim.g.autoformat end, { desc = "Toggle auto format (global)" })
 map("n", "<leader>uF", function() vim.b.autoformat = not vim.b.autoformat end, { desc = "Toggle auto format (buffer)" })
 map("n", "<leader>us", function() vim.wo.spell = not vim.wo.spell end, { desc = "Toggle Spelling" })
-map("n", "<leader>uw", function() vim.wo.wrap = not vim.wo.wrap end, { desc = "Toggle Word Wrap" })
+map("n", "<leader>uw", function()
+	vim.wo.wrap = not vim.wo.wrap
+	vim.wo.linebreak = vim.wo.wrap
+end, { desc = "Toggle Word Wrap" })
 map("n", "<leader>uL", function() vim.wo.relativenumber = not vim.wo.relativenumber end, { desc = "Toggle Relative Line Numbers" })
 map("n", "<leader>ul", function() vim.wo.number = not vim.wo.number end, { desc = "Toggle Line Numbers" })
 map("n", "<leader>ud", function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end, { desc = "Toggle Diagnostics" })
