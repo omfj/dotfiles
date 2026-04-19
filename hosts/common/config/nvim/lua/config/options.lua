@@ -13,9 +13,6 @@ vim.opt.listchars = {
 }
 vim.opt.autowrite = true -- Enable auto write
 vim.opt.autoread = true -- Reload files changed outside nvim
-vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
-	command = "checktime",
-})
 vim.opt.clipboard = "unnamedplus" -- Sync with system clipboard
 vim.opt.completeopt = "menu,menuone,noselect"
 vim.opt.conceallevel = 0 -- Disable concealing - show all characters
