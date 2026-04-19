@@ -147,8 +147,6 @@ map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 -- stylua: ignore start
 
 -- toggle options
-map("n", "<leader>uf", function() vim.g.autoformat = not vim.g.autoformat end, { desc = "Toggle auto format (global)" })
-map("n", "<leader>uF", function() vim.b.autoformat = not vim.b.autoformat end, { desc = "Toggle auto format (buffer)" })
 map("n", "<leader>us", function() vim.wo.spell = not vim.wo.spell end, { desc = "Toggle Spelling" })
 map("n", "<leader>uw", function()
 	vim.wo.wrap = not vim.wo.wrap
