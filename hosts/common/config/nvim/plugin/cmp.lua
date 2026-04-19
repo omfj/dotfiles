@@ -88,7 +88,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
-	require("blink.cmp").setup({
+require("blink.cmp").setup({
 	keymap = {
 		preset = "none",
 		["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
@@ -129,7 +129,14 @@ vim.api.nvim_create_autocmd("FileType", {
 		nerd_font_variant = "mono",
 	},
 	sources = {
-		default = { "lsp", "path" },
+		default = { "lsp", "path", "snippets" },
+		providers = {
+			snippets = {
+				opts = {
+					search_paths = { vim.fn.stdpath("config") .. "/snippets" },
+				},
+			},
+		},
 	},
 	completion = {
 		accept = { auto_brackets = { enabled = false } },
