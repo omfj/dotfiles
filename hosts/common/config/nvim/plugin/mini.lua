@@ -33,7 +33,15 @@ hipatterns.setup({
 		note = { pattern = "%f[%w]()NOTE.*", group = "MiniHipatternsNote" },
 		warn = { pattern = "%f[%w]()WARN.*", group = "MiniHipatternsWarn" },
 		hex_color = hipatterns.gen_highlighter.hex_color(),
+		nbsp = { pattern = "\xc2\xa0", group = "MiniHipatternsNbsp" },
 	},
+})
+require("mini.trailspace").setup()
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "alpha", "dashboard", "snacks_dashboard" },
+	callback = function()
+		vim.b.minitrailspace_disable = true
+	end,
 })
 require("mini.bufremove").setup()
 
