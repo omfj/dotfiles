@@ -1,0 +1,127 @@
+# Functions
+
+function has() {
+    command -v "$1" &>/dev/null
+}
+
+# Environment variables
+
+export EDITOR=nvim
+export GOPATH=$HOME/go
+export XDG_CONFIG_HOME=$HOME/.config
+export PROGRAMMING=$HOME/Developer
+export DOTFILES=$PROGRAMMING/github/dotfiles
+
+# Set to Emacs keybindings, since Zsh automatically uses Vi keybinds
+# if it detects "vi" in $EDITOR or $VISUAL, which is the case for Neovim.
+bindkey -e
+
+# PATH
+
+typeset -U path
+
+path=(
+    $HOME/.vite-plus/bin
+    $HOME/.cargo/bin
+    $HOME/.local/bin
+    $HOME/.atuin/bin
+    $HOME/.opencode/bin
+
+    /usr/local/bin
+    /usr/local/sbin
+    /usr/local/opt/openjdk/bin
+
+    $path
+)
+
+export PATH
+
+# Aliases
+
+alias l="eza"
+alias ls="eza"
+alias la="eza -a"
+alias ll="eza -l"
+alias lla="eza -la"
+
+alias g="git"
+alias ga="git add"
+alias gc="git commit -m"
+
+alias b="brew"
+alias bi="brew install"
+alias bu="$DOTFILES/bin/update-mac"
+
+alias lg="lazygit"
+
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
+alias .........="cd ../../../../../.."
+alias ..........="cd ../../../../../../.."
+
+alias dots="cd $DOTFILES"
+alias conf="cd $HOME/.config"
+
+# Functions
+
+function uuid() {
+    local id=$(uuidgen | tr '[:upper:]' '[:lower:]')
+    echo "$id" | pbcopy
+    echo "$id"
+}
+
+function claude() {
+    env SHELL=/usr/bin/bash claude "$@"
+}
+
+# bat
+
+if has batcat; then
+    alias bat="batcat"
+    alias cat="bat"
+elif has bat; then
+    alias cat="bat"
+fi
+
+# Zoxide
+
+if has zoxide; then
+    eval "$(zoxide init --cmd cd zsh)"
+fi
+
+# Atuin
+
+if has atuin; then
+    eval "$(atuin init zsh --disable-up-arrow)"
+fi
+
+# Vite+
+
+if [[ -f "$HOME/.vite-plus/env" ]]; then
+    source "$HOME/.vite-plus/env"
+fi
+
+# Zap
+
+# Install Zap if not already installed, and source it
+if [[ ! -f "$HOME/.local/share/zap/zap.zsh" ]]; then
+    zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1 --keep-zshrc
+fi
+
+source "$HOME/.local/share/zap/zap.zsh"
+
+plug "zsh-users/zsh-autosuggestions"
+plug "zsh-users/zsh-syntax-highlighting"
+
+ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=blue,underline
+ZSH_HIGHLIGHT_STYLES[precommand]=fg=blue,underline
+ZSH_HIGHLIGHT_STYLES[arg0]=fg=blue
+
+# Starship (should be last)
+
+if has starship; then
+    eval "$(starship init zsh)"
+fi

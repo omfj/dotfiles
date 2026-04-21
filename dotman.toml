@@ -131,8 +131,8 @@ if = { hostname = "oarch" }
 #
 
 [[links]]
-source = "hosts/obuntu/config/fish"
-target = "~/.config/fish"
+source = "hosts/obuntu/zshrc"
+target = "~/.zshrc"
 if = { file_exists = ["~/.obuntu"] }
 
 # ------------
