@@ -147,6 +147,7 @@ local servers = {
 	"oxlint",
 	"zls",
 	"jinja_lsp",
+	"clangd",
 }
 
 -- Optionally enable Harper LSP if not disabled
@@ -195,5 +196,7 @@ require("mason").setup({
 		"zls",
 		"jinja-lsp",
 		"djlint",
+		"clangd",
+		"clang-format",
 	},
 })

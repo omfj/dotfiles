@@ -20,6 +20,7 @@ vim.pack.add({
 local ensure_installed = {
 	"bash",
 	"c",
+	"cpp",
 	"diff",
 	"html",
 	"javascript",
