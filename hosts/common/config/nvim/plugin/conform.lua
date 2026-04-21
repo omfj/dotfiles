@@ -32,6 +32,8 @@ require("conform").setup({
 		toml = { "taplo" },
 		rust = { "rustfmt" },
 		zig = { "zigfmt" },
+		c = { "clang_format" },
+		cpp = { "clang_format" },
 		jinja = { "djlint" },
 	},
 	format_on_save = function(bufnr)
