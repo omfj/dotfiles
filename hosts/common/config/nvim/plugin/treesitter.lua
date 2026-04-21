@@ -15,6 +15,7 @@ vim.api.nvim_create_autocmd("PackChanged", {
 vim.pack.add({
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-context" },
 })
 
 local ensure_installed = {
@@ -111,3 +112,15 @@ require("nvim-treesitter-textobjects").setup({
 		},
 	},
 })
+
+require("treesitter-context").setup({
+	enable = true,
+	max_lines = 3,
+	mode = "cursor",
+	trim_scope = "outer",
+})
+
+-- go to the context / header of the current line
+vim.keymap.set("n", "[c", function()
+	require("treesitter-context").go_to_context(vim.v.count1)
+end, { silent = true, desc = "Go to context" })
