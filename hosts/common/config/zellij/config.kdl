@@ -254,10 +254,10 @@ keybinds clear-defaults=true {
         bind "[" { SwitchToMode "scroll"; }
         bind "Ctrl a" { Write 1; SwitchToMode "locked"; }
         bind "c" { NewTab; SwitchToMode "locked"; }
-        bind "Ctrl h" { MoveFocus "left"; SwitchToMode "locked"; }
-        bind "Ctrl j" { MoveFocus "down"; SwitchToMode "locked"; }
-        bind "Ctrl k" { MoveFocus "up"; SwitchToMode "locked"; }
-        bind "Ctrl l" { MoveFocus "right"; SwitchToMode "locked"; }
+        bind "h" { MoveFocus "left"; SwitchToMode "locked"; }
+        bind "j" { MoveFocus "down"; SwitchToMode "locked"; }
+        bind "k" { MoveFocus "up"; SwitchToMode "locked"; }
+        bind "l" { MoveFocus "right"; SwitchToMode "locked"; }
         bind "n" { GoToNextTab; SwitchToMode "locked"; }
         bind "p" { GoToPreviousTab; SwitchToMode "locked"; }
         bind "s" {
