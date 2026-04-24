@@ -12,8 +12,8 @@ font-size = 14
 shell-integration = zsh
 
 # padding around
-#window-padding-x = 20
-#window-padding-y = 20
+window-padding-x = 20
+window-padding-y = 20
 
 # make block cursor work on fish
 cursor-style = block
