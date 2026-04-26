@@ -1,6 +1,7 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 vim.g.colorcolumn = "100" -- Used by toggle keymap (<leader>uS) to restore the column position
+vim.g.typstdark = true -- Set to true for dark theme, false for light theme
 vim.opt.list = true -- Show some invisible characters (tabs, trailing spaces, etc.)
 vim.opt.listchars = {
 	tab = "➙ ",
