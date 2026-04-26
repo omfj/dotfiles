@@ -7,6 +7,11 @@ require("noice").setup({
 	views = {
 		hover = {
 			size = { max_width = 120, max_height = 25 },
+			border = { style = "single" },
+			position = { row = 2, col = 0 },
+			win_options = {
+				winhighlight = "Normal:NoiceHoverNormal,NormalFloat:NoiceHoverNormal",
+			},
 		},
 	},
 	lsp = {
@@ -16,7 +21,7 @@ require("noice").setup({
 		},
 	},
 	cmdline = { enabled = false },
-	messages = { enabled = false },
+	messages = { enabled = true },
 	presets = {
 		bottom_search = true,
 		command_palette = false,

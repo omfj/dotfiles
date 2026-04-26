@@ -57,7 +57,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, vim.tbl_extend("force", opts, { desc = "Rename" }))
 		vim.keymap.set("n", "<leader>cS", function() require("config.copilot-rename").suggest() end, vim.tbl_extend("force", opts, { desc = "Suggest name (Copilot)" }))
 		-- stylua: ignore end
-
+		vim.keymap.set("n", "<leader>K", function()
+			vim.lsp.buf.hover({
+				border = "single",
+			})
+		end, { desc = "Hover" })
 		vim.keymap.set(
 			"n",
 			"<C-k>",

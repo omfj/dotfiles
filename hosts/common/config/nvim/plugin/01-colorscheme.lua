@@ -4,7 +4,6 @@ vim.pack.add({
 
 require("jellybeans").setup({
 	transparent = true,
-	flat_ui = true,
 	plugins = {
 		all = true,
 		auto = true,
@@ -16,10 +15,10 @@ vim.api.nvim_set_hl(0, "CursorLine", { bg = "#222222" }) -- softer cursor line, 
 vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#222222" }) -- softer color column, to match cursor line
 
 vim.api.nvim_set_hl(0, "NonText", { fg = "#222222" }) -- softer whitespace characters
-vim.api.nvim_set_hl(0, "MiniTrailspace", { bg = "#4a3a00" }) -- dark yellow bg on trailing spaces
 vim.api.nvim_set_hl(0, "MiniHipatternsNbsp", { bg = "#4a3a00" }) -- dark yellow bg on non-breaking spaces (opt+space)
 --vim.api.nvim_set_hl(0, "SpecialKey", { fg = "#222222" })
 vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#444444", bg = "NONE" })
+vim.api.nvim_set_hl(0, "NoiceHoverNormal", { bg = "#141414" })
 
 -- override some colors for better visibility. without these they are almost the same as the background
 vim.api.nvim_set_hl(0, "SnacksPickerFile", { fg = "#e8e8d3" })
