@@ -5,6 +5,8 @@
 
 theme = Jellybeans
 background = #0a0a0a
+background-opacity = 0.95
+background-blur = true
 
 font-family = IosevkaTerm Nerd Font
 font-size = 14

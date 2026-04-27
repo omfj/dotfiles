@@ -13,6 +13,9 @@ require("noice").setup({
 				winhighlight = "Normal:NoiceHoverNormal,NormalFloat:NoiceHoverNormal",
 			},
 		},
+		cmdline_popup = {
+			position = { row = 0, col = "50%" },
+		},
 	},
 	lsp = {
 		override = {
@@ -20,7 +23,10 @@ require("noice").setup({
 			["vim.lsp.util.stylize_markdown"] = true,
 		},
 	},
-	cmdline = { enabled = false },
+	cmdline = {
+		enabled = true,
+		view = "cmdline_popup",
+	},
 	messages = { enabled = true },
 	presets = {
 		bottom_search = true,
