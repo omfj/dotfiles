@@ -6,7 +6,7 @@ vim.pack.add({
 require("noice").setup({
 	views = {
 		hover = {
-			size = { max_width = 120, max_height = 25 },
+			size = { max_width = 60, max_height = 10 },
 			border = { style = "single" },
 			position = { row = 2, col = 0 },
 			win_options = {
