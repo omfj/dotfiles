@@ -13,6 +13,11 @@ require("snacks").setup({
 				height = 0.85,
 			},
 		},
+		sources = {
+			select = {
+				layout = { preset = "select" },
+			},
+		},
 	},
 	dashboard = {
 		enabled = true,
