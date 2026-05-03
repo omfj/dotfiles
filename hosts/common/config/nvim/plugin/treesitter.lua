@@ -53,6 +53,8 @@ local ensure_installed = {
 	"vue",
 	"zig",
 	"jinja",
+	"templ",
+	"java",
 }
 
 -- Install any missing parsers on startup
