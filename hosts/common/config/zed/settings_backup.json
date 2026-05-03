@@ -8,18 +8,6 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   // Appearance
-  "project_panel": {
-    "dock": "left"
-  },
-  "outline_panel": {
-    "dock": "left"
-  },
-  "collaboration_panel": {
-    "dock": "left"
-  },
-  "git_panel": {
-    "dock": "left"
-  },
   "theme": {
     "mode": "system",
     "light": "VSCode Dark Modern",
@@ -37,20 +25,19 @@
   "buffer_font_size": 16.0,
   "buffer_font_family": "Iosevka Nerd Font Mono",
   "relative_line_numbers": "enabled",
-  "show_whitespaces": "selection",
+  "show_whitespaces": "all",
   // AI
   "edit_predictions": {
     "provider": "copilot"
   },
   "agent_ui_font_size": 15.0,
   "agent": {
-    "dock": "right",
     "default_model": {
       "provider": "copilot_chat",
       "model": "gpt-5-mini",
       "enable_thinking": false
     },
-    "play_sound_when_agent_done": "always",
+    "play_sound_when_agent_done": true,
     "model_parameters": []
   },
   // Formatting
