@@ -26,7 +26,15 @@
     "context": "Editor && vim_mode == normal",
     "bindings": {
       "j k": null,
-      "j j": null
+      "j j": null,
+      "j": [
+        "workspace::SendKeystrokes",
+        "g j"
+      ],
+      "k": [
+        "workspace::SendKeystrokes",
+        "g k"
+      ]
     }
   },
   {
