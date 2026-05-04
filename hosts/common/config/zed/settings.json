@@ -8,6 +8,7 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   // Appearance
+  "cli_default_open_behavior": "new_window",
   "proxy": "",
   "git": {
     "inline_blame": {
@@ -94,6 +95,7 @@
   "show_whitespaces": "trailing",
   // AI
   "edit_predictions": {
+    "disabled_globs": [],
     "provider": "copilot",
   },
   "agent_ui_font_size": 15.0,
