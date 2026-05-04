@@ -23,8 +23,17 @@ vim.api.nvim_set_hl(0, "NoiceHoverNormal", { bg = "#141414" })
 -- override some colors for better visibility. without these they are almost the same as the background
 vim.api.nvim_set_hl(0, "SnacksPickerFile", { fg = "#e8e8d3" })
 vim.api.nvim_set_hl(0, "SnacksPickerDir", { fg = "#888888" })
+vim.api.nvim_set_hl(0, "SnacksPickerTotals", { fg = "#888888" })
 
 vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", { fg = "#555555", italic = true }) -- a bit harder color so to not be invisible in the cursor line:w
+
+-- neo-tree and line number backgrounds
+vim.api.nvim_set_hl(0, "LineNr", { fg = "#555555", bg = "#151515" })
+vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#555555", bg = "#151515" })
+vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#555555", bg = "#151515" })
+vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#e8e8d3", bg = "#151515" })
+vim.api.nvim_set_hl(0, "SignColumn", { bg = "#151515" })
+vim.api.nvim_set_hl(0, "FoldColumn", { bg = "#151515" })
 
 -- diff colors
 vim.api.nvim_set_hl(0, "DiffAdd", { bg = "#3a4a3a" })
