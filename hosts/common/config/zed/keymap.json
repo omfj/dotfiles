@@ -25,8 +25,10 @@
   {
     "context": "Editor && vim_mode == normal",
     "bindings": {
+      // Remove jk and jj to escape insert mode.
       "j k": null,
       "j j": null,
+      // Use j and k to navigate soft wrapped lines.
       "j": [
         "workspace::SendKeystrokes",
         "g j"
@@ -34,12 +36,23 @@
       "k": [
         "workspace::SendKeystrokes",
         "g k"
-      ]
+      ],
+      // Use H and L to navigate between panes.
+      "L": "pane::ActivateNextItem",
+      "H": "pane::ActivatePreviousItem",
     }
   },
+  // Add Helix Amp Jump / Sneak. Not yet in stable.
+  // {
+  //   "context": "VimControl && !menu",
+  //   "bindings": {
+  //     "s": "vim::HelixJumpToWord",
+  //   }
+  // },
   {
     "context": "Editor && vim_mode == insert",
     "bindings": {
+      // Remove jk and jj to escape insert mode.
       "j k": null,
       "j j": null
     }
