@@ -1,54 +1,28 @@
-local function blink_build(path)
-	vim.notify("blink.cmp: building from source...", vim.log.levels.INFO)
-	vim.system({ "cargo", "build", "--release" }, { cwd = path }, function(result)
-		vim.schedule(function()
-			if result.code == 0 then
-				vim.notify("blink.cmp: build complete", vim.log.levels.INFO)
-			else
-				vim.notify("blink.cmp: build failed\n" .. (result.stderr or ""), vim.log.levels.ERROR)
-			end
-		end)
+local function blink_build()
+	vim.notify("blink.cmp: downloading native library...", vim.log.levels.INFO)
+	local ok, err = pcall(function()
+		require("blink.cmp").build():wait(60000)
 	end)
+	if ok then
+		vim.notify("blink.cmp: build complete", vim.log.levels.INFO)
+	else
+		vim.notify("blink.cmp: build failed\n" .. tostring(err), vim.log.levels.ERROR)
+	end
 end
 
 vim.api.nvim_create_autocmd("PackChanged", {
 	callback = function(ev)
 		local name, kind = ev.data.spec.name, ev.data.kind
 		if name == "blink.cmp" and (kind == "install" or kind == "update") then
-			blink_build(ev.data.path)
+			blink_build()
 		end
 	end,
 })
 
-local function blink_path()
-	return vim.tbl_filter(function(p)
-		return p:match("blink%.cmp$")
-	end, vim.api.nvim_list_runtime_paths())[1]
-end
-
-vim.keymap.set("n", "<leader>dB", function()
-	local path = blink_path()
-	if path then
-		blink_build(path)
-	else
-		vim.notify("blink.cmp: could not find install path", vim.log.levels.ERROR)
-	end
-end, { desc = "Build blink.cmp" })
-
--- Build on startup if the native binary is missing
-vim.defer_fn(function()
-	local path = blink_path()
-	if not path then
-		return
-	end
-	local ext = vim.fn.has("mac") == 1 and "dylib" or "so"
-	local bin = path .. "/target/release/libblink_cmp_fuzzy." .. ext
-	if vim.uv.fs_stat(bin) == nil then
-		blink_build(path)
-	end
-end, 100)
+vim.keymap.set("n", "<leader>dB", blink_build, { desc = "Build blink.cmp" })
 
 vim.pack.add({
+	{ src = "https://github.com/Saghen/blink.lib" },
 	{ src = "https://github.com/Saghen/blink.cmp" },
 })
 
@@ -147,12 +121,12 @@ require("blink.cmp").setup({
 			},
 		},
 		menu = {
-			winhighlight = "Normal:Normal,CursorLine:BlinkCmpMenuSelection,Search:None",
+			winhighlight = "Normal:BlinkCmpMenu,CursorLine:BlinkCmpMenuSelection,Search:None",
 		},
 		documentation = {
 			auto_show = true,
 			window = {
-				winhighlight = "Normal:Normal",
+				winhighlight = "Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder",
 			},
 		},
 		ghost_text = { enabled = false },
@@ -160,7 +134,13 @@ require("blink.cmp").setup({
 })
 
 local function apply_blink_highlights()
+	vim.api.nvim_set_hl(0, "BlinkCmpMenu", { bg = "#151515" })
 	vim.api.nvim_set_hl(0, "BlinkCmpMenuSelection", { bg = "#222222" })
+	vim.api.nvim_set_hl(0, "BlinkCmpLabelDetail", { bg = "#151515", fg = "#555555", italic = true })
+	vim.api.nvim_set_hl(0, "BlinkCmpLabelDescription", { bg = "#151515", fg = "#555555", italic = true })
+	vim.api.nvim_set_hl(0, "BlinkCmpDoc", { bg = "#151515" })
+	vim.api.nvim_set_hl(0, "BlinkCmpDocBorder", { bg = "#151515" })
+	vim.api.nvim_set_hl(0, "BlinkCmpDocSeparator", { bg = "#151515", fg = "#444444" })
 	vim.api.nvim_set_hl(0, "BlinkCmpScrollBarThumb", { bg = "#444444" })
 	vim.api.nvim_set_hl(0, "BlinkCmpLabelMatch", { fg = "#fad07a", bold = true })
 end
