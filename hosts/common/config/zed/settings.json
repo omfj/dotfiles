@@ -8,27 +8,81 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   // Appearance
+  "proxy": "",
+  "git": {
+    "inline_blame": {
+      "show_commit_summary": true
+    }
+  },
+  "terminal": {
+    "show_count_badge": false
+  },
+  "title_bar": {
+    "show_menus": false,
+    "show_user_picture": true,
+    "show_branch_status_icon": true
+  },
+  "use_smartcase_search": true,
+  "languages": {
+    "Rust": {
+      "inlay_hints": {
+        "enabled": true
+      }
+    }
+  },
+  "colorize_brackets": true,
+  "inlay_hints": {
+    "show_background": false,
+    "enabled": false
+  },
+  "indent_guides": {
+    "background_coloring": "disabled",
+    "coloring": "fixed"
+  },
+  "preferred_line_length": 100,
+  "toolbar": {
+    "code_actions": false
+  },
+  "minimap": {
+    "max_width_columns": 100,
+    "show": "auto"
+  },
+  "gutter": {
+    "line_numbers": true
+  },
+  "auto_signature_help": false,
+  "scroll_sensitivity": 1.0,
+  "which_key": {
+    "delay_ms": 500,
+    "enabled": true
+  },
+  "cursor_blink": true,
+  "text_rendering_mode": "platform_default",
+  "session": {
+    "trust_all_worktrees": true,
+  },
+  "redact_private_values": false,
+  "sticky_scroll": {
+    "enabled": true,
+  },
   "project_panel": {
-    "dock": "left"
+    "hide_root": true,
+    "dock": "left",
   },
   "outline_panel": {
-    "dock": "left"
+    "dock": "left",
   },
   "collaboration_panel": {
-    "dock": "left"
+    "dock": "left",
   },
   "git_panel": {
-    "dock": "left"
+    "dock": "left",
   },
-  "theme": {
-    "mode": "system",
-    "light": "VSCode Dark Modern",
-    "dark": "Jellybeans"
-  },
+  "theme": "Jellybeans",
   "icon_theme": "Zed (Default)",
   // Cosmetic
   "tabs": {
-    "show_diagnostics": "all"
+    "show_diagnostics": "all",
   },
   "ui_font_weight": 500.0,
   "ui_font_size": 15.0,
@@ -37,10 +91,10 @@
   "buffer_font_size": 16.0,
   "buffer_font_family": "Iosevka Nerd Font Mono",
   "relative_line_numbers": "enabled",
-  "show_whitespaces": "selection",
+  "show_whitespaces": "trailing",
   // AI
   "edit_predictions": {
-    "provider": "copilot"
+    "provider": "copilot",
   },
   "agent_ui_font_size": 15.0,
   "agent": {
@@ -48,30 +102,31 @@
     "default_model": {
       "provider": "copilot_chat",
       "model": "gpt-5-mini",
-      "enable_thinking": false
+      "enable_thinking": false,
     },
     "play_sound_when_agent_done": "always",
-    "model_parameters": []
+    "model_parameters": [],
   },
   // Formatting
   "ensure_final_newline_on_save": true,
   "format_on_save": "on",
-  // Privacy
   "formatter": "language_server",
+  // Privacy
   "telemetry": {
     "diagnostics": false,
-    "metrics": false
+    "metrics": false,
   },
   // Vim
   "vim_mode": true,
   "vim": {
+    "use_smartcase_find": false,
     "default_mode": "normal",
     "toggle_relative_line_numbers": true,
     "cursor_shape": {
       "insert": "bar",
       "normal": "block",
       "replace": "block",
-      "visual": "block"
-    }
+      "visual": "block",
+    },
   },
 }
