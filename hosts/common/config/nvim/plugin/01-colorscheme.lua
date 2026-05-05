@@ -17,6 +17,7 @@ vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#222222" }) -- softer color column
 vim.api.nvim_set_hl(0, "NonText", { fg = "#222222" }) -- softer whitespace characters
 vim.api.nvim_set_hl(0, "MiniHipatternsNbsp", { bg = "#4a3a00" }) -- dark yellow bg on non-breaking spaces (opt+space)
 --vim.api.nvim_set_hl(0, "SpecialKey", { fg = "#222222" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#151515" })
 vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#444444", bg = "NONE" })
 vim.api.nvim_set_hl(0, "NoiceHoverNormal", { bg = "#141414" })
 

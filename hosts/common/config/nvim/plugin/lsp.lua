@@ -52,7 +52,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "gri", function() Snacks.picker.lsp_implementations() end, vim.tbl_extend("force", opts, { desc = "Goto Implementation" }))
 		vim.keymap.set("n", "grr", function() Snacks.picker.lsp_references() end, vim.tbl_extend("force", opts, { desc = "Goto References" }))
 		vim.keymap.set("n", "gra", function() Snacks.picker.lsp_code_actions() end, vim.tbl_extend("force", opts, { desc = "Code Actions" }))
-		vim.keymap.set("n", "grn", function() Snacks.picker.lsp_rename() end, vim.tbl_extend("force", opts, { desc = "Rename" }))
+		vim.keymap.set("n", "grn", vim.lsp.buf.rename, vim.tbl_extend("force", opts, { desc = "Rename" }))
 		vim.keymap.set("n", "gO", function() Snacks.picker.lsp_symbols() end, vim.tbl_extend("force", opts, { desc = "Document Symbols" }))
 		vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, vim.tbl_extend("force", opts, { desc = "Rename" }))
 		vim.keymap.set("n", "<leader>cS", function() require("config.copilot-rename").suggest() end, vim.tbl_extend("force", opts, { desc = "Suggest name (Copilot)" }))
@@ -205,5 +205,8 @@ require("mason").setup({
 		"templ",
 		"jdtls",
 		"google-java-format",
+		"delve",
+		"js-debug-adapter",
+		"codelldb",
 	},
 })
