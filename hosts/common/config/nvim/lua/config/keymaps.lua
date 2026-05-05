@@ -1,3 +1,4 @@
+local pt = require("util.persist_toggle")
 local function map(mode, lhs, rhs, opts)
 	opts = opts or {}
 	opts.silent = opts.silent ~= false
@@ -146,14 +147,25 @@ map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 -- toggle options
 map("n", "<leader>us", function() vim.wo.spell = not vim.wo.spell end, { desc = "Toggle Spelling" })
 map("n", "<leader>uw", function()
-	vim.wo.wrap = not vim.wo.wrap
-	vim.wo.linebreak = vim.wo.wrap
+	pt.cycle("wrap", {
+		steps = {
+			{ label = "off", apply = function() vim.opt.wrap = false; vim.opt.linebreak = false end },
+			{ label = "on",  apply = function() vim.opt.wrap = true;  vim.opt.linebreak = true  end },
+		},
+	})
 end, { desc = "Toggle Word Wrap" })
 map("n", "<leader>uL", function() vim.wo.relativenumber = not vim.wo.relativenumber end, { desc = "Toggle Relative Line Numbers" })
 map("n", "<leader>ul", function() vim.wo.number = not vim.wo.number end, { desc = "Toggle Line Numbers" })
 map("n", "<leader>ud", function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end, { desc = "Toggle Diagnostics" })
-local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
-map("n", "<leader>uc", function() vim.wo.conceallevel   = vim.wo.conceallevel == 0 and conceallevel or 0 end, { desc = "Toggle Conceal" })
+map("n", "<leader>uc", function()
+	pt.cycle("conceal", {
+		steps = {
+			{ label = "off (0)",  apply = function() vim.opt.conceallevel = 0 end },
+			{ label = "on (2)",   apply = function() vim.opt.conceallevel = 2 end },
+			{ label = "full (3)", apply = function() vim.opt.conceallevel = 3 end },
+		},
+	})
+end, { desc = "Cycle Conceal" })
 if vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint then
   map("n", "<leader>uh", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, { desc = "Toggle Inlay Hints" })
 end
