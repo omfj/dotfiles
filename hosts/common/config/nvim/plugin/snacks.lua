@@ -97,6 +97,15 @@ require("snacks").setup({
 -- stylua: ignore start
 
 vim.keymap.set("n", "<leader>gg", function() Snacks.lazygit() end, { desc = "LazyGit" })
+vim.keymap.set("n", "<leader>uz", function()
+	Snacks.zen({
+		toggles = {},
+		show = {
+			statusline = true,
+			tabline = true,
+		},
+	})
+end, { desc = "Centered Buffer" })
 vim.keymap.set("n", "<leader>ft", function() Snacks.terminal.toggle(nil, { win = { style = "float" } }) end, { desc = "Float Terminal" })
 vim.keymap.set("n", "<leader>fT", function() Snacks.terminal.toggle(nil, { win = { position = "bottom" } }) end, { desc = "Horizontal Terminal" })
 vim.keymap.set("n", "<c-/>", function() Snacks.terminal.toggle(nil, { win = { style = "float" } }) end, { desc = "Float Terminal" })
