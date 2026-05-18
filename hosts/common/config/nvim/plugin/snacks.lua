@@ -47,7 +47,7 @@ require("snacks").setup({
 					key = "f",
 					desc = "Find file",
 					action = function()
-						Snacks.picker.files({ hidden = true })
+						require("fff").find_files()
 					end,
 				},
 				{
@@ -63,7 +63,7 @@ require("snacks").setup({
 					key = "g",
 					desc = "Find word",
 					action = function()
-						Snacks.picker.grep()
+						require("fff").live_grep()
 					end,
 				},
 				{
@@ -115,14 +115,10 @@ vim.keymap.set("n", "<leader>.", function() Snacks.scratch() end, { desc = "Scra
 -- telescope like
 
 vim.keymap.set("n", "<leader>,", function() Snacks.picker.buffers() end, { desc = "Switch Buffer" })
-vim.keymap.set("n", "<leader>/", function() Snacks.picker.grep() end, { desc = "Grep" })
-vim.keymap.set("n", "<leader><space>", function() Snacks.picker.smart({ hidden = true }) end, { desc = "Find Files" })
 vim.keymap.set("n", "<leader>n", function() Snacks.picker.notifications() end, { desc = "Notifications History" })
 
 -- find
 vim.keymap.set("n", "<leader>fb", function() Snacks.picker.buffers() end, { desc = "Buffers" })
-vim.keymap.set("n", "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, { desc = "Find Config File" })
-vim.keymap.set("n", "<leader>fF", function() Snacks.picker.files({ cwd = vim.fn.getcwd() }) end, { desc = "Find Files (cwd)" })
 vim.keymap.set("n", "<leader>fr", function() Snacks.picker.recent() end, { desc = "Recent" })
 vim.keymap.set("n", "<leader>fR", function() Snacks.picker.recent({ filter = { cwd = true } }) end, { desc = "Recent (cwd)" })
 
@@ -138,9 +134,6 @@ vim.keymap.set("n", "<leader>sc", function() require("noice").cmd("history") end
 vim.keymap.set("n", "<leader>sC", function() Snacks.picker.commands() end, { desc = "Commands" })
 vim.keymap.set("n", "<leader>sd", function() Snacks.picker.diagnostics({ buf = 0 }) end, { desc = "Document Diagnostics" })
 vim.keymap.set("n", "<leader>sD", function() Snacks.picker.diagnostics() end, { desc = "Workspace Diagnostics" })
-vim.keymap.set("n", "<leader>sg", function() Snacks.picker.grep() end, { desc = "Grep (root dir)" })
-vim.keymap.set("n", "<leader>sG", function() Snacks.picker.grep({ cwd = vim.fn.getcwd() }) end, { desc = "Grep (cwd)" })
-vim.keymap.set("n", "<leader>sf", function() Snacks.picker.grep({ cwd = vim.fn.getcwd() }) end, { desc = "Grep current folder" })
 vim.keymap.set("n", "<leader>sh", function() Snacks.picker.help() end, { desc = "Help Pages" })
 vim.keymap.set("n", "<leader>sH", function() Snacks.picker.highlights() end, { desc = "Search Highlight Groups" })
 vim.keymap.set("n", "<leader>sk", function() Snacks.picker.keymaps() end, { desc = "Key Maps" })
@@ -149,10 +142,6 @@ vim.keymap.set("n", "<leader>sm", function() Snacks.picker.marks() end, { desc =
 vim.keymap.set("n", "<leader>so", function() Snacks.picker.vim_options() end, { desc = "Options" })
 vim.keymap.set("n", "<leader>sR", function() Snacks.picker.resume() end, { desc = "Resume" })
 vim.keymap.set("n", "<leader>ss", function() Snacks.picker.lsp_symbols() end, { desc = "Symbols" })
-vim.keymap.set("n", "<leader>sw", function() Snacks.picker.grep_word() end, { desc = "Word (root dir)" })
-vim.keymap.set("n", "<leader>sW", function() Snacks.picker.grep_word({ cwd = vim.fn.getcwd() }) end, { desc = "Word (cwd)" })
-vim.keymap.set("v", "<leader>sw", function() Snacks.picker.grep_word() end, { desc = "Selection (root dir)" })
-vim.keymap.set("v", "<leader>sW", function() Snacks.picker.grep_word({ cwd = vim.fn.getcwd() }) end, { desc = "Selection (cwd)" })
 vim.keymap.set("n", "<leader>uC", function() Snacks.picker.colorschemes() end, { desc = "Colorscheme with preview" })
 
 -- stylua: ignore end
