@@ -13,7 +13,7 @@ shell-integration = zsh
 
 # padding around
 window-padding-x = 20
-window-padding-y = 20
+window-padding-y = 0
 
 # make block cursor work on fish
 cursor-style = block
