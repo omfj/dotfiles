@@ -11,27 +11,26 @@
 [init]
 	defaultBranch = main
 [core]
-    editor = nvim
-    pager = delta
+	editor = nvim
+	pager = delta
 [alias]
 	ac = commit -S -am
 	s = status
 	st = status
-	cm = commit -m
+	cm = "!f() { git commit -m \"$*\"; }; f"
 	c = clone
 	lg = log --oneline --graph
 	fomo = "!f() { git fetch origin ${1:-main} && git rebase origin/${1:-main}; }; f"
 	cleanup-branches = "!git fetch --prune && git branch -vv | awk '/: gone]/{print $1}' | xargs -r git branch -d"
 	yolo = push -f
-    fl = push --force-with-lease
-    ai = "!convmit --edit"
-    rc = rebase --continue
-    pb = "!git switch $(git branch | grep -v HEAD | fzf | tr -d ' ')"
+	fl = push --force-with-lease
+	ai = "!convmit --edit"
+	rc = rebase --continue
+	pb = "!git switch $(git branch | grep -v HEAD | fzf | tr -d ' ')"
 [interactive]
-    diffFilter = delta --color-only
+	diffFilter = delta --color-only
 [delta]
-    navigate = true
-    line-numbers = true
+	navigate = true
+    	line-numbers = true
 [merge]
-    conflictstyle = zdiff3
-
+	conflictstyle = zdiff3
