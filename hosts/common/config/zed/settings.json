@@ -8,6 +8,9 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   // Appearance
+  "file_finder": {
+    "skip_focus_for_active_in_search": true
+  },
   "cli_default_open_behavior": "new_window",
   "proxy": "",
   "git": {
@@ -24,13 +27,6 @@
     "show_branch_status_icon": true
   },
   "use_smartcase_search": true,
-  "languages": {
-    "Rust": {
-      "inlay_hints": {
-        "enabled": true
-      }
-    }
-  },
   "colorize_brackets": true,
   "inlay_hints": {
     "show_background": false,
@@ -79,7 +75,7 @@
   "git_panel": {
     "dock": "left",
   },
-  "theme": "Jellybeans",
+  "theme": "One Black",
   "icon_theme": "Zed (Default)",
   // Cosmetic
   "tabs": {
