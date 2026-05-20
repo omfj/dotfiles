@@ -37,6 +37,7 @@ require("conform").setup({
 		jinja = { "djlint" },
 		templ = { "templ" },
 		java = { "google-java-format" },
+		bib = { "bibtex-tidy" },
 	},
 	format_on_save = function(bufnr)
 		if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then

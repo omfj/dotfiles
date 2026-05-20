@@ -151,6 +151,7 @@ local servers = {
 	"clangd",
 	"templ",
 	"jdtls",
+	"texlab",
 }
 
 -- Optionally enable Harper LSP if not disabled
@@ -204,6 +205,7 @@ require("mason").setup({
 		"templ",
 		"jdtls",
 		"google-java-format",
+		"texlab",
 		"delve",
 		"js-debug-adapter",
 		"codelldb",
