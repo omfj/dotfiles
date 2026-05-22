@@ -1,10 +1,22 @@
-# Functions
+#region Functions
 
 function has() {
     command -v "$1" &>/dev/null
 }
 
-# Environment variables
+function uuid() {
+    local id=$(uuidgen | tr '[:upper:]' '[:lower:]')
+    echo "$id" | pbcopy
+    echo "$id"
+}
+
+function claude() {
+    env SHELL=/usr/bin/bash claude "$@"
+}
+
+#endregion Functions
+
+#region Env
 
 export EDITOR=nvim
 export GOPATH=$HOME/go
@@ -19,17 +31,23 @@ export PYENV_ROOT=$HOME/.pyenv
 export PHP_INI_SCAN_DIR=$HOME/.config/herd-lite/bin:$PHP_INI_SCAN_DIR
 export DOCKERHOST=unix://$COLIMA_HOME/default/docker.sock
 
+#endregion Env
+
 # Set to Emacs keybindings, since Zsh automatically uses Vi keybinds
 # if it detects "vi" in $EDITOR or $VISUAL, which is the case for Neovim.
+# I don't really like the Vi keybindings.
 bindkey -e
 
-# Homebrew
+#region Homebrew
+
 if [[ -x /opt/homebrew/bin/brew ]]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
     export HOMEBREW_NO_ANALYTICS=1
 fi
 
-# PATH
+#endregion Homebrew
+
+#region Path
 
 typeset -U path
 
@@ -72,6 +90,10 @@ if [[ -d $PYENV_ROOT/bin ]]; then
     path=($PYENV_ROOT/bin $path)
 fi
 
+#endregion Path
+
+#region icu4c
+
 # icu4c - should be removed, but homebrew forces me to have both for some reason
 
 if [[ -d /opt/homebrew/opt/icu4c@77/bin ]]; then
@@ -87,18 +109,24 @@ fi
 
 export PATH
 
-# Xcode
+#endregion icu4c
+
+#region Xcode
 
 if has xcrun; then
     export SDKROOT=$(xcrun --show-sdk-path 2>/dev/null)
 fi
 
-# Go
+#endregion Xcode
+
+#region Go
 
 export CC=/Library/Developer/CommandLineTools/usr/bin/cc
 export CGO_CFLAGS="-O2 -g -isysroot $SDKROOT"
 
-# Aliases
+#endregion Go
+
+#region Aliases
 
 alias l="eza"
 alias ls="eza"
@@ -109,6 +137,7 @@ alias lla="eza -la"
 alias g="git"
 alias ga="git add"
 alias gc="git commit -m"
+alias gpf="git push --force-with-lease"
 
 alias b="brew"
 alias bi="brew install"
@@ -127,17 +156,7 @@ alias ..........="cd ../../../../../../.."
 alias dots="cd $DOTFILES"
 alias conf="cd $HOME/.config"
 
-# Functions
-
-function uuid() {
-    local id=$(uuidgen | tr '[:upper:]' '[:lower:]')
-    echo "$id" | pbcopy
-    echo "$id"
-}
-
-function claude() {
-    env SHELL=/usr/bin/bash claude "$@"
-}
+#endregion Aliases
 
 # bat
 
