@@ -124,3 +124,13 @@ pt.define("conceal", {
 -- Toggle relative line numbers based on mode
 vim.api.nvim_create_autocmd("InsertEnter", { command = [[set norelativenumber]] })
 vim.api.nvim_create_autocmd("InsertLeave", { command = [[set relativenumber]] })
+
+-- Use marker folding for shell filetypes with #region/#endregion
+vim.api.nvim_create_autocmd("FileType", {
+	group = augroup("shell_foldmarker"),
+	pattern = { "zsh", "sh", "bash" },
+	callback = function()
+		vim.opt_local.foldmethod = "marker"
+		vim.opt_local.foldmarker = "#region,#endregion"
+	end,
+})

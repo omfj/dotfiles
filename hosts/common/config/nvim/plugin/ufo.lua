@@ -1,5 +1,5 @@
-local marker_open = { "//#startregion", "//#region", "{{{" }
-local marker_close = { "//#endregion", "}}}" }
+local marker_open = { "//#startregion", "#startregion", "//#region", "#region", "{{{" }
+local marker_close = { "//#endregion", "#endregion", "}}}" }
 
 local function matches_any(line, patterns)
 	for _, p in ipairs(patterns) do
@@ -11,13 +11,17 @@ local function matches_any(line, patterns)
 end
 
 function _G.custom_foldexpr()
-	local line = vim.api.nvim_buf_get_lines(0, vim.v.lnum - 1, vim.v.lnum, false)[1] or ""
+	local line = vim.fn.getline(vim.v.lnum)
 	if matches_any(line, marker_open) then
 		return ">1"
 	elseif matches_any(line, marker_close) then
 		return "<1"
 	end
-	return vim.lsp.foldexpr()
+	local clients = vim.lsp.get_clients({ bufnr = 0 })
+	if #clients > 0 then
+		return vim.lsp.foldexpr()
+	end
+	return "0"
 end
 
 vim.opt.foldexpr = "v:lua.custom_foldexpr()"
