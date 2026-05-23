@@ -5,7 +5,6 @@ echo "✨ Running system wide updates... "
 echo "════════════════════════════════════════"
 echo ""
 
-
 echo "🍺 Updating Homebrew..."
 brew update
 echo "📋 Checking what's outdated..."
@@ -26,14 +25,25 @@ cargo install-update -a
 echo "✅ Rust done!"
 
 echo ""
-echo "📮 Updating npm globals..."
+echo "📮 Updating npm globals packages..."
 npm update -g
 echo "✅ npm done!"
 
 echo ""
-echo "📦 Updating pnpm globals..."
+echo "📦 Updating pnpm and globals packages..."
 pnpm update -g
 echo "✅ pnpm done!"
+
+echo ""
+echo "📦 Updating Vite+ and global packages..."
+vp upgrade
+vp update -g
+echo "✅ Vite+ done!"
+
+echo ""
+echo "📦 Updating Deno..."
+deno upgrade
+echo "✅ Deno done!"
 
 echo ""
 echo "════════════════════════════════════════"
