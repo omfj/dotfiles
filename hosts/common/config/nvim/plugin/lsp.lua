@@ -17,6 +17,7 @@ vim.pack.add({
 	{ src = "https://github.com/mason-org/mason.nvim" },
 	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" },
 	{ src = "https://github.com/b0o/SchemaStore.nvim" },
+	{ src = "https://github.com/mfussenegger/nvim-jdtls" },
 })
 
 -- Set up diagnostics
@@ -150,7 +151,6 @@ local servers = {
 	"jinja_lsp",
 	"clangd",
 	"templ",
-	"jdtls",
 	"texlab",
 }
 
@@ -204,6 +204,7 @@ require("mason").setup({
 		"clang-format",
 		"templ",
 		"jdtls",
+		"java-debug-adapter",
 		"google-java-format",
 		"texlab",
 		"delve",
