@@ -1,0 +1,50 @@
+common = "hosts/common"
+obook  = "hosts/obook"
+obuntu = "hosts/obuntu"
+oarch  = "hosts/oarch"
+
+conf   = "~/.config"
+
+# Common
+link "$common/config/ghostty"       to "$conf/ghostty"
+link "$common/config/helix"         to "$conf/helix"
+link "$common/config/starship.toml" to "$conf/starship.toml"
+link "$common/vimrc"                to "~/.vimrc"
+link "$common/config/atuin"         to "$conf/atuin"
+link "$common/config/lazydocker"    to "$conf/lazydocker"
+link "$common/config/lazygit"       to "$conf/lazygit"
+link "$common/config/cheat"         to "$conf/cheat"
+link "$common/config/tmux"          to "$conf/tmux"
+link "$common/config/nvim"          to "$conf/nvim"
+
+# Shared between main computers
+if hostname is "obook.local" or hostname is "oarch" {
+    link "$common/config/git" to "$conf/git"
+}
+
+# Mac (obook)
+if hostname is "obook.local" {
+    link "$obook/config/fish"  to "$conf/fish"
+    link "$common/config/zed"  to "$conf/zed"
+    link "$obook/zshrc"        to "~/.zshrc"
+}
+
+# Arch (oarch)
+if hostname is "oarch" {
+    link "$oarch/config/fish"               to "$conf/fish"
+    link "$oarch/config/bspwm"              to "$conf/bspwm"
+    link "$oarch/config/sxhkd"              to "$conf/sxhkd"
+    link "$oarch/config/dunst"              to "$conf/dunst"
+    link "$oarch/config/picom"              to "$conf/picom"
+    link "$oarch/config/rofi"               to "$conf/rofi"
+    link "$oarch/config/polybar"            to "$conf/polybar"
+    link "$oarch/config/betterlockscreenrc" to "$conf/betterlockscreenrc"
+    link "$oarch/config/user-dirs.dirs"     to "$conf/user-dirs.dirs"
+    link "$oarch/config/user-dirs.locale"   to "$conf/user-dirs.locale"
+    link "$oarch/config/hypr"               to "$conf/hypr"
+}
+
+# obuntu
+if exists "~/.obuntu" {
+    link "$obuntu/zshrc" to "~/.zshrc"
+}
