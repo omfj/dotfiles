@@ -3,7 +3,7 @@ obook  = "hosts/obook"
 obuntu = "hosts/obuntu"
 oarch  = "hosts/oarch"
 
-conf   = "~/.config"
+conf = "~/.config"
 
 # Common
 link "$common/config/ghostty"       to "$conf/ghostty"
