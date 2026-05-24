@@ -19,6 +19,8 @@
     }
   },
   "terminal": {
+    "font_weight": 400.0,
+    "font_size": 16.0,
     "show_count_badge": false
   },
   "title_bar": {
@@ -75,8 +77,16 @@
   "git_panel": {
     "dock": "left",
   },
-  "theme": "One Black",
-  "icon_theme": "Zed (Default)",
+  "theme": {
+    "mode": "dark",
+    "light": "One Light",
+    "dark": "GitHub Dark"
+  },
+  "icon_theme": {
+    "mode": "light",
+    "light": "Zed (Default)",
+    "dark": "Zed (Default)"
+  },
   // Cosmetic
   "tabs": {
     "show_diagnostics": "all",
