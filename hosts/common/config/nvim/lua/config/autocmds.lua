@@ -104,11 +104,19 @@ vim.api.nvim_create_user_command("ToggleHarper", function()
 end, { desc = "Toggle harper_ls spelling LSP" })
 
 -- Restore persistent toggles
+-- stylua: ignore start
 local pt = require("util.persist_toggle")
 pt.define("wrap", {
     steps = {
         { label = "off", apply = function() vim.opt.wrap = false; vim.opt.linebreak = false end },
         { label = "on",  apply = function() vim.opt.wrap = true;  vim.opt.linebreak = true  end },
+    },
+    default = 1,
+})
+pt.define("listchars", {
+    steps = {
+        { label = "on",  apply = function() vim.opt.list = true  end },
+        { label = "off", apply = function() vim.opt.list = false end },
     },
     default = 1,
 })
@@ -120,6 +128,7 @@ pt.define("conceal", {
     },
     default = 1,
 })
+-- stylua: ignore end
 
 -- Toggle relative line numbers based on mode
 vim.api.nvim_create_autocmd("InsertEnter", { command = [[set norelativenumber]] })
