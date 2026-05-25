@@ -155,7 +155,14 @@ map("n", "<leader>uw", function()
 	})
 end, { desc = "Toggle Word Wrap" })
 map("n", "<leader>uL", function() vim.wo.relativenumber = not vim.wo.relativenumber end, { desc = "Toggle Relative Line Numbers" })
-map("n", "<leader>ul", function() vim.wo.number = not vim.wo.number end, { desc = "Toggle Line Numbers" })
+map("n", "<leader>ul", function()
+	pt.cycle("listchars", {
+		steps = {
+			{ label = "on",  apply = function() vim.opt.list = true  end },
+			{ label = "off", apply = function() vim.opt.list = false end },
+		},
+	})
+end, { desc = "Toggle List Chars" })
 map("n", "<leader>ud", function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end, { desc = "Toggle Diagnostics" })
 map("n", "<leader>uc", function()
 	pt.cycle("conceal", {
