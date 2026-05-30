@@ -19,7 +19,8 @@ link "$common/config/nvim"          to "$conf/nvim"
 
 # Shared between main computers
 if hostname is "obook.local" or hostname is "oarch" {
-    link "$common/config/git" to "$conf/git"
+    link "$common/config/git"            to "$conf/git"
+    link "$common/config/alacritty.toml" to "$conf/alacritty.toml"
 }
 
 # Mac (obook)
