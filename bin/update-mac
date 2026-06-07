@@ -1,51 +1,36 @@
 #!/usr/bin/env bash
 
-echo "════════════════════════════════════════"
-echo "✨ Running system wide updates... "
-echo "════════════════════════════════════════"
-echo ""
+GREEN='\033[0;32m'
+NC='\033[0m'
 
-echo "🍺 Updating Homebrew..."
+echo -e "$GREEN[Homebrew]$NC STARTING..."
 brew update
-echo "📋 Checking what's outdated..."
 brew outdated
-echo "⬆️  Upgrading packages..."
 brew upgrade
-echo "🖥️  Upgrading casks..."
 brew upgrade --cask
-echo "🧹 Cleaning up..."
 brew cleanup
-echo "✅ Homebrew done!"
+echo -e "$GREEN[Homebrew]$NC DONE"
 
-echo ""
-echo "🦀 Updating Rust..."
+echo -e "$GREEN[Rust]$NC STARTING..."
 rustup update
-echo "📦 Updating cargo binaries..."
 cargo install-update -a
-echo "✅ Rust done!"
+echo -e "$GREEN[Rust]$NC DONE\n"
 
-echo ""
-echo "📮 Updating npm globals packages..."
+echo -e "$GREEN[npm]$NC STARTING..."
 npm update -g
-echo "✅ npm done!"
+echo "$GREEN[npm]$NC DONE"
 
-echo ""
-echo "📦 Updating pnpm and globals packages..."
+echo -e "$GREEN[pnpm]$NC STARTING..."
 pnpm update -g
-echo "✅ pnpm done!"
+echo -e "$GREEN[pnpm]$NC DONE"
 
-echo ""
-echo "📦 Updating Vite+ and global packages..."
+echo -e "$GREEN[vp]$NC STARTING..."
 vp upgrade
 vp update -g
-echo "✅ Vite+ done!"
+echo -e "$GREEN[vp]$NC DONE"
 
-echo ""
-echo "📦 Updating Deno..."
+echo -e "$GREEN[deno]$NC STARTING..."
 deno upgrade
-echo "✅ Deno done!"
+echo -e "$GREEN[deno]$NC DONE"
 
-echo ""
-echo "════════════════════════════════════════"
-echo "✨ All global dependencies updated! 🎉"
-echo "════════════════════════════════════════"
+echo "Done..."

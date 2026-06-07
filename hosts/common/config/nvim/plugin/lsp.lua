@@ -160,6 +160,25 @@ if not harper_disabled then
 	table.insert(servers, "harper_ls")
 end
 
+-- Override nvim-lspconfig's bundled lsp/clangd.lua (which resets cmd to { "clangd" }).
+-- Explicit vim.lsp.config() calls have higher precedence than lsp/*.lua files.
+vim.lsp.config("clangd", {
+	cmd = {
+		"/opt/homebrew/opt/llvm@21/bin/clangd",
+		"--background-index",
+		"--clang-tidy",
+		"--completion-style=detailed",
+		"--header-insertion=iwyu",
+		"--experimental-modules-support",
+	},
+	init_options = {
+		fallbackFlags = {
+			"-std=c++23",
+			"-stdlib=libc++",
+		},
+	},
+})
+
 vim.lsp.enable(servers)
 
 -- Mason setup
@@ -200,7 +219,6 @@ require("mason").setup({
 		"zls",
 		"jinja-lsp",
 		"djlint",
-		"clangd",
 		"clang-format",
 		"templ",
 		"jdtls",
