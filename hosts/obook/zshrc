@@ -119,13 +119,6 @@ fi
 
 #endregion Xcode
 
-#region Go
-
-export CC=/Library/Developer/CommandLineTools/usr/bin/cc
-export CGO_CFLAGS="-O2 -g -isysroot $SDKROOT"
-
-#endregion Go
-
 #region Aliases
 
 alias l="eza"
