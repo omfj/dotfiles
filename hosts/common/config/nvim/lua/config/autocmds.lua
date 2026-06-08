@@ -128,6 +128,27 @@ pt.define("conceal", {
     },
     default = 1,
 })
+pt.define("colorcolumn", {
+    steps = {
+	{ label = "off", apply = function() vim.opt.colorcolumn = "" end },
+	{ label = "100", apply = function() vim.opt.colorcolumn = "100" end },
+    },
+    default = 2,
+})
+pt.define("cursorline", {
+    steps = {
+	{ label = "off", apply = function() vim.opt.cursorline = false end },
+	{ label = "on",  apply = function() vim.opt.cursorline = true  end },
+    },
+    default = 2,
+})
+pt.define("spelling", {
+    steps = {
+	{ label = "off", apply = function() vim.opt.spell = false end },
+	{ label = "on",  apply = function() vim.opt.spell = true  end },
+    },
+    default = 1,
+})
 -- stylua: ignore end
 
 -- Toggle relative line numbers based on mode

@@ -15,6 +15,7 @@ link "$common/config/lazydocker"    to "$conf/lazydocker"
 link "$common/config/lazygit"       to "$conf/lazygit"
 link "$common/config/cheat"         to "$conf/cheat"
 link "$common/config/tmux"          to "$conf/tmux"
+link "$common/config/zsh"           to "$conf/zsh"
 link "$common/config/nvim"          to "$conf/nvim"
 
 # Shared between main computers

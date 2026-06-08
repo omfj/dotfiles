@@ -133,18 +133,6 @@ require("blink.cmp").setup({
 	},
 })
 
-local function apply_blink_highlights()
-	vim.api.nvim_set_hl(0, "BlinkCmpMenu", { bg = "#151515" })
-	vim.api.nvim_set_hl(0, "BlinkCmpMenuSelection", { bg = "#222222" })
-	vim.api.nvim_set_hl(0, "BlinkCmpLabelDetail", { bg = "#151515", fg = "#555555", italic = true })
-	vim.api.nvim_set_hl(0, "BlinkCmpLabelDescription", { bg = "#151515", fg = "#555555", italic = true })
-	vim.api.nvim_set_hl(0, "BlinkCmpDoc", { bg = "#151515" })
-	vim.api.nvim_set_hl(0, "BlinkCmpDocBorder", { bg = "#151515" })
-	vim.api.nvim_set_hl(0, "BlinkCmpDocSeparator", { bg = "#151515", fg = "#444444" })
-	vim.api.nvim_set_hl(0, "BlinkCmpScrollBarThumb", { bg = "#444444" })
-	vim.api.nvim_set_hl(0, "BlinkCmpLabelMatch", { fg = "#fad07a", bold = true })
-end
-
 local kind_bg_cleared = false
 local function clear_kind_bg()
 	if kind_bg_cleared then
@@ -162,11 +150,9 @@ local function clear_kind_bg()
 	end
 end
 
-apply_blink_highlights()
 vim.api.nvim_create_autocmd("ColorScheme", {
 	callback = function()
 		kind_bg_cleared = false
-		apply_blink_highlights()
 	end,
 })
 vim.api.nvim_create_autocmd("User", {

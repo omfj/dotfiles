@@ -1,5 +1,6 @@
 vim.pack.add({
 	{ src = "https://github.com/wtfox/jellybeans.nvim" },
+	{ src = "https://github.com/f-person/auto-dark-mode.nvim" },
 })
 
 require("jellybeans").setup({
@@ -10,34 +11,66 @@ require("jellybeans").setup({
 	},
 })
 
-vim.cmd.colorscheme("jellybeans")
-vim.api.nvim_set_hl(0, "CursorLine", { bg = "#222222" }) -- softer cursor line, to not interfere with ghost text
-vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#222222" }) -- softer color column, to match cursor line
+local function apply_blink_highlights()
+	if vim.o.background == "light" then
+		vim.api.nvim_set_hl(0, "BlinkCmpMenu", { bg = "#eeeeee" })
+		vim.api.nvim_set_hl(0, "BlinkCmpMenuSelection", { bg = "#e0dcd7" })
+		vim.api.nvim_set_hl(0, "BlinkCmpLabelDetail", { bg = "#eeeeee", fg = "#787878", italic = true })
+		vim.api.nvim_set_hl(0, "BlinkCmpLabelDescription", { bg = "#eeeeee", fg = "#787878", italic = true })
+		vim.api.nvim_set_hl(0, "BlinkCmpDoc", { bg = "#eeeeee" })
+		vim.api.nvim_set_hl(0, "BlinkCmpDocBorder", { bg = "#eeeeee" })
+		vim.api.nvim_set_hl(0, "BlinkCmpDocSeparator", { bg = "#eeeeee", fg = "#c0c0c0" })
+		vim.api.nvim_set_hl(0, "BlinkCmpScrollBarThumb", { bg = "#c0c0c0" })
+		vim.api.nvim_set_hl(0, "BlinkCmpLabelMatch", { fg = "#876820", bold = true })
+	else
+		vim.api.nvim_set_hl(0, "BlinkCmpMenu", { bg = "#151515" })
+		vim.api.nvim_set_hl(0, "BlinkCmpMenuSelection", { bg = "#222222" })
+		vim.api.nvim_set_hl(0, "BlinkCmpLabelDetail", { bg = "#151515", fg = "#555555", italic = true })
+		vim.api.nvim_set_hl(0, "BlinkCmpLabelDescription", { bg = "#151515", fg = "#555555", italic = true })
+		vim.api.nvim_set_hl(0, "BlinkCmpDoc", { bg = "#151515" })
+		vim.api.nvim_set_hl(0, "BlinkCmpDocBorder", { bg = "#151515" })
+		vim.api.nvim_set_hl(0, "BlinkCmpDocSeparator", { bg = "#151515", fg = "#444444" })
+		vim.api.nvim_set_hl(0, "BlinkCmpScrollBarThumb", { bg = "#444444" })
+		vim.api.nvim_set_hl(0, "BlinkCmpLabelMatch", { fg = "#fad07a", bold = true })
+	end
+end
 
-vim.api.nvim_set_hl(0, "NonText", { fg = "#222222" }) -- softer whitespace characters
-vim.api.nvim_set_hl(0, "MiniHipatternsNbsp", { bg = "#4a3a00" }) -- dark yellow bg on non-breaking spaces (opt+space)
---vim.api.nvim_set_hl(0, "SpecialKey", { fg = "#222222" })
-vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#151515" })
-vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#444444", bg = "NONE" })
-vim.api.nvim_set_hl(0, "NoiceHoverNormal", { bg = "#141414" })
+local function apply_dark()
+	vim.cmd.colorscheme("jellybeans-muted")
+	vim.api.nvim_set_hl(0, "CursorLine", { bg = "#222222" }) -- softer cursor line, to not interfere with ghost text
+	vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#222222" }) -- softer color column, to match cursor line
+	vim.api.nvim_set_hl(0, "NonText", { fg = "#222222" }) -- softer whitespace characters
+	vim.api.nvim_set_hl(0, "MiniHipatternsNbsp", { bg = "#4a3a00" }) -- dark yellow bg on non-breaking spaces (opt+space)
+	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#151515" })
+	vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#444444", bg = "NONE" })
+	vim.api.nvim_set_hl(0, "NoiceHoverNormal", { bg = "#141414" })
+	-- override some colors for better visibility. without these they are almost the same as the background
+	vim.api.nvim_set_hl(0, "SnacksPickerFile", { fg = "#e8e8d3" })
+	vim.api.nvim_set_hl(0, "SnacksPickerDir", { fg = "#888888" })
+	vim.api.nvim_set_hl(0, "SnacksPickerTotals", { fg = "#888888" })
+	vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", { fg = "#555555", italic = true }) -- a bit harder color so to not be invisible in the cursor line
+	-- neo-tree and line number backgrounds
+	vim.api.nvim_set_hl(0, "LineNr", { fg = "#555555", bg = "#151515" })
+	vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#555555", bg = "#151515" })
+	vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#555555", bg = "#151515" })
+	vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#e8e8d3", bg = "#151515" })
+	vim.api.nvim_set_hl(0, "SignColumn", { bg = "#151515" })
+	vim.api.nvim_set_hl(0, "FoldColumn", { bg = "#151515" })
+	-- diff colors
+	vim.api.nvim_set_hl(0, "DiffAdd", { bg = "#3a4a3a" })
+	vim.api.nvim_set_hl(0, "DiffDelete", { bg = "#4a2a2a" })
+	vim.api.nvim_set_hl(0, "DiffChange", { bg = "#4a4a2a" })
+	vim.api.nvim_set_hl(0, "DiffText", { bg = "#4a4a2a", bold = true })
+	apply_blink_highlights()
+end
 
--- override some colors for better visibility. without these they are almost the same as the background
-vim.api.nvim_set_hl(0, "SnacksPickerFile", { fg = "#e8e8d3" })
-vim.api.nvim_set_hl(0, "SnacksPickerDir", { fg = "#888888" })
-vim.api.nvim_set_hl(0, "SnacksPickerTotals", { fg = "#888888" })
+local function apply_light()
+	vim.cmd.colorscheme("jellybeans-light")
+	apply_blink_highlights()
+end
 
-vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", { fg = "#555555", italic = true }) -- a bit harder color so to not be invisible in the cursor line:w
-
--- neo-tree and line number backgrounds
-vim.api.nvim_set_hl(0, "LineNr", { fg = "#555555", bg = "#151515" })
-vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#555555", bg = "#151515" })
-vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#555555", bg = "#151515" })
-vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#e8e8d3", bg = "#151515" })
-vim.api.nvim_set_hl(0, "SignColumn", { bg = "#151515" })
-vim.api.nvim_set_hl(0, "FoldColumn", { bg = "#151515" })
-
--- diff colors
-vim.api.nvim_set_hl(0, "DiffAdd", { bg = "#3a4a3a" })
-vim.api.nvim_set_hl(0, "DiffDelete", { bg = "#4a2a2a" })
-vim.api.nvim_set_hl(0, "DiffChange", { bg = "#4a4a2a" })
-vim.api.nvim_set_hl(0, "DiffText", { bg = "#4a4a2a", bold = true })
+require("auto-dark-mode").setup({
+	update_interval = 1000,
+	set_dark_mode = apply_dark,
+	set_light_mode = apply_light,
+})
