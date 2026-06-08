@@ -108,18 +108,28 @@ map("n", "[q", vim.cmd.cprev, { desc = "Previous quickfix" })
 map("n", "]q", vim.cmd.cnext, { desc = "Next quickfix" })
 
 -- toggle cursorline
+-- stylua: ignore start
 map("n", "<leader>uv", function()
-	vim.wo.cursorline = not vim.wo.cursorline
+	pt.cycle("cursorline", {
+		steps = {
+			{ label = "off", apply = function() vim.wo.cursorline = false end },
+			{ label = "on",  apply = function() vim.wo.cursorline = true  end },
+		},
+		default = 2,
+	})
 end, { desc = "Toggle Cursorline" })
 
 -- toggle colorcolumn
 map("n", "<leader>uS", function()
-	if vim.wo.colorcolumn == "" then
-		vim.wo.colorcolumn = vim.g.colorcolumn or "100"
-	else
-		vim.wo.colorcolumn = ""
-	end
+	pt.cycle("colorcolumn", {
+		steps = {
+			{ label = "off", apply = function() vim.wo.colorcolumn = "" end },
+			{ label = "on",  apply = function() vim.wo.colorcolumn = vim.g.colorcolumn or "100" end },
+		},
+		default = 2,
+	})
 end, { desc = "Toggle ColorColumn" })
+-- stylua: ignore end
 
 -- formatting
 map({ "n", "v" }, "<leader>cf", function()
@@ -145,7 +155,15 @@ map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 -- stylua: ignore start
 
 -- toggle options
-map("n", "<leader>us", function() vim.wo.spell = not vim.wo.spell end, { desc = "Toggle Spelling" })
+map("n", "<leader>us", function()
+	pt.cycle("spelling", {
+		steps = {
+			{ label = "off", apply = function() vim.opt.spell = false end },
+			{ label = "on",  apply = function() vim.opt.spell = true  end },
+		},
+	})
+
+end, { desc = "Toggle Spelling" })
 map("n", "<leader>uw", function()
 	pt.cycle("wrap", {
 		steps = {

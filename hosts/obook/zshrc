@@ -1,3 +1,5 @@
+source ~/.config/zsh/colors.zsh
+
 #region Functions
 
 function has() {

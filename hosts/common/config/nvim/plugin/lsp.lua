@@ -171,12 +171,6 @@ vim.lsp.config("clangd", {
 		"--header-insertion=iwyu",
 		"--experimental-modules-support",
 	},
-	init_options = {
-		fallbackFlags = {
-			"-std=c++23",
-			"-stdlib=libc++",
-		},
-	},
 })
 
 vim.lsp.enable(servers)

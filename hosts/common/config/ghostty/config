@@ -3,8 +3,7 @@
 # or
 # ctrl + shift + ,
 
-theme = Jellybeans
-background = #0a0a0a
+theme = dark:Jellybeans Custom,light:Jellybeans Light Custom
 
 font-family = IosevkaTerm Nerd Font
 font-size = 14
