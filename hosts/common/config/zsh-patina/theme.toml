@@ -1,0 +1,6 @@
+"dynamic.callable" = { foreground = "blue" }
+"dynamic.callable.alias" = { foreground = "blue", underline = true }
+"keyword" = { foreground = "blue", underline = true }
+
+[metadata]
+extends = "patina"
