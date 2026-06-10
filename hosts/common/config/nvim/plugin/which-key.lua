@@ -4,7 +4,6 @@ vim.pack.add({
 
 local wk = require("which-key")
 wk.setup({ plugins = { spelling = true } })
-vim.api.nvim_set_hl(0, "WhichKeyNormal", { bg = "#151515" })
 -- stylua: ignore start
 wk.add({
 	{ "<leader>:", icon = "󰋚" },

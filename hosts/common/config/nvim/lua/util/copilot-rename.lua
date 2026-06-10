@@ -1,7 +1,12 @@
 local M = {}
 
-local MODEL = "gpt-4o-mini"
+local DEFAULT_MODEL = "gpt-4o-mini"
 local CONTEXT_LINES = 10
+
+-- Configurable via vim.g.copilot_rename_model (see config.options)
+local function model()
+	return vim.g.copilot_rename_model or DEFAULT_MODEL
+end
 
 --- Gather surrounding buffer lines (CONTEXT_LINES above and below the cursor)
 --- and return them as a single string with a marker on the cursor line.
@@ -113,7 +118,7 @@ end
 ---@param callback fun(content: string|nil)
 local function call_copilot(session_token, prompt, callback)
 	local body = vim.json.encode({
-		model = MODEL,
+		model = model(),
 		messages = {
 			{ role = "system", content = "You are a helpful coding assistant and an expert at naming variables." },
 			{ role = "user", content = prompt },

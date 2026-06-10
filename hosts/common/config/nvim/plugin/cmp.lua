@@ -19,7 +19,9 @@ vim.api.nvim_create_autocmd("PackChanged", {
 	end,
 })
 
-vim.keymap.set("n", "<leader>dB", blink_build, { desc = "Build blink.cmp" })
+-- A command rather than a keymap: <leader>dB belongs to dap (conditional
+-- breakpoint), and a manual rebuild is rare (PackChanged handles updates)
+vim.api.nvim_create_user_command("BlinkBuild", blink_build, { desc = "Build blink.cmp" })
 
 vim.pack.add({
 	{ src = "https://github.com/Saghen/blink.lib" },

@@ -123,6 +123,7 @@ require("treesitter-context").setup({
 })
 
 -- go to the context / header of the current line
-vim.keymap.set("n", "[c", function()
+-- ([C, not [c — [c/]c are taken by mini.diff hunk navigation in diffgit.lua)
+vim.keymap.set("n", "[C", function()
 	require("treesitter-context").go_to_context(vim.v.count1)
 end, { silent = true, desc = "Go to context" })

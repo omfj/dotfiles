@@ -35,15 +35,8 @@ diff.setup({
 	},
 })
 
--- Sign column colors (set after setup so mini.diff doesn't override them)
-vim.api.nvim_set_hl(0, "MiniDiffSignAdd", { fg = "#a9dd9d" })
-vim.api.nvim_set_hl(0, "MiniDiffSignChange", { fg = "#f0922b" })
-vim.api.nvim_set_hl(0, "MiniDiffSignDelete", { fg = "#e03030" })
--- Overlay colors
-vim.api.nvim_set_hl(0, "MiniDiffOverAdd", { bg = "#3a4a3a" })
-vim.api.nvim_set_hl(0, "MiniDiffOverChange", { bg = "#4a4a2a" })
-vim.api.nvim_set_hl(0, "MiniDiffOverDelete", { bg = "#4a2a2a" })
-vim.api.nvim_set_hl(0, "MiniDiffOverContext", { bg = "#2a2a2a" })
+-- Sign column and overlay colors live in plugin/01-colorscheme.lua so they
+-- survive theme switches (auto-dark-mode re-runs :colorscheme, which clears them).
 
 local git = require("mini.git")
 git.setup()

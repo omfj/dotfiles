@@ -47,7 +47,7 @@ require("snacks").setup({
 					key = "f",
 					desc = "Find file",
 					action = function()
-						require("fff").find_files()
+						require("telescope.builtin").find_files()
 					end,
 				},
 				{
@@ -63,7 +63,7 @@ require("snacks").setup({
 					key = "g",
 					desc = "Find word",
 					action = function()
-						require("fff").live_grep()
+						require("telescope.builtin").live_grep()
 					end,
 				},
 				{

@@ -35,8 +35,9 @@ map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 -- Clear search with <esc>
 map("n", "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
 map("i", "<esc>", function()
-	if require("copilot.suggestion").is_visible() then
-		require("copilot.suggestion").dismiss()
+	local has_copilot, suggestion = pcall(require, "copilot.suggestion")
+	if has_copilot and suggestion.is_visible() then
+		suggestion.dismiss()
 	elseif vim.fn.reg_recording() ~= "" then
 		-- Plain escape during macro recording so it gets captured correctly
 		return "<esc>"
@@ -107,34 +108,15 @@ map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
 map("n", "[q", vim.cmd.cprev, { desc = "Previous quickfix" })
 map("n", "]q", vim.cmd.cnext, { desc = "Next quickfix" })
 
--- toggle cursorline
--- stylua: ignore start
+-- toggle cursorline (steps defined in config.autocmds via persist_toggle)
 map("n", "<leader>uv", function()
-	pt.cycle("cursorline", {
-		steps = {
-			{ label = "off", apply = function() vim.wo.cursorline = false end },
-			{ label = "on",  apply = function() vim.wo.cursorline = true  end },
-		},
-		default = 2,
-	})
+	pt.cycle("cursorline")
 end, { desc = "Toggle Cursorline" })
 
 -- toggle colorcolumn
 map("n", "<leader>uS", function()
-	pt.cycle("colorcolumn", {
-		steps = {
-			{ label = "off", apply = function() vim.wo.colorcolumn = "" end },
-			{ label = "on",  apply = function() vim.wo.colorcolumn = vim.g.colorcolumn or "100" end },
-		},
-		default = 2,
-	})
+	pt.cycle("colorcolumn")
 end, { desc = "Toggle ColorColumn" })
--- stylua: ignore end
-
--- formatting
-map({ "n", "v" }, "<leader>cf", function()
-	vim.lsp.buf.format({ async = true })
-end, { desc = "Format" })
 
 -- diagnostic
 local diagnostic_goto = function(next, severity)
@@ -154,43 +136,13 @@ map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
 -- stylua: ignore start
 
--- toggle options
-map("n", "<leader>us", function()
-	pt.cycle("spelling", {
-		steps = {
-			{ label = "off", apply = function() vim.opt.spell = false end },
-			{ label = "on",  apply = function() vim.opt.spell = true  end },
-		},
-	})
-
-end, { desc = "Toggle Spelling" })
-map("n", "<leader>uw", function()
-	pt.cycle("wrap", {
-		steps = {
-			{ label = "off", apply = function() vim.opt.wrap = false; vim.opt.linebreak = false end },
-			{ label = "on",  apply = function() vim.opt.wrap = true;  vim.opt.linebreak = true  end },
-		},
-	})
-end, { desc = "Toggle Word Wrap" })
+-- toggle options (steps defined in config.autocmds via persist_toggle)
+map("n", "<leader>us", function() pt.cycle("spelling") end, { desc = "Toggle Spelling" })
+map("n", "<leader>uw", function() pt.cycle("wrap") end, { desc = "Toggle Word Wrap" })
 map("n", "<leader>uL", function() vim.wo.relativenumber = not vim.wo.relativenumber end, { desc = "Toggle Relative Line Numbers" })
-map("n", "<leader>ul", function()
-	pt.cycle("listchars", {
-		steps = {
-			{ label = "on",  apply = function() vim.opt.list = true  end },
-			{ label = "off", apply = function() vim.opt.list = false end },
-		},
-	})
-end, { desc = "Toggle List Chars" })
+map("n", "<leader>ul", function() pt.cycle("listchars") end, { desc = "Toggle List Chars" })
 map("n", "<leader>ud", function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end, { desc = "Toggle Diagnostics" })
-map("n", "<leader>uc", function()
-	pt.cycle("conceal", {
-		steps = {
-			{ label = "off (0)",  apply = function() vim.opt.conceallevel = 0 end },
-			{ label = "on (2)",   apply = function() vim.opt.conceallevel = 2 end },
-			{ label = "full (3)", apply = function() vim.opt.conceallevel = 3 end },
-		},
-	})
-end, { desc = "Cycle Conceal" })
+map("n", "<leader>uc", function() pt.cycle("conceal") end, { desc = "Cycle Conceal" })
 if vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint then
   map("n", "<leader>uh", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, { desc = "Toggle Inlay Hints" })
 end
