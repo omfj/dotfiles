@@ -38,17 +38,20 @@ require("conform").setup({
 		templ = { "templ" },
 		java = { "google-java-format" },
 		bib = { "bibtex-tidy" },
+		sh = { "shfmt" },
+		bash = { "shfmt" },
+		zsh = { "shfmt" },
 	},
 	format_on_save = function(bufnr)
 		if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
 			return
 		end
-		return { timeout_ms = 2000, lsp_fallback = true }
+		return { timeout_ms = 2000, lsp_format = "fallback" }
 	end,
 })
 
 vim.keymap.set({ "n", "v" }, "<leader>cf", function()
-	require("conform").format({ async = true, lsp_fallback = true })
+	require("conform").format({ async = true, lsp_format = "fallback" })
 end, { desc = "Format" })
 
 vim.keymap.set("n", "<leader>uf", function()

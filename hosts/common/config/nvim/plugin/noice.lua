@@ -17,6 +17,8 @@ require("noice").setup({
 		},
 	},
 	lsp = {
+		-- progress is rendered by the LspProgress autocmd in plugin/lsp.lua
+		progress = { enabled = false },
 		override = {
 			["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 			["vim.lsp.util.stylize_markdown"] = true,

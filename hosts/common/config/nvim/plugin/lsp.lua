@@ -15,7 +15,6 @@ vim.api.nvim_create_autocmd("PackChanged", {
 vim.pack.add({
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/mason-org/mason.nvim" },
-	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" },
 	{ src = "https://github.com/b0o/SchemaStore.nvim" },
 	{ src = "https://github.com/mfussenegger/nvim-jdtls" },
 })
@@ -55,7 +54,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "gra", function() Snacks.picker.lsp_code_actions() end, vim.tbl_extend("force", opts, { desc = "Code Actions" }))
 		vim.keymap.set("n", "grn", vim.lsp.buf.rename, vim.tbl_extend("force", opts, { desc = "Rename" }))
 		vim.keymap.set("n", "gO", function() Snacks.picker.lsp_symbols() end, vim.tbl_extend("force", opts, { desc = "Document Symbols" }))
-		vim.keymap.set("n", "<leader>cS", function() require("config.copilot-rename").suggest() end, vim.tbl_extend("force", opts, { desc = "Suggest name (Copilot)" }))
+		vim.keymap.set("n", "<leader>cS", function() require("util.copilot-rename").suggest() end, vim.tbl_extend("force", opts, { desc = "Suggest name (Copilot)" }))
 		-- stylua: ignore end
 		vim.keymap.set("n", "<leader>K", function()
 			vim.lsp.buf.hover()
@@ -125,102 +124,102 @@ if has_blink then
 end
 vim.lsp.config("*", { capabilities = capabilities })
 
+-- LSP servers to enable, mapped to the Mason package that provides them
+-- (false = installed outside Mason). Adding a language is one entry here.
 local servers = {
-	"lua_ls",
-	"bashls",
-	"denols",
-	"ts_ls",
-	"svelte",
-	"astro",
-	"html",
-	"cssls",
-	"tailwindcss",
-	"kotlin_language_server",
-	"rust_analyzer",
-	"eslint",
-	"basedpyright",
-	"ruff",
-	"tinymist",
-	"yamlls",
-	"jsonls",
-	"taplo",
-	"gopls",
-	"vue_language_server",
-	"oxlint",
-	"zls",
-	"jinja_lsp",
-	"clangd",
-	"templ",
-	"texlab",
+	lua_ls = "lua-language-server",
+	bashls = "bash-language-server",
+	denols = "deno",
+	ts_ls = "typescript-language-server",
+	svelte = "svelte-language-server",
+	astro = "astro-language-server",
+	html = "html-lsp",
+	cssls = "css-lsp",
+	emmet_language_server = "emmet-language-server",
+	tailwindcss = "tailwindcss-language-server",
+	kotlin_language_server = "kotlin-language-server",
+	rust_analyzer = "rust-analyzer",
+	eslint = "eslint-lsp",
+	basedpyright = "basedpyright",
+	ruff = "ruff",
+	tinymist = "tinymist",
+	yamlls = "yaml-language-server",
+	jsonls = "json-lsp",
+	taplo = "taplo",
+	gopls = "gopls",
+	vue_language_server = "vue-language-server",
+	oxlint = "oxlint",
+	zls = "zls",
+	jinja_lsp = "jinja-lsp",
+	clangd = false, -- homebrew llvm, see after/lsp/clangd.lua
+	templ = "templ",
+	texlab = "texlab",
+	harper_ls = "harper-ls",
 }
 
--- Optionally enable Harper LSP if not disabled
+-- Optionally enable Harper LSP if not disabled (still installed, so :ToggleHarper works)
 local harper_disabled = vim.uv.fs_stat(vim.fn.stdpath("data") .. "/harper_disabled") ~= nil
-if not harper_disabled then
-	table.insert(servers, "harper_ls")
+
+local enabled_servers = {}
+for server in pairs(servers) do
+	if server ~= "harper_ls" or not harper_disabled then
+		table.insert(enabled_servers, server)
+	end
 end
 
--- Override nvim-lspconfig's bundled lsp/clangd.lua (which resets cmd to { "clangd" }).
--- Explicit vim.lsp.config() calls have higher precedence than lsp/*.lua files.
-vim.lsp.config("clangd", {
-	cmd = {
-		"/opt/homebrew/opt/llvm@21/bin/clangd",
-		"--background-index",
-		"--clang-tidy",
-		"--completion-style=detailed",
-		"--header-insertion=iwyu",
-		"--experimental-modules-support",
-	},
-})
-
-vim.lsp.enable(servers)
+vim.lsp.enable(enabled_servers)
 
 -- Mason setup
-require("mason").setup({
-	ui = {},
-	ensure_installed = {
-		"stylua",
-		"lua-language-server",
-		"shfmt",
-		"bash-language-server",
-		"typescript-language-server",
-		"deno",
-		"svelte-language-server",
-		"astro-language-server",
-		"html-lsp",
-		"css-lsp",
-		"tailwindcss-language-server",
-		"kotlin-language-server",
-		"rust-analyzer",
-		"eslint-lsp",
-		"oxlint",
-		"prettierd",
-		"prettier",
-		"ktlint",
-		"tinymist",
-		"typstyle",
-		"gopls",
-		"goimports",
-		"gofumpt",
-		"yaml-language-server",
-		"taplo",
-		"basedpyright",
-		"ruff",
-		"harper-ls",
-		"fixjson",
-		"json-lsp",
-		"vue-language-server",
-		"zls",
-		"jinja-lsp",
-		"djlint",
-		"clang-format",
-		"templ",
-		"jdtls",
-		"java-debug-adapter",
-		"google-java-format",
-		"texlab",
-		"delve",
-		"js-debug-adapter",
-		"codelldb",
-	},
+require("mason").setup()
+
+-- Non-LSP tools (formatters, linters, debug adapters)
+local tools = {
+	"stylua",
+	"shfmt",
+	"prettierd",
+	"prettier",
+	"ktlint",
+	"typstyle",
+	"goimports",
+	"gofumpt",
+	"fixjson",
+	"djlint",
+	"clang-format",
+	"jdtls",
+	"java-debug-adapter",
+	"google-java-format",
+	"delve",
+	"js-debug-adapter",
+	"codelldb",
+}
+
+-- mason.nvim has no ensure_installed setting, so install missing packages
+-- ourselves: every tool plus the Mason package for each enabled server
+local ensure_installed = vim.deepcopy(tools)
+for _, pkg in pairs(servers) do
+	if pkg then
+		table.insert(ensure_installed, pkg)
+	end
+end
+
+vim.api.nvim_create_autocmd("VimEnter", {
+	once = true,
+	callback = function()
+		local registry = require("mason-registry")
+		local missing = vim.tbl_filter(function(name)
+			local ok, pkg = pcall(registry.get_package, name)
+			return not ok or not pkg:is_installed()
+		end, ensure_installed)
+		if #missing == 0 then
+			return
+		end
+		registry.refresh(function()
+			for _, name in ipairs(missing) do
+				local ok, pkg = pcall(registry.get_package, name)
+				if ok and not pkg:is_installed() then
+					pkg:install()
+				end
+			end
+		end)
+	end,
 })

@@ -19,6 +19,8 @@ local M = {}
 
 local data_dir = vim.fn.stdpath("data") .. "/persist_toggles"
 
+local registry = {}
+
 local function idx_path(name)
 	return data_dir .. "/" .. name
 end
@@ -46,6 +48,7 @@ end
 --- @param name string  unique key for this cycle
 --- @param opts { steps: { label: string, apply: fun() }[], default: integer }
 function M.define(name, opts)
+	registry[name] = opts
 	local idx = read_idx(name) or opts.default or 1
 	idx = math.max(1, math.min(idx, #opts.steps))
 	write_idx(name, idx)
@@ -54,8 +57,12 @@ end
 
 --- Advance to the next step and persist.
 --- @param name string
---- @param opts { steps: { label: string, apply: fun() }[] }
-function M.cycle(name, opts)
+function M.cycle(name)
+	local opts = registry[name]
+	if not opts then
+		vim.notify("persist_toggle: no cycle defined for " .. name, vim.log.levels.ERROR)
+		return
+	end
 	local idx = read_idx(name) or 1
 	local next_idx = (idx % #opts.steps) + 1
 	write_idx(name, next_idx)

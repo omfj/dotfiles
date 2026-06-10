@@ -11,6 +11,17 @@ require("jellybeans").setup({
 	},
 })
 
+-- mini.diff sign column and overlay colors
+local function apply_minidiff_highlights()
+	vim.api.nvim_set_hl(0, "MiniDiffSignAdd", { fg = "#a9dd9d" })
+	vim.api.nvim_set_hl(0, "MiniDiffSignChange", { fg = "#f0922b" })
+	vim.api.nvim_set_hl(0, "MiniDiffSignDelete", { fg = "#e03030" })
+	vim.api.nvim_set_hl(0, "MiniDiffOverAdd", { bg = "#3a4a3a" })
+	vim.api.nvim_set_hl(0, "MiniDiffOverChange", { bg = "#4a4a2a" })
+	vim.api.nvim_set_hl(0, "MiniDiffOverDelete", { bg = "#4a2a2a" })
+	vim.api.nvim_set_hl(0, "MiniDiffOverContext", { bg = "#2a2a2a" })
+end
+
 local function apply_blink_highlights()
 	if vim.o.background == "light" then
 		vim.api.nvim_set_hl(0, "BlinkCmpMenu", { bg = "#eeeeee" })
@@ -61,11 +72,14 @@ local function apply_dark()
 	vim.api.nvim_set_hl(0, "DiffDelete", { bg = "#4a2a2a" })
 	vim.api.nvim_set_hl(0, "DiffChange", { bg = "#4a4a2a" })
 	vim.api.nvim_set_hl(0, "DiffText", { bg = "#4a4a2a", bold = true })
+	vim.api.nvim_set_hl(0, "WhichKeyNormal", { bg = "#151515" })
 	apply_blink_highlights()
+	apply_minidiff_highlights()
 end
 
 local function apply_light()
 	vim.cmd.colorscheme("jellybeans-light")
+	vim.api.nvim_set_hl(0, "WhichKeyNormal", { bg = "#eeeeee" })
 	apply_blink_highlights()
 end
 

@@ -131,7 +131,7 @@ pt.define("conceal", {
 pt.define("colorcolumn", {
     steps = {
 	{ label = "off", apply = function() vim.opt.colorcolumn = "" end },
-	{ label = "100", apply = function() vim.opt.colorcolumn = "100" end },
+	{ label = "on",  apply = function() vim.opt.colorcolumn = vim.g.colorcolumn or "100" end },
     },
     default = 2,
 })
@@ -151,16 +151,21 @@ pt.define("spelling", {
 })
 -- stylua: ignore end
 
--- Toggle relative line numbers based on mode
-vim.api.nvim_create_autocmd("InsertEnter", { command = [[set norelativenumber]] })
-vim.api.nvim_create_autocmd("InsertLeave", { command = [[set relativenumber]] })
-
--- Use marker folding for shell filetypes with #region/#endregion
-vim.api.nvim_create_autocmd("FileType", {
-	group = augroup("shell_foldmarker"),
-	pattern = { "zsh", "sh", "bash" },
+-- Toggle relative line numbers based on mode, only restoring it if it was
+-- on when insert mode was entered (so <leader>uL stays effective)
+vim.api.nvim_create_autocmd("InsertEnter", {
+	group = augroup("relnum_insert"),
 	callback = function()
-		vim.opt_local.foldmethod = "marker"
-		vim.opt_local.foldmarker = "#region,#endregion"
+		vim.w.relnum_restore = vim.wo.relativenumber
+		vim.wo.relativenumber = false
+	end,
+})
+vim.api.nvim_create_autocmd("InsertLeave", {
+	group = augroup("relnum_insert_leave"),
+	callback = function()
+		if vim.w.relnum_restore then
+			vim.wo.relativenumber = true
+		end
+		vim.w.relnum_restore = nil
 	end,
 })

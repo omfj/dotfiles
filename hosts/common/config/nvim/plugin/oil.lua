@@ -15,4 +15,4 @@ require("oil").setup({
 	},
 })
 
-vim.keymap.set("n", "<leader>to", "<cmd>Oil --float<cr>", { desc = "Open oil (float)" })
+vim.keymap.set("n", "<leader>fo", "<cmd>Oil --float<cr>", { desc = "Open oil (float)" })
