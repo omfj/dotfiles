@@ -55,6 +55,9 @@ local ensure_installed = {
 	"jinja",
 	"templ",
 	"java",
+	"ocaml",
+	"ocaml_interface",
+	"ocamllex",
 }
 
 -- Install any missing parsers on startup

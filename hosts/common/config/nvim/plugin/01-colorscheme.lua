@@ -60,6 +60,8 @@ local function apply_dark()
 	vim.api.nvim_set_hl(0, "SnacksPickerDir", { fg = "#888888" })
 	vim.api.nvim_set_hl(0, "SnacksPickerTotals", { fg = "#888888" })
 	vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", { fg = "#555555", italic = true }) -- a bit harder color so to not be invisible in the cursor line
+	vim.api.nvim_set_hl(0, "LspInlayHint", { link = "GitSignsCurrentLineBlame" }) -- match blame text; default link to NonText is too dark
+	vim.api.nvim_set_hl(0, "LspCodeLens", { fg = "#555555" })
 	-- neo-tree and line number backgrounds
 	vim.api.nvim_set_hl(0, "LineNr", { fg = "#555555", bg = "#151515" })
 	vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#555555", bg = "#151515" })
@@ -80,6 +82,8 @@ end
 local function apply_light()
 	vim.cmd.colorscheme("jellybeans-light")
 	vim.api.nvim_set_hl(0, "WhichKeyNormal", { bg = "#eeeeee" })
+	vim.api.nvim_set_hl(0, "LspInlayHint", { link = "GitSignsCurrentLineBlame" }) -- match blame text
+	vim.api.nvim_set_hl(0, "LspCodeLens", { fg = "#555555" })
 	apply_blink_highlights()
 end
 

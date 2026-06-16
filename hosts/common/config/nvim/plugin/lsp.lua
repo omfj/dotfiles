@@ -151,7 +151,6 @@ local servers = {
 	oxlint = "oxlint",
 	zls = "zls",
 	jinja_lsp = "jinja-lsp",
-	clangd = false, -- homebrew llvm, see after/lsp/clangd.lua
 	templ = "templ",
 	texlab = "texlab",
 	harper_ls = "harper-ls",

@@ -146,6 +146,7 @@ map("n", "<leader>uc", function() pt.cycle("conceal") end, { desc = "Cycle Conce
 if vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint then
   map("n", "<leader>uh", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, { desc = "Toggle Inlay Hints" })
 end
+map("n", "<leader>ucl", function() vim.lsp.codelens.enable(not vim.lsp.codelens.is_enabled()) end, { desc = "Toggle CodeLens" })
 map("n", "<leader>uT", function() if vim.b.ts_highlight then vim.treesitter.stop() else vim.treesitter.start() end end, { desc = "Toggle Treesitter Highlight" })
 map("n", "<leader>uH", "<cmd>ToggleHarper<cr>", { desc = "Toggle Harper (spelling)" })
 map("n", "<leader>uA", function()

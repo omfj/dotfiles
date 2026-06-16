@@ -31,6 +31,7 @@ require("conform").setup({
 		go = { "goimports", "gofumpt" },
 		toml = { "taplo" },
 		rust = { "rustfmt" },
+		ocaml = { "ocamlformat" },
 		zig = { "zigfmt" },
 		c = { "clang_format" },
 		cpp = { "clang_format" },
