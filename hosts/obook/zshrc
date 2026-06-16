@@ -57,7 +57,6 @@ path=(
     $HOME/.vite-plus/bin
     $HOME/.ghcup/bin
     $HOME/.cargo/bin
-    $HOME/.emacs.d/bin
     $HOME/.local/bin
     $HOME/.deno/bin
     $HOME/.atuin/bin
@@ -65,6 +64,9 @@ path=(
     $HOME/go/bin
     $HOME/.slack/bin
     $BUN_INSTALL/bin
+
+    $HOME/.config/emacs/bin
+    $HOME/.emacs.d/bin
 
     /usr/local/bin
     /usr/local/sbin
@@ -122,6 +124,8 @@ fi
 #endregion Xcode
 
 #region Aliases
+
+alias ec="emacsclient -c -n -a ''"
 
 alias l="eza"
 alias ls="eza"
@@ -215,3 +219,11 @@ zinit light michel-kraemer/zsh-patina
 if has starship; then
     eval "$(starship init zsh)"
 fi
+
+# BEGIN opam configuration
+# This is useful if you're using opam as it adds:
+#   - the correct directories to the PATH
+#   - auto-completion for the opam binary
+# This section can be safely removed at any time if needed.
+[[ ! -r "$HOME/.opam/opam-init/init.zsh" ]] || source "$HOME/.opam/opam-init/init.zsh" >/dev/null 2>/dev/null
+# END opam configuration
