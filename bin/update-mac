@@ -18,7 +18,7 @@ echo -e "$GREEN[Rust]$NC DONE\n"
 
 echo -e "$GREEN[npm]$NC STARTING..."
 npm update -g
-echo "$GREEN[npm]$NC DONE"
+echo -e "$GREEN[npm]$NC DONE"
 
 echo -e "$GREEN[pnpm]$NC STARTING..."
 pnpm update -g
