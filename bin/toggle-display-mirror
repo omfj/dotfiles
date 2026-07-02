@@ -1,0 +1,102 @@
+#!/bin/bash
+
+# Toggles mirroring on all connected displays using displayplacer.
+# When turning mirroring on, the current layout is saved so it can be
+# restored the next time this script is run to turn mirroring back off.
+
+# Required parameters:
+# @raycast.schemaVersion 1
+# @raycast.title Toggle Screen Mirroring
+# @raycast.mode compact
+
+# Optional parameters:
+# @raycast.icon 🤖
+# @raycast.packageName Utility
+
+# Documentation:
+# @raycast.description Toggles screen mirroring on displays
+# @raycast.author Ole Magnus
+
+set -euo pipefail
+
+if ! command -v displayplacer >/dev/null 2>&1; then
+  echo "Error: displayplacer is not installed. Install with: brew install displayplacer" >&2
+  exit 1
+fi
+
+state_dir="${XDG_CACHE_HOME:-$HOME/.cache}/toggle-display-mirror"
+backup_file="$state_dir/layout"
+
+mkdir -p "$state_dir"
+
+if [ -f "$backup_file" ]; then
+  # Mirroring is currently on -> restore the saved layout.
+  restore_cmd="$(cat "$backup_file")"
+  eval "$restore_cmd"
+  rm -f "$backup_file"
+  echo "Mirroring off, previous display layout restored."
+  exit 0
+fi
+
+list_output="$(displayplacer list)"
+
+current_cmd="$(echo "$list_output" | grep '^displayplacer ')"
+if [ -z "$current_cmd" ]; then
+  echo "Error: could not determine the current display layout." >&2
+  exit 1
+fi
+
+ids=()
+main_id=""
+main_res=""
+main_scaling=""
+screen_id=""
+screen_res=""
+screen_scaling=""
+while IFS= read -r line; do
+  case "$line" in
+  "Persistent screen id: "*)
+    screen_id="${line#Persistent screen id: }"
+    ids+=("$screen_id")
+    ;;
+  "Resolution: "*)
+    screen_res="${line#Resolution: }"
+    ;;
+  "Scaling: "*)
+    screen_scaling="${line#Scaling: }"
+    ;;
+  *"main display"*)
+    main_id="$screen_id"
+    main_res="$screen_res"
+    main_scaling="$screen_scaling"
+    ;;
+  esac
+done <<<"$list_output"
+
+if [ "${#ids[@]}" -lt 2 ]; then
+  echo "Error: need at least two screens connected to mirror." >&2
+  exit 1
+fi
+
+if [ -z "$main_id" ]; then
+  main_id="${ids[0]}"
+  main_res="$screen_res"
+  main_scaling="$screen_scaling"
+fi
+
+ordered_ids=("$main_id")
+for id in "${ids[@]}"; do
+  if [ "$id" != "$main_id" ]; then
+    ordered_ids+=("$id")
+  fi
+done
+
+ids_joined="$(
+  IFS=+
+  echo "${ordered_ids[*]}"
+)"
+
+echo "$current_cmd" >"$backup_file"
+
+displayplacer "id:${ids_joined} res:${main_res} scaling:${main_scaling} origin:(0,0) degree:0"
+echo "Mirroring on, previous display layout saved to $backup_file."
