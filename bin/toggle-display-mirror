@@ -6,11 +6,11 @@
 
 # Required parameters:
 # @raycast.schemaVersion 1
-# @raycast.title Toggle Screen Mirroring
+# @raycast.title Toggle Display Mirroring
 # @raycast.mode compact
 
 # Optional parameters:
-# @raycast.icon 🤖
+# @raycast.icon 🖥️
 # @raycast.packageName Utility
 
 # Documentation:
