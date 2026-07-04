@@ -211,10 +211,8 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 source "${ZINIT_HOME}/zinit.zsh"
 
 zinit light zsh-users/zsh-autosuggestions
-zinit ice as"program" from"gh-r" pick"zsh-patina-*/zsh-patina" atload'eval "$(zsh-patina activate)"'
-zinit light michel-kraemer/zsh-patina
 
-# Starship (should be last)
+# Starship
 
 if has starship; then
     eval "$(starship init zsh)"
@@ -227,3 +225,8 @@ fi
 # This section can be safely removed at any time if needed.
 [[ ! -r "$HOME/.opam/opam-init/init.zsh" ]] || source "$HOME/.opam/opam-init/init.zsh" >/dev/null 2>/dev/null
 # END opam configuration
+
+# zsh-patina (must be last, since it needs to own the zle widgets)
+
+zinit ice as"program" from"gh-r" pick"zsh-patina-*/zsh-patina" atload'eval "$(zsh-patina activate)"'
+zinit light michel-kraemer/zsh-patina
