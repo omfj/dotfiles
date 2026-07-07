@@ -228,5 +228,6 @@ fi
 
 # zsh-patina (must be last, since it needs to own the zle widgets)
 
-zinit ice as"program" from"gh-r" pick"zsh-patina-*/zsh-patina" atload'eval "$(zsh-patina activate)"'
-zinit light michel-kraemer/zsh-patina
+if has zsh-patina; then
+    eval "$(zsh-patina activate)"
+fi
