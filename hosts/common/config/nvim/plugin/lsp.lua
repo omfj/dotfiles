@@ -47,13 +47,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		local opts = { buffer = ev.buf }
 
 		-- stylua: ignore start
-		vim.keymap.set("n", "gD", function() Snacks.picker.lsp_declarations() end, vim.tbl_extend("force", opts, { desc = "Goto Declaration" }))
-		vim.keymap.set("n", "gd", function() Snacks.picker.lsp_definitions() end, vim.tbl_extend("force", opts, { desc = "Goto Definition" }))
-		vim.keymap.set("n", "gri", function() Snacks.picker.lsp_implementations() end, vim.tbl_extend("force", opts, { desc = "Goto Implementation" }))
-		vim.keymap.set("n", "grr", function() Snacks.picker.lsp_references() end, vim.tbl_extend("force", opts, { desc = "Goto References" }))
-		vim.keymap.set("n", "gra", function() Snacks.picker.lsp_code_actions() end, vim.tbl_extend("force", opts, { desc = "Code Actions" }))
+		vim.keymap.set("n", "gD", function() require("mini.extra").pickers.lsp({ scope = "declaration" }) end, vim.tbl_extend("force", opts, { desc = "Goto Declaration" }))
+		vim.keymap.set("n", "gd", function() require("mini.extra").pickers.lsp({ scope = "definition" }) end, vim.tbl_extend("force", opts, { desc = "Goto Definition" }))
+		vim.keymap.set("n", "gri", function() require("mini.extra").pickers.lsp({ scope = "implementation" }) end, vim.tbl_extend("force", opts, { desc = "Goto Implementation" }))
+		vim.keymap.set("n", "grr", function() require("mini.extra").pickers.lsp({ scope = "references" }) end, vim.tbl_extend("force", opts, { desc = "Goto References" }))
+		vim.keymap.set("n", "gra", vim.lsp.buf.code_action, vim.tbl_extend("force", opts, { desc = "Code Actions" }))
 		vim.keymap.set("n", "grn", vim.lsp.buf.rename, vim.tbl_extend("force", opts, { desc = "Rename" }))
-		vim.keymap.set("n", "gO", function() Snacks.picker.lsp_symbols() end, vim.tbl_extend("force", opts, { desc = "Document Symbols" }))
+		vim.keymap.set("n", "gO", function() require("mini.extra").pickers.lsp({ scope = "document_symbol" }) end, vim.tbl_extend("force", opts, { desc = "Document Symbols" }))
 		vim.keymap.set("n", "<leader>cS", function() require("util.copilot-rename").suggest() end, vim.tbl_extend("force", opts, { desc = "Suggest name (Copilot)" }))
 		-- stylua: ignore end
 		vim.keymap.set("n", "<leader>K", function()

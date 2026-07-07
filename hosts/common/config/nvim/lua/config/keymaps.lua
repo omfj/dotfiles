@@ -178,11 +178,7 @@ map("n", "<leader>R", "<cmd>restart<cr>", { desc = "Restart Neovim" })
 -- highlights under cursor
 map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
 
--- notifications
-map("n", "<leader>sn", function() Snacks.notifier.show_history() end, { desc = "Notification History" })
-map("n", "<leader>sN", function() Snacks.notifier.hide() end, { desc = "Dismiss Notifications" })
-
-
+-- notifications live in plugin/mini-notify.lua
 
 -- Terminal Mappings
 map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })

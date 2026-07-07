@@ -1,4 +1,7 @@
-vim.pack.add({ { src = "https://github.com/lewis6991/gitsigns.nvim" } })
+vim.pack.add({
+	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
+	{ src = "https://github.com/echasnovski/mini.nvim" },
+})
 
 -- We only use gitsigns to show the current line blame, since mini.diff doesnt support that.
 -- We disable the signs so not to conflict with mini diff.
