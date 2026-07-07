@@ -18,6 +18,7 @@ link "$common/config/tmux"          to "$conf/tmux"
 link "$common/config/zsh"           to "$conf/zsh"
 link "$common/config/zsh-patina"    to "$conf/zsh-patina"
 link "$common/config/nvim"          to "$conf/nvim"
+link "$common/config/lsd"           to "$conf/lsd"
 
 # Shared between main computers
 if hostname is "obook.local" or hostname is "oarch" {

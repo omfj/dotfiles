@@ -127,11 +127,12 @@ fi
 
 alias ec="emacsclient -c -n -a ''"
 
-alias l="eza"
-alias ls="eza"
-alias la="eza -a"
-alias ll="eza -l"
-alias lla="eza -la"
+alias ls='lsd'
+alias l='lsd -l'
+alias ll='lsd -l'
+alias la='lsd -a'
+alias lla='lsd -la'
+alias lt='lsd --tree'
 
 alias g="git"
 alias ga="git add"
