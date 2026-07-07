@@ -2,7 +2,9 @@ vim.pack.add({
 	{ src = "https://github.com/echasnovski/mini.nvim" },
 })
 
-require("mini.files").setup({
+local MiniFiles = require("mini.files")
+
+MiniFiles.setup({
 	windows = {
 		preview = true,
 		width_focus = 30,
