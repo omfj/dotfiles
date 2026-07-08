@@ -13,7 +13,7 @@ map.setup({
 		map.gen_integration.diff(),
 	},
 	window = {
-		show_integration_count = true,
+		show_integration_count = false,
 	},
 })
 
