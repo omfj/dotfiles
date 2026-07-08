@@ -3,10 +3,6 @@ vim.pack.add({
 })
 
 require("snacks").setup({
-	input = { enabled = true },
-	picker = { enabled = false }, -- replaced by mini.pick
-	dashboard = { enabled = false }, -- replaced by mini.starter
-	notifier = { enabled = false }, -- replaced by mini.notify
 	lazygit = { enabled = true },
 	scratch = { enabled = true },
 	terminal = { enabled = true },
