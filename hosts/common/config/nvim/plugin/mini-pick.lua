@@ -66,7 +66,26 @@ vim.keymap.set("v", "<leader>sW", function() pick.builtin.grep({ pattern = visua
 
 -- git
 vim.keymap.set("n", "<leader>gc", function() extra.pickers.git_commits() end, { desc = "commits" })
-vim.keymap.set("n", "<leader>gs", function() extra.pickers.git_hunks() end, { desc = "status (hunks)" })
+vim.keymap.set("n", "<leader>gs", function()
+	pick.builtin.cli({
+		command = { "git", "-c", "core.quotepath=false", "status", "--porcelain" },
+		postprocess = function(lines)
+			local res = {}
+			for _, line in ipairs(lines) do
+				if line ~= "" then
+					local path = line:sub(4)
+					res[#res + 1] = path:match(" -> (.+)") or path
+				end
+			end
+			return res
+		end,
+	}, {
+		source = {
+			name = "Git status",
+			show = function(buf_id, items, query) pick.default_show(buf_id, items, query, { show_icons = true }) end,
+		},
+	})
+end, { desc = "status" })
 
 -- search
 vim.keymap.set("n", '<leader>s"', function() extra.pickers.registers() end, { desc = "Registers" })

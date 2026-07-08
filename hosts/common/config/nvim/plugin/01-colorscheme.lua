@@ -22,6 +22,11 @@ local function apply_minidiff_highlights()
 	vim.api.nvim_set_hl(0, "MiniDiffOverContext", { bg = "#2a2a2a" })
 end
 
+local function apply_minifiles_highlights()
+	vim.api.nvim_set_hl(0, "MiniFilesGitNew", { fg = "#a9dd9d" })
+	vim.api.nvim_set_hl(0, "MiniFilesGitModified", { fg = "#f0922b" })
+end
+
 local function apply_blink_highlights()
 	if vim.o.background == "light" then
 		vim.api.nvim_set_hl(0, "BlinkCmpMenu", { bg = "#eeeeee" })
@@ -64,6 +69,7 @@ local function apply_dark()
 	vim.api.nvim_set_hl(0, "DiffText", { bg = "#4a4a2a", bold = true })
 	apply_blink_highlights()
 	apply_minidiff_highlights()
+	apply_minifiles_highlights()
 end
 
 local function apply_light()
@@ -71,6 +77,7 @@ local function apply_light()
 	vim.api.nvim_set_hl(0, "LspInlayHint", { link = "GitSignsCurrentLineBlame" }) -- match blame text
 	vim.api.nvim_set_hl(0, "LspCodeLens", { fg = "#555555" })
 	apply_blink_highlights()
+	apply_minifiles_highlights()
 end
 
 require("auto-dark-mode").setup({

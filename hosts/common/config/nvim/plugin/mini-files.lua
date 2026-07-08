@@ -3,6 +3,7 @@ vim.pack.add({
 })
 
 local MiniFiles = require("mini.files")
+local gitignore = require("util.mini_files_gitignore"):new()
 
 MiniFiles.setup({
 	windows = {
@@ -10,6 +11,39 @@ MiniFiles.setup({
 		width_focus = 30,
 		width_preview = 40,
 	},
+	content = {
+		sort = function(fs_entries)
+			return gitignore:sort_entries(fs_entries)
+		end,
+		highlight = function(fs_entry)
+			local dir = vim.fs.dirname(fs_entry.path)
+			if gitignore:is_ignored(dir, fs_entry.path) then
+				return "Comment"
+			end
+			local status = gitignore:get_status(dir, fs_entry.path)
+			if status == "new" then
+				return "MiniFilesGitNew"
+			elseif status == "modified" then
+				return "MiniFilesGitModified"
+			end
+			return MiniFiles.default_highlight(fs_entry)
+		end,
+	},
+})
+
+vim.api.nvim_create_autocmd("User", {
+	pattern = "MiniFilesBufferCreate",
+	callback = function(args)
+		vim.keymap.set("n", ".", function()
+			gitignore:toggle()
+		end, { buffer = args.data.buf_id, desc = "Toggle gitignore dim" })
+	end,
+})
+
+vim.api.nvim_create_autocmd("VimLeavePre", {
+	callback = function()
+		gitignore:cleanup()
+	end,
 })
 
 -- Toggle at the current file (falls back to cwd for unnamed buffers)

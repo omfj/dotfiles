@@ -232,3 +232,6 @@ fi
 if has zsh-patina; then
     eval "$(zsh-patina activate)"
 fi
+
+# Pi
+export PATH="/Users/olem/.vite-plus/js_runtime/node/24.18.0/bin:$PATH"
