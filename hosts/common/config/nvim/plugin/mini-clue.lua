@@ -44,6 +44,7 @@ miniclue.setup({
 		{ mode = "n", keys = "<Leader>g", desc = "+Git" },
 		{ mode = "n", keys = "<Leader>h", desc = "+Git Hunks" },
 		{ mode = "n", keys = "<Leader>m", desc = "+Mason" },
+		{ mode = "n", keys = "<Leader>M", desc = "+Minimap" },
 		{ mode = "n", keys = "<Leader>q", desc = "+Sessions" },
 		{ mode = "n", keys = "<Leader>s", desc = "+Search" },
 		{ mode = "n", keys = "<Leader>t", desc = "+Toggle" },
