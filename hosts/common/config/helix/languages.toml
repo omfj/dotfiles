@@ -88,54 +88,54 @@ auto-format = true
 name = "typescript"
 language-servers = ["typescript-language-server", "vscode-eslint-language-server"]
 auto-format = true
-formatter = { command = "prettierd", args = ["--parser", "typescript"] }
+formatter = { command = "prettierd", args = ["file.ts"] }
 
 [[language]]
 name = "tsx"
 language-servers = ["typescript-language-server", "vscode-eslint-language-server", "tailwindcss-ls"]
 auto-format = true
-formatter = { command = "prettierd", args = ["--parser", "typescript"] }
+formatter = { command = "prettierd", args = ["file.tsx"] }
 
 [[language]]
 name = "javascript"
 language-servers = ["typescript-language-server", "vscode-eslint-language-server"]
 auto-format = true
-formatter = { command = "prettierd", args = ["--parser", "typescript"] }
+formatter = { command = "prettierd", args = ["file.js"] }
 
 [[language]]
 name = "jsx"
 language-servers = ["typescript-language-server", "vscode-eslint-language-server", "tailwindcss-ls"]
 auto-format = true
-formatter = { command = "prettierd", args = ["--parser", "typescript"] }
+formatter = { command = "prettierd", args = ["file.jsx"] }
 
 [[language]]
 name = "html"
 language-servers = ["vscode-html-language-server", "tailwindcss-ls"]
 auto-format = true
-formatter = { command = "prettierd", args = ["--parser", "html"] }
+formatter = { command = "prettierd", args = ["file.html"] }
 
 [[language]]
 name = "css"
 language-servers = ["vscode-css-language-server", "tailwindcss-ls"]
 auto-format = true
-formatter = { command = "prettierd", args = ["--parser", "css"] }
+formatter = { command = "prettierd", args = ["file.css"] }
 
 [[language]]
 name = "json"
 auto-format = true
-formatter = { command = "prettierd", args = ["--parser", "json"] }
+formatter = { command = "prettierd", args = ["file.json"] }
 
 [[language]]
 name = "svelte"
 language-servers = ["svelteserver", "tailwindcss-ls"]
 auto-format = true
-formatter = { command = "prettierd", args = ["--parser", "svelte"] }
+formatter = { command = "prettierd", args = ["file.svelte"] }
 
 [[language]]
 name = "astro"
 language-servers = ["astro-ls"]
 auto-format = true
-formatter = { command = "prettierd", args = ["--parser", "astro"] }
+formatter = { command = "prettierd", args = ["file.astro"] }
 
 [[language]]
 name = "lua"
@@ -158,7 +158,7 @@ formatter = { command = "taplo", args = ["format", "-"] }
 name = "markdown"
 language-servers = ["marksman", "harper-ls"]
 auto-format = false
-formatter = { command = "prettierd", args = ["--parser", "markdown"] }
+formatter = { command = "prettierd", args = ["file.md"] }
 
 [[language]]
 name = "yaml"

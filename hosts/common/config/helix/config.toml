@@ -5,7 +5,6 @@ line-number = "relative"
 auto-format = true
 true-color = true
 cursorline = true
-rulers = [100]
 scrolloff = 5
 mouse = true
 idle-timeout = 200
@@ -47,9 +46,6 @@ left = ["mode", "spinner", "file-name", "file-modification-indicator"]
 center = []
 right = ["diagnostics", "selections", "register", "position", "file-encoding", "file-line-ending", "file-type"]
 separator = "│"
-mode.normal = "NORMAL"
-mode.insert = "INSERT"
-mode.select = "SELECT"
 
 [keys.normal]
 G = "goto_file_end"
@@ -60,6 +56,9 @@ C-l = "jump_view_right"
 C-s = ":write"
 H = "goto_previous_buffer"
 L = "goto_next_buffer"
+
+[keys.normal.space]
+i = ":toggle lsp.display-inlay-hints"
 
 [keys.normal.space.c]
 f = ":format"
