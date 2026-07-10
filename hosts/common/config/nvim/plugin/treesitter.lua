@@ -42,6 +42,7 @@ local ensure_installed = {
 	"astro",
 	"css",
 	"kotlin",
+	"clojure",
 	"rust",
 	"vim",
 	"vimdoc",
