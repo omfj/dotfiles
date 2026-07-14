@@ -19,7 +19,9 @@
 
 set -euo pipefail
 
-if ! command -v displayplacer >/dev/null 2>&1; then
+displayplacer="/opt/homebrew/bin/displayplacer"
+
+if [ ! -x "$displayplacer" ]; then
   echo "Error: displayplacer is not installed. Install with: brew install displayplacer" >&2
   exit 1
 fi
@@ -38,7 +40,7 @@ if [ -f "$backup_file" ]; then
   exit 0
 fi
 
-list_output="$(displayplacer list)"
+list_output="$("$displayplacer" list)"
 
 current_cmd="$(echo "$list_output" | grep '^displayplacer ')"
 if [ -z "$current_cmd" ]; then
@@ -98,5 +100,5 @@ ids_joined="$(
 
 echo "$current_cmd" >"$backup_file"
 
-displayplacer "id:${ids_joined} res:${main_res} scaling:${main_scaling} origin:(0,0) degree:0"
+"$displayplacer" "id:${ids_joined} res:${main_res} scaling:${main_scaling} origin:(0,0) degree:0"
 echo "Mirroring on, previous display layout saved to $backup_file."
