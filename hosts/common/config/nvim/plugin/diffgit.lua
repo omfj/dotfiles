@@ -41,9 +41,6 @@ diff.setup({
 -- Sign column and overlay colors live in plugin/01-colorscheme.lua so they
 -- survive theme switches (auto-dark-mode re-runs :colorscheme, which clears them).
 
-local git = require("mini.git")
-git.setup()
-
 -- Navigation
 vim.keymap.set("n", "]c", function()
 	if vim.wo.diff then
@@ -67,7 +64,6 @@ vim.keymap.set("n", "<leader>hr", function()
 	diff.operator("reset")
 end, { desc = "Reset hunk" })
 vim.keymap.set("n", "<leader>hp", diff.toggle_overlay, { desc = "Toggle diff overlay" })
-vim.keymap.set("n", "<leader>hb", git.show_at_cursor, { desc = "Show git object at cursor" })
 
 -- Text object
 vim.keymap.set({ "o", "x" }, "ih", diff.operator, { desc = "MiniDiff select hunk" })

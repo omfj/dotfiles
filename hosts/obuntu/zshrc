@@ -69,7 +69,13 @@ alias conf="cd $HOME/.config"
 
 function uuid() {
     local id=$(uuidgen | tr '[:upper:]' '[:lower:]')
-    echo "$id" | pbcopy
+    if has pbcopy; then
+        print -rn -- "$id" | pbcopy
+    elif has wl-copy; then
+        print -rn -- "$id" | wl-copy
+    elif has xclip; then
+        print -rn -- "$id" | xclip -selection clipboard
+    fi
     echo "$id"
 }
 
@@ -107,11 +113,15 @@ fi
 # Zinit
 
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
-[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-source "${ZINIT_HOME}/zinit.zsh"
+if [[ ! -r "$ZINIT_HOME/zinit.zsh" ]] && command -v git >/dev/null; then
+    mkdir -p "${ZINIT_HOME:h}"
+    git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
 
-zinit light zsh-users/zsh-autosuggestions
+if [[ -r "$ZINIT_HOME/zinit.zsh" ]]; then
+    source "$ZINIT_HOME/zinit.zsh"
+    zinit light zsh-users/zsh-autosuggestions
+fi
 
 # Starship
 
@@ -121,5 +131,7 @@ fi
 
 # zsh-patina (must be last, since it needs to own the zle widgets)
 
-zinit ice as"program" from"gh-r" pick"zsh-patina-*/zsh-patina" atload'eval "$(zsh-patina activate)"'
-zinit light michel-kraemer/zsh-patina
+if (( $+functions[zinit] )); then
+    zinit ice as"program" from"gh-r" pick"zsh-patina-*/zsh-patina" atload'eval "$(zsh-patina activate)"'
+    zinit light michel-kraemer/zsh-patina
+fi

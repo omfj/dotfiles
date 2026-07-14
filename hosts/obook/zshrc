@@ -1,4 +1,4 @@
-source ~/.config/zsh/colors.zsh
+[[ -r "$HOME/.config/zsh/colors.zsh" ]] && source "$HOME/.config/zsh/colors.zsh"
 
 #region Functions
 
@@ -8,7 +8,13 @@ function has() {
 
 function uuid() {
     local id=$(uuidgen | tr '[:upper:]' '[:lower:]')
-    echo "$id" | pbcopy
+    if has pbcopy; then
+        print -rn -- "$id" | pbcopy
+    elif has wl-copy; then
+        print -rn -- "$id" | wl-copy
+    elif has xclip; then
+        print -rn -- "$id" | xclip -selection clipboard
+    fi
     echo "$id"
 }
 
@@ -30,8 +36,11 @@ export DOTFILES=$PROGRAMMING/github/dotfiles
 export BUN_INSTALL=$HOME/.bun
 export PNPM_HOME=$HOME/Library/pnpm
 export PYENV_ROOT=$HOME/.pyenv
-export PHP_INI_SCAN_DIR=$HOME/.config/herd-lite/bin:$PHP_INI_SCAN_DIR
-export DOCKERHOST=unix://$COLIMA_HOME/default/docker.sock
+export PHP_INI_SCAN_DIR="$HOME/.config/herd-lite/bin${PHP_INI_SCAN_DIR:+:$PHP_INI_SCAN_DIR}"
+
+if [[ -S "${COLIMA_HOME:-$HOME/.colima}/default/docker.sock" ]]; then
+    export DOCKER_HOST="unix://${COLIMA_HOME:-$HOME/.colima}/default/docker.sock"
+fi
 
 #endregion Env
 
@@ -207,11 +216,15 @@ fi
 # Zinit
 
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
-[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-source "${ZINIT_HOME}/zinit.zsh"
+if [[ ! -r "$ZINIT_HOME/zinit.zsh" ]] && command -v git >/dev/null; then
+    mkdir -p "${ZINIT_HOME:h}"
+    git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
 
-zinit light zsh-users/zsh-autosuggestions
+if [[ -r "$ZINIT_HOME/zinit.zsh" ]]; then
+    source "$ZINIT_HOME/zinit.zsh"
+    zinit light zsh-users/zsh-autosuggestions
+fi
 
 # Starship
 
@@ -234,4 +247,6 @@ if has zsh-patina; then
 fi
 
 # Pi
-export PATH="/Users/olem/.vite-plus/js_runtime/node/24.18.0/bin:$PATH"
+if [[ -d "$HOME/.vite-plus/js_runtime/node/24.18.0/bin" ]]; then
+    path=("$HOME/.vite-plus/js_runtime/node/24.18.0/bin" $path)
+fi

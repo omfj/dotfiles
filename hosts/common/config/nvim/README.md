@@ -2,6 +2,9 @@
 
 Uses `vim.pack`, the built-in package manager.
 
+Plugin revisions are pinned in `nvim-pack-lock.json`. To intentionally update
+them, run `:lua vim.pack.update()` in Neovim and commit the resulting lockfile.
+
 ## Structure
 
 - `init.lua` — loader, neovide settings
