@@ -193,8 +193,9 @@ local tools = {
 	"codelldb",
 }
 
--- mason.nvim has no ensure_installed setting, so install missing packages
--- ourselves: every tool plus the Mason package for each enabled server
+-- mason.nvim has no ensure_installed setting. Keep the complete toolchain
+-- available as an explicit action instead of downloading language tooling on
+-- every Neovim startup.
 local ensure_installed = vim.deepcopy(tools)
 for _, pkg in pairs(servers) do
 	if pkg then
@@ -202,24 +203,25 @@ for _, pkg in pairs(servers) do
 	end
 end
 
-vim.api.nvim_create_autocmd("VimEnter", {
-	once = true,
-	callback = function()
-		local registry = require("mason-registry")
-		local missing = vim.tbl_filter(function(name)
+vim.api.nvim_create_user_command("MasonInstallConfigured", function()
+	local registry = require("mason-registry")
+	registry.refresh(function()
+		local missing = {}
+		for _, name in ipairs(ensure_installed) do
 			local ok, pkg = pcall(registry.get_package, name)
-			return not ok or not pkg:is_installed()
-		end, ensure_installed)
+			if ok and not pkg:is_installed() then
+				missing[#missing + 1] = pkg
+			end
+		end
+
 		if #missing == 0 then
+			vim.notify("Configured Mason packages are already installed")
 			return
 		end
-		registry.refresh(function()
-			for _, name in ipairs(missing) do
-				local ok, pkg = pcall(registry.get_package, name)
-				if ok and not pkg:is_installed() then
-					pkg:install()
-				end
-			end
-		end)
-	end,
-})
+
+		vim.notify(string.format("Installing %d configured Mason packages", #missing))
+		for _, pkg in ipairs(missing) do
+			pkg:install()
+		end
+	end)
+end, { desc = "Install all configured Mason packages" })
