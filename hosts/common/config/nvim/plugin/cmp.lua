@@ -10,15 +10,6 @@ local function blink_build()
 	end
 end
 
-vim.api.nvim_create_autocmd("PackChanged", {
-	callback = function(ev)
-		local name, kind = ev.data.spec.name, ev.data.kind
-		if name == "blink.cmp" and (kind == "install" or kind == "update") then
-			blink_build()
-		end
-	end,
-})
-
 -- A command rather than a keymap: <leader>dB belongs to dap (conditional
 -- breakpoint), and a manual rebuild is rare (PackChanged handles updates)
 vim.api.nvim_create_user_command("BlinkBuild", blink_build, { desc = "Build blink.cmp" })

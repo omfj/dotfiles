@@ -128,8 +128,6 @@ require("neo-tree").setup({
 	},
 })
 
--- Toggle at the current file (falls back to cwd for unnamed buffers)
 vim.keymap.set("n", "<leader>e", "<cmd>Neotree reveal toggle<cr>", { desc = "Toggle explorer (current file)" })
 
--- Toggle at cwd
 vim.keymap.set("n", "<leader>fo", "<cmd>Neotree toggle<cr>", { desc = "Toggle explorer (cwd)" })

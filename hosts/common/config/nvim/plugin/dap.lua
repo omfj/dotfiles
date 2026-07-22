@@ -27,7 +27,6 @@ local function load_dap()
 
 	dapui.setup()
 
-	-- Auto open/close UI
 	dap.listeners.after.event_initialized["dapui_config"] = function()
 		dapui.open()
 	end
@@ -38,7 +37,6 @@ local function load_dap()
 		dapui.close()
 	end
 
-	-- Go
 	require("dap-go").setup()
 
 	-- Adapters (no default configs — use .vscode/launch.json per project)
@@ -83,7 +81,6 @@ vim.fn.sign_define(
 vim.fn.sign_define("DapStopped", { text = "▶", texthl = "DapStopped", linehl = "DapStopped", numhl = "" })
 vim.fn.sign_define("DapBreakpointRejected", { text = "✘", texthl = "DapBreakpointRejected", linehl = "", numhl = "" })
 
--- Keymaps
 -- stylua: ignore start
 vim.keymap.set("n", "<leader>db", function() load_dap().toggle_breakpoint() end, { desc = "Toggle Breakpoint" })
 vim.keymap.set("n", "<leader>dB", function() load_dap().set_breakpoint(vim.fn.input("Condition: ")) end, { desc = "Conditional Breakpoint" })

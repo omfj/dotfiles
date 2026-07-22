@@ -12,6 +12,7 @@ vim.opt.listchars = {
 	nbsp = "·",
 	eol = "¬",
 	lead = "·",
+	space = "·",
 }
 vim.opt.autowrite = true -- Enable auto write
 vim.opt.autoread = true -- Reload files changed outside nvim

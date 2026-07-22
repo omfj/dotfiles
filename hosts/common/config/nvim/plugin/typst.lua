@@ -59,7 +59,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 				command = "tinymist.pinMain",
 				arguments = { vim.api.nvim_buf_get_name(0) },
 			}, { bufnr = bufnr })
-		end, { desc = "Tinymist Pin", noremap = true, buffer = bufnr })
+		end, { desc = "Tinymist Pin", buffer = bufnr })
 
 		vim.keymap.set("n", "<leader>tU", function()
 			vim.g.typst_manual_pin = true
@@ -68,6 +68,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 				command = "tinymist.pinMain",
 				arguments = { vim.v.null },
 			}, { bufnr = bufnr })
-		end, { desc = "Tinymist Unpin", noremap = true, buffer = bufnr })
+		end, { desc = "Tinymist Unpin", buffer = bufnr })
 	end,
 })

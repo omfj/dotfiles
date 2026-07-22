@@ -3,8 +3,7 @@ vim.pack.add({
 	{ src = "https://github.com/echasnovski/mini.nvim" },
 })
 
--- We only use gitsigns to show the current line blame, since mini.diff doesnt support that.
--- We disable the signs so not to conflict with mini diff.
+-- Use gitsigns for current-line blame only; mini.diff owns the signs.
 require("gitsigns").setup({
 	signs = {
 		add = { text = "" },
@@ -41,7 +40,6 @@ diff.setup({
 -- Sign column and overlay colors live in plugin/01-colorscheme.lua so they
 -- survive theme switches (auto-dark-mode re-runs :colorscheme, which clears them).
 
--- Navigation
 vim.keymap.set("n", "]c", function()
 	if vim.wo.diff then
 		return "]c"
@@ -58,12 +56,10 @@ vim.keymap.set("n", "[c", function()
 	return "<Ignore>"
 end, { expr = true, desc = "Previous hunk" })
 
--- Actions
 vim.keymap.set("n", "<leader>hs", diff.operator, { desc = "Apply hunk (stage)" })
 vim.keymap.set("n", "<leader>hr", function()
 	diff.operator("reset")
 end, { desc = "Reset hunk" })
 vim.keymap.set("n", "<leader>hp", diff.toggle_overlay, { desc = "Toggle diff overlay" })
 
--- Text object
 vim.keymap.set({ "o", "x" }, "ih", diff.operator, { desc = "MiniDiff select hunk" })

@@ -46,18 +46,32 @@ local function apply_blink_highlights()
 	end
 end
 
+local function apply_whitespace_highlights(color)
+	vim.api.nvim_set_hl(0, "NonText", { fg = color })
+	vim.api.nvim_set_hl(0, "SpecialKey", { fg = color })
+	vim.api.nvim_set_hl(0, "Whitespace", { fg = color })
+end
+
+local function apply_gutter_highlights(background)
+	for _, group in ipairs({ "CursorLineNr", "LineNr", "LineNrAbove", "LineNrBelow", "SignColumn" }) do
+		local highlight = vim.api.nvim_get_hl(0, { name = group, link = false })
+		highlight.bg = background
+		vim.api.nvim_set_hl(0, group, highlight)
+	end
+end
+
 local function apply_dark()
 	vim.cmd.colorscheme("jellybeans-muted")
 	vim.api.nvim_set_hl(0, "CursorLine", { bg = "#222222" }) -- softer cursor line, to not interfere with ghost text
 	vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#222222" }) -- softer color column, to match cursor line
-	vim.api.nvim_set_hl(0, "NonText", { fg = "#222222" }) -- softer whitespace characters
+	apply_whitespace_highlights("#404040")
+	apply_gutter_highlights("#151515")
 	vim.api.nvim_set_hl(0, "MiniHipatternsNbsp", { bg = "#4a3a00" }) -- dark yellow bg on non-breaking spaces (opt+space)
 	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#151515" })
 	vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#444444", bg = "NONE" })
 	vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", { fg = "#555555", italic = true }) -- a bit harder color so to not be invisible in the cursor line
 	vim.api.nvim_set_hl(0, "LspInlayHint", { link = "GitSignsCurrentLineBlame" }) -- match blame text; default link to NonText is too dark
 	vim.api.nvim_set_hl(0, "LspCodeLens", { fg = "#555555" })
-	-- diff colors
 	vim.api.nvim_set_hl(0, "DiffAdd", { bg = "#3a4a3a" })
 	vim.api.nvim_set_hl(0, "DiffDelete", { bg = "#4a2a2a" })
 	vim.api.nvim_set_hl(0, "DiffChange", { bg = "#4a4a2a" })
@@ -68,6 +82,8 @@ end
 
 local function apply_light()
 	vim.cmd.colorscheme("jellybeans-light")
+	apply_whitespace_highlights("#b0b0b0")
+	apply_gutter_highlights("#eeeeee")
 	vim.api.nvim_set_hl(0, "LspInlayHint", { link = "GitSignsCurrentLineBlame" }) -- match blame text
 	vim.api.nvim_set_hl(0, "LspCodeLens", { fg = "#555555" })
 	apply_blink_highlights()
@@ -77,4 +93,11 @@ require("auto-dark-mode").setup({
 	update_interval = 1000,
 	set_dark_mode = apply_dark,
 	set_light_mode = apply_light,
+})
+
+vim.api.nvim_create_autocmd("VimEnter", {
+	once = true,
+	callback = function()
+		apply_whitespace_highlights(vim.o.background == "light" and "#b0b0b0" or "#404040")
+	end,
 })

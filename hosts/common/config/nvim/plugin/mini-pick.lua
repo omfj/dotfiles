@@ -37,9 +37,10 @@ vim.ui.select = pick.ui_select
 -- Yank the current visual selection and return it, restoring the register
 local function visual_selection()
 	local saved = vim.fn.getreg("v")
+	local saved_type = vim.fn.getregtype("v")
 	vim.cmd('normal! "vy')
 	local text = vim.fn.getreg("v")
-	vim.fn.setreg("v", saved)
+	vim.fn.setreg("v", saved, saved_type)
 	return text
 end
 

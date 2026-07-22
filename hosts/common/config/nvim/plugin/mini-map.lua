@@ -21,7 +21,7 @@ map.setup({
 vim.api.nvim_create_autocmd("VimEnter", {
 	callback = function()
 		vim.schedule(function()
-			if vim.bo.filetype ~= "ministarter" then
+			if vim.bo.filetype ~= "alpha" then
 				map.open()
 			end
 		end)

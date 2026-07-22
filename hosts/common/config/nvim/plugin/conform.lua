@@ -2,7 +2,9 @@ vim.pack.add({
 	{ src = "https://github.com/stevearc/conform.nvim" },
 })
 
-require("conform").setup({
+local conform = require("conform")
+
+conform.setup({
 	formatters = {
 		oxfmt = {
 			condition = function(_, ctx)
@@ -52,10 +54,10 @@ require("conform").setup({
 })
 
 vim.keymap.set({ "n", "v" }, "<leader>cf", function()
-	require("conform").format({ async = true, lsp_format = "fallback" })
+	conform.format({ async = true, lsp_format = "fallback" })
 end, { desc = "Format" })
 
-vim.keymap.set("n", "<leader>uf", function()
+vim.keymap.set("n", "<leader>uF", function()
 	vim.g.disable_autoformat = not vim.g.disable_autoformat
 	if vim.g.disable_autoformat then
 		vim.notify("Autoformat disabled (global)")
@@ -63,12 +65,3 @@ vim.keymap.set("n", "<leader>uf", function()
 		vim.notify("Autoformat enabled (global)")
 	end
 end, { desc = "Toggle autoformat (global)" })
-
-vim.keymap.set("n", "<leader>uF", function()
-	vim.b.disable_autoformat = not vim.b.disable_autoformat
-	if vim.b.disable_autoformat then
-		vim.notify("Autoformat disabled (buffer)")
-	else
-		vim.notify("Autoformat enabled (buffer)")
-	end
-end, { desc = "Toggle autoformat (buffer)" })

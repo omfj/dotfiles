@@ -1,5 +1,5 @@
 plugins=(
-    git 
+    git
     zsh-syntax-highlighting
     web-search
     zsh-fzf-history-search

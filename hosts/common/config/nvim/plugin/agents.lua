@@ -28,7 +28,6 @@ vim.api.nvim_create_autocmd("TextChangedI", {
 	desc = "Dismiss Copilot suggestion during macro execution",
 })
 
--- Toggle Copilot suggestions
 vim.keymap.set("n", "<leader>ap", function()
 	require("copilot.suggestion").toggle_auto_trigger()
 	vim.g.copilot_suggestion_enabled = not (vim.g.copilot_suggestion_enabled ~= false)

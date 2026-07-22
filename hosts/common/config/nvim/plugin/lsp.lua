@@ -1,25 +1,10 @@
-vim.api.nvim_create_autocmd("PackChanged", {
-	callback = function(ev)
-		local name, kind = ev.data.spec.name, ev.data.kind
-		if name == "mason.nvim" and (kind == "install" or kind == "update") then
-			vim.schedule(function()
-				if not ev.data.active then
-					vim.cmd.packadd("mason.nvim")
-				end
-				vim.cmd("MasonUpdate")
-			end)
-		end
-	end,
-})
-
 vim.pack.add({
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/mason-org/mason.nvim" },
+	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" },
 	{ src = "https://github.com/b0o/SchemaStore.nvim" },
-	{ src = "https://github.com/mfussenegger/nvim-jdtls" },
 })
 
--- Set up diagnostics
 vim.diagnostic.config({
 	underline = true,
 	update_in_insert = false,
@@ -40,7 +25,6 @@ vim.diagnostic.config({
 	},
 })
 
--- LSP keymaps
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 	callback = function(ev)
@@ -83,40 +67,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
--- Show LSP progress in the cmdline
-vim.api.nvim_create_autocmd("LspProgress", {
-	callback = function(ev)
-		local value = ev.data.params.value
-		vim.api.nvim_echo({ { value.message or "done" } }, false, {
-			id = "lsp." .. ev.data.client_id,
-			kind = "progress",
-			source = "vim.lsp",
-			title = value.title,
-			status = value.kind ~= "end" and "running" or "success",
-			percent = value.percentage,
-		})
-	end,
-})
-
--- Get the latest LSP log
-vim.api.nvim_create_user_command("LspLog", function(_)
-	local state_path = vim.fn.stdpath("state")
-	local log_path = vim.fs.joinpath(state_path, "lsp.log")
-
-	vim.cmd(string.format("edit %s", log_path))
-end, {
-	desc = "Show LSP log",
-})
-
--- Restart the LSP servers
-vim.api.nvim_create_user_command("LspRestart", "lsp restart", {
-	desc = "Restart LSP",
-})
-
-vim.api.nvim_create_user_command("LspInfo", "checkhealth vim.lsp", {
-	desc = "Check LSP health",
-})
-
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 local has_blink, blink = pcall(require, "blink.cmp")
 if has_blink then
@@ -124,104 +74,49 @@ if has_blink then
 end
 vim.lsp.config("*", { capabilities = capabilities })
 
--- LSP servers to enable, mapped to the Mason package that provides them
--- (false = installed outside Mason). Adding a language is one entry here.
+-- LSP servers to install and enable. Adding a language is one entry here.
 local servers = {
-	lua_ls = "lua-language-server",
-	bashls = "bash-language-server",
-	denols = "deno",
-	ts_ls = "typescript-language-server",
-	svelte = "svelte-language-server",
-	astro = "astro-language-server",
-	html = "html-lsp",
-	cssls = "css-lsp",
-	emmet_language_server = "emmet-language-server",
-	tailwindcss = "tailwindcss-language-server",
-	kotlin_language_server = "kotlin-language-server",
-	clojure_lsp = "clojure-lsp",
-	rust_analyzer = "rust-analyzer",
-	eslint = "eslint-lsp",
-	basedpyright = "basedpyright",
-	ruff = "ruff",
-	tinymist = "tinymist",
-	yamlls = "yaml-language-server",
-	jsonls = "json-lsp",
-	taplo = "taplo",
-	gopls = "gopls",
-	vue_language_server = "vue-language-server",
-	oxlint = "oxlint",
-	zls = "zls",
-	jinja_lsp = "jinja-lsp",
-	templ = "templ",
-	texlab = "texlab",
-	harper_ls = "harper-ls",
+	"lua_ls",
+	"bashls",
+	"denols",
+	"ts_ls",
+	"svelte",
+	"astro",
+	"html",
+	"cssls",
+	"emmet_language_server",
+	"tailwindcss",
+	"kotlin_language_server",
+	"clojure_lsp",
+	"rust_analyzer",
+	"eslint",
+	"basedpyright",
+	"ruff",
+	"tinymist",
+	"yamlls",
+	"jsonls",
+	"taplo",
+	"gopls",
+	"vue_ls",
+	"oxlint",
+	"zls",
+	"jinja_lsp",
+	"templ",
+	"texlab",
+	"harper_ls",
 }
 
 -- Optionally enable Harper LSP if not disabled (still installed, so :ToggleHarper works)
 local harper_disabled = vim.uv.fs_stat(vim.fn.stdpath("data") .. "/harper_disabled") ~= nil
 
-local enabled_servers = {}
-for server in pairs(servers) do
-	if server ~= "harper_ls" or not harper_disabled then
-		table.insert(enabled_servers, server)
-	end
-end
+local enabled_servers = vim.tbl_filter(function(server)
+	return server ~= "harper_ls" or not harper_disabled
+end, servers)
+
+require("mason").setup()
+require("mason-lspconfig").setup({
+	ensure_installed = enabled_servers,
+	automatic_enable = false,
+})
 
 vim.lsp.enable(enabled_servers)
-
--- Mason setup
-require("mason").setup()
-
--- Non-LSP tools (formatters, linters, debug adapters)
-local tools = {
-	"stylua",
-	"shfmt",
-	"prettierd",
-	"prettier",
-	"ktlint",
-	"typstyle",
-	"goimports",
-	"gofumpt",
-	"fixjson",
-	"djlint",
-	"clang-format",
-	"jdtls",
-	"java-debug-adapter",
-	"google-java-format",
-	"delve",
-	"js-debug-adapter",
-	"codelldb",
-}
-
--- mason.nvim has no ensure_installed setting. Keep the complete toolchain
--- available as an explicit action instead of downloading language tooling on
--- every Neovim startup.
-local ensure_installed = vim.deepcopy(tools)
-for _, pkg in pairs(servers) do
-	if pkg then
-		table.insert(ensure_installed, pkg)
-	end
-end
-
-vim.api.nvim_create_user_command("MasonInstallConfigured", function()
-	local registry = require("mason-registry")
-	registry.refresh(function()
-		local missing = {}
-		for _, name in ipairs(ensure_installed) do
-			local ok, pkg = pcall(registry.get_package, name)
-			if ok and not pkg:is_installed() then
-				missing[#missing + 1] = pkg
-			end
-		end
-
-		if #missing == 0 then
-			vim.notify("Configured Mason packages are already installed")
-			return
-		end
-
-		vim.notify(string.format("Installing %d configured Mason packages", #missing))
-		for _, pkg in ipairs(missing) do
-			pkg:install()
-		end
-	end)
-end, { desc = "Install all configured Mason packages" })
