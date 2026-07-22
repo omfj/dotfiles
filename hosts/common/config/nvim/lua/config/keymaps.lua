@@ -2,9 +2,6 @@ local pt = require("util.persist_toggle")
 local function map(mode, lhs, rhs, opts)
 	opts = opts or {}
 	opts.silent = opts.silent ~= false
-	if opts.remap and not vim.g.vscode then
-		opts.remap = nil
-	end
 	vim.keymap.set(mode, lhs, rhs, opts)
 end
 
@@ -20,13 +17,9 @@ map("n", "<C-w>J", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
 map("n", "<C-w>H", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
 map("n", "<C-w>L", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
 
--- Move Lines
-map("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move down" })
-map("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move up" })
+-- Move Lines (insert mode only; normal/visual <A-hjkl> are owned by mini.move)
 map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move down" })
 map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
-map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
-map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 
 -- buffers (non-bufferline specific)
 map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
@@ -143,9 +136,7 @@ map("n", "<leader>uL", function() vim.wo.relativenumber = not vim.wo.relativenum
 map("n", "<leader>ul", function() pt.cycle("listchars") end, { desc = "Toggle List Chars" })
 map("n", "<leader>ud", function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end, { desc = "Toggle Diagnostics" })
 map("n", "<leader>uc", function() pt.cycle("conceal") end, { desc = "Cycle Conceal" })
-if vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint then
-  map("n", "<leader>uh", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, { desc = "Toggle Inlay Hints" })
-end
+map("n", "<leader>uh", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, { desc = "Toggle Inlay Hints" })
 map("n", "<leader>ucl", function() vim.lsp.codelens.enable(not vim.lsp.codelens.is_enabled()) end, { desc = "Toggle CodeLens" })
 map("n", "<leader>uT", function() if vim.b.ts_highlight then vim.treesitter.stop() else vim.treesitter.start() end end, { desc = "Toggle Treesitter Highlight" })
 map("n", "<leader>uH", "<cmd>ToggleHarper<cr>", { desc = "Toggle Harper (spelling)" })
@@ -187,13 +178,13 @@ map("t", "<C-w>j", "<cmd>wincmd j<cr>", { desc = "Go to lower window" })
 map("t", "<C-w>k", "<cmd>wincmd k<cr>", { desc = "Go to upper window" })
 map("t", "<C-w>l", "<cmd>wincmd l<cr>", { desc = "Go to right window" })
 map("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
-map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
+map("t", "<c-_>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 
 -- windows
-map("n", "<leader>ww", "<C-W>p", { desc = "Other window", remap = true })
-map("n", "<leader>wd", "<C-W>c", { desc = "Delete window", remap = true })
-map("n", "<leader>w-", "<C-W>s", { desc = "Split window below", remap = true })
-map("n", "<leader>w|", "<C-W>v", { desc = "Split window right", remap = true })
+map("n", "<leader>ww", "<C-W>p", { desc = "Other window" })
+map("n", "<leader>wd", "<C-W>c", { desc = "Delete window" })
+map("n", "<leader>w-", "<C-W>s", { desc = "Split window below" })
+map("n", "<leader>w|", "<C-W>v", { desc = "Split window right" })
 
 -- tabs
 map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })

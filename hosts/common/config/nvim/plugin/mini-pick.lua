@@ -49,24 +49,52 @@ end
 -- find
 vim.keymap.set("n", "<leader><space>", function() pick.builtin.files() end, { desc = "Find Files" })
 vim.keymap.set("n", "<leader>fc", function() pick.builtin.files(nil, { source = { cwd = vim.fn.stdpath("config") } }) end, { desc = "Find Config File" })
-vim.keymap.set("n", "<leader>fF", function() pick.builtin.files(nil, { source = { cwd = vim.fn.getcwd() } }) end, { desc = "Find Files (cwd)" })
 vim.keymap.set("n", "<leader>,", function() pick.builtin.buffers() end, { desc = "Switch Buffer" })
 vim.keymap.set("n", "<leader>fb", function() pick.builtin.buffers() end, { desc = "Buffers" })
 vim.keymap.set("n", "<leader>fr", function() extra.pickers.oldfiles() end, { desc = "Recent" })
 vim.keymap.set("n", "<leader>fR", function() extra.pickers.oldfiles({ current_dir = true }) end, { desc = "Recent (cwd)" })
 
--- grep
+-- grep (mini.pick has no root-dir concept; everything is relative to cwd)
 vim.keymap.set("n", "<leader>/", function() pick.builtin.grep_live() end, { desc = "Grep" })
-vim.keymap.set("n", "<leader>sg", function() pick.builtin.grep_live() end, { desc = "Grep (root dir)" })
-vim.keymap.set("n", "<leader>sG", function() pick.builtin.grep_live(nil, { source = { cwd = vim.fn.getcwd() } }) end, { desc = "Grep (cwd)" })
+vim.keymap.set("n", "<leader>sg", function() pick.builtin.grep_live() end, { desc = "Grep (cwd)" })
 vim.keymap.set("n", "<leader>sf", function() pick.builtin.grep_live(nil, { source = { cwd = vim.fn.expand("%:p:h") } }) end, { desc = "Grep current folder" })
-vim.keymap.set("n", "<leader>sw", function() pick.builtin.grep({ pattern = vim.fn.expand("<cword>") }) end, { desc = "Word (root dir)" })
-vim.keymap.set("n", "<leader>sW", function() pick.builtin.grep({ pattern = vim.fn.expand("<cword>") }, { source = { cwd = vim.fn.getcwd() } }) end, { desc = "Word (cwd)" })
-vim.keymap.set("v", "<leader>sw", function() pick.builtin.grep({ pattern = visual_selection() }) end, { desc = "Selection (root dir)" })
-vim.keymap.set("v", "<leader>sW", function() pick.builtin.grep({ pattern = visual_selection() }, { source = { cwd = vim.fn.getcwd() } }) end, { desc = "Selection (cwd)" })
+vim.keymap.set("n", "<leader>sw", function() pick.builtin.grep({ pattern = vim.fn.expand("<cword>") }) end, { desc = "Word (cwd)" })
+vim.keymap.set("v", "<leader>sw", function() pick.builtin.grep({ pattern = visual_selection() }) end, { desc = "Selection (cwd)" })
 
 -- git
 vim.keymap.set("n", "<leader>gc", function() extra.pickers.git_commits() end, { desc = "commits" })
+-- Show the two porcelain status columns before each path, colored like
+-- `git status` (green = staged, red = unstaged, gray = untracked). Items are
+-- tables: `text` is displayed/matched, `path` drives the icon and file opening.
+local git_status_ns = vim.api.nvim_create_namespace("mini-pick-git-status")
+
+local function git_status_show(buf_id, items, query)
+	pick.default_show(buf_id, items, query, { show_icons = true })
+	vim.api.nvim_buf_clear_namespace(buf_id, git_status_ns, 0, -1)
+	local lines = vim.api.nvim_buf_get_lines(buf_id, 0, -1, false)
+	for i, item in ipairs(items) do
+		local line = lines[i]
+		if line == nil then
+			break
+		end
+		-- Locate where the item text starts in the rendered line (after the icon)
+		local start = line:find(item.text, 1, true)
+		if start then
+			if item.status == "??" then
+				vim.api.nvim_buf_set_extmark(buf_id, git_status_ns, i - 1, start - 1, { end_col = start + 1, hl_group = "Comment" })
+			else
+				local staged, unstaged = item.status:sub(1, 1), item.status:sub(2, 2)
+				if staged ~= " " then
+					vim.api.nvim_buf_set_extmark(buf_id, git_status_ns, i - 1, start - 1, { end_col = start, hl_group = "Added" })
+				end
+				if unstaged ~= " " then
+					vim.api.nvim_buf_set_extmark(buf_id, git_status_ns, i - 1, start, { end_col = start + 1, hl_group = "Removed" })
+				end
+			end
+		end
+	end
+end
+
 vim.keymap.set("n", "<leader>gs", function()
 	pick.builtin.cli({
 		command = { "git", "-c", "core.quotepath=false", "status", "--porcelain" },
@@ -74,8 +102,13 @@ vim.keymap.set("n", "<leader>gs", function()
 			local res = {}
 			for _, line in ipairs(lines) do
 				if line ~= "" then
+					local status = line:sub(1, 2)
 					local path = line:sub(4)
-					res[#res + 1] = path:match(" -> (.+)") or path
+					res[#res + 1] = {
+						text = status .. " " .. path,
+						path = path:match(" -> (.+)") or path,
+						status = status,
+					}
 				end
 			end
 			return res
@@ -83,7 +116,7 @@ vim.keymap.set("n", "<leader>gs", function()
 	}, {
 		source = {
 			name = "Git status",
-			show = function(buf_id, items, query) pick.default_show(buf_id, items, query, { show_icons = true }) end,
+			show = git_status_show,
 		},
 	})
 end, { desc = "status" })

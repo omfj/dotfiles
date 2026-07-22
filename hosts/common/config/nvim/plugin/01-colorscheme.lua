@@ -95,9 +95,10 @@ require("auto-dark-mode").setup({
 	set_light_mode = apply_light,
 })
 
-vim.api.nvim_create_autocmd("VimEnter", {
-	once = true,
+-- Overrides that should survive any colorscheme change, including picking a
+-- different scheme with <leader>uC (auto-dark-mode only re-runs its own apply fns)
+vim.api.nvim_create_autocmd("ColorScheme", {
 	callback = function()
-		apply_whitespace_highlights(vim.o.background == "light" and "#b0b0b0" or "#404040")
+		vim.api.nvim_set_hl(0, "SpellRare", {})
 	end,
 })

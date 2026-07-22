@@ -17,7 +17,7 @@ local function recording()
 end
 
 local function searchcount()
-	local ok, result = pcall(vim.fn.searchcount, { reltime = vim.o.timeout / 1000 })
+	local ok, result = pcall(vim.fn.searchcount, { reltime = vim.o.timeoutlen / 1000 })
 	if not ok or not result or result.incomplete == 1 then
 		return ""
 	end

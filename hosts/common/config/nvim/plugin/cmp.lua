@@ -10,8 +10,8 @@ local function blink_build()
 	end
 end
 
--- A command rather than a keymap: <leader>dB belongs to dap (conditional
--- breakpoint), and a manual rebuild is rare (PackChanged handles updates)
+-- A command rather than a keymap: a manual rebuild is rare, since the
+-- PackChanged hook in 00-pack-hooks.lua rebuilds on install/update
 vim.api.nvim_create_user_command("BlinkBuild", blink_build, { desc = "Build blink.cmp" })
 
 vim.pack.add({

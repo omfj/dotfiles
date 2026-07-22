@@ -25,7 +25,7 @@ end, { desc = "Centered Buffer" })
 vim.keymap.set("n", "<leader>ft", function() Snacks.terminal.toggle(nil, { win = { style = "float" } }) end, { desc = "Float Terminal" })
 vim.keymap.set("n", "<leader>fT", function() Snacks.terminal.toggle(nil, { win = { position = "bottom" } }) end, { desc = "Horizontal Terminal" })
 vim.keymap.set("n", "<c-/>", function() Snacks.terminal.toggle(nil, { win = { style = "float" } }) end, { desc = "Float Terminal" })
-vim.keymap.set("n", "<c-_>", function() Snacks.terminal.toggle(nil, { win = { style = "float" } }) end, { desc = "which_key_ignore" })
+vim.keymap.set("n", "<c-_>", function() Snacks.terminal.toggle(nil, { win = { style = "float" } }) end, { desc = "Float Terminal" })
 vim.keymap.set("n", "<leader>.", function() Snacks.scratch() end, { desc = "Scratch Buffer" })
 
 -- stylua: ignore end

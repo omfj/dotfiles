@@ -35,8 +35,6 @@ miniclue.setup({
 		-- stylua: ignore start
 		{ mode = "n", keys = "<Leader>a", desc = "+Agents" },
 		{ mode = "n", keys = "<Leader>b", desc = "+Buffers" },
-		{ mode = "n", keys = "<Leader>d", desc = "+Debug" },
-		{ mode = "n", keys = "<Leader>dg", desc = "+Go" },
 		{ mode = "n", keys = "<Leader>D", desc = "+Dependencies" },
 		{ mode = "n", keys = "<Leader>C", desc = "+Crate (Rust)" },
 		{ mode = "n", keys = "<Leader>c", desc = "+Code" },

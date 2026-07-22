@@ -38,7 +38,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "gra", vim.lsp.buf.code_action, vim.tbl_extend("force", opts, { desc = "Code Actions" }))
 		vim.keymap.set("n", "grn", vim.lsp.buf.rename, vim.tbl_extend("force", opts, { desc = "Rename" }))
 		vim.keymap.set("n", "gO", function() require("mini.extra").pickers.lsp({ scope = "document_symbol" }) end, vim.tbl_extend("force", opts, { desc = "Document Symbols" }))
-		vim.keymap.set("n", "<leader>cS", function() require("util.copilot-rename").suggest() end, vim.tbl_extend("force", opts, { desc = "Suggest name (Copilot)" }))
 		-- stylua: ignore end
 		vim.keymap.set("n", "<leader>K", function()
 			vim.lsp.buf.hover()

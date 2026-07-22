@@ -6,5 +6,5 @@ require("grug-far").setup()
 
 vim.keymap.set("n", "<leader>sr", "<cmd>GrugFar<cr>", { desc = "Search and Replace" })
 vim.keymap.set("v", "<leader>sr", function()
-	require("grug-far").open({ prefills = { search = vim.fn.expand("<cword>") } })
+	require("grug-far").with_visual_selection()
 end, { desc = "Search and Replace (selection)" })
