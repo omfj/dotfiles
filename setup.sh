@@ -10,17 +10,17 @@ usage() {
 
 while (($# > 0)); do
     case "$1" in
-        --dry-run | -n)
-            dry_run=true
-            ;;
-        --help | -h)
-            usage
-            exit 0
-            ;;
-        *)
-            usage >&2
-            exit 1
-            ;;
+    --dry-run | -n)
+        dry_run=true
+        ;;
+    --help | -h)
+        usage
+        exit 0
+        ;;
+    *)
+        usage >&2
+        exit 1
+        ;;
     esac
     shift
 done
@@ -72,6 +72,10 @@ host_is() {
     [[ "$host" == "$1" ]]
 }
 
+file_exists() {
+    [[ -e "$1" ]]
+}
+
 # Common
 link "$common/config/ghostty" "$conf/ghostty"
 link "$common/config/helix" "$conf/helix"
@@ -116,6 +120,6 @@ if host_is "oarch"; then
 fi
 
 # obuntu
-if [[ -e "$HOME/.obuntu" ]]; then
+if file_exists "$HOME/.obuntu"; then
     link "$obuntu/zshrc" "$HOME/.zshrc"
 fi
