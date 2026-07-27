@@ -29,10 +29,10 @@ vim.api.nvim_create_autocmd("VimEnter", {
 })
 
 -- stylua: ignore start
-vim.keymap.set("n", "<leader>Mo", function() map.open() end, { desc = "Open minimap" })
-vim.keymap.set("n", "<leader>Mc", function() map.close() end, { desc = "Close minimap" })
-vim.keymap.set("n", "<leader>Mt", function() map.toggle() end, { desc = "Toggle minimap" })
-vim.keymap.set("n", "<leader>Mr", function() map.refresh() end, { desc = "Refresh minimap" })
-vim.keymap.set("n", "<leader>Mf", function() map.toggle_focus() end, { desc = "Toggle focus" })
-vim.keymap.set("n", "<leader>Ms", function() map.toggle_side() end, { desc = "Toggle side" })
+vim.keymap.set("n", "<leader>uMo", function() map.open() end, { desc = "Open minimap" })
+vim.keymap.set("n", "<leader>uMc", function() map.close() end, { desc = "Close minimap" })
+vim.keymap.set("n", "<leader>uMt", function() map.toggle() end, { desc = "Toggle minimap" })
+vim.keymap.set("n", "<leader>uMr", function() map.refresh() end, { desc = "Refresh minimap" })
+vim.keymap.set("n", "<leader>uMf", function() map.toggle_focus() end, { desc = "Toggle focus" })
+vim.keymap.set("n", "<leader>uMs", function() map.toggle_side() end, { desc = "Toggle side" })
 -- stylua: ignore end

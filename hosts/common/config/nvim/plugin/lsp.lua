@@ -39,9 +39,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "grn", vim.lsp.buf.rename, vim.tbl_extend("force", opts, { desc = "Rename" }))
 		vim.keymap.set("n", "gO", function() require("mini.extra").pickers.lsp({ scope = "document_symbol" }) end, vim.tbl_extend("force", opts, { desc = "Document Symbols" }))
 		-- stylua: ignore end
-		vim.keymap.set("n", "<leader>K", function()
-			vim.lsp.buf.hover()
-		end, { desc = "Hover" })
 		vim.keymap.set(
 			"n",
 			"<C-k>",

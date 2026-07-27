@@ -121,6 +121,10 @@ vim.keymap.set("n", "<leader>gs", function()
 	})
 end, { desc = "status" })
 
+-- LSP
+vim.keymap.set("n", "<leader>li", "<cmd>LspInfo<cr>", { desc = "LSP Info" })
+vim.keymap.set("n", "<leader>lr", "<cmd>LspRestart<cr>", { desc = "Restart LSP" })
+
 -- search
 vim.keymap.set("n", '<leader>s"', function() extra.pickers.registers() end, { desc = "Registers" })
 vim.keymap.set("n", "<leader>sb", function() extra.pickers.buf_lines({ scope = "current" }) end, { desc = "Buffer" })

@@ -56,12 +56,12 @@ vim.keymap.set("n", "[c", function()
 	return "<Ignore>"
 end, { expr = true, desc = "Previous hunk" })
 
-vim.keymap.set("n", "<leader>hs", function()
+vim.keymap.set("n", "<leader>ghs", function()
 	return diff.operator("apply") .. "ih"
 end, { expr = true, remap = true, desc = "Apply hunk (stage)" })
-vim.keymap.set("n", "<leader>hr", function()
+vim.keymap.set("n", "<leader>ghr", function()
 	return diff.operator("reset") .. "ih"
 end, { expr = true, remap = true, desc = "Reset hunk" })
-vim.keymap.set("n", "<leader>hp", diff.toggle_overlay, { desc = "Toggle diff overlay" })
+vim.keymap.set("n", "<leader>ghp", diff.toggle_overlay, { desc = "Toggle diff overlay" })
 
 vim.keymap.set({ "o", "x" }, "ih", diff.textobject, { desc = "MiniDiff select hunk" })

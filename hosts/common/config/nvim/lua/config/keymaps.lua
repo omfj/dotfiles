@@ -21,10 +21,6 @@ map("n", "<C-w>L", "<cmd>vertical resize +2<cr>", { desc = "Increase window widt
 map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move down" })
 map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
 
--- buffers (non-bufferline specific)
-map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
-map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
-
 -- Clear search with <esc>
 map("n", "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
 map("i", "<esc>", function()
@@ -164,7 +160,7 @@ end, { desc = "Toggle LSP (buffer)" })
 
 -- quit
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
-map("n", "<leader>R", "<cmd>restart<cr>", { desc = "Restart Neovim" })
+map("n", "<leader>R", function() require("mini.sessions").restart() end, { desc = "Restart Neovim and restore session" })
 
 -- highlights under cursor
 map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
