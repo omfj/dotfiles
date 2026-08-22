@@ -83,7 +83,6 @@ local servers = {
 	"emmet_language_server",
 	"tailwindcss",
 	"kotlin_language_server",
-	"clojure_lsp",
 	"rust_analyzer",
 	"eslint",
 	"basedpyright",
