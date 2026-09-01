@@ -70,7 +70,7 @@
     "enabled": true,
   },
   "project_panel": {
-    "hide_root": true,
+    "hide_root": false,
     "dock": "left",
   },
   "outline_panel": {
@@ -80,12 +80,13 @@
     "dock": "left",
   },
   "git_panel": {
+    "file_icons": false,
     "dock": "left",
   },
   "theme": {
     "mode": "dark",
     "light": "One Light",
-    "dark": "GitHub Dark"
+    "dark": "JetBrains Islands Dark"
   },
   "icon_theme": {
     "mode": "light",
@@ -101,7 +102,7 @@
   "ui_font_family": ".ZedSans",
   "buffer_line_height": "standard",
   "buffer_font_size": 16.0,
-  "buffer_font_family": "Iosevka Nerd Font Mono",
+  "buffer_font_family": "IosevkaTerm Nerd Font Mono",
   "relative_line_numbers": "enabled",
   "show_whitespaces": "trailing",
   // AI
@@ -142,4 +143,27 @@
       "visual": "block",
     },
   },
+  "lsp": {
+    "tailwindcss-language-server": {
+      "settings": {
+        "classFunctions": [
+          "cva",
+          "cx"
+        ],
+        "experimental": {
+          "classRegex": [
+            "[cls|className]\\s\\:\\=\\s\"([^\"]*)"
+          ]
+        }
+      }
+    }
+  },
+  "languages": {
+    "CSS": {
+      "language_servers": [
+        "tailwindcss-intellisense-css",
+        "!vscode-css-language-server",
+      ]
+    }
+  }
 }
