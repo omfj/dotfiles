@@ -9,10 +9,8 @@ bold_italic = { family = "IosevkaTerm Nerd Font", style = "BoldItalic" }
 size = 14.0
 
 [window]
-padding = { x = 5, y = 25 }
+padding = { x = 10, y = 10 }
 dynamic_padding = true
-decorations = "Transparent"
-startup_mode = "SimpleFullscreen"
 
 [cursor]
 style = { shape = "Block", blinking = "Always" }
