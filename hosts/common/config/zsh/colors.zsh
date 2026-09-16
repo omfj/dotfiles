@@ -1,4 +1,4 @@
-# ── Dark palette (Jellybeans)
+# Jellybeans Dark
 
 export COLORS_DARK_BG="#151515"
 export COLORS_DARK_FG="#e8e8d3"
@@ -11,7 +11,7 @@ export COLORS_DARK_DIM="#b0b8c0"
 export COLORS_DARK_BRIGHT="#dddddd"
 export COLORS_DARK_SURFACE="#2a2a2a"
 
-# ── Light palette (Jellybeans Light)
+# Jellybeans Light
 
 export COLORS_LIGHT_BG="#eeeeee"
 export COLORS_LIGHT_FG="#252525"
@@ -23,3 +23,16 @@ export COLORS_LIGHT_MUTED="#787878"
 export COLORS_LIGHT_DIM="#7a8490"
 export COLORS_LIGHT_BRIGHT="#252525"
 export COLORS_LIGHT_SURFACE="#e0dcd7"
+
+() {
+    local palette=DARK key variable
+    if command -v defaults >/dev/null 2>&1 &&
+        [[ "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" != Dark ]]; then
+        palette=LIGHT
+    fi
+
+    for key in BG FG ACCENT SECONDARY ACCENT_FG BORDER MUTED DIM BRIGHT SURFACE; do
+        variable="COLORS_${palette}_${key}"
+        export "COLORS_${key}=${(P)variable}"
+    done
+}

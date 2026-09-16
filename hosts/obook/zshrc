@@ -250,3 +250,11 @@ fi
 if [[ -d "$HOME/.vite-plus/js_runtime/node/24.18.0/bin" ]]; then
     path=("$HOME/.vite-plus/js_runtime/node/24.18.0/bin" $path)
 fi
+
+# pnpm
+export PNPM_HOME="/Users/olem/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+# pnpm end
