@@ -114,6 +114,10 @@ require("blink.cmp").setup({
 			},
 		},
 		menu = {
+			-- Do not auto show in CSS, as it is annoying. Prefer <C-Space>.
+			auto_show = function()
+				return not vim.tbl_contains({ "css", "scss", "less" }, vim.bo.filetype)
+			end,
 			winhighlight = "Normal:BlinkCmpMenu,CursorLine:BlinkCmpMenuSelection,Search:None",
 		},
 		documentation = {
