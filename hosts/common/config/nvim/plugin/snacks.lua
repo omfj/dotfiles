@@ -8,6 +8,8 @@ require("snacks").setup({
 	terminal = { enabled = true },
 	words = { enabled = true },
 	bigfile = { enabled = true },
+	picker = { enabled = true },
+	input = { enabled = true },
 })
 
 -- stylua: ignore start

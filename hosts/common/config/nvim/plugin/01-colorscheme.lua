@@ -100,5 +100,10 @@ require("auto-dark-mode").setup({
 vim.api.nvim_create_autocmd("ColorScheme", {
 	callback = function()
 		vim.api.nvim_set_hl(0, "SpellRare", {})
+		-- Snacks links picker paths to NonText, which we dim for whitespace and
+		-- is unreadable on the picker's cursor line; use the (non-italic) Comment color
+		local comment_fg = vim.api.nvim_get_hl(0, { name = "Comment", link = false }).fg
+		vim.api.nvim_set_hl(0, "SnacksPickerDir", { fg = comment_fg })
+		vim.api.nvim_set_hl(0, "SnacksPickerPathHidden", { fg = comment_fg })
 	end,
 })
