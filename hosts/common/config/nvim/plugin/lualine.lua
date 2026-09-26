@@ -4,7 +4,8 @@ vim.pack.add({
 })
 
 local function copilot()
-	return vim.g.copilot_suggestion_enabled == false and "\u{f4b9}" or "\u{f4b8}"
+	-- copilot.lua toggles auto trigger per buffer; unset means the config default (on)
+	return vim.b.copilot_suggestion_auto_trigger == false and "\u{f4b9}" or "\u{f4b8}"
 end
 
 local function autoformat()
@@ -44,8 +45,6 @@ require("lualine").setup({
 		lualine_z = { recording, "location" },
 	},
 })
-
-vim.o.showmode = false
 
 -- The statusline only redraws on certain events, so force one for macros
 vim.api.nvim_create_autocmd({ "RecordingEnter", "RecordingLeave" }, {

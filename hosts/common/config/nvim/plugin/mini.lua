@@ -31,6 +31,7 @@ require("mini.pairs").setup()
 require("mini.move").setup()
 require("mini.ai").setup()
 require("mini.trailspace").setup()
+require("mini.bufremove").setup()
 
 local sessions = require("mini.sessions")
 
@@ -46,7 +47,6 @@ vim.keymap.set("n", "<leader>qc", function()
 end, { desc = "Create session" })
 vim.keymap.set("n", "<leader>qs", function() sessions.read() end, { desc = "Restore session" })
 vim.keymap.set("n", "<leader>qS", function() sessions.select() end, { desc = "Select session" })
-vim.keymap.set("n", "<leader>ql", function() sessions.read() end, { desc = "Restore last session" })
-vim.keymap.set("n", "<leader>qd", function() require("mini.sessions").config.autowrite = false end, { desc = "Don't save session" })
+vim.keymap.set("n", "<leader>qd", function() sessions.config.autowrite = false end, { desc = "Don't save session" })
 vim.keymap.set("n", "<leader>qD", function() sessions.select("delete") end, { desc = "Delete session" })
 -- stylua: ignore end

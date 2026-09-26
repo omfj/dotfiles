@@ -41,7 +41,6 @@ miniclue.setup({
 		{ mode = "n", keys = "<Leader>g", desc = "+Git" },
 		{ mode = "n", keys = "<Leader>gh", desc = "+Hunks" },
 		{ mode = "n", keys = "<Leader>l", desc = "+LSP" },
-		{ mode = "n", keys = "<Leader>m", desc = "+Mason" },
 		{ mode = "n", keys = "<Leader>q", desc = "+Sessions" },
 		{ mode = "n", keys = "<Leader>s", desc = "+Search" },
 		{ mode = "n", keys = "<Leader>t", desc = "+Toggle" },
@@ -60,9 +59,3 @@ miniclue.setup({
 		config = { width = "auto" },
 	},
 })
-
--- stylua: ignore start
-vim.keymap.set("n", "<leader>Du", function() vim.pack.update() end, { desc = "Update (preview)" })
-vim.keymap.set("n", "<leader>DU", function() vim.pack.update(nil, { force = true }) end, { desc = "Update (apply all)" })
-vim.keymap.set("n", "<leader>Ds", function() vim.pack.update(nil, { target = "lockfile", force = true }) end, { desc = "Sync to lockfile" })
--- stylua: ignore end

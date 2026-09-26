@@ -4,13 +4,11 @@
 vim.keymap.set("n", "<leader><space>", function() Snacks.picker.files() end, { desc = "Find Files" })
 vim.keymap.set("n", "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, { desc = "Find Config File" })
 vim.keymap.set("n", "<leader>,", function() Snacks.picker.buffers() end, { desc = "Switch Buffer" })
-vim.keymap.set("n", "<leader>fb", function() Snacks.picker.buffers() end, { desc = "Buffers" })
 vim.keymap.set("n", "<leader>fr", function() Snacks.picker.recent() end, { desc = "Recent" })
 vim.keymap.set("n", "<leader>fR", function() Snacks.picker.recent({ filter = { cwd = true } }) end, { desc = "Recent (cwd)" })
 
 -- grep (relative to cwd)
 vim.keymap.set("n", "<leader>/", function() Snacks.picker.grep() end, { desc = "Grep" })
-vim.keymap.set("n", "<leader>sg", function() Snacks.picker.grep() end, { desc = "Grep (cwd)" })
 vim.keymap.set("n", "<leader>sf", function() Snacks.picker.grep({ dirs = { vim.fn.expand("%:p:h") } }) end, { desc = "Grep current folder" })
 vim.keymap.set("n", "<leader>sw", function() Snacks.picker.grep_word() end, { desc = "Word (cwd)" })
 vim.keymap.set("x", "<leader>sw", function() Snacks.picker.grep_word() end, { desc = "Selection (cwd)" })

@@ -66,42 +66,41 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+-- The main branch only configures behaviour in setup(); keymaps are set manually
 require("nvim-treesitter-textobjects").setup({
-	select = {
-		enable = true,
-		lookahead = true,
-		keymaps = {
-			["aa"] = "@parameter.outer",
-			["ia"] = "@parameter.inner",
-			["af"] = "@function.outer",
-			["if"] = "@function.inner",
-			["ac"] = "@class.outer",
-			["ic"] = "@class.inner",
-			["at"] = "@tag.outer",
-			["it"] = "@tag.inner",
-		},
-	},
-	move = {
-		enable = true,
-		set_jumps = true,
-		goto_next_start = {
-			["]m"] = "@function.outer",
-			["]]"] = "@class.outer",
-		},
-		goto_next_end = {
-			["]M"] = "@function.outer",
-			["]["] = "@class.outer",
-		},
-		goto_previous_start = {
-			["[m"] = "@function.outer",
-			["[["] = "@class.outer",
-		},
-		goto_previous_end = {
-			["[M"] = "@function.outer",
-			["[]"] = "@class.outer",
-		},
-	},
+	select = { lookahead = true },
+	move = { set_jumps = true },
 })
+
+local select_objects = {
+	aa = "@parameter.outer",
+	ia = "@parameter.inner",
+	af = "@function.outer",
+	["if"] = "@function.inner",
+	ac = "@class.outer",
+	ic = "@class.inner",
+	at = "@tag.outer",
+	it = "@tag.inner",
+}
+for lhs, query in pairs(select_objects) do
+	vim.keymap.set({ "x", "o" }, lhs, function()
+		require("nvim-treesitter-textobjects.select").select_textobject(query, "textobjects")
+	end, { desc = query })
+end
+
+local moves = {
+	goto_next_start = { ["]m"] = "@function.outer", ["]]"] = "@class.outer" },
+	goto_next_end = { ["]M"] = "@function.outer", ["]["] = "@class.outer" },
+	goto_previous_start = { ["[m"] = "@function.outer", ["[["] = "@class.outer" },
+	goto_previous_end = { ["[M"] = "@function.outer", ["[]"] = "@class.outer" },
+}
+for method, maps in pairs(moves) do
+	for lhs, query in pairs(maps) do
+		vim.keymap.set({ "n", "x", "o" }, lhs, function()
+			require("nvim-treesitter-textobjects.move")[method](query, "textobjects")
+		end, { desc = method:gsub("_", " ") .. " " .. query })
+	end
+end
 
 require("treesitter-context").setup({
 	enable = true,

@@ -6,10 +6,10 @@ local function map(mode, lhs, rhs, opts)
 end
 
 -- better up/down
-map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true, desc = "Down" })
-map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true, desc = "Down" })
-map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true, desc = "Up" })
-map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true, desc = "Up" })
+map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, desc = "Down" })
+map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, desc = "Down" })
+map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, desc = "Up" })
+map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, desc = "Up" })
 
 -- Resize window using <C-w> + HJKL
 map("n", "<C-w>K", "<cmd>resize +2<cr>", { desc = "Increase window height" })
@@ -27,13 +27,10 @@ map("i", "<esc>", function()
 	local has_copilot, suggestion = pcall(require, "copilot.suggestion")
 	if has_copilot and suggestion.is_visible() then
 		suggestion.dismiss()
-	elseif vim.fn.reg_recording() ~= "" then
-		-- Plain escape during macro recording so it gets captured correctly
-		return "<esc>"
-	else
-		vim.cmd("noh")
-		vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<esc>", true, false, true), "n", false)
+		return ""
 	end
+	-- Returned keys aren't recorded, so this is safe during macro recording
+	return "<esc><cmd>noh<cr>"
 end, { desc = "Escape or dismiss Copilot suggestion", expr = true })
 
 -- Clear search, diff update and redraw
@@ -133,29 +130,29 @@ map("n", "<leader>ul", function() pt.cycle("listchars") end, { desc = "Toggle Li
 map("n", "<leader>ud", function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end, { desc = "Toggle Diagnostics" })
 map("n", "<leader>uc", function() pt.cycle("conceal") end, { desc = "Cycle Conceal" })
 map("n", "<leader>uh", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, { desc = "Toggle Inlay Hints" })
-map("n", "<leader>ucl", function() vim.lsp.codelens.enable(not vim.lsp.codelens.is_enabled()) end, { desc = "Toggle CodeLens" })
+map("n", "<leader>uk", function() vim.lsp.codelens.enable(not vim.lsp.codelens.is_enabled()) end, { desc = "Toggle CodeLens" })
 map("n", "<leader>uT", function() if vim.b.ts_highlight then vim.treesitter.stop() else vim.treesitter.start() end end, { desc = "Toggle Treesitter Highlight" })
 map("n", "<leader>uH", "<cmd>ToggleHarper<cr>", { desc = "Toggle Harper (spelling)" })
 map("n", "<leader>uA", function()
-  local buf = vim.api.nvim_get_current_buf()
-  local clients = vim.lsp.get_clients({ bufnr = buf })
-  if #clients > 0 then
-    vim.b.detached_lsp_clients = vim.tbl_map(function(c) return c.id end, clients)
-    for _, client in ipairs(clients) do
-      vim.lsp.buf_detach_client(buf, client.id)
-    end
-    vim.notify("LSP detached", vim.log.levels.INFO)
-  else
-    local ids = vim.b.detached_lsp_clients or {}
-    for _, id in ipairs(ids) do
-      local client = vim.lsp.get_client_by_id(id)
-      if client then
-        vim.lsp.buf_attach_client(buf, id)
-      end
-    end
-    vim.b.detached_lsp_clients = nil
-    vim.notify("LSP reattached", vim.log.levels.INFO)
-  end
+	local buf = vim.api.nvim_get_current_buf()
+	local clients = vim.lsp.get_clients({ bufnr = buf })
+	if #clients > 0 then
+		vim.b.detached_lsp_clients = vim.tbl_map(function(c) return c.id end, clients)
+		for _, client in ipairs(clients) do
+			vim.lsp.buf_detach_client(buf, client.id)
+		end
+		vim.notify("LSP detached", vim.log.levels.INFO)
+	else
+		local ids = vim.b.detached_lsp_clients or {}
+		for _, id in ipairs(ids) do
+			local client = vim.lsp.get_client_by_id(id)
+			if client then
+				vim.lsp.buf_attach_client(buf, id)
+			end
+		end
+		vim.b.detached_lsp_clients = nil
+		vim.notify("LSP reattached", vim.log.levels.INFO)
+	end
 end, { desc = "Toggle LSP (buffer)" })
 
 -- quit
@@ -164,8 +161,6 @@ map("n", "<leader>R", function() require("mini.sessions").restart() end, { desc 
 
 -- highlights under cursor
 map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
-
--- notifications live in plugin/mini-notify.lua
 
 -- Terminal Mappings
 map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })

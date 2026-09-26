@@ -177,11 +177,10 @@ require("heirline").setup({
 			"BufAdd",
 			"BufDelete",
 			"BufEnter",
+			"BufModifiedSet",
 			"BufWritePost",
 			"ColorScheme",
 			"DiagnosticChanged",
-			"TextChanged",
-			"TextChangedI",
 			"WinEnter",
 			"WinNew",
 			"WinClosed",
@@ -201,7 +200,6 @@ vim.api.nvim_create_autocmd("User", {
 })
 
 local bufremove = require("mini.bufremove")
-bufremove.setup()
 
 vim.keymap.set("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 vim.keymap.set("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next buffer" })

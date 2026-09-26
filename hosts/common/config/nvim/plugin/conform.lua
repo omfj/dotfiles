@@ -4,6 +4,9 @@ vim.pack.add({
 
 local conform = require("conform")
 
+local prettier = { "prettierd", "prettier", stop_after_first = true }
+local oxfmt_or_prettier = { "oxfmt", "prettierd", "prettier", stop_after_first = true }
+
 conform.setup({
 	formatters = {
 		oxfmt = {
@@ -15,18 +18,18 @@ conform.setup({
 	},
 	formatters_by_ft = {
 		lua = { "stylua" },
-		javascript = { "oxfmt", "prettierd", "prettier", stop_after_first = true },
-		typescript = { "oxfmt", "prettierd", "prettier", stop_after_first = true },
-		javascriptreact = { "oxfmt", "prettierd", "prettier", stop_after_first = true },
-		typescriptreact = { "oxfmt", "prettierd", "prettier", stop_after_first = true },
-		svelte = { "prettierd", "prettier", stop_after_first = true },
-		vue = { "prettierd", "prettier", stop_after_first = true },
-		css = { "prettierd", "prettier", stop_after_first = true },
-		html = { "prettierd", "prettier", stop_after_first = true },
+		javascript = oxfmt_or_prettier,
+		typescript = oxfmt_or_prettier,
+		javascriptreact = oxfmt_or_prettier,
+		typescriptreact = oxfmt_or_prettier,
+		svelte = prettier,
+		vue = prettier,
+		css = prettier,
+		html = prettier,
 		json = { "fixjson", "prettierd", "prettier", stop_after_first = true },
-		markdown = { "prettierd", "prettier", stop_after_first = true },
-		mdx = { "prettierd", "prettier", stop_after_first = true },
-		astro = { "prettierd", "prettier", stop_after_first = true },
+		markdown = prettier,
+		mdx = prettier,
+		astro = prettier,
 		python = { "ruff_format", "ruff_organize_imports" },
 		kotlin = { "ktlint" },
 		typst = { "typstyle" },
@@ -59,9 +62,5 @@ end, { desc = "Format" })
 
 vim.keymap.set("n", "<leader>uF", function()
 	vim.g.disable_autoformat = not vim.g.disable_autoformat
-	if vim.g.disable_autoformat then
-		vim.notify("Autoformat disabled (global)")
-	else
-		vim.notify("Autoformat enabled (global)")
-	end
+	vim.notify("Autoformat " .. (vim.g.disable_autoformat and "disabled" or "enabled") .. " (global)")
 end, { desc = "Toggle autoformat (global)" })

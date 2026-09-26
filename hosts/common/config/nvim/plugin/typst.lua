@@ -2,6 +2,8 @@ vim.pack.add({
 	{ src = "https://github.com/chomosuke/typst-preview.nvim" },
 })
 
+vim.g.typstdark = true -- invert preview colors for a dark theme; toggled with <leader>tt
+
 local function get_invert_colors()
 	return vim.g.typstdark and "always" or "never"
 end

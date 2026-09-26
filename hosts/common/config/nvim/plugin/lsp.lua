@@ -28,45 +28,25 @@ vim.diagnostic.config({
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 	callback = function(ev)
-		local opts = { buffer = ev.buf }
+		local function map(mode, lhs, rhs, desc)
+			vim.keymap.set(mode, lhs, rhs, { buffer = ev.buf, desc = desc })
+		end
 
 		-- stylua: ignore start
-		vim.keymap.set("n", "gD", function() Snacks.picker.lsp_declarations() end, vim.tbl_extend("force", opts, { desc = "Goto Declaration" }))
-		vim.keymap.set("n", "gd", function() Snacks.picker.lsp_definitions() end, vim.tbl_extend("force", opts, { desc = "Goto Definition" }))
-		vim.keymap.set("n", "gri", function() Snacks.picker.lsp_implementations() end, vim.tbl_extend("force", opts, { desc = "Goto Implementation" }))
-		vim.keymap.set("n", "grr", function() Snacks.picker.lsp_references() end, vim.tbl_extend("force", opts, { desc = "Goto References" }))
-		vim.keymap.set("n", "gO", function() Snacks.picker.lsp_symbols() end, vim.tbl_extend("force", opts, { desc = "Document Symbols" }))
+		map("n", "gD", function() Snacks.picker.lsp_declarations() end, "Goto Declaration")
+		map("n", "gd", function() Snacks.picker.lsp_definitions() end, "Goto Definition")
+		map("n", "gri", function() Snacks.picker.lsp_implementations() end, "Goto Implementation")
+		map("n", "grr", function() Snacks.picker.lsp_references() end, "Goto References")
+		map("n", "gO", function() Snacks.picker.lsp_symbols() end, "Document Symbols")
+		map("n", "<C-k>", vim.lsp.buf.signature_help, "Signature Help")
+		map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Code Action")
+		map({ "n", "v" }, "<C-.>", vim.lsp.buf.code_action, "Code Action")
+		map("n", "<leader>cA", function() vim.lsp.buf.code_action({ context = { only = { "source" }, diagnostics = {} } }) end, "Source Action")
 		-- stylua: ignore end
-		vim.keymap.set(
-			"n",
-			"<C-k>",
-			vim.lsp.buf.signature_help,
-			vim.tbl_extend("force", opts, { desc = "Signature Help" })
-		)
-		vim.keymap.set(
-			{ "n", "v" },
-			"<leader>ca",
-			vim.lsp.buf.code_action,
-			vim.tbl_extend("force", opts, { desc = "Code Action" })
-		)
-		vim.keymap.set("n", "<leader>cA", function()
-			vim.lsp.buf.code_action({ context = { only = { "source" }, diagnostics = {} } })
-		end, vim.tbl_extend("force", opts, { desc = "Source Action" }))
-		vim.keymap.set(
-			{ "n", "v" },
-			"<C-.>",
-			vim.lsp.buf.code_action,
-			vim.tbl_extend("force", opts, { desc = "Code Action" })
-		)
 	end,
 })
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-local has_blink, blink = pcall(require, "blink.cmp")
-if has_blink then
-	capabilities = blink.get_lsp_capabilities(capabilities)
-end
-vim.lsp.config("*", { capabilities = capabilities })
+-- Completion capabilities are registered by blink.cmp's plugin/ file.
 
 -- LSP servers to install and enable. Adding a language is one entry here.
 local servers = {
@@ -99,17 +79,36 @@ local servers = {
 	"harper_ls",
 }
 
--- Optionally enable Harper LSP if not disabled (still installed, so :ToggleHarper works)
-local harper_disabled = vim.uv.fs_stat(vim.fn.stdpath("data") .. "/harper_disabled") ~= nil
-
-local enabled_servers = vim.tbl_filter(function(server)
-	return server ~= "harper_ls" or not harper_disabled
-end, servers)
-
 require("mason").setup()
 require("mason-lspconfig").setup({
-	ensure_installed = enabled_servers,
+	ensure_installed = servers,
 	automatic_enable = false,
 })
 
-vim.lsp.enable(enabled_servers)
+-- harper_ls is always installed, but enabled through a persistent toggle
+vim.lsp.enable(vim.tbl_filter(function(server)
+	return server ~= "harper_ls"
+end, servers))
+
+local pt = require("util.persist_toggle")
+pt.define("harper", {
+	steps = {
+		{
+			label = "on",
+			apply = function()
+				vim.lsp.enable("harper_ls")
+			end,
+		},
+		{
+			label = "off",
+			apply = function()
+				vim.lsp.enable("harper_ls", false)
+			end,
+		},
+	},
+	default = 1,
+})
+
+vim.api.nvim_create_user_command("ToggleHarper", function()
+	pt.cycle("harper")
+end, { desc = "Toggle harper_ls spelling LSP" })

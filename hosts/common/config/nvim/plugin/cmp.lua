@@ -128,6 +128,8 @@ require("blink.cmp").setup({
 		},
 		ghost_text = { enabled = false },
 	},
+	-- <C-s> is mapped to save, which shadows the builtin insert-mode signature help
+	signature = { enabled = true },
 })
 
 local kind_bg_cleared = false

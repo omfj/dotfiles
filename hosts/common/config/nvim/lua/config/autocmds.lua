@@ -33,22 +33,7 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
 -- close some filetypes with <q>
 vim.api.nvim_create_autocmd("FileType", {
 	group = augroup("close_with_q"),
-	pattern = {
-		"PlenaryTestPopup",
-		"help",
-		"lspinfo",
-		"man",
-		"notify",
-		"qf",
-		"query",
-		"spectre_panel",
-		"startuptime",
-		"tsplayground",
-		"neotest-output",
-		"checkhealth",
-		"neotest-summary",
-		"neotest-output-panel",
-	},
+	pattern = { "help", "man", "qf", "query", "checkhealth" },
 	callback = function(event)
 		vim.bo[event.buf].buflisted = false
 		vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true, desc = "Close window" })
@@ -76,32 +61,6 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 		vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
 	end,
 })
-
--- Toggle harper_ls (spelling LSP) — global + persistent across restarts
-local harper_flag = vim.fn.stdpath("data") .. "/harper_disabled"
-vim.api.nvim_create_user_command("ToggleHarper", function()
-	local disabled = vim.uv.fs_stat(harper_flag) ~= nil
-	if disabled then
-		vim.uv.fs_unlink(harper_flag, function() end)
-		vim.lsp.enable("harper_ls")
-		for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-			if vim.api.nvim_buf_is_loaded(buf) then
-				vim.api.nvim_exec_autocmds({ "FileType" }, { buffer = buf })
-			end
-		end
-		vim.notify("Harper enabled")
-	else
-		local fd = io.open(harper_flag, "w")
-		if fd then
-			fd:close()
-		end
-		vim.lsp.enable("harper_ls", false)
-		for _, client in ipairs(vim.lsp.get_clients({ name = "harper_ls" })) do
-			client:stop()
-		end
-		vim.notify("Harper disabled")
-	end
-end, { desc = "Toggle harper_ls spelling LSP" })
 
 -- Restore persistent toggles
 -- stylua: ignore start
@@ -131,7 +90,7 @@ pt.define("conceal", {
 pt.define("colorcolumn", {
     steps = {
 	{ label = "off", apply = function() vim.opt.colorcolumn = "" end },
-	{ label = "on",  apply = function() vim.opt.colorcolumn = vim.g.colorcolumn or "100" end },
+	{ label = "on",  apply = function() vim.opt.colorcolumn = "100" end },
     },
     default = 2,
 })
