@@ -1,16 +1,16 @@
 # Aliases
-abbr -a l "eza"
-abbr -a ls "eza"
-abbr -a la "eza -a"
-abbr -a ll "eza -l"
-abbr -a lla "eza -la"
-abbr -a i "pnpm i"
-abbr -a cat "bat"
+abbr -a l "lsd -l"
+abbr -a ls "lsd"
+abbr -a la "lsd -a"
+abbr -a ll "lsd -l"
+abbr -a lla "lsd -la"
+abbr -a lt "lsd --tree"
 
 # Common git commands
 abbr -a g "git"
 abbr -a ga "git add"
 abbr -a gc "git commit -m"
+abbr -a gpf "git push --force-with-lease"
 
 # brew
 abbr -a b "brew"
@@ -32,11 +32,3 @@ abbr -a .......... "cd ../../../../../../.."
 # Project navigation
 abbr -a dots "cd $DOTFILES"
 abbr -a conf "cd $HOME/.config"
-
-# UUID
-function uuid
-    set id (uuidgen)
-    echo $id | tr "[:upper:][:lower:]" "[:lower:][:upper:]" | pbcopy
-    echo $id | tr "[:upper:][:lower:]" "[:lower:][:upper:]"
-end
-

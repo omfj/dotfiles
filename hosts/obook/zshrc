@@ -28,8 +28,8 @@ function claude() {
 
 export EDITOR=nvim
 export GOPATH="$HOME/.local/share/go"
-export CARGO_NAME="Ole Magnus Johnsen"
-export CARGO_EMAIL="ole.magnus@me.com"
+export CARGO_NAME="Ole Magnus Fon Johnsen"
+export CARGO_EMAIL="me@omfj.no"
 export XDG_CONFIG_HOME=$HOME/.config
 export PROGRAMMING=$HOME/Developer
 export DOTFILES=$PROGRAMMING/dotfiles
@@ -252,7 +252,7 @@ fi
 # pnpm
 export PNPM_HOME="/Users/olem/Library/pnpm"
 case ":$PATH:" in
-  *":$PNPM_HOME/bin:"*) ;;
-  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+*":$PNPM_HOME/bin:"*) ;;
+*) export PATH="$PNPM_HOME/bin:$PATH" ;;
 esac
 # pnpm end
