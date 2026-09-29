@@ -1,10 +1,18 @@
 #"$schema" = 'https://starship.rs/config-schema.json'
 
-add_newline = false
-format = "$username$hostname$directory$git_branch$git_status$package$character"
+add_newline = true
+format = """
+$username$hostname$directory$git_branch$git_status$package$time
+$character"""
 
 [git_metrics]
 disabled = false
+
+[time]
+disabled = false
+format = "at [$time]($style) "
+time_format = "%H:%M:%S"
+style = "bold yellow"
 
 [directory]
 style = "bold blue"
@@ -13,16 +21,11 @@ truncation_length = 3
 truncate_to_repo = true
 
 [git_branch]
-format = "[$symbol$branch]($style) "
 style = "bold blue"
 
-[package]
-format = "[$symbol$version]($style) "
-
 [character]
-success_symbol = "[|](bold blue)"
-error_symbol = "[|](bold red)"
-format = "$symbol "
+success_symbol = "[λ](bold blue)"
+error_symbol = "[λ](bold red)"
 
 [memory_usage]
 symbol = " "
