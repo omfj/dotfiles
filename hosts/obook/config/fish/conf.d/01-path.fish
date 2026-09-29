@@ -5,7 +5,7 @@ fish_add_path $HOME/.local/bin # User local binaries
 fish_add_path $HOME/.deno/bin # Deno
 fish_add_path $HOME/.atuin/bin/ # Atuin for shell history
 fish_add_path $HOME/.composer/vendor/bin # PHP Composer
-fish_add_path $HOME/go/bin # Go binaries
+fish_add_path $GOPATH/bin # Go binaries
 fish_add_path $HOME/.slack/bin # Slack CLI
 
 fish_add_path $BUN_INSTALL/bin # Bun JavaScript runtime

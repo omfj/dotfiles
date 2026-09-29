@@ -27,7 +27,7 @@ function claude() {
 #region Env
 
 export EDITOR=nvim
-export GOPATH=$HOME/go
+export GOPATH="$HOME/.local/share/go"
 export CARGO_NAME="Ole Magnus Johnsen"
 export CARGO_EMAIL="ole.magnus@me.com"
 export XDG_CONFIG_HOME=$HOME/.config
@@ -70,7 +70,7 @@ path=(
     $HOME/.deno/bin
     $HOME/.atuin/bin
     $HOME/.composer/vendor/bin
-    $HOME/go/bin
+    $GOPATH/bin
     $HOME/.slack/bin
     $BUN_INSTALL/bin
 
