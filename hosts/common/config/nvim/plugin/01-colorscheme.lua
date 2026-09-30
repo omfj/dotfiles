@@ -89,6 +89,20 @@ local function apply_light()
 	apply_blink_highlights()
 end
 
+-- Overrides that should survive any colorscheme change, including picking a
+-- different scheme with <leader>uC (auto-dark-mode only re-runs its own apply fns).
+-- Registered before the initial apply below so it also fires on startup
+vim.api.nvim_create_autocmd("ColorScheme", {
+	callback = function()
+		vim.api.nvim_set_hl(0, "SpellRare", {})
+		-- Snacks links picker paths to NonText, which we dim for whitespace and
+		-- is unreadable on the picker's cursor line; use the (non-italic) Comment color
+		local comment_fg = vim.api.nvim_get_hl(0, { name = "Comment", link = false }).fg
+		vim.api.nvim_set_hl(0, "SnacksPickerDir", { fg = comment_fg })
+		vim.api.nvim_set_hl(0, "SnacksPickerPathHidden", { fg = comment_fg })
+	end,
+})
+
 if vim.fn.has("mac") == 1 then
 	local style = vim.system({ "defaults", "read", "-g", "AppleInterfaceStyle" }, { text = true }):wait().stdout
 	local appearance = style == "Dark\n" and "dark" or "light"
@@ -104,17 +118,4 @@ require("auto-dark-mode").setup({
 	update_interval = 1000,
 	set_dark_mode = apply_dark,
 	set_light_mode = apply_light,
-})
-
--- Overrides that should survive any colorscheme change, including picking a
--- different scheme with <leader>uC (auto-dark-mode only re-runs its own apply fns)
-vim.api.nvim_create_autocmd("ColorScheme", {
-	callback = function()
-		vim.api.nvim_set_hl(0, "SpellRare", {})
-		-- Snacks links picker paths to NonText, which we dim for whitespace and
-		-- is unreadable on the picker's cursor line; use the (non-italic) Comment color
-		local comment_fg = vim.api.nvim_get_hl(0, { name = "Comment", link = false }).fg
-		vim.api.nvim_set_hl(0, "SnacksPickerDir", { fg = comment_fg })
-		vim.api.nvim_set_hl(0, "SnacksPickerPathHidden", { fg = comment_fg })
-	end,
 })
