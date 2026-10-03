@@ -118,13 +118,9 @@ require("blink.cmp").setup({
 			auto_show = function()
 				return not vim.tbl_contains({ "css", "scss", "less" }, vim.bo.filetype)
 			end,
-			winhighlight = "Normal:BlinkCmpMenu,CursorLine:BlinkCmpMenuSelection,Search:None",
 		},
 		documentation = {
 			auto_show = true,
-			window = {
-				winhighlight = "Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder",
-			},
 		},
 		ghost_text = { enabled = false },
 	},
@@ -132,32 +128,9 @@ require("blink.cmp").setup({
 	signature = { enabled = true },
 })
 
-local kind_bg_cleared = false
-local function clear_kind_bg()
-	if kind_bg_cleared then
-		return
-	end
-	kind_bg_cleared = true
-	vim.api.nvim_set_hl(0, "BlinkCmpKind", { bg = "NONE" })
-	for _, kind in ipairs(vim.tbl_values(vim.lsp.protocol.CompletionItemKind)) do
-		if type(kind) == "string" then
-			local name = "BlinkCmpKind" .. kind
-			local hl = vim.api.nvim_get_hl(0, { name = name, link = false })
-			hl.bg = nil
-			vim.api.nvim_set_hl(0, name, hl)
-		end
-	end
-end
-
-vim.api.nvim_create_autocmd("ColorScheme", {
-	callback = function()
-		kind_bg_cleared = false
-	end,
-})
 vim.api.nvim_create_autocmd("User", {
 	pattern = "BlinkCmpMenuOpen",
 	callback = function()
 		require("copilot.suggestion").dismiss()
-		clear_kind_bg()
 	end,
 })

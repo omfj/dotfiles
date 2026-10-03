@@ -4,104 +4,21 @@ vim.pack.add({
 })
 
 require("jellybeans").setup({
-	transparent = true,
-	plugins = {
-		all = true,
-		auto = true,
-	},
+	flat_ui = false, -- bordered pickers instead of the blocky flat style
+	-- auto-detection only works with lazy.nvim, so enable every plugin group
+	plugins = { all = true },
 })
 
--- mini.diff sign column and overlay colors
-local function apply_minidiff_highlights()
-	vim.api.nvim_set_hl(0, "MiniDiffSignAdd", { fg = "#a9dd9d" })
-	vim.api.nvim_set_hl(0, "MiniDiffSignChange", { fg = "#f0922b" })
-	vim.api.nvim_set_hl(0, "MiniDiffSignDelete", { fg = "#e03030" })
-	vim.api.nvim_set_hl(0, "MiniDiffOverAdd", { bg = "#3a4a3a" })
-	vim.api.nvim_set_hl(0, "MiniDiffOverChange", { bg = "#4a4a2a" })
-	vim.api.nvim_set_hl(0, "MiniDiffOverDelete", { bg = "#4a2a2a" })
-	vim.api.nvim_set_hl(0, "MiniDiffOverContext", { bg = "#2a2a2a" })
-end
-
-local function apply_blink_highlights()
-	if vim.o.background == "light" then
-		vim.api.nvim_set_hl(0, "BlinkCmpMenu", { bg = "#eeeeee" })
-		vim.api.nvim_set_hl(0, "BlinkCmpMenuSelection", { bg = "#e0dcd7" })
-		vim.api.nvim_set_hl(0, "BlinkCmpLabelDetail", { bg = "#eeeeee", fg = "#787878", italic = true })
-		vim.api.nvim_set_hl(0, "BlinkCmpLabelDescription", { bg = "#eeeeee", fg = "#787878", italic = true })
-		vim.api.nvim_set_hl(0, "BlinkCmpDoc", { bg = "#eeeeee" })
-		vim.api.nvim_set_hl(0, "BlinkCmpDocBorder", { bg = "#eeeeee" })
-		vim.api.nvim_set_hl(0, "BlinkCmpDocSeparator", { bg = "#eeeeee", fg = "#c0c0c0" })
-		vim.api.nvim_set_hl(0, "BlinkCmpScrollBarThumb", { bg = "#c0c0c0" })
-		vim.api.nvim_set_hl(0, "BlinkCmpLabelMatch", { fg = "#876820", bold = true })
-	else
-		vim.api.nvim_set_hl(0, "BlinkCmpMenu", { bg = "#151515" })
-		vim.api.nvim_set_hl(0, "BlinkCmpMenuSelection", { bg = "#222222" })
-		vim.api.nvim_set_hl(0, "BlinkCmpLabelDetail", { bg = "#151515", fg = "#555555", italic = true })
-		vim.api.nvim_set_hl(0, "BlinkCmpLabelDescription", { bg = "#151515", fg = "#555555", italic = true })
-		vim.api.nvim_set_hl(0, "BlinkCmpDoc", { bg = "#151515" })
-		vim.api.nvim_set_hl(0, "BlinkCmpDocBorder", { bg = "#151515" })
-		vim.api.nvim_set_hl(0, "BlinkCmpDocSeparator", { bg = "#151515", fg = "#444444" })
-		vim.api.nvim_set_hl(0, "BlinkCmpScrollBarThumb", { bg = "#444444" })
-		vim.api.nvim_set_hl(0, "BlinkCmpLabelMatch", { fg = "#fad07a", bold = true })
-	end
-end
-
-local function apply_whitespace_highlights(color)
-	vim.api.nvim_set_hl(0, "NonText", { fg = color })
-	vim.api.nvim_set_hl(0, "SpecialKey", { fg = color })
-	vim.api.nvim_set_hl(0, "Whitespace", { fg = color })
-end
-
-local function apply_gutter_highlights(background)
-	for _, group in ipairs({ "CursorLineNr", "LineNr", "LineNrAbove", "LineNrBelow", "SignColumn" }) do
-		local highlight = vim.api.nvim_get_hl(0, { name = group, link = false })
-		highlight.bg = background
-		vim.api.nvim_set_hl(0, group, highlight)
-	end
-end
-
+-- jellybeans does not set 'background' itself
 local function apply_dark()
+	vim.o.background = "dark"
 	vim.cmd.colorscheme("jellybeans-muted")
-	vim.api.nvim_set_hl(0, "CursorLine", { bg = "#222222" }) -- softer cursor line, to not interfere with ghost text
-	vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#222222" }) -- softer color column, to match cursor line
-	apply_whitespace_highlights("#404040")
-	apply_gutter_highlights("#151515")
-	vim.api.nvim_set_hl(0, "MiniHipatternsNbsp", { bg = "#4a3a00" }) -- dark yellow bg on non-breaking spaces (opt+space)
-	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#151515" })
-	vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#444444", bg = "NONE" })
-	vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", { fg = "#555555", italic = true }) -- a bit harder color so to not be invisible in the cursor line
-	vim.api.nvim_set_hl(0, "LspInlayHint", { link = "GitSignsCurrentLineBlame" }) -- match blame text; default link to NonText is too dark
-	vim.api.nvim_set_hl(0, "LspCodeLens", { fg = "#555555" })
-	vim.api.nvim_set_hl(0, "DiffAdd", { bg = "#3a4a3a" })
-	vim.api.nvim_set_hl(0, "DiffDelete", { bg = "#4a2a2a" })
-	vim.api.nvim_set_hl(0, "DiffChange", { bg = "#4a4a2a" })
-	vim.api.nvim_set_hl(0, "DiffText", { bg = "#4a4a2a", bold = true })
-	apply_blink_highlights()
-	apply_minidiff_highlights()
 end
 
 local function apply_light()
+	vim.o.background = "light"
 	vim.cmd.colorscheme("jellybeans-light")
-	apply_whitespace_highlights("#b0b0b0")
-	apply_gutter_highlights("#eeeeee")
-	vim.api.nvim_set_hl(0, "LspInlayHint", { link = "GitSignsCurrentLineBlame" }) -- match blame text
-	vim.api.nvim_set_hl(0, "LspCodeLens", { fg = "#555555" })
-	apply_blink_highlights()
 end
-
--- Overrides that should survive any colorscheme change, including picking a
--- different scheme with <leader>uC (auto-dark-mode only re-runs its own apply fns).
--- Registered before the initial apply below so it also fires on startup
-vim.api.nvim_create_autocmd("ColorScheme", {
-	callback = function()
-		vim.api.nvim_set_hl(0, "SpellRare", {})
-		-- Snacks links picker paths to NonText, which we dim for whitespace and
-		-- is unreadable on the picker's cursor line; use the (non-italic) Comment color
-		local comment_fg = vim.api.nvim_get_hl(0, { name = "Comment", link = false }).fg
-		vim.api.nvim_set_hl(0, "SnacksPickerDir", { fg = comment_fg })
-		vim.api.nvim_set_hl(0, "SnacksPickerPathHidden", { fg = comment_fg })
-	end,
-})
 
 if vim.fn.has("mac") == 1 then
 	local style = vim.system({ "defaults", "read", "-g", "AppleInterfaceStyle" }, { text = true }):wait().stdout

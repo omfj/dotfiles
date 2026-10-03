@@ -37,9 +37,6 @@ diff.setup({
 	},
 })
 
--- Sign column and overlay colors live in plugin/01-colorscheme.lua so they
--- survive theme switches (auto-dark-mode re-runs :colorscheme, which clears them).
-
 vim.keymap.set("n", "]c", function()
 	if vim.wo.diff then
 		return "]c"
