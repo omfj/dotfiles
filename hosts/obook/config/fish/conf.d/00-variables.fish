@@ -10,3 +10,4 @@ set -gx DOTFILES $PROGRAMMING/dotfiles
 set -gx BUN_INSTALL $HOME/.bun
 set -gx PNPM_HOME $HOME/Library/pnpm
 set -gx PYENV_ROOT $HOME/.pyenv
+set -gx MAX_HOST containers@omfj.no
