@@ -1,5 +1,7 @@
 {
   "diagnostics": {
-    "globals": ["dotty"]
+    "globals": [
+      "Snacks"
+    ]
   }
 }
