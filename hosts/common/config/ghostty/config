@@ -8,6 +8,9 @@ theme = dark:Jellybeans Custom,light:Jellybeans Light Custom
 font-family = IosevkaTerm Nerd Font
 font-size = 14
 
+# space between lines
+adjust-cell-height = -10
+
 shell-integration = zsh
 
 # padding around
