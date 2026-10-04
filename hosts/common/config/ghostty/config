@@ -28,12 +28,6 @@ link-url = true
 copy-on-select = true
 window-save-state = always
 
-# move tabs to the titlebar on macos
-#macos-titlebar-style = tabs
-
-# claude code?
-keybind = shift+enter=text:\x1b\r
-
 # scrolling configuration
 mouse-scroll-multiplier = 3
 scrollback-limit = 500000000
