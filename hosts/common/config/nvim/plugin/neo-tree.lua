@@ -48,7 +48,7 @@ require("neo-tree").setup({
 		use_libuv_file_watcher = true,
 		window = {
 			mappings = {
-				["."] = "toggle_gitignored",
+				["."] = "toggle_hidden",
 			},
 		},
 	},
