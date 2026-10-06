@@ -22,6 +22,13 @@ require("mini.pairs").setup()
 require("mini.move").setup()
 require("mini.ai").setup()
 require("mini.trailspace").setup()
+vim.api.nvim_create_autocmd("User", {
+	pattern = "SnacksDashboardOpened",
+	callback = function()
+		vim.b.minitrailspace_disable = true
+		MiniTrailspace.unhighlight()
+	end,
+})
 require("mini.bufremove").setup()
 
 local sessions = require("mini.sessions")

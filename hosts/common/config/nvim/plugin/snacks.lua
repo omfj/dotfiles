@@ -55,6 +55,26 @@ require("snacks").setup({
 		},
 	},
 	input = { enabled = true },
+	dashboard = {
+		enabled = true,
+		preset = {
+			header = table.concat(require("util.banners").pryda, "\n"),
+			-- stylua: ignore
+			keys = {
+				{ key = "n", desc = "New file", action = ":enew | startinsert" },
+				{ key = "f", desc = "Find file", action = function() Snacks.picker.files() end },
+				{ key = "r", desc = "Recent files", action = function() Snacks.picker.recent() end },
+				{ key = "g", desc = "Grep", action = function() Snacks.picker.grep() end },
+				{ key = "s", desc = "Restore session", action = function() require("mini.sessions").read() end },
+				{ key = "S", desc = "Select session", action = function() require("mini.sessions").select() end },
+				{ key = "q", desc = "Quit", action = ":qa" },
+			},
+		},
+		sections = {
+			{ section = "header" },
+			{ section = "keys", gap = 1 },
+		},
+	},
 })
 
 -- stylua: ignore start

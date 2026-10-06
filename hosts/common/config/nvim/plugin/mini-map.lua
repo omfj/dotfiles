@@ -21,7 +21,7 @@ map.setup({
 vim.api.nvim_create_autocmd("VimEnter", {
 	callback = function()
 		vim.schedule(function()
-			if vim.bo.filetype ~= "alpha" then
+			if vim.bo.filetype ~= "snacks_dashboard" then
 				map.open()
 			end
 		end)

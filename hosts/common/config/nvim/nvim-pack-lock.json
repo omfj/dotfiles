@@ -4,10 +4,6 @@
       "rev": "1f8835ba58a2ad341c9c1515316a3183596dbb60",
       "src": "https://github.com/b0o/SchemaStore.nvim"
     },
-    "alpha-nvim": {
-      "rev": "6c6a89d5b068b5251c8bdf0dd57bb921bcfeeb09",
-      "src": "https://github.com/goolord/alpha-nvim"
-    },
     "auto-dark-mode.nvim": {
       "rev": "54058b4fe414bd64bd2904a6f8a63f1f14e3d8df",
       "src": "https://github.com/f-person/auto-dark-mode.nvim"
