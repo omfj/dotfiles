@@ -55,6 +55,7 @@ require("snacks").setup({
 		},
 	},
 	input = { enabled = true },
+	notifier = { enabled = true },
 	dashboard = {
 		enabled = true,
 		preset = {
@@ -94,5 +95,7 @@ vim.keymap.set("n", "<leader>fT", function() Snacks.terminal.toggle(nil, { win =
 vim.keymap.set("n", "<c-/>", function() Snacks.terminal.toggle(nil, { win = { style = "float" } }) end, { desc = "Float Terminal" })
 vim.keymap.set("n", "<c-_>", function() Snacks.terminal.toggle(nil, { win = { style = "float" } }) end, { desc = "Float Terminal" })
 vim.keymap.set("n", "<leader>.", function() Snacks.scratch() end, { desc = "Scratch Buffer" })
+vim.keymap.set("n", "<leader>n", function() Snacks.notifier.show_history() end, { desc = "Notifications History" })
+vim.keymap.set("n", "<leader>sN", function() Snacks.notifier.hide() end, { desc = "Dismiss Notifications" })
 
 -- stylua: ignore end

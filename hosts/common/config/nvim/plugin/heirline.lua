@@ -199,25 +199,18 @@ vim.api.nvim_create_autocmd("User", {
 	end),
 })
 
-local bufremove = require("mini.bufremove")
-
 vim.keymap.set("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 vim.keymap.set("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 vim.keymap.set("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 vim.keymap.set("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer" })
 vim.keymap.set("n", "<leader>bc", function()
-	bufremove.delete(0, false)
+	Snacks.bufdelete()
 end, { desc = "Close current buffer" })
 vim.keymap.set("n", "<leader>bD", function()
-	bufremove.delete(0, true)
+	Snacks.bufdelete({ force = true })
 end, { desc = "Delete Buffer (force)" })
 vim.keymap.set("n", "<leader>bo", function()
-	local current = vim.api.nvim_get_current_buf()
-	for _, bufnr in ipairs(listed_buffers()) do
-		if bufnr ~= current then
-			bufremove.delete(bufnr, false)
-		end
-	end
+	Snacks.bufdelete.other()
 end, { desc = "Delete Other Buffers" })
 
 for index = 1, 9 do

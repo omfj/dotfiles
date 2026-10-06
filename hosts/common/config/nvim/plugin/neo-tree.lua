@@ -14,7 +14,7 @@ require("nvim-web-devicons").setup({
 
 require("neo-tree").setup({
 	popup_border_style = "single",
-	open_files_do_not_replace_types = { "terminal", "trouble", "qf" },
+	open_files_do_not_replace_types = { "terminal", "qf" },
 	default_component_configs = {
 		indent = {
 			with_expanders = true,

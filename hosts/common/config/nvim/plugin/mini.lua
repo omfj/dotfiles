@@ -29,7 +29,6 @@ vim.api.nvim_create_autocmd("User", {
 		MiniTrailspace.unhighlight()
 	end,
 })
-require("mini.bufremove").setup()
 
 local sessions = require("mini.sessions")
 

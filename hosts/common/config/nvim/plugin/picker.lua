@@ -17,6 +17,13 @@ vim.keymap.set("x", "<leader>sw", function() Snacks.picker.grep_word() end, { de
 vim.keymap.set("n", "<leader>gc", function() Snacks.picker.git_log() end, { desc = "commits" })
 vim.keymap.set("n", "<leader>gs", function() Snacks.picker.git_status() end, { desc = "status" })
 
+-- diagnostics / lists
+vim.keymap.set("n", "<leader>xx", function() Snacks.picker.diagnostics() end, { desc = "Diagnostics" })
+vim.keymap.set("n", "<leader>xX", function() Snacks.picker.diagnostics_buffer() end, { desc = "Buffer Diagnostics" })
+vim.keymap.set("n", "<leader>xL", function() Snacks.picker.loclist() end, { desc = "Location List (picker)" })
+vim.keymap.set("n", "<leader>xQ", function() Snacks.picker.qflist() end, { desc = "Quickfix List (picker)" })
+vim.keymap.set("n", "<leader>cs", function() Snacks.picker.lsp_symbols() end, { desc = "Symbols" })
+
 -- LSP
 vim.keymap.set("n", "<leader>li", "<cmd>LspInfo<cr>", { desc = "LSP Info" })
 vim.keymap.set("n", "<leader>lr", "<cmd>LspRestart<cr>", { desc = "Restart LSP" })
