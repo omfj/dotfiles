@@ -120,6 +120,17 @@ map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
 map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
+-- diagnostics panel (quickfix list, kept in sync by config.autocmds)
+map("n", "<leader>xd", function()
+	if vim.fn.getqflist({ winid = 0 }).winid ~= 0 and vim.fn.getqflist({ title = 0 }).title == "Diagnostics" then
+		vim.cmd("cclose")
+		return
+	end
+	vim.diagnostic.setqflist({ title = "Diagnostics", open = false })
+	vim.cmd("botright copen")
+	vim.cmd("wincmd p")
+end, { desc = "Diagnostics Panel" })
+
 -- stylua: ignore start
 
 -- toggle options (steps defined in config.autocmds via persist_toggle)

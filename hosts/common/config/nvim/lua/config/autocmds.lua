@@ -40,6 +40,27 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+-- wrap long messages in quickfix/location lists
+vim.api.nvim_create_autocmd("FileType", {
+	group = augroup("qf_wrap"),
+	pattern = "qf",
+	callback = function()
+		vim.opt_local.wrap = true
+		vim.opt_local.linebreak = true
+	end,
+})
+
+-- keep the diagnostics panel (<leader>xd) in sync
+vim.api.nvim_create_autocmd("DiagnosticChanged", {
+	group = augroup("diagnostics_qf"),
+	callback = function()
+		if vim.fn.getqflist({ title = 0 }).title ~= "Diagnostics" then
+			return
+		end
+		vim.fn.setqflist({}, "r", { title = "Diagnostics", items = vim.diagnostic.toqflist(vim.diagnostic.get()) })
+	end,
+})
+
 -- wrap and check for spell in text filetypes
 vim.api.nvim_create_autocmd("FileType", {
 	group = augroup("wrap_spell"),
