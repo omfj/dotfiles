@@ -38,6 +38,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		map("n", "gri", function() Snacks.picker.lsp_implementations() end, "Goto Implementation")
 		map("n", "grr", function() Snacks.picker.lsp_references() end, "Goto References")
 		map("n", "gO", function() Snacks.picker.lsp_symbols() end, "Document Symbols")
+		map("n", "K", function() vim.lsp.buf.hover({ border = "single" }) end, "Hover")
 		map("n", "<C-k>", vim.lsp.buf.signature_help, "Signature Help")
 		map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Code Action")
 		map({ "n", "v" }, "<C-.>", vim.lsp.buf.code_action, "Code Action")
