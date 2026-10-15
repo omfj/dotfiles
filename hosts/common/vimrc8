@@ -1,0 +1,742 @@
+" vimrc8 — the Vim 8 variant of ./vimrc, for machines without Vim 9.
+" Plain Vim, no third-party plugins. Works on Vim 8.0+ on macOS, Linux and
+" Windows; newer features are used only when the running Vim has them.
+" Use it as ~/.vimrc (or ~/_vimrc on Windows), or try it with `vim -u vimrc8`.
+"
+" Differences from ./vimrc:
+"   - gc/gcc commenting and yank highlighting are implemented below instead of
+"     using the Vim 9 `comment` and `hlyank` packages
+"   - no editorconfig (the package needs Vim 9)
+"   - :Find (rg file list + simple fuzzy match) replaces 'findfunc'
+"   - the fzf picker runs in a popup (8.2+), a bottom split (8.1) or a
+"     full-screen shell-out (8.0)
+"
+" Style guide:
+"   - Sections start with a `" Name ----` heading padded with dashes to
+"     column 80, and are separated by three blank lines.
+"   - No line is longer than 80 columns.
+"   - Prefer 'single quotes'; use "double quotes" only for escapes like "\e"
+"     or "\<C-v>".
+"   - Only use what ships with Vim 8.0; guard anything newer with has() or
+"     exists(). Besides Vim, ripgrep (rg), fzf, bat and git may be assumed.
+"     No third-party plugins.
+"   - Never put a trailing "comment after a mapping; it becomes part of it.
+"   - Don't rely on trailing whitespace (it is stripped on save); set such
+"     options with `let &option = '...'` instead.
+
+set nocompatible
+set encoding=utf-8
+scriptencoding utf-8
+filetype plugin indent on
+syntax enable
+
+
+
+" Built-in optional packages ---------------------------------------------------
+silent! packadd! matchit       " better % on if/else, tags, etc.
+silent! packadd! cfilter       " :Cfilter /pat/ to filter quickfix (8.1+)
+
+
+
+" General ----------------------------------------------------------------------
+set fileformats=unix,dos       " prefer LF for new files, also on Windows
+set hidden                     " switch buffers without saving
+set autoread autowrite
+set confirm                    " ask instead of failing on :q with changes
+set backspace=indent,eol,start
+set mouse=a
+if exists('&ttymouse') && !has('gui_running')
+  set ttymouse=sgr
+endif
+set updatetime=200
+" Wait indefinitely for the rest of a mapping (like mini.clue in Neovim);
+" key codes such as <Esc> and arrows still time out quickly
+set notimeout ttimeout ttimeoutlen=10
+set history=1000
+set nrformats-=octal
+set virtualedit=block
+set belloff=all
+set shortmess+=Ic
+
+" Add Norwegian to spell checking only if its spellfile is installed
+" (otherwise Vim prompts to download it every time spell is enabled)
+let g:spelllangs = empty(globpath(&runtimepath, 'spell/nb.*.spl'))
+      \ ? 'en' : 'en,nb'
+
+" '+' only differs from '*' on X11/Wayland; elsewhere 'unnamed' is enough
+if has('unnamedplus')
+  set clipboard^=unnamed,unnamedplus
+elseif has('clipboard')
+  set clipboard^=unnamed
+endif
+
+" Keep swap/backup/undo files out of the working directory.
+" First 'runtimepath' entry is ~/.vim on Unix and ~/vimfiles on Windows.
+let s:vimdir = expand(split(&runtimepath, ',')[0])
+for s:d in ['undo', 'swap', 'backup']
+  if !isdirectory(s:vimdir . '/' . s:d)
+    call mkdir(s:vimdir . '/' . s:d, 'p', 0700)
+  endif
+endfor
+let &undodir   = s:vimdir . '/undo//'
+let &directory = s:vimdir . '/swap//'
+let &backupdir = s:vimdir . '/backup//'
+set undofile undolevels=10000
+set viminfo='1000,<100,s10,h
+
+
+
+" UI ---------------------------------------------------------------------------
+set number relativenumber
+set signcolumn=yes
+set cursorline
+set scrolloff=5 sidescrolloff=8
+set splitbelow splitright
+set nowrap
+set linebreak breakindent
+let &showbreak = '↪ '
+set display=lastline,uhex
+set laststatus=2
+set showcmd
+set noshowmode
+set wildmenu
+set wildmode=longest:full,full
+if has('patch-8.2.4325')
+  set wildoptions=pum
+endif
+if has('patch-8.2.4463')
+  set wildoptions+=fuzzy
+endif
+set wildignorecase
+set wildignore+=*.o,*.pyc,.DS_Store
+set wildignore+=*/.git/*,*/node_modules/*,*/target/*,*/dist/*
+set completeopt=menuone,noselect
+if has('patch-8.1.1882')
+  set completeopt+=popup
+endif
+set pumheight=10
+set listchars=tab:➙\ ,trail:␣,extends:⟩,precedes:⟨,nbsp:·
+let &fillchars = 'vert:│,fold: ' . (has('patch-8.2.2508') ? ',eob: ' : '')
+set foldmethod=syntax foldlevelstart=99
+
+" Cursor shape: bar in insert, underline in replace, block otherwise
+" (Windows console Vim and GUI Vim handle the cursor shape themselves)
+if !has('gui_running') && !has('win32')
+  let &t_SI = "\e[6 q"
+  let &t_SR = "\e[4 q"
+  let &t_EI = "\e[2 q"
+endif
+
+" True colour in truecolor terminals and in Windows Terminal / modern conhost
+if has('termguicolors') && ($COLORTERM =~# 'truecolor\|24bit' || has('vcon'))
+  set termguicolors
+endif
+
+if has('gui_running')
+  set guioptions-=T guioptions-=m guioptions-=r guioptions-=L
+  if has('win32')
+    set guifont=Cascadia_Mono:h11,Consolas:h11
+    set renderoptions=type:directx
+  elseif has('mac')
+    set guifont=Menlo:h13
+  endif
+endif
+set background=dark
+" habamax ships with Vim 9.0+; desert has shipped with Vim forever
+try
+  colorscheme habamax
+catch
+  silent! colorscheme desert
+endtry
+
+" Statusline
+let s:modes = {'n': 'NORMAL', 'i': 'INSERT', 'R': 'REPLACE', 'v': 'VISUAL',
+      \ 'V': 'V-LINE', "\<C-v>": 'V-BLOCK', 'c': 'COMMAND', 's': 'SELECT',
+      \ 'S': 'S-LINE', "\<C-s>": 'S-BLOCK', 't': 'TERMINAL'}
+function! StatusMode() abort
+  return get(s:modes, mode(), mode())
+endfunction
+let &statusline = '%#PmenuSel# %{StatusMode()} %* %f%m%r%h%w%='
+      \ . '%y %{&fenc!=""?&fenc:&enc} [%{&ff}] %l:%c %p%% '
+
+
+
+" Search -----------------------------------------------------------------------
+set incsearch hlsearch
+set ignorecase smartcase
+if executable('rg')
+  set grepprg=rg\ --vimgrep\ --smart-case
+  set grepformat=%f:%l:%c:%m
+endif
+
+
+
+" Indentation ------------------------------------------------------------------
+set autoindent smartindent
+set expandtab tabstop=4 shiftwidth=4 softtabstop=-1 shiftround
+set formatoptions+=jn
+
+
+
+" File finding -----------------------------------------------------------------
+" :find searches recursively from cwd with <Tab> completion.
+set path=.,**
+
+" :Find completes from `rg --files` (respects .gitignore) with a simple fuzzy
+" match: "vrc" matches "hosts/common/vimrc". Shortest paths first.
+if executable('rg')
+  function! s:FindComplete(arg, line, pos) abort
+    let files = systemlist('rg --files --hidden --glob ' . shellescape('!.git'))
+    if empty(a:arg)
+      return files
+    endif
+    let chars = map(split(a:arg, '\zs'), {_, c -> escape(c, '\')})
+    let pat = '\V' . join(chars, '\.\{-}')
+    return sort(filter(files, {_, f -> f =~? pat}), {a, b -> len(a) - len(b)})
+  endfunction
+  command! -nargs=1 -complete=customlist,s:FindComplete Find edit <args>
+endif
+
+
+
+" fzf picker (no fzf.vim needed) -----------------------------------------------
+" Runs the fzf binary and passes the selection to a callback. Where it runs
+" depends on the Vim version: a popup terminal (8.2), a bottom split terminal
+" (8.1) or a full-screen shell-out (8.0, Unix terminal only).
+" <C-v>/<C-x>/<C-t> open in vsplit/split/tab, <Tab> multi-selects (several
+" grep hits go to the quickfix list). Previews use bat if present.
+let s:fzf_mode = !executable('fzf') ? ''
+      \ : has('terminal') && has('popupwin') && has('patch-8.2.0191') ? 'popup'
+      \ : has('terminal') ? 'split'
+      \ : !has('gui_running') && !has('win32') ? 'bang' : ''
+let s:has_bat = executable('bat')
+let s:actions = {'': 'edit', 'ctrl-v': 'vsplit', 'ctrl-x': 'split',
+      \ 'ctrl-t': 'tabedit'}
+
+" Quote one argument for the script the picker writes (sh or cmd.exe)
+function! s:Quote(s) abort
+  if has('win32')
+    let s = substitute(a:s, '"', '\\"', 'g')
+    return '"' . substitute(s, '%', '%%', 'g') . '"'
+  endif
+  return "'" . substitute(a:s, "'", "'\\\\''", 'g') . "'"
+endfunction
+
+" source: shell command that prints lines, a List of lines, or '' (fzf's own
+" default). args: List of extra fzf arguments. Sink gets (action, lines).
+function! s:Fzf(source, args, Sink) abort
+  let s:fzf = {'sink': a:Sink, 'out': tempname(), 'tmp': [], 'win': win_getid()}
+  let expect = filter(keys(s:actions), 'v:val !=# ""')
+  let args = ['--layout=reverse', '--info=inline', '--multi',
+        \ '--expect=' . join(expect, ',')] + a:args
+  let cmd = 'fzf ' . join(map(args, 's:Quote(v:val)'))
+  if type(a:source) == v:t_list
+    let in = tempname()
+    call writefile(a:source, in)
+    call add(s:fzf.tmp, in)
+    let cmd .= ' < ' . s:Quote(in)
+  elseif !empty(a:source)
+    let cmd = a:source . ' | ' . cmd
+  endif
+  let cmd .= ' > ' . s:Quote(s:fzf.out)
+
+  " Run through a script file so quoting/redirection behave the same everywhere
+  let script = tempname() . (has('win32') ? '.bat' : '.sh')
+  call add(s:fzf.tmp, script)
+  call writefile(has('win32')
+        \ ? ['@echo off', 'chcp 65001 >nul', cmd] : [cmd], script)
+
+  if s:fzf_mode ==# 'bang'
+    execute 'silent !sh' shellescape(script)
+    redraw!
+    call s:FzfDone(v:shell_error)
+    return
+  endif
+
+  let job = has('win32') ? ['cmd.exe', '/c', script] : ['sh', script]
+  let opts = {'term_finish': 'close',
+        \ 'exit_cb': {j, st -> timer_start(10, {-> s:FzfDone(st)})}}
+  " <Esc> goes straight to fzf instead of waiting for the global <Esc><Esc>
+  let esc = 'tnoremap <buffer> <nowait> <Esc> <Esc>'
+  if s:fzf_mode ==# 'popup'
+    let w = max([40, float2nr(&columns * 0.9)])
+    let h = max([10, float2nr(&lines * 0.8)])
+    let buf = term_start(job, extend(opts,
+          \ {'hidden': 1, 'term_cols': w, 'term_rows': h}))
+    let s:fzf.buf = buf
+    let win = popup_create(buf, {'minwidth': w, 'minheight': h, 'border': [],
+          \ 'borderchars': ['─', '│', '─', '│', '╭', '╮', '╯', '╰']})
+    call win_execute(win, esc)
+  else
+    let s:fzf.buf = term_start(job, opts)
+    wincmd J
+    execute 'resize' max([10, &lines / 2])
+    execute esc
+  endif
+endfunction
+
+function! s:FzfDone(status) abort
+  call win_gotoid(s:fzf.win)
+  " term_finish 'close' only closes the window; wipe the finished buffer too
+  if has_key(s:fzf, 'buf') && bufexists(s:fzf.buf)
+    execute 'silent! bwipeout!' s:fzf.buf
+  endif
+  let lines = filereadable(s:fzf.out) ? readfile(s:fzf.out) : []
+  for f in s:fzf.tmp + [s:fzf.out]
+    call delete(f)
+  endfor
+  if a:status == 0 && len(lines) > 1
+    call s:fzf.sink(get(s:actions, lines[0], 'edit'), lines[1:])
+  endif
+endfunction
+
+function! s:OpenFiles(cmd, files) abort
+  for f in a:files
+    execute a:cmd fnameescape(f)
+  endfor
+endfunction
+
+function! s:OpenGrep(cmd, lines) abort
+  if len(a:lines) > 1
+    let efm = &errorformat
+    let &errorformat = '%f:%l:%c:%m'
+    cgetexpr a:lines
+    let &errorformat = efm
+    copen | cfirst
+    return
+  endif
+  let [file, lnum, col] = matchlist(a:lines[0], '\v^(.{-}):(\d+):(\d+):')[1:3]
+  execute a:cmd fnameescape(file)
+  call cursor(str2nr(lnum), str2nr(col))
+  normal! zvzz
+endfunction
+
+function! s:FilePreview() abort
+  return s:has_bat ? ['--preview',
+        \ 'bat --color=always --style=numbers --line-range=:300 {}'] : []
+endfunction
+
+function! s:Files() abort
+  if empty(s:fzf_mode)
+    call feedkeys(exists(':Find') == 2 ? ':Find ' : ':find ', 'n') | return
+  endif
+  let src = executable('rg')
+        \ ? 'rg --files --hidden --glob ' . s:Quote('!.git') : ''
+  call s:Fzf(src, ['--prompt', 'Files> '] + s:FilePreview(),
+        \ function('s:OpenFiles'))
+endfunction
+
+function! s:Buffers() abort
+  if empty(s:fzf_mode) | call feedkeys(':buffer ', 'n') | return | endif
+  let bufs = filter(range(1, bufnr('$')),
+        \ 'buflisted(v:val) && v:val != bufnr("%")')
+  let names = map(bufs, 'empty(bufname(v:val)) ? v:val . ":[No Name]"'
+        \ . ' : fnamemodify(bufname(v:val), ":~:.")')
+  call s:Fzf(names, ['--prompt', 'Buffers> '] + s:FilePreview(),
+        \ function('s:OpenFiles'))
+endfunction
+
+function! s:Recent() abort
+  if empty(s:fzf_mode) | browse oldfiles | return | endif
+  let files = filter(copy(v:oldfiles), 'filereadable(expand(v:val))')
+  let files = map(files, 'fnamemodify(expand(v:val), ":~:.")')
+  call s:Fzf(files, ['--prompt', 'Recent> ', '--no-sort'] + s:FilePreview(),
+        \ function('s:OpenFiles'))
+endfunction
+
+" Live grep: rg re-runs on every keystroke, fzf only displays the results
+function! s:Grep(query) abort
+  if empty(s:fzf_mode) || !executable('rg')
+    call feedkeys(':silent grep! ' . a:query, 'n') | return
+  endif
+  let rg = 'rg --column --line-number --no-heading --color=always'
+        \ . ' --smart-case -- {q} || ' . (has('win32') ? 'cd .' : 'true')
+  let args = ['--prompt', 'Grep> ', '--ansi', '--disabled', '--query', a:query,
+        \ '--delimiter', ':',
+        \ '--bind', 'start:reload:' . rg, '--bind', 'change:reload:' . rg]
+  if s:has_bat
+    let args += ['--preview',
+          \ 'bat --color=always --style=numbers --highlight-line {2} {1}',
+          \ '--preview-window', '+{2}/2']
+  endif
+  call s:Fzf('', args, function('s:OpenGrep'))
+endfunction
+
+command! -nargs=0 Files call s:Files()
+command! -nargs=0 Buffers call s:Buffers()
+command! -nargs=0 Recent call s:Recent()
+command! -nargs=* Grep call s:Grep(<q-args>)
+
+
+
+" Commenting (stand-in for Vim 9's comment package) ----------------------------
+" gc{motion}, gcc (with count) and visual gc toggle comments using
+" 'commentstring'. If every non-blank line is commented they are uncommented.
+function! VimrcComment(type, ...) abort
+  let [l1, l2] = a:0 ? [line("'<"), line("'>")] : [line("'["), line("']")]
+  let parts = split(&commentstring =~# '%s' ? &commentstring : '# %s', '%s', 1)
+  let pre = substitute(parts[0], '\s*$', '', '')
+  let post = substitute(get(parts, 1, ''), '^\s*', '', '')
+  let rx = '\V\^\(\s\*\)' . escape(pre, '\') . ' \?\(\.\{-}\)'
+        \ . (empty(post) ? '' : ' \?' . escape(post, '\')) . '\$'
+  let lines = getline(l1, l2)
+  let code = filter(copy(lines), {_, l -> l =~# '\S'})
+  if empty(code)
+    return
+  endif
+  if empty(filter(copy(code), {_, l -> l !~# rx}))
+    call map(lines, {_, l -> l =~# rx ? substitute(l, rx, '\1\2', '') : l})
+  else
+    let ind = min(map(copy(code), {_, l -> match(l, '\S')}))
+    call map(lines, {_, l -> l !~# '\S' ? l : strpart(l, 0, ind) . pre . ' '
+          \ . strpart(l, ind) . (empty(post) ? '' : ' ' . post)})
+  endif
+  call setline(l1, lines)
+endfunction
+
+function! s:CommentOp() abort
+  set operatorfunc=VimrcComment
+  return 'g@'
+endfunction
+nnoremap <expr> gc <SID>CommentOp()
+nnoremap <expr> gcc <SID>CommentOp() . '_'
+xnoremap <silent> gc :<C-u>call VimrcComment(visualmode(), 1)<CR>
+
+
+
+" Yank highlight (stand-in for Vim 9's hlyank package) -------------------------
+if exists('##TextYankPost')
+  function! s:HlYank() abort
+    if v:event.operator !=# 'y' || v:event.regtype =~# "^\<C-v>"
+      return
+    endif
+    let [l1, c1, l2, c2] = [line("'["), col("'["), line("']"), col("']")]
+    let pat = v:event.regtype ==# 'V'
+          \ ? '\%>' . (l1 - 1) . 'l\%<' . (l2 + 1) . 'l.*'
+          \ : '\%' . l1 . 'l\%' . c1 . 'c\_.\{-}\%' . l2 . 'l\%' . c2 . 'c.'
+    let id = matchadd('IncSearch', pat)
+    let win = win_getid()
+    call timer_start(150, {-> win_getid() == win ? matchdelete(id) : 0})
+  endfunction
+  augroup vimrc_hlyank
+    autocmd!
+    autocmd TextYankPost * silent! call s:HlYank()
+  augroup END
+endif
+
+
+
+" Git signs ------------------------------------------------------------------
+" Marks lines added, changed or removed relative to the git index in the sign
+" column (like mini.diff in Neovim). ]c / [c jump between hunks (or between
+" changes in diff mode). Updates on read, write, focus and while typing.
+if executable('git') && exists('*sign_place') && has('job') && has('timers')
+  call sign_define('GitAdd', {'text': '▌', 'texthl': 'GitSignAdd'})
+  call sign_define('GitChange', {'text': '▌', 'texthl': 'GitSignChange'})
+  call sign_define('GitDelete', {'text': '▁', 'texthl': 'GitSignDelete'})
+
+  function! s:GitSignHighlights() abort
+    let groups = {'Add': ['Added', 'DiffAdd'],
+          \ 'Change': ['Changed', 'DiffChange'],
+          \ 'Delete': ['Removed', 'DiffDelete']}
+    for [name, links] in items(groups)
+      let target = hlexists(links[0]) ? links[0] : links[1]
+      execute 'highlight default link GitSign' . name target
+    endfor
+  endfunction
+  call s:GitSignHighlights()
+
+  " Per buffer: index version (base), buffer contents (cur), debounce timer
+  " and the first line of each hunk
+  let s:git = {}
+
+  " Fetch the index version of the buffer's file, then diff against it
+  function! s:GitBase(buf) abort
+    let file = resolve(fnamemodify(bufname(a:buf), ':p'))
+    if !empty(getbufvar(a:buf, '&buftype')) || !filereadable(file)
+      return s:GitForget(a:buf)
+    endif
+    let base = systemlist('git -C ' . shellescape(fnamemodify(file, ':h'))
+          \ . ' show ' . shellescape(':./' . fnamemodify(file, ':t')))
+    if v:shell_error
+      return s:GitForget(a:buf)
+    endif
+    if !has_key(s:git, a:buf)
+      let s:git[a:buf] = {'base': tempname(), 'cur': tempname(),
+            \ 'timer': -1, 'hunks': []}
+    endif
+    call writefile(base, s:git[a:buf].base)
+    call s:GitDiff(a:buf)
+  endfunction
+
+  function! s:GitForget(buf) abort
+    if has_key(s:git, a:buf)
+      call timer_stop(s:git[a:buf].timer)
+      call delete(s:git[a:buf].base)
+      call delete(s:git[a:buf].cur)
+      call remove(s:git, a:buf)
+    endif
+    if bufexists(a:buf)
+      call sign_unplace('gitsigns', {'buffer': a:buf})
+    endif
+  endfunction
+
+  " Diff the buffer contents against the index version in the background
+  function! s:GitDiff(buf) abort
+    if !has_key(s:git, a:buf) || !bufloaded(a:buf)
+      return
+    endif
+    let buf = a:buf
+    let st = s:git[buf]
+    call writefile(getbufline(buf, 1, '$'), st.cur)
+    let out = []
+    call job_start(['git', 'diff', '--no-index', '--no-color',
+          \ '--no-ext-diff', '--ignore-cr-at-eol', '-U0', st.base, st.cur], {
+          \ 'in_io': 'null', 'err_io': 'null',
+          \ 'out_cb': {_, l -> add(out, l)},
+          \ 'close_cb': {_ -> s:GitPlace(buf, out)}})
+  endfunction
+
+  " Turn the '@@ -old,count +new,count @@' hunk headers into signs
+  function! s:GitPlace(buf, out) abort
+    if !has_key(s:git, a:buf) || !bufloaded(a:buf)
+      return
+    endif
+    call sign_unplace('gitsigns', {'buffer': a:buf})
+    let hunks = []
+    let rx = '^@@ -\d\+\%(,\(\d\+\)\)\? +\(\d\+\)\%(,\(\d\+\)\)\? @@'
+    for l in a:out
+      let m = matchlist(l, rx)
+      if empty(m)
+        continue
+      endif
+      let old = m[1] ==# '' ? 1 : str2nr(m[1])
+      let start = str2nr(m[2])
+      let new = m[3] ==# '' ? 1 : str2nr(m[3])
+      if new == 0
+        let lnums = [max([1, start])]
+        let sign = 'GitDelete'
+      else
+        let lnums = range(start, start + new - 1)
+        let sign = old == 0 ? 'GitAdd' : 'GitChange'
+      endif
+      call add(hunks, lnums[0])
+      for lnum in lnums
+        call sign_place(0, 'gitsigns', sign, a:buf,
+              \ {'lnum': lnum, 'priority': 5})
+      endfor
+    endfor
+    let s:git[a:buf].hunks = hunks
+  endfunction
+
+  function! s:GitSchedule(buf) abort
+    if !has_key(s:git, a:buf)
+      return
+    endif
+    let buf = a:buf
+    call timer_stop(s:git[buf].timer)
+    let s:git[buf].timer = timer_start(150, {-> s:GitDiff(buf)})
+  endfunction
+
+  function! s:GitHunk(dir) abort
+    if &diff
+      execute 'normal!' v:count1 . (a:dir > 0 ? ']c' : '[c')
+      return
+    endif
+    let hunks = get(get(s:git, bufnr('%'), {}), 'hunks', [])
+    let lnum = line('.')
+    let targets = a:dir > 0
+          \ ? filter(copy(hunks), {_, h -> h > lnum})
+          \ : reverse(filter(copy(hunks), {_, h -> h < lnum}))
+    if !empty(targets)
+      execute 'normal!' targets[min([v:count1, len(targets)]) - 1] . 'G'
+    endif
+  endfunction
+  nnoremap <silent> ]c :<C-u>call <SID>GitHunk(1)<CR>
+  nnoremap <silent> [c :<C-u>call <SID>GitHunk(-1)<CR>
+
+  augroup vimrc_gitsigns
+    autocmd!
+    autocmd BufReadPost,BufWritePost,FileChangedShellPost *
+          \ call s:GitBase(str2nr(expand('<abuf>')))
+    autocmd FocusGained,ShellCmdPost * call s:GitBase(bufnr('%'))
+    autocmd TextChanged,TextChangedI,InsertLeave *
+          \ call s:GitSchedule(bufnr('%'))
+    autocmd BufWipeout * call s:GitForget(str2nr(expand('<abuf>')))
+    autocmd ColorScheme * call s:GitSignHighlights()
+  augroup END
+endif
+
+
+
+" netrw (built-in file explorer) -----------------------------------------------
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_winsize = 25
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+,\.DS_Store'
+
+
+
+" Keymaps ----------------------------------------------------------------------
+" NB: never put a trailing "comment after a mapping — it becomes part of it.
+let mapleader = ' '
+let maplocalleader = ','
+
+" Move by display line when no count is given
+nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
+nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
+xnoremap <expr> j v:count == 0 ? 'gj' : 'j'
+xnoremap <expr> k v:count == 0 ? 'gk' : 'k'
+
+" n/N always search in the same direction, and open folds
+nnoremap <expr> n 'Nn'[v:searchforward] . 'zv'
+nnoremap <expr> N 'nN'[v:searchforward] . 'zv'
+
+" Y behaves like D and C
+nnoremap Y y$
+
+" Keep selection when indenting
+xnoremap < <gv
+xnoremap > >gv
+
+" Move selected lines
+xnoremap J :move '>+1<CR>gv=gv
+xnoremap K :move '<-2<CR>gv=gv
+
+" Undo break-points in insert mode
+inoremap , ,<C-g>u
+inoremap . .<C-g>u
+inoremap ; ;<C-g>u
+
+" Save / quit
+nnoremap <silent> <C-s> :update<CR>
+inoremap <silent> <C-s> <Esc>:update<CR>
+xnoremap <silent> <C-s> <Esc>:update<CR>
+nnoremap <leader>qq :qa<CR>
+
+" Clear search highlight / redraw
+nnoremap <silent> <leader>ur :nohlsearch<Bar>diffupdate<CR><C-l>
+
+" Windows
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap <leader>ww <C-w>p
+nnoremap <leader>wd <C-w>c
+nnoremap <leader>w- <C-w>s
+nnoremap <leader>w\| <C-w>v
+nnoremap <silent> <C-w>K :resize +2<CR>
+nnoremap <silent> <C-w>J :resize -2<CR>
+nnoremap <silent> <C-w>H :vertical resize -2<CR>
+nnoremap <silent> <C-w>L :vertical resize +2<CR>
+
+" Buffers
+nnoremap <silent> [b :bprevious<CR>
+nnoremap <silent> ]b :bnext<CR>
+nnoremap <leader>bd :bdelete<CR>
+nnoremap <leader>fn :enew<CR>
+
+" Find / grep / explore (fzf pickers, falling back to built-ins without fzf)
+nnoremap <silent> <leader><Space> :Files<CR>
+nnoremap <silent> <leader>ff :Files<CR>
+nnoremap <silent> <leader>, :Buffers<CR>
+nnoremap <silent> <leader>fb :Buffers<CR>
+nnoremap <silent> <leader>fr :Recent<CR>
+nnoremap <silent> <leader>/ :Grep<CR>
+nnoremap <silent> <leader>sw :execute 'Grep' expand('<cword>')<CR>
+xnoremap <silent> <leader>sw "zy:execute 'Grep' @z<CR>
+nnoremap <leader>sg :silent grep!<Space>
+nnoremap <silent> <leader>e :Lexplore<CR>
+nnoremap <silent> - :Explore<CR>
+
+" Copy relative path (with line range in visual mode)
+function! s:CopyPath(visual) abort
+  let @+ = expand('%:~:.')
+        \ . (a:visual ? ':' . line("'<") . ':' . line("'>") : '')
+  echo 'Copied: ' . @+
+endfunction
+nnoremap <silent> <leader>fy :call <SID>CopyPath(0)<CR>
+xnoremap <silent> <leader>fy :<C-u>call <SID>CopyPath(1)<CR>
+
+" Quickfix / location list
+nnoremap <silent> [q :cprevious<CR>
+nnoremap <silent> ]q :cnext<CR>
+nnoremap <silent> [l :lprevious<CR>
+nnoremap <silent> ]l :lnext<CR>
+nnoremap <silent> <leader>xq :copen<CR>
+nnoremap <silent> <leader>xl :lopen<CR>
+
+" Toggles
+nnoremap <silent> <leader>us
+      \ :let &l:spelllang = g:spelllangs<Bar>setlocal spell!<CR>
+nnoremap <silent> <leader>uw :setlocal wrap!<CR>
+nnoremap <silent> <leader>ul :setlocal list!<CR>
+nnoremap <silent> <leader>uL :setlocal relativenumber!<CR>
+nnoremap <silent> <leader>uv :setlocal cursorline!<CR>
+nnoremap <silent> <leader>uS
+      \ :let &l:colorcolumn = empty(&l:colorcolumn) ? '80' : ''<CR>
+
+" Tabs
+nnoremap <silent> <leader><Tab><Tab> :tabnew<CR>
+nnoremap <silent> <leader><Tab>d :tabclose<CR>
+nnoremap <silent> <leader><Tab>] :tabnext<CR>
+nnoremap <silent> <leader><Tab>[ :tabprevious<CR>
+nnoremap <silent> <leader><Tab>f :tabfirst<CR>
+nnoremap <silent> <leader><Tab>l :tablast<CR>
+
+" Terminal (Vim 8.1+)
+if has('terminal')
+  nnoremap <silent> <leader>ft :botright terminal ++rows=12<CR>
+  tnoremap <Esc><Esc> <C-\><C-n>
+endif
+
+" Write with sudo
+if has('unix')
+  cnoremap w!! w !sudo tee % >/dev/null
+endif
+
+
+
+" Autocommands -----------------------------------------------------------------
+augroup vimrc
+  autocmd!
+  " Jump to last known cursor position
+  autocmd BufReadPost *
+        \ if line("'\"") >= 1 && line("'\"") <= line('$') && &ft !~# 'commit'
+        \ |   exe 'normal! g`"zv'
+        \ | endif
+  " Reload files changed outside Vim
+  autocmd FocusGained,BufEnter,CursorHold * silent! checktime
+  " Equalize splits when the terminal is resized
+  autocmd VimResized * wincmd =
+  " Open quickfix after :grep / :make
+  autocmd QuickFixCmdPost [^l]* cwindow
+  autocmd QuickFixCmdPost l* lwindow
+  " Close helper windows with q
+  autocmd FileType help,qf,netrw nnoremap <buffer><silent> q :close<CR>
+  " Prose
+  autocmd FileType markdown,text,gitcommit setlocal wrap spell
+        \ | let &l:spelllang = g:spelllangs
+  " Two-space indent for these
+  autocmd FileType javascript,typescript,typescriptreact,json,yaml
+        \ setlocal shiftwidth=2 tabstop=2
+  autocmd FileType html,css,svelte,nix,ocaml
+        \ setlocal shiftwidth=2 tabstop=2
+  " Real tabs where required
+  autocmd FileType make,go setlocal noexpandtab
+  " Strip trailing whitespace on save (skip markdown, where it can matter)
+  autocmd BufWritePre * if &ft !=# 'markdown' && &modifiable
+        \ |   let s:v = winsaveview()
+        \ |   keeppatterns %s/\s\+$//e
+        \ |   call winrestview(s:v)
+        \ | endif
+augroup END
+
+" Local overrides (not tracked)
+for s:f in ['~/.vimrc.local', '~/_vimrc.local']
+  if filereadable(expand(s:f))
+    execute 'source' fnameescape(expand(s:f))
+    break
+  endif
+endfor
