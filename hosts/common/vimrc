@@ -1,7 +1,9 @@
 " ~/.vimrc — plain Vim, no third-party plugins. Works on macOS, Linux and
-" Windows (Vim reads ~/.vimrc there too, after ~/_vimrc).
-" Everything here ships with Vim 9.1 (incl. the optional packages in
-" $VIMRUNTIME/pack/dist/opt). Keymaps mirror the Neovim config where sensible.
+" Windows (Vim reads ~/.vimrc there too, after ~/_vimrc), including the Vim
+" that ships with Git Bash (an MSYS build: has('unix') and has('win32unix')
+" are true, has('win32') is false). Targets Vim 9.1 at any patch level;
+" anything added by a 9.1.x patch is guarded or has a fallback below.
+" Keymaps mirror the Neovim config where sensible.
 "
 " Style guide:
 "   - Sections start with a `" Name ----` heading padded with dashes to
@@ -9,7 +11,8 @@
 "   - No line is longer than 80 columns.
 "   - Prefer 'single quotes'; use "double quotes" only for escapes like "\e"
 "     or "\<C-v>".
-"   - Only use what ships with Vim 9.1 (incl. $VIMRUNTIME/pack/dist/opt).
+"   - Only use what ships with Vim 9.1.0000 (incl. $VIMRUNTIME/pack/dist/opt);
+"     guard anything from a later 9.1.x patch with has() or exists().
 "     Besides Vim, ripgrep (rg), fzf, bat and git may be assumed. No
 "     third-party plugins.
 "   - Never put a trailing "comment after a mapping; it becomes part of it.
@@ -26,10 +29,22 @@ syntax enable
 
 " Built-in optional packages ---------------------------------------------------
 silent! packadd! matchit       " better % on if/else, tags, etc.
-silent! packadd! comment       " gcc / gc{motion} to toggle comments
 silent! packadd! editorconfig  " respect .editorconfig
-silent! packadd! hlyank        " briefly highlight yanked text
 silent! packadd! cfilter       " :Cfilter /pat/ to filter quickfix
+
+" The comment and hlyank packages only ship with later 9.1 patches;
+" without them the stand-ins further down are used instead
+function! s:HasPack(name) abort
+  return !empty(globpath(&packpath, 'pack/*/opt/' . a:name))
+endfunction
+let s:has_comment = s:HasPack('comment')
+let s:has_hlyank = s:HasPack('hlyank')
+if s:has_comment
+  packadd! comment
+endif
+if s:has_hlyank
+  packadd! hlyank
+endif
 
 
 
@@ -63,6 +78,28 @@ if has('unnamedplus')
   set clipboard^=unnamed,unnamedplus
 elseif has('clipboard')
   set clipboard^=unnamed
+endif
+
+" Git Bash's Vim has no clipboard support, but MSYS exposes the Windows
+" clipboard as /dev/clipboard: copy unnamed yanks there, paste with
+" :r /dev/clipboard
+let s:devclip = !has('clipboard') && has('win32unix')
+      \ && filewritable('/dev/clipboard')
+function! s:SetClipboard(lines, linewise) abort
+  if s:devclip
+    call writefile(a:lines + (a:linewise ? [''] : []), '/dev/clipboard', 'b')
+  else
+    call setreg('+', a:lines, a:linewise ? 'l' : 'c')
+  endif
+endfunction
+if s:devclip
+  augroup vimrc_clipboard
+    autocmd!
+    autocmd TextYankPost * if v:event.regname ==# ''
+          \ |   call s:SetClipboard(v:event.regcontents,
+          \       v:event.regtype ==# 'V')
+          \ | endif
+  augroup END
 endif
 
 " Keep swap/backup/undo files out of the working directory.
@@ -113,8 +150,10 @@ if !has('gui_running') && !has('win32')
   let &t_EI = "\e[2 q"
 endif
 
-" True colour in truecolor terminals and in Windows Terminal / modern conhost
-if has('termguicolors') && ($COLORTERM =~# 'truecolor\|24bit' || has('vcon'))
+" True colour in truecolor terminals and in Windows Terminal / modern conhost.
+" mintty (Git Bash) and Windows Terminal don't always set $COLORTERM.
+if has('termguicolors') && ($COLORTERM =~# 'truecolor\|24bit' || has('vcon')
+      \ || $TERM_PROGRAM ==# 'mintty' || !empty($WT_SESSION))
   set termguicolors
 endif
 
@@ -145,8 +184,10 @@ let &statusline = '%#PmenuSel# %{StatusMode()} %* %f%m%r%h%w%='
 " Search -----------------------------------------------------------------------
 set incsearch hlsearch
 set ignorecase smartcase
+" Native Windows rg prints 'dir\file' paths, which Git Bash's Vim can't open
+let s:rg = 'rg' . (has('win32unix') ? ' --path-separator /' : '')
 if executable('rg')
-  set grepprg=rg\ --vimgrep\ --smart-case
+  let &grepprg = s:rg . ' --vimgrep --smart-case'
   set grepformat=%f:%l:%c:%m
 endif
 
@@ -169,7 +210,7 @@ if executable('rg') && exists('+findfunc')
   let s:rg_files = []
   function! VimrcFind(arg, cmdcomplete) abort
     if empty(s:rg_files)
-      let s:rg_files = systemlist('rg --files --hidden --glob '
+      let s:rg_files = systemlist(s:rg . ' --files --hidden --glob '
             \ . shellescape('!.git'))
     endif
     return empty(a:arg) ? s:rg_files : matchfuzzy(s:rg_files, a:arg)
@@ -279,7 +320,7 @@ endfunction
 function! s:Files() abort
   if !s:has_fzf | call feedkeys(':find ', 'n') | return | endif
   let src = executable('rg')
-        \ ? 'rg --files --hidden --glob ' . s:Quote('!.git') : ''
+        \ ? s:rg . ' --files --hidden --glob ' . s:Quote('!.git') : ''
   call s:Fzf(src, ['--prompt', 'Files> '] + s:FilePreview(),
         \ function('s:OpenFiles'))
 endfunction
@@ -307,7 +348,7 @@ function! s:Grep(query) abort
   if !s:has_fzf || !executable('rg')
     call feedkeys(':silent grep! ' . a:query, 'n') | return
   endif
-  let rg = 'rg --column --line-number --no-heading --color=always'
+  let rg = s:rg . ' --column --line-number --no-heading --color=always'
         \ . ' --smart-case -- {q} || ' . (has('win32') ? 'cd .' : 'true')
   let args = ['--prompt', 'Grep> ', '--ansi', '--disabled', '--query', a:query,
         \ '--delimiter', ':',
@@ -324,6 +365,68 @@ command! -nargs=0 Files call s:Files()
 command! -nargs=0 Buffers call s:Buffers()
 command! -nargs=0 Recent call s:Recent()
 command! -nargs=* Grep call s:Grep(<q-args>)
+
+
+
+" Commenting (stand-in for the comment package) -------------------------------
+" Only used on 9.1 builds that predate the package. gc{motion}, gcc (with
+" count) and visual gc toggle comments using 'commentstring'. If every
+" non-blank line is commented they are uncommented.
+if !s:has_comment
+  function! VimrcComment(type, ...) abort
+    let [l1, l2] = a:0 ? [line("'<"), line("'>")] : [line("'["), line("']")]
+    let parts = split(&commentstring =~# '%s' ? &commentstring : '# %s',
+          \ '%s', 1)
+    let pre = substitute(parts[0], '\s*$', '', '')
+    let post = substitute(get(parts, 1, ''), '^\s*', '', '')
+    let rx = '\V\^\(\s\*\)' . escape(pre, '\') . ' \?\(\.\{-}\)'
+          \ . (empty(post) ? '' : ' \?' . escape(post, '\')) . '\$'
+    let lines = getline(l1, l2)
+    let code = filter(copy(lines), {_, l -> l =~# '\S'})
+    if empty(code)
+      return
+    endif
+    if empty(filter(copy(code), {_, l -> l !~# rx}))
+      call map(lines, {_, l -> l =~# rx ? substitute(l, rx, '\1\2', '') : l})
+    else
+      let ind = min(map(copy(code), {_, l -> match(l, '\S')}))
+      call map(lines, {_, l -> l !~# '\S' ? l : strpart(l, 0, ind) . pre
+            \ . ' ' . strpart(l, ind) . (empty(post) ? '' : ' ' . post)})
+    endif
+    call setline(l1, lines)
+  endfunction
+
+  function! s:CommentOp() abort
+    set operatorfunc=VimrcComment
+    return 'g@'
+  endfunction
+  nnoremap <expr> gc <SID>CommentOp()
+  nnoremap <expr> gcc <SID>CommentOp() . '_'
+  xnoremap <silent> gc :<C-u>call VimrcComment(visualmode(), 1)<CR>
+endif
+
+
+
+" Yank highlight (stand-in for the hlyank package) -----------------------------
+" Only used on 9.1 builds that predate the package.
+if !s:has_hlyank
+  function! s:HlYank() abort
+    if v:event.operator !=# 'y' || v:event.regtype =~# "^\<C-v>"
+      return
+    endif
+    let [l1, c1, l2, c2] = [line("'["), col("'["), line("']"), col("']")]
+    let pat = v:event.regtype ==# 'V'
+          \ ? '\%>' . (l1 - 1) . 'l\%<' . (l2 + 1) . 'l.*'
+          \ : '\%' . l1 . 'l\%' . c1 . 'c\_.\{-}\%' . l2 . 'l\%' . c2 . 'c.'
+    let id = matchadd('IncSearch', pat)
+    let win = win_getid()
+    call timer_start(150, {-> win_getid() == win ? matchdelete(id) : 0})
+  endfunction
+  augroup vimrc_hlyank
+    autocmd!
+    autocmd TextYankPost * silent! call s:HlYank()
+  augroup END
+endif
 
 
 
@@ -553,9 +656,10 @@ nnoremap <silent> - :Explore<CR>
 
 " Copy relative path (with line range in visual mode)
 function! s:CopyPath(visual) abort
-  let @+ = expand('%:~:.')
+  let path = expand('%:~:.')
         \ . (a:visual ? ':' . line("'<") . ':' . line("'>") : '')
-  echo 'Copied: ' . @+
+  call s:SetClipboard([path], 0)
+  echo 'Copied: ' . path
 endfunction
 nnoremap <silent> <leader>fy :call <SID>CopyPath(0)<CR>
 xnoremap <silent> <leader>fy :<C-u>call <SID>CopyPath(1)<CR>
@@ -590,8 +694,8 @@ nnoremap <silent> <leader><Tab>l :tablast<CR>
 nnoremap <silent> <leader>ft :botright terminal ++rows=12<CR>
 tnoremap <Esc><Esc> <C-\><C-n>
 
-" Write with sudo
-if has('unix')
+" Write with sudo (not in Git Bash, which has no sudo)
+if has('unix') && executable('sudo')
   cnoremap w!! w !sudo tee % >/dev/null
 endif
 
