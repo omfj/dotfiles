@@ -1,0 +1,23 @@
+[general]
+launch_at_login = true
+hide_menu_icon = true
+
+[hotkeys]
+window_switcher = "cmd+tab"
+launcher = "cmd+space"
+
+[aliases]
+c = "Code.app"
+t = "Rex Beta.app"
+r = "Rex Beta.app"
+f = "Firefox.app"
+
+[launcher]
+max_rows = 5
+minimal = true
+
+[window_switcher]
+style = "icons"
+
+[scripts]
+directories = ["/Users/olem/Developer/github/dotfiles/bin"]

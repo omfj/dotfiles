@@ -92,16 +92,17 @@ link "$common/config/nvim" "$conf/nvim"
 link "$common/config/lsd" "$conf/lsd"
 
 # Shared between main computers
-if host_is "obook.local" || host_is "oarch"; then
+if host_is "MacBookPro.lan" || host_is "oarch"; then
     link "$common/config/git" "$conf/git"
     link "$common/config/alacritty.toml" "$conf/alacritty.toml"
 fi
 
 # Mac (obook)
-if host_is "obook.local"; then
+if host_is "MacBookPro.lan"; then
     link "$obook/config/fish" "$conf/fish"
     link "$common/config/zed" "$conf/zed"
     link "$obook/zshrc" "$HOME/.zshrc"
+    link "$obook/config/tabbee" "$conf/tabbee"
 fi
 
 # Arch (oarch)
