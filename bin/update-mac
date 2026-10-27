@@ -29,8 +29,4 @@ vp upgrade
 vp update -g
 echo -e "$GREEN[vp]$NC DONE"
 
-echo -e "$GREEN[deno]$NC STARTING..."
-deno upgrade
-echo -e "$GREEN[deno]$NC DONE"
-
 echo "Done..."
