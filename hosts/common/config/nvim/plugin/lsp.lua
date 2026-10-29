@@ -71,6 +71,7 @@ local servers = {
 	"jsonls",
 	"taplo",
 	"gopls",
+	"clangd",
 	"vue_ls",
 	"oxlint",
 	"zls",
