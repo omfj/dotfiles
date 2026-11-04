@@ -18,6 +18,12 @@ function uuid() {
     echo "$id"
 }
 
+# cd into a git worktree picked with fzf (see `git wpick`)
+function wcd() {
+    local dir
+    dir=$(git wpick) && [[ -n "$dir" ]] && cd "$dir"
+}
+
 function claude() {
     env SHELL=/usr/bin/bash claude "$@"
 }

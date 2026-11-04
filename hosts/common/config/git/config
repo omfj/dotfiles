@@ -13,6 +13,7 @@
 [core]
 	editor = nvim
 	pager = delta
+	excludesfile = /Users/olem/.gitignore_global
 [alias]
 	ac = commit -S -am
 	s = status
@@ -27,6 +28,19 @@
 	ai = "!convmit --edit"
 	rc = rebase --continue
 	pb = "!git switch $(git branch | grep -v HEAD | fzf | tr -d ' ')"
+
+	# worktrees: should live next to the main repo as; ../<repo>-wt-<branch>
+	wt = worktree
+	wl = worktree list
+	wp = worktree prune
+	wadd = "!f() { \
+		b=\"$1\"; [ -z \"$b\" ] && { echo 'usage: git wa <branch> [base]'; return 1; }; \
+		root=$(dirname \"$(git rev-parse --path-format=absolute --git-common-dir)\"); \
+		dir=\"$(dirname \"$root\")/$(basename \"$root\")-wt-$(echo \"$b\" | tr / -)\"; \
+		if git show-ref --verify --quiet \"refs/heads/$b\"; then git worktree add \"$dir\" \"$b\"; \
+		else git worktree add -b \"$b\" \"$dir\" \"${2:-HEAD}\"; fi; }; f"
+	wrm = "!git worktree list | tail -n +2 | fzf | awk '{print $1}' | xargs -r git worktree remove"
+	wpick = "!git worktree list | fzf --height 40% | awk '{print $1}'"
 [interactive]
 	diffFilter = delta --color-only
 [delta]
