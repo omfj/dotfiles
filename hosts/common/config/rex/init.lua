@@ -100,8 +100,6 @@ rex.bind(P .. "shift+j", "pane.move.down")
 rex.bind(P .. "shift+k", "pane.move.up")
 rex.bind(P .. "shift+l", "pane.move.right")
 
-rex.bind(P .. "c", "client.tab.new")
-
 rex.bind(P .. "shift+=", "session.new")
 
 rex.bind(P .. ",", "client.tab.rename")
