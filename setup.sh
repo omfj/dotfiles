@@ -90,6 +90,7 @@ link "$common/config/zsh" "$conf/zsh"
 link "$common/config/zsh-patina" "$conf/zsh-patina"
 link "$common/config/nvim" "$conf/nvim"
 link "$common/config/lsd" "$conf/lsd"
+link "$common/config/rex" "$conf/rex"
 
 # Shared between main computers
 if host_is "MacBookPro.lan" || host_is "oarch"; then
