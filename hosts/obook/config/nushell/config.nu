@@ -116,7 +116,7 @@ if (which starship | is-not-empty) {
 
 if (which atuin | is-not-empty) {
     mkdir ($nu.data-dir | path join 'vendor/autoload')
-    atuin init nu | save -f ($nu.data-dir | path join 'vendor/autoload/atuin.nu')
+    atuin init nu --disable-up-arrow | save -f ($nu.data-dir | path join 'vendor/autoload/atuin.nu')
 }
 
 if (which zoxide | is-not-empty) and ('DISABLE_ZOXIDE' not-in $env) {
