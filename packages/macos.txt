@@ -1,5 +1,6 @@
 dua-cli
 zsh
+nushell
 neovim
 tmux
 git

@@ -100,6 +100,11 @@ fi
 
 # Mac (obook)
 if host_is "MacBookPro.lan"; then
+    link "$obook/config/nushell/config.nu" "$conf/nushell/config.nu"
+    link "$obook/config/nushell/env.nu" "$conf/nushell/env.nu"
+    # Nushell uses the macOS default when XDG_CONFIG_HOME is not inherited.
+    link "$obook/config/nushell/config.nu" "$HOME/Library/Application Support/nushell/config.nu"
+    link "$obook/config/nushell/env.nu" "$HOME/Library/Application Support/nushell/env.nu"
     link "$obook/config/fish" "$conf/fish"
     link "$common/config/zed" "$conf/zed"
     link "$obook/zshrc" "$HOME/.zshrc"
