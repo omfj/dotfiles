@@ -1,0 +1,21 @@
+#:schema https://docs.jj-vcs.dev/latest/config-schema.json
+
+[user]
+name = "Ole Magnus Fon Johnsen"
+email = "me@omfj.no"
+
+[ui]
+default-command = "log"
+
+[aliases]
+s = ["status"]
+a = ["abandon"]
+fomo = [
+  "util",
+  "exec",
+  "--",
+  "sh",
+  "-c",
+  'f() { jj git fetch && jj rebase -b @ -d "${1:-main}@origin"; }; f "$@"',
+  "sh",
+]
