@@ -123,3 +123,8 @@ if (which zoxide | is-not-empty) and ('DISABLE_ZOXIDE' not-in $env) {
     mkdir ($nu.data-dir | path join 'vendor/autoload')
     zoxide init nushell --cmd cd | save -f ($nu.data-dir | path join 'vendor/autoload/zoxide.nu')
 }
+
+if (which jj | is-not-empty) {
+    mkdir ($nu.data-dir | path join 'vendor/autoload')
+    jj util completion nushell | save -f ($nu.data-dir | path join 'vendor/autoload/jj.nu')
+}
