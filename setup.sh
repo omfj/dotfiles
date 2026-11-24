@@ -28,7 +28,6 @@ done
 repo_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 common="$repo_root/hosts/common"
 obook="$repo_root/hosts/obook"
-obuntu="$repo_root/hosts/obuntu"
 oarch="$repo_root/hosts/oarch"
 conf="$HOME/.config"
 host="$(hostname 2>/dev/null || hostnamectl --static 2>/dev/null || uname -n 2>/dev/null || echo unknown)"
@@ -77,30 +76,26 @@ file_exists() {
 }
 
 # Common
-link "$common/config/ghostty" "$conf/ghostty"
 link "$common/config/helix" "$conf/helix"
-link "$common/config/starship.toml" "$conf/starship.toml"
-link "$common/vimrc" "$HOME/.vimrc"
-link "$common/config/atuin" "$conf/atuin"
-link "$common/config/lazydocker" "$conf/lazydocker"
 link "$common/config/lazygit" "$conf/lazygit"
-link "$common/config/cheat" "$conf/cheat"
+link "$common/config/nvim" "$conf/nvim"
+link "$common/config/lsd" "$conf/lsd"
+link "$common/config/jj" "$conf/jj"
 link "$common/config/tmux" "$conf/tmux"
 link "$common/config/zsh" "$conf/zsh"
 link "$common/config/zsh-patina" "$conf/zsh-patina"
-link "$common/config/nvim" "$conf/nvim"
-link "$common/config/lsd" "$conf/lsd"
-link "$common/config/rex" "$conf/rex"
-link "$common/config/jj" "$conf/jj"
-
-# Shared between main computers
-if host_is "MacBookPro.lan" || host_is "oarch"; then
-    link "$common/config/git" "$conf/git"
-    link "$common/config/alacritty.toml" "$conf/alacritty.toml"
-fi
+link "$common/config/starship.toml" "$conf/starship.toml"
 
 # Mac (obook)
 if host_is "MacBookPro.lan"; then
+    link "$common/config/rex" "$conf/rex"
+    link "$common/config/atuin" "$conf/atuin"
+    link "$common/config/lazydocker" "$conf/lazydocker"
+    link "$common/config/cheat" "$conf/cheat"
+    link "$common/config/ghostty" "$conf/ghostty"
+    link "$common/vimrc" "$HOME/.vimrc"
+    link "$common/config/git" "$conf/git"
+    link "$common/config/alacritty.toml" "$conf/alacritty.toml"
     link "$obook/config/nushell/config.nu" "$conf/nushell/config.nu"
     link "$obook/config/nushell/env.nu" "$conf/nushell/env.nu"
     # Nushell uses the macOS default when XDG_CONFIG_HOME is not inherited.
@@ -115,19 +110,15 @@ fi
 # Arch (oarch)
 if host_is "oarch"; then
     link "$oarch/config/fish" "$conf/fish"
-    link "$oarch/config/bspwm" "$conf/bspwm"
-    link "$oarch/config/sxhkd" "$conf/sxhkd"
-    link "$oarch/config/dunst" "$conf/dunst"
-    link "$oarch/config/picom" "$conf/picom"
-    link "$oarch/config/rofi" "$conf/rofi"
-    link "$oarch/config/polybar" "$conf/polybar"
-    link "$oarch/config/betterlockscreenrc" "$conf/betterlockscreenrc"
+    # currently used as a home server, so no need for DE or WM configs
+    # link "$oarch/config/bspwm" "$conf/bspwm"
+    # link "$oarch/config/sxhkd" "$conf/sxhkd"
+    # link "$oarch/config/dunst" "$conf/dunst"
+    # link "$oarch/config/picom" "$conf/picom"
+    # link "$oarch/config/rofi" "$conf/rofi"
+    # link "$oarch/config/polybar" "$conf/polybar"
+    # link "$oarch/config/betterlockscreenrc" "$conf/betterlockscreenrc"
+    # link "$oarch/config/hypr" "$conf/hypr"
     link "$oarch/config/user-dirs.dirs" "$conf/user-dirs.dirs"
     link "$oarch/config/user-dirs.locale" "$conf/user-dirs.locale"
-    link "$oarch/config/hypr" "$conf/hypr"
-fi
-
-# obuntu
-if file_exists "$HOME/.obuntu"; then
-    link "$obuntu/zshrc" "$HOME/.zshrc"
 fi
