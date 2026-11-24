@@ -7,7 +7,7 @@ format = "${custom.remote_identity}$directory([::](bold blue) $git_branch$git_st
 description = "Show user@machine on computers other than the main Mac"
 shell = ["sh"]
 when = 'case "$(hostname -s)" in MacBookPro|obook) exit 1 ;; *) exit 0 ;; esac'
-command = 'printf "%s@%s" "$(id -un)" "$(hostname -s)"'
+command = 'printf "%s@%s" "$(id -un)" "$(hostname -s 2>/dev/null || hostnamectl --static 2>/dev/null || unknown)"'
 format = "[$output]($style) "
 style = "bold yellow"
 
