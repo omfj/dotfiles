@@ -31,7 +31,7 @@ obook="$repo_root/hosts/obook"
 obuntu="$repo_root/hosts/obuntu"
 oarch="$repo_root/hosts/oarch"
 conf="$HOME/.config"
-host="$(hostname)"
+host="$(hostname 2>/dev/null || hostnamectl --static 2>/dev/null || uname -n 2>/dev/null || echo unknown)"
 
 run() {
     if [[ "$dry_run" == true ]]; then

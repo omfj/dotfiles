@@ -2,3 +2,6 @@
 
 lazy-lock.json
 
+# rex
+ssh_config
+terminfo-hosts
