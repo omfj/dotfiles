@@ -108,7 +108,7 @@ if host_is "MacBookPro.lan"; then
 fi
 
 # Arch (oarch)
-if host_is "oarch"; then
+if host_is "oarch" || host_is "ofedora"; then
     link "$oarch/config/fish" "$conf/fish"
     # currently used as a home server, so no need for DE or WM configs
     # link "$oarch/config/bspwm" "$conf/bspwm"
