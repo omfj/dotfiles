@@ -1,7 +1,15 @@
 #"$schema" = 'https://starship.rs/config-schema.json'
 
 add_newline = false
-format = "$username$hostname$directory([::](bold blue) $git_branch$git_status)$package$character"
+format = "${custom.remote_identity}$directory([::](bold blue) $git_branch$git_status)$package$character"
+
+[custom.remote_identity]
+description = "Show user@machine on computers other than the main Mac"
+shell = ["sh"]
+when = 'case "$(hostname -s)" in MacBookPro|obook) exit 1 ;; *) exit 0 ;; esac'
+command = 'printf "%s@%s" "$(id -un)" "$(hostname -s)"'
+format = "[$output]($style) "
+style = "bold yellow"
 
 [git_metrics]
 disabled = false
