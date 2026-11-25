@@ -8,8 +8,8 @@ launcher = "cmd+space"
 
 [aliases]
 c = "Code.app"
-t = "Rex Beta.app"
-r = "Rex Beta.app"
+t = "Rex.app"
+r = "Rex.app"
 f = "Firefox.app"
 
 [launcher]
