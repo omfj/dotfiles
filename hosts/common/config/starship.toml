@@ -1,7 +1,11 @@
 #"$schema" = 'https://starship.rs/config-schema.json'
 
 add_newline = false
-format = "${custom.remote_identity}$directory([::](bold blue) $git_branch$git_status)$package$character"
+format = "${custom.remote_identity}$directory([::](bold blue) $vcs)$package$character"
+
+[vcs]
+order = ["jj", "git"]
+git_modules = "$git_branch$git_status"
 
 [custom.remote_identity]
 description = "Show user@machine on computers other than the main Mac"
